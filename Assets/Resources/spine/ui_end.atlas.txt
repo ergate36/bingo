@@ -1,0 +1,27 @@
+
+ui_end.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+box
+  rotate: false
+  xy: 661, 18
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+end1
+  rotate: false
+  xy: 2, 4
+  size: 368, 114
+  orig: 368, 114
+  offset: 0, 0
+  index: -1
+end2
+  rotate: false
+  xy: 372, 2
+  size: 287, 116
+  orig: 287, 116
+  offset: 0, 0
+  index: -1

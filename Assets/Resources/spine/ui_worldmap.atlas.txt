@@ -1,0 +1,160 @@
+
+ui_worldmap.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+a1
+  rotate: false
+  xy: 2, 1513
+  size: 1530, 531
+  orig: 1530, 531
+  offset: 0, 0
+  index: -1
+a2
+  rotate: false
+  xy: 2, 981
+  size: 1530, 530
+  orig: 1530, 530
+  offset: 0, 0
+  index: -1
+a3
+  rotate: false
+  xy: 476, 718
+  size: 765, 261
+  orig: 765, 261
+  offset: 0, 0
+  index: -1
+a4
+  rotate: false
+  xy: 476, 455
+  size: 765, 261
+  orig: 765, 261
+  offset: 0, 0
+  index: -1
+a5
+  rotate: false
+  xy: 476, 172
+  size: 672, 209
+  orig: 672, 209
+  offset: 0, 0
+  index: -1
+arr
+  rotate: false
+  xy: 1303, 89
+  size: 90, 137
+  orig: 90, 137
+  offset: 0, 0
+  index: -1
+b1
+  rotate: false
+  xy: 1293, 299
+  size: 334, 84
+  orig: 334, 84
+  offset: 0, 0
+  index: -1
+box
+  rotate: false
+  xy: 1456, 197
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+icon1
+  rotate: false
+  xy: 1534, 1431
+  size: 478, 613
+  orig: 478, 613
+  offset: 0, 0
+  index: -1
+icon1a
+  rotate: false
+  xy: 1534, 893
+  size: 478, 536
+  orig: 478, 536
+  offset: 0, 0
+  index: -1
+icon2
+  rotate: true
+  xy: 2, 2
+  size: 374, 467
+  orig: 374, 467
+  offset: 0, 0
+  index: -1
+icon2a
+  rotate: false
+  xy: 1843, 533
+  size: 151, 358
+  orig: 151, 358
+  offset: 0, 0
+  index: -1
+icon3
+  rotate: false
+  xy: 2, 378
+  size: 472, 601
+  orig: 472, 601
+  offset: 0, 0
+  index: -1
+icon3a
+  rotate: false
+  xy: 1243, 465
+  size: 472, 426
+  orig: 472, 426
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 1293, 385
+  size: 360, 78
+  orig: 360, 78
+  offset: 0, 0
+  index: -1
+ui1
+  rotate: false
+  xy: 1012, 21
+  size: 145, 149
+  orig: 145, 149
+  offset: 0, 0
+  index: -1
+ui2
+  rotate: false
+  xy: 1159, 76
+  size: 142, 150
+  orig: 142, 150
+  offset: 0, 0
+  index: -1
+ui3
+  rotate: false
+  xy: 1150, 228
+  size: 304, 69
+  orig: 304, 69
+  offset: 0, 0
+  index: -1
+ui4
+  rotate: false
+  xy: 476, 383
+  size: 815, 70
+  orig: 815, 70
+  offset: 0, 0
+  index: -1
+ui5
+  rotate: false
+  xy: 1243, 904
+  size: 183, 75
+  orig: 183, 75
+  offset: 0, 0
+  index: -1
+ui6
+  rotate: false
+  xy: 471, 21
+  size: 539, 149
+  orig: 539, 149
+  offset: 0, 0
+  index: -1
+ui7
+  rotate: true
+  xy: 1717, 500
+  size: 391, 124
+  orig: 391, 124
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,76 @@
+
+ui_bingo.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bingo/back1
+  rotate: false
+  xy: 470, 78
+  size: 402, 420
+  orig: 402, 420
+  offset: 0, 0
+  index: -1
+bingo/ball1
+  rotate: false
+  xy: 1553, 420
+  size: 78, 78
+  orig: 78, 78
+  offset: 0, 0
+  index: -1
+bingo/ball2
+  rotate: false
+  xy: 1172, 276
+  size: 93, 93
+  orig: 93, 93
+  offset: 0, 0
+  index: -1
+bingo/ball3
+  rotate: false
+  xy: 874, 84
+  size: 72, 73
+  orig: 72, 73
+  offset: 0, 0
+  index: -1
+bingo/bingo
+  rotate: false
+  xy: 1172, 371
+  size: 379, 127
+  orig: 379, 127
+  offset: 0, 0
+  index: -1
+bingo/complete
+  rotate: false
+  xy: 874, 159
+  size: 172, 39
+  orig: 172, 39
+  offset: 0, 0
+  index: -1
+bingo/label
+  rotate: false
+  xy: 470, 6
+  size: 384, 70
+  orig: 384, 70
+  offset: 0, 0
+  index: -1
+bingo/round
+  rotate: false
+  xy: 874, 200
+  size: 296, 298
+  orig: 296, 298
+  offset: 0, 0
+  index: -1
+bingo/star
+  rotate: false
+  xy: 1048, 173
+  size: 24, 25
+  orig: 24, 25
+  offset: 0, 0
+  index: -1
+reward/light
+  rotate: false
+  xy: 2, 2
+  size: 466, 496
+  orig: 466, 496
+  offset: 0, 0
+  index: -1

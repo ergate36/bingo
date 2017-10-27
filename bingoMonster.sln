@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bingoMonster", "Assembly-CSharp.csproj", "{1BA53D1C-ADCD-95C0-11C9-F0D79C2A76A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bingoMonster", "Assembly-CSharp-Editor.csproj", "{39FE84A1-B83C-5CA8-FDED-D525E998D905}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BA53D1C-ADCD-95C0-11C9-F0D79C2A76A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA53D1C-ADCD-95C0-11C9-F0D79C2A76A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA53D1C-ADCD-95C0-11C9-F0D79C2A76A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA53D1C-ADCD-95C0-11C9-F0D79C2A76A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FE84A1-B83C-5CA8-FDED-D525E998D905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FE84A1-B83C-5CA8-FDED-D525E998D905}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FE84A1-B83C-5CA8-FDED-D525E998D905}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FE84A1-B83C-5CA8-FDED-D525E998D905}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{8E7147AB-F89E-E64B-7FD8-189F9E67DFBA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_2;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;UNITY_FACEBOOK</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Bson\BsonBinaryType.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Bson\BsonBinaryWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Bson\BsonObjectId.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Bson\BsonReader.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Bson\BsonToken.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Bson\BsonType.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Bson\BsonWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\ConstructorHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\BinaryConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\BsonObjectIdConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\CustomCreationConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\DataSetConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\DataTableConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\DateTimeConverterBase.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\DiscriminatedUnionConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\EntityKeyMemberConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\ExpandoObjectConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\IsoDateTimeConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\JavaScriptDateTimeConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\KeyValuePairConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\RegexConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\StringEnumConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\VersionConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Converters\XmlNodeConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\DateFormatHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\DateParseHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\DateTimeZoneHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\DefaultValueHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\FloatFormatHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\FloatParseHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\FormatterAssemblyStyle.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Formatting.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\IArrayPool.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\IJsonLineInfo.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonArrayAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonConstructorAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonContainerAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonConvert.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonConverterAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonConverterCollection.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonDictionaryAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonException.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonExtensionDataAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonIgnoreAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonObjectAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonPosition.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonPropertyAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonReader.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonReader.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonReaderException.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonRequiredAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonSerializationException.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonSerializer.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonSerializerSettings.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonTextReader.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonTextReader.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonTextWriter.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonTextWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonToken.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonValidatingReader.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonWriter.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\JsonWriterException.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\CommentHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\Extensions.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\IJEnumerable.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JArray.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JArray.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JConstructor.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JConstructor.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JContainer.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JContainer.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JEnumerable.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JObject.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JObject.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JProperty.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JProperty.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JPropertyDescriptor.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JPropertyKeyedCollection.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JRaw.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JRaw.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JToken.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JToken.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JTokenEqualityComparer.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JTokenReader.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JTokenType.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JTokenWriter.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JTokenWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JValue.Async.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JValue.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonLoadSettings.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonMergeSettings.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\ArrayIndexFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\ArrayMultipleIndexFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\ArraySliceFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\FieldFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\FieldMultipleFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\JPath.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\PathFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\QueryExpression.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\QueryFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\QueryScanFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\RootFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\ScanFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\JsonPath\ScanMultipleFilter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\MergeArrayHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Linq\MergeNullValueHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\MemberSerialization.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\MetadataPropertyHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\MissingMemberHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\NullValueHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\ObjectCreationHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\PreserveReferencesHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Properties\AssemblyInfo.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\ReferenceLoopHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Required.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\Extensions.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchema.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaBuilder.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaConstants.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaException.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaGenerator.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaModel.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaModelBuilder.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaNode.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaNodeCollection.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaResolver.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaType.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\JsonSchemaWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\UndefinedSchemaIdHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\ValidationEventArgs.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Schema\ValidationEventHandler.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\CachedAttributeGetter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\CamelCaseNamingStrategy.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\CamelCasePropertyNamesContractResolver.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\DefaultContractResolver.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\DefaultNamingStrategy.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\DefaultReferenceResolver.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\DefaultSerializationBinder.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\DiagnosticsTraceWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\DynamicValueProvider.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\ErrorContext.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\ErrorEventArgs.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\ExpressionValueProvider.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\FormatterConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\IAttributeProvider.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\IContractResolver.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\IReferenceResolver.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\ISerializationBinder.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\ITraceWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\IValueProvider.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonArrayContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonContainerContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonDictionaryContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonDynamicContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonFormatterConverter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonISerializableContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonLinqContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonObjectContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonPrimitiveContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonProperty.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonPropertyCollection.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonSerializerInternalBase.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonSerializerInternalReader.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonSerializerInternalWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonSerializerProxy.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonStringContract.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\JsonTypeReflector.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\MemoryTraceWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\NamingStrategy.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\ObjectConstructor.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\OnErrorAttribute.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\ReflectionAttributeProvider.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\ReflectionValueProvider.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\SerializationBinderAdapter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\SnakeCaseNamingStrategy.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\TraceJsonReader.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Serialization\TraceJsonWriter.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\SerializationBinder.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\StringEscapeHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\TraceLevel.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\TypeNameAssemblyFormatHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\TypeNameHandling.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\AsyncUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\Base64Encoder.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\BidirectionalDictionary.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\CollectionUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\CollectionWrapper.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\ConvertUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\DateTimeParser.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\DateTimeUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\DictionaryWrapper.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\DynamicProxy.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\DynamicProxyMetaObject.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\DynamicReflectionDelegateFactory.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\DynamicUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\EnumUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\EnumValue.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\ExpressionReflectionDelegateFactory.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\FSharpUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\ILGeneratorExtensions.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\ImmutableCollectionsUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\JavaScriptUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\JsonTokenUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\LateBoundReflectionDelegateFactory.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\LinqBridge.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\MathUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\MethodBinder.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\MethodCall.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\MiscellaneousUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\PropertyNameTable.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\ReflectionDelegateFactory.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\ReflectionObject.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\ReflectionUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\StringBuffer.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\StringReference.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\StringUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\ThreadSafeStore.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\TypeExtensions.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\Utilities\ValidationUtils.cs" />
+     <Compile Include="Assets\plugins\json\Newtonsoft.Json\WriteState.cs" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Editor\Resources\SpineAssetDatabaseMarker.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Depth Cutout.shader" />
+     <None Include="Assets\Resources\Xml\MonsterRankXml.xml" />
+     <None Include="Assets\NGUI\ReadMe - 3.5.3.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Eyes\eyes.atlas.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Utility\HiddenPass.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Spine-Skeleton-Fill.shader" />
+     <None Include="Assets\plugins\Android\res\values\version.xml" />
+     <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\SpritePixelLighting.cginc" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpriteVertexLighting.cginc" />
+     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpriteShadows.cginc" />
+     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_title_bar.xml" />
+     <None Include="Assets\plugins\Android\res\values\attrs.xml" />
+     <None Include="Assets\plugins\Android\res\values\colors.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\SpriteShadows.cginc" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpritePixelLighting.cginc" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (SoftClip).shader" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_checkbox.xml" />
+     <None Include="Assets\plugins\Android\res\values\styles.xml" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_top_button.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpriteLighting.cginc" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\spineboy-pro\spineboy.atlas.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Gauge\Gauge.atlas.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font (AlphaClip).shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Masked Colored.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\SkeletonGraphic\Shaders\Spine-SkeletonGraphic-TintBlack.shader" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_check.xml" />
+     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_list_section_header.xml" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_tooltip_bubble.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\FootSoldier\FS_White.atlas.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\ShaderShared.cginc" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (AlphaClip) .shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\CustomMaterials\SkeletonRendererCustomMaterials.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Hero\hero-mesh.atlas.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Dragon\license.txt" />
+     <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Hero\license.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (AlphaClip).shader" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_usersettingsfragment_background_gradient.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Goblins\goblins.atlas.txt" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_search_box.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Strechyman\stretchyman-diffuse-pma.atlas.txt" />
+     <None Include="Assets\Resources\spine\ui_worldmap.atlas.txt" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_title_bar_stub.xml" />
+     <None Include="Assets\plugins\Android\res\drawable\common_signin_btn_text_dark.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Raptor\raptor.atlas.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\SpriteLighting.cginc" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (AlphaClip).shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\SlotBlendModes\Spine-Skeleton-PMA-Screen.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\spineboy-unity\spineboy.atlas.txt" />
+     <None Include="Assets\plugins\Android\res\values-he\strings.xml" />
+     <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
+     <None Include="Assets\plugins\Android\res\drawable\common_signin_btn_text_light.xml" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_picker_list_selector_background_transition.xml" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_friendpickerfragment.xml" />
+     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpriteUnlit.cginc" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_usersettingsfragment.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\SpriteUnlit.cginc" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_placepickerfragment_list_row.xml" />
+     <None Include="Assets\plugins\Android\AndroidManifest.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\FootSoldier\license.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\version.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font (SoftClip).shader" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_loginbutton_silver.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpritesPixelLit.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Raggedy Spineboy\Raggedy Spineboy.atlas.txt" />
+     <None Include="Assets\plugins\Android\res\values-xhdpi\dimens.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Spine-Skeleton-Tint.shader" />
+     <None Include="Assets\Resources\Xml\GachaXml.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpritesUnlit.shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (SoftClip).shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Utility\Hidden-Spine-Bones.shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (SoftClip).shader" />
+     <None Include="Assets\plugins\Android\res\values-mdpi\dimens.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpritesVertexLit.shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
+     <None Include="Assets\plugins\Android\res\values-es\strings.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Ghost\Shaders\Spine-Special-Skeleton-Ghost.shader" />
+     <None Include="Assets\plugins\Android\res\drawable\common_signin_btn_icon_light.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font.shader" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_top_background.xml" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_picker_top_button.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
+     <None Include="Assets\plugins\Android\res\values-hdpi\dimens.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\SpriteVertexLighting.cginc" />
+     <None Include="Assets\plugins\Android\res\values\strings.xml" />
+     <None Include="Assets\Resources\Xml\RankXml.xml" />
+     <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_login_activity_layout.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Dragon\dragon.atlas.txt" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_list_row.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed).shader" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_activity_circle_row.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CameraDepthNormalsTexture.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Spine-Skeleton-TintBlack.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\ShaderShared.cginc" />
+     <None Include="Assets\Sprites\effectImage\eff_texture\eff_attack_freeze\eff_attack_freeze_notice_magic.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\SkeletonGraphic\Shaders\Spine-SkeletonGraphic.shader" />
+     <None Include="Assets\plugins\Android\res\drawable\common_signin_btn_icon_dark.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Spine-Skeleton.shader" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_picker_item_background.xml" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_like.xml" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_image.xml" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_blue.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CameraNormalsTexture.shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Additive Colored.shader" />
+     <None Include="Assets\plugins\Android\res\values\drawables.xml" />
+     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
+     <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_search_bar_layout.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Spineunitygirl\Doi.atlas.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Depth.shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CameraDepthTexture.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\SlotBlendModes\Spine-Skeleton-PMA-Multiply.shader" />
+     <None Include="Assets\Resources\Xml\MonsterXml.xml" />
+     <None Include="Assets\plugins\Android\res\values-iw\strings.xml" />
+     <None Include="Assets\plugins\Android\res\layout\com_facebook_placepickerfragment.xml" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_like_selected.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\ShaderMaths.cginc" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\SkeletonRenderSeparator\SkeletonRenderSeparator.txt" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpriteDepthNormalsTexture.shader" />
+     <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Spine-SkeletonLit.shader" />
+     <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\SpriteSpecular.cginc" />
+     <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
+     <None Include="Assets\plugins\Android\res\values-ldpi\dimens.xml" />
+     <None Include="Assets\plugins\Android\res\drawable\com_facebook_picker_list_selector.xml" />
+     <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\FootSoldier\Equipment\Equipment.atlas.txt" />
+ <Reference Include="Facebook.Unity">
+ <HintPath>D:/bingo/bingo/BingoMonster_Client/Library/FacebookSDK/Facebook.Unity.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity.Settings">
+ <HintPath>D:/bingo/bingo/BingoMonster_Client/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ </Reference>
+ <Reference Include="FacebookNamedPipeClient">
+ <HintPath>D:/bingo/bingo/BingoMonster_Client/Library/FacebookSDK/FacebookNamedPipeClient.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.VR">
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
+ <Reference Include="LitJson">
+ <HintPath>D:/bingo/bingo/BingoMonster_Client/Assets/plugins/LitJson.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity.Gameroom">
+ <HintPath>D:/bingo/bingo/BingoMonster_Client/Library/FacebookSDK/Facebook.Unity.Gameroom.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>D:/bingo/bingo/BingoMonster_Client/Assets/plugins/json/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

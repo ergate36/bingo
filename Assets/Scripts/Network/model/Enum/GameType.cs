@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace MarigoldModel.Model
+{
+    public enum GameType
+    {
+        BLITZ,          // 메인 스테이지. 빙고 블리츠와 유사한 게임 모드
+        MONSTER,        // 서브 스테이지. 빙고 몬스터의 아이템을 가져온 모드
+    }
+}

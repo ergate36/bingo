@@ -1,0 +1,22 @@
+{
+	"card_info": {
+		"1": {
+			"name": "kiki_",
+			"sprite_monster": "card_a_kiki",
+			"sprite_back": "card_a_kiki_back",
+			"sprite_grade": "card_a_kiki_grade"
+		},
+		"2": {
+			"name": "taro",
+			"sprite_monster": "card_b_taro",
+			"sprite_back": "card_a_taro_back",
+			"sprite_grade": "card_a_taro_grade"
+		},
+		"3": {
+			"name": "moya",
+			"sprite_monster": "card_c_moya",
+			"sprite_back": "card_a_moya_back",
+			"sprite_grade": "card_a_moya_grade"
+		}
+	}
+}

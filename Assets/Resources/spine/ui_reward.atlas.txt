@@ -1,0 +1,370 @@
+
+ui_reward.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+reward/back
+  rotate: false
+  xy: 1211, 1300
+  size: 360, 244
+  orig: 360, 244
+  offset: 0, 0
+  index: -1
+reward/bingo
+  rotate: false
+  xy: 1573, 1418
+  size: 371, 126
+  orig: 371, 126
+  offset: 0, 0
+  index: -1
+reward/bingo1
+  rotate: false
+  xy: 811, 1090
+  size: 384, 161
+  orig: 384, 161
+  offset: 0, 0
+  index: -1
+reward/bingo2
+  rotate: true
+  xy: 1976, 1769
+  size: 91, 52
+  orig: 91, 52
+  offset: 0, 0
+  index: -1
+reward/bingo3
+  rotate: true
+  xy: 242, 202
+  size: 123, 52
+  orig: 123, 52
+  offset: 0, 0
+  index: -1
+reward/bingo4
+  rotate: true
+  xy: 1938, 1253
+  size: 120, 53
+  orig: 120, 53
+  offset: 0, 0
+  index: -1
+reward/bingo5
+  rotate: false
+  xy: 2, 35
+  size: 180, 63
+  orig: 180, 63
+  offset: 0, 0
+  index: -1
+reward/bingo6
+  rotate: true
+  xy: 1976, 1862
+  size: 180, 59
+  orig: 180, 59
+  offset: 0, 0
+  index: -1
+reward/button1
+  rotate: false
+  xy: 708, 799
+  size: 68, 78
+  orig: 68, 78
+  offset: 0, 0
+  index: -1
+reward/button2
+  rotate: false
+  xy: 406, 669
+  size: 311, 84
+  orig: 311, 84
+  offset: 0, 0
+  index: -1
+reward/card
+  rotate: true
+  xy: 1679, 1546
+  size: 207, 244
+  orig: 207, 244
+  offset: 0, 0
+  index: -1
+reward/card1
+  rotate: false
+  xy: 2, 616
+  size: 402, 417
+  orig: 402, 417
+  offset: 0, 0
+  index: -1
+reward/card2
+  rotate: false
+  xy: 1106, 924
+  size: 87, 87
+  orig: 87, 87
+  offset: 0, 0
+  index: -1
+reward/chest1
+  rotate: false
+  xy: 2, 100
+  size: 238, 225
+  orig: 238, 225
+  offset: 0, 0
+  index: -1
+reward/chest2
+  rotate: false
+  xy: 406, 755
+  size: 300, 278
+  orig: 300, 278
+  offset: 0, 0
+  index: -1
+reward/collection1
+  rotate: true
+  xy: 1782, 1221
+  size: 152, 154
+  orig: 152, 154
+  offset: 0, 0
+  index: -1
+reward/collection2
+  rotate: true
+  xy: 794, 859
+  size: 152, 154
+  orig: 152, 154
+  offset: 0, 0
+  index: -1
+reward/collection3
+  rotate: false
+  xy: 1679, 1755
+  size: 295, 287
+  orig: 295, 287
+  offset: 0, 0
+  index: -1
+reward/collection3a
+  rotate: false
+  xy: 2, 327
+  size: 295, 287
+  orig: 295, 287
+  offset: 0, 0
+  index: -1
+reward/collection4
+  rotate: true
+  xy: 950, 859
+  size: 152, 154
+  orig: 152, 154
+  offset: 0, 0
+  index: -1
+reward/fast
+  rotate: true
+  xy: 708, 879
+  size: 154, 84
+  orig: 154, 84
+  offset: 0, 0
+  index: -1
+reward/frame
+  rotate: false
+  xy: 2, 1253
+  size: 1207, 789
+  orig: 1207, 789
+  offset: 0, 0
+  index: -1
+reward/guage
+  rotate: false
+  xy: 811, 1013
+  size: 495, 75
+  orig: 495, 75
+  offset: 0, 0
+  index: -1
+reward/guage1
+  rotate: true
+  xy: 1925, 1641
+  size: 112, 47
+  orig: 112, 47
+  offset: 0, 0
+  index: -1
+reward/header
+  rotate: false
+  xy: 2, 1035
+  size: 807, 216
+  orig: 807, 216
+  offset: 0, 0
+  index: -1
+reward/light
+  rotate: false
+  xy: 1211, 1546
+  size: 466, 496
+  orig: 466, 496
+  offset: 0, 0
+  index: -1
+reward/money1
+  rotate: false
+  xy: 1106, 859
+  size: 61, 63
+  orig: 61, 63
+  offset: 0, 0
+  index: -1
+reward/money1a
+  rotate: false
+  xy: 184, 36
+  size: 55, 62
+  orig: 55, 62
+  offset: 0, 0
+  index: -1
+reward/money1b
+  rotate: false
+  xy: 1925, 1577
+  size: 44, 62
+  orig: 44, 62
+  offset: 0, 0
+  index: -1
+reward/money1c
+  rotate: false
+  xy: 381, 550
+  size: 23, 64
+  orig: 23, 64
+  offset: 0, 0
+  index: -1
+reward/money2
+  rotate: false
+  xy: 242, 141
+  size: 59, 59
+  orig: 59, 59
+  offset: 0, 0
+  index: -1
+reward/money2a
+  rotate: true
+  xy: 406, 620
+  size: 47, 61
+  orig: 47, 61
+  offset: 0, 0
+  index: -1
+reward/money2b
+  rotate: true
+  xy: 1925, 1546
+  size: 29, 61
+  orig: 29, 61
+  offset: 0, 0
+  index: -1
+reward/money2c
+  rotate: false
+  xy: 778, 816
+  size: 14, 61
+  orig: 14, 61
+  offset: 0, 0
+  index: -1
+reward/money3
+  rotate: false
+  xy: 1195, 946
+  size: 58, 65
+  orig: 58, 65
+  offset: 0, 0
+  index: -1
+reward/p1
+  rotate: false
+  xy: 1470, 1267
+  size: 66, 31
+  orig: 66, 31
+  offset: 0, 0
+  index: -1
+reward/p2
+  rotate: false
+  xy: 469, 636
+  size: 65, 31
+  orig: 65, 31
+  offset: 0, 0
+  index: -1
+reward/p3
+  rotate: false
+  xy: 2, 2
+  size: 66, 31
+  orig: 66, 31
+  offset: 0, 0
+  index: -1
+reward/p4
+  rotate: false
+  xy: 70, 2
+  size: 65, 31
+  orig: 65, 31
+  offset: 0, 0
+  index: -1
+reward/round
+  rotate: false
+  xy: 1255, 955
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1
+reward/t1
+  rotate: false
+  xy: 1169, 894
+  size: 22, 28
+  orig: 22, 28
+  offset: 0, 0
+  index: -1
+reward/t2
+  rotate: false
+  xy: 536, 638
+  size: 37, 29
+  orig: 37, 29
+  offset: 0, 0
+  index: -1
+reward/t3
+  rotate: false
+  xy: 242, 110
+  size: 38, 29
+  orig: 38, 29
+  offset: 0, 0
+  index: -1
+reward/t4
+  rotate: false
+  xy: 1938, 1222
+  size: 39, 29
+  orig: 39, 29
+  offset: 0, 0
+  index: -1
+reward/text1
+  rotate: false
+  xy: 1573, 1375
+  size: 432, 41
+  orig: 432, 41
+  offset: 0, 0
+  index: -1
+reward/text2
+  rotate: false
+  xy: 1573, 1253
+  size: 207, 120
+  orig: 207, 120
+  offset: 0, 0
+  index: -1
+reward/text3
+  rotate: false
+  xy: 1211, 1258
+  size: 257, 40
+  orig: 257, 40
+  offset: 0, 0
+  index: -1
+reward/text4
+  rotate: true
+  xy: 299, 348
+  size: 266, 80
+  orig: 266, 80
+  offset: 0, 0
+  index: -1
+reward/x0
+  rotate: false
+  xy: 708, 755
+  size: 56, 42
+  orig: 56, 42
+  offset: 0, 0
+  index: -1
+reward/x1
+  rotate: false
+  xy: 406, 576
+  size: 44, 42
+  orig: 44, 42
+  offset: 0, 0
+  index: -1
+reward/x2
+  rotate: false
+  xy: 794, 815
+  size: 54, 42
+  orig: 54, 42
+  offset: 0, 0
+  index: -1
+reward/x3
+  rotate: true
+  xy: 719, 698
+  size: 55, 43
+  orig: 55, 43
+  offset: 0, 0
+  index: -1

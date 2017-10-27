@@ -1,0 +1,24 @@
+{
+	"card_ability": {
+		"1": {
+			"type_explain": "코인획득",
+			"type_kind": "증가"
+		},
+		"2": {
+			"type_explain": "결산 보상 시 대전 티켓 확률 ",
+			"type_kind": "증가"
+		},
+		"3": {
+			"type_explain": "코인아이템 확률",
+			"type_kind": "증가"
+		},
+		"4": {
+			"type_explain": "어택 아이템 확률",
+			"type_kind": "증가"
+		},
+		"5": {
+			"type_explain": "첫번째 아이템은 무조건 더블덮",
+			"type_kind": -1
+		}
+	}
+}

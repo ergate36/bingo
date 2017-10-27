@@ -1,0 +1,5 @@
+*.meta
+bin/
+Temp/
+Library/metadata/
+Library/PlayerDataCache/

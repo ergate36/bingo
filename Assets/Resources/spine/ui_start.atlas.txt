@@ -1,0 +1,20 @@
+
+ui_start.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+start1
+  rotate: false
+  xy: 2, 2
+  size: 387, 145
+  orig: 387, 145
+  offset: 0, 0
+  index: -1
+start2
+  rotate: false
+  xy: 391, 6
+  size: 206, 141
+  orig: 206, 141
+  offset: 0, 0
+  index: -1

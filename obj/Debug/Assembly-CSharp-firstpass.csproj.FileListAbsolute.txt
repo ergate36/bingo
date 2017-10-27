@@ -1,0 +1,3 @@
+D:\bingo\bingo\BingoMonster_Client\obj\Debug\Assembly-CSharp-firstpass.csprojResolveAssemblyReference.cache
+D:\bingo\bingo\BingoMonster_Client\obj\Debug\Assembly-CSharp-firstpass.dll
+D:\bingo\bingo\BingoMonster_Client\obj\Debug\Assembly-CSharp-firstpass.pdb
