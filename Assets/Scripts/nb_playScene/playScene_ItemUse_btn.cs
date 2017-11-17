@@ -15,9 +15,9 @@ public class playScene_ItemUse_btn : MonoBehaviour
     {
 
         //if ((int)playScene.GetComponent<nb_PlayBlitzScene>().gaugeState != 1)
-        {
-            return;
-        }
+        //{
+        //    return;
+        //}
 
         playScene.GetComponent<nb_PlayBlitzScene>().onUseItem();
     }

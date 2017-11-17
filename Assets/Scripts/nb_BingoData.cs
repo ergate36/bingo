@@ -102,6 +102,9 @@ public class nb_SocketClass
         MonsterClearRewardAlarm = 1220,     // 게임 끝날을때 보상정보를 알려준다.
         MonsterRetryCollectionRequest = 1221,     // 못한 컬렉션 카드를 다시 시도할 수 있게 저장한다.
         MonsterRetryCollectionResponse = 1222,     // 못한 컬렉션 카드 저장 응답
+
+        KillServerRequest = 9777,   //서버 강제 종료
+        KillServerResponse = 9778,
     };
     public enum STATE
     {
@@ -169,6 +172,12 @@ public class nb_SocketClass
         BlitzEndGameAlarm_End = (short)1010,
 
         GameLiftConnectResponse_End = (short)1102,
+
+        BlitzUsePowerUpRequest_End = 1011,
+        BlitzUsePowerUpResponse_End = 1012,
+
+        BlitzRefreshPowerUpRequest_End = 1013,
+        BlitzRefreshPowerUpResponse_End = 1014,
 
         BlitzCheckNumberRequest_End = 1017,
         BlitzCheckNumberResponse_End = 1018,
@@ -753,40 +762,35 @@ public class nb_Shop
 
 public class nb_Item
 {
-    public enum ItemType
+    public enum normal_ItemType
     {
         Item_None = 0,
 	
-	    Item_Daub,
-	    Item_Bomb,
-	    Item_Daub_10,
-	    Item_Gold_30,
-	    Item_Gold_50,
-	    Item_DirectBingo,
-	    Item_Ticket,
-	    Item_FrozenItem,
-	    Item_Blind_5,
-	    Item_SwapSheet,
-	    Item_ShuffleSheet,
-	    Item_Shield,
-	    kItemEffect_Max,
+        Item_1_Daub = 1,            //1.single daub
+	    Item_2_Coin = 2,            //2.coin reward
+	    Item_3_Chest = 3,           //3.chest
+	    Item_4_DoubleDaub = 4,      //4.double daubs
+	    Item_5_DoubleExp = 5,       //5.double exp
+	    Item_6_DoubleReward = 6,    //6.double reward
+	    Item_7_Bomb = 7,            //7.bomb
+	    Item_8_InstantWin = 8,      //8.instant win
+	    Item_9_Booster = 9,         //9.booster
+	    Item_10_TripleDaub = 10,    //10.triple daubs
     }
 
-    static public string[] itemImagePath =
+    static public string[] nb_itemIconPath =
     {
-        "item_unknown",
-        "item_bonusdub",
-        "item_doubledub",
-        "item_extracoin",
-        "item_extracoin",
-        "item_boxcoin",
-        "item_bingo",
-        "item_ticket",
-        "item_freeze",
-        "item_blind",
-        "item_swap",
-        "item_numbermix",
-        "item_shield"
+        "ui_money_normal",
+        "ui_item_normal1",
+        "ui_item_normal2",
+        "ui_item_normal3",
+        "ui_item_normal4",
+        "ui_item_normal5",
+        "ui_item_normal6",
+        "ui_item_normal7",
+        "ui_item_normal8",
+        "ui_item_normal9",
+        "ui_item_normal10",
     };
 
     static public string[] itemImageMent =
@@ -809,21 +813,19 @@ public class nb_Item
 
 
 
-    static public string[] daubItemImagePath =
+    static public string[] nb_daubItemImagePath =
     {
         "item_unknown",
-        "board_daub",
-        "board_bomb",
-        "board_gold30",
-        "board_gold30",
-        "board_gold50",
-        "board_bingo",
-        "board_ticket",
         "item_unknown",
+        "ui_effect_gold",
+        "ui_effect_chest",
         "item_unknown",
+        "ui_item_normal5",  //임시 이미지
+        "ui_item_normal6",  //임시 이미지
+        "ui_item_normal7",  //임시 이미지
+        "ui_item_normal8",  //임시 이미지
+        "ui_item_normal9",  //임시 이미지
         "item_unknown",
-        "item_unknown",
-        "item_unknown"
     };
 }
 

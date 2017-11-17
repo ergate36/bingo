@@ -211,8 +211,8 @@ public class nb_MainScene : MonoBehaviour
         //GlobalData.g_global.rankCount = 0;
         //GlobalData.g_global.bingoFlag = 0;
 
-        nb_GlobalData.g_global.serverFlag = 1;
-        nbSocket.sCtrl.StartClient();
+        //nb_GlobalData.g_global.serverFlag = 1;
+        //nbSocket.sCtrl.StartClient();
         //GlobalData.g_global.socketState = (int)SocketClass.STATE.mLoginIng;
         //nbSocket.sCtrl.FrontBeginWrite((int)SocketClass.MsgType.mLoginRequest);
         
@@ -223,6 +223,8 @@ public class nb_MainScene : MonoBehaviour
         //if (GlobalData.g_global.GetComponent<AudioSource>().isPlaying == false)
         //    GlobalData.g_global.GetComponent<AudioSource>().Play();
 
+
+        drawPowerUpMoney();
     }
 
     private void diff_item()
@@ -430,4 +432,15 @@ public class nb_MainScene : MonoBehaviour
         //}
     }
 
+    public void drawPowerUpMoney()
+    {
+        GameObject moneyGroup = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase/money_group") as GameObject;
+        if (moneyGroup == null)
+        {
+            Debug.Log("moneyGroup null");
+        }
+        UILabel textLabel = moneyGroup.transform.Find("ticket_n_group/t_value").GetComponent<UILabel>();
+
+        textLabel.text = nb_GlobalData.g_global.getTotalNormalPowerUpCount().ToString();
+    }
 }

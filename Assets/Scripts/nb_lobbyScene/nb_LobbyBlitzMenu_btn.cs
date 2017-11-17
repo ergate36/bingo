@@ -16,6 +16,11 @@ public class nb_LobbyBlitzMenu_btn : MonoBehaviour
 
     void OnClick()
     {
+        if (nb_GlobalData.g_global.MainMenuActive == true)
+        {
+            return;
+        }
+
         if (nb_GlobalData.g_global.LobbyMenuActive == false)
         {
             nb_GlobalData.g_global.LobbyMenuActive = true;

@@ -10,7 +10,12 @@ using System.Collections.Generic;
 using MarigoldGame.Protocol;
 using Newtonsoft.Json;
 using MarigoldGame.Common;
+using MarigoldGame.Commands;
+using MarigoldModel.Model.Enum;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
+using MarigoldModel.Model;
+using MarigoldModel.Commands;
 
 
 public class nbSocket : MonoBehaviour
@@ -74,7 +79,7 @@ public class nbSocket : MonoBehaviour
         {
             try
             {
-                closeSocket();
+                //closeSocket();
             }
             catch
             {
@@ -254,6 +259,9 @@ public class nbSocket : MonoBehaviour
                         {
                             //Debug.Log("> HeartBeatResponse <");
                         }
+                        break;
+                    case (short)nb_SocketClass.MsgType.ConnectExitRequest:
+                        nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.mCloseComplete;
                         break;
 
                     case (short)nb_SocketClass.MsgType.GameLiftConnectResponse:
@@ -487,7 +495,7 @@ public class nbSocket : MonoBehaviour
                                 bodyText);
                             nb_GlobalData.g_global.blitzCompleteBingoAlarm = body;
                             
-                            int rank = body.Rank;                            
+                            int rank = body.Ranking;                            
                             //string userName = Encoding.UTF8.GetString(reader.ReadBytes(20)).Split(char.MinValue)[0];
                             string userName = body.Name;
 
@@ -523,14 +531,34 @@ public class nbSocket : MonoBehaviour
                     case (short)nb_SocketClass.MsgType.BlitzUsePowerUpResponse:
                         using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                         {
+                            var body = JsonConvert.DeserializeObject<BlitzUsePowerUpResponse>(
+                                bodyText);
                             //아이템 사용 응답
+                            Debug.Log("BlitzUsePowerUpResponse : " + bodyText.ToString());
+
+                            nb_GlobalData.g_global.blitzUsePowerUpResponse = body;
+
+                            //if (body.Result == 0)
+                            {
+                                nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzUsePowerUpResponse_End;
+                            }
                         }
                         break;
 
                     case (short)nb_SocketClass.MsgType.BlitzRefreshPowerUpResponse:
                         using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                         {
+                            var body = JsonConvert.DeserializeObject<BlitzRefreshPowerUpResponse>(
+                                bodyText);
                             //아이템 재확인 응답
+                            Debug.Log("BlitzRefreshPowerUpResponse : " + bodyText.ToString());
+
+                            nb_GlobalData.g_global.blitzRefreshPowerUpResponse = body;
+
+                            //if (body.Result == 0)
+                            {
+                                nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzRefreshPowerUpResponse_End;
+                            }
                         }
                         break;
 
@@ -544,15 +572,60 @@ public class nbSocket : MonoBehaviour
                     case (short)nb_SocketClass.MsgType.BlitzCheckNumberResponse:
                         using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                         {
+                            //var o = JObject.Parse(bodyText);
+                            //var c = o["Command"];
+
+                            //ParseCommand(c);
+
+                            //var body = JsonConvert.DeserializeObject<BlitzCheckNumberResponse>(bodyText);
+
                             var body = JsonConvert.DeserializeObject<BlitzCheckNumberResponse>(
-                                bodyText);
+                                bodyText,
+                                new JsonSerializerSettings()
+                                    {
+                                        TypeNameHandling = TypeNameHandling.Objects,
+                                        Binder = new MarigoldSerializationBinder(),
+                                    });
+                            
                             //빙고 숫자 체크 응답
                             Debug.Log("BlitzCheckNumberResponse : " + bodyText.ToString());
 
                             nb_GlobalData.g_global.blitzCheckNumberResponse = body;
 
+                            //Debug.Log("CheckSquareCommand found");
+
+                            if (nb_GlobalData.g_global.blitzCheckNumberResponse.
+                                Command.SubCommandList != null)
+                            {
+                                IncreasePowerUpGaugeCommand powerGauge = 
+                                    nb_GlobalData.g_global.blitzCheckNumberResponse.
+                                    Command.SubCommandList[0] as IncreasePowerUpGaugeCommand;
+
+                                Debug.Log("powerGauge : " + powerGauge.PowerUpGauge.ToString());
+
+                                if (nb_GlobalData.g_global.blitzCheckNumberResponse.
+                                    Command.SubCommandList[0].SubCommandList != null)
+                                {
+                                    SelectRandomPowerUpCommand select =
+                                        powerGauge.SubCommandList[0] as SelectRandomPowerUpCommand;
+
+                                    if (nb_GlobalData.g_global.selectItemId == 0)
+                                    {
+                                        //아이템 선택
+                                        nb_GlobalData.g_global.selectItemId = (int)select.SelectPowerUpId;
+                                    }
+
+                                    Debug.Log("SelectRandomPowerUpCommand found : " + 
+                                        select.SelectPowerUpId.ToString());
+                                }
+                                else
+                                {
+                                    //Debug.Log("SelectRandomPowerUpCommand null");
+                                }
+                            }
+                            
                             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzCheckNumberResponse_End;
-                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+                            //nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
                         }
                         break;
 
@@ -579,6 +652,24 @@ public class nbSocket : MonoBehaviour
             Debug.Log(st.Length.ToString());
             Debug.Log(st.ToString());
             Debug.Log(e.ToString());
+        }
+    }
+
+    private void ParseCommand(JToken c)
+    {
+        var type = (CommandType)c["Type"].Value<int>();
+        if (type == CommandType.CHECK_SQUARE)
+        {
+            //  ???
+        }
+        else if (type == CommandType.INCREASE_POWER_UP_GAUGE)
+        {
+            // 파워업 게이지가 늘어났을대 할 일
+        }
+
+        foreach (var child in c["SubCommandList"].Children())
+        {
+            ParseCommand(c);
         }
     }
     public void closeSocket()
@@ -618,11 +709,11 @@ public class nbSocket : MonoBehaviour
             }
             switch (type)
             {
-                case (short)SocketClass.MsgType.mHeartBeat:
+                case (short)nb_SocketClass.MsgType.HeartBeatRequest:
                     using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                     {
                         writer.Write(H);             //헤더
-                        writer.Write((short)SocketClass.MsgType.mHeartBeat);
+                        writer.Write((short)nb_SocketClass.MsgType.HeartBeatRequest);
                         writer.Write((short)0);             //사이즈
                         ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
                         writer.Close();
@@ -630,18 +721,18 @@ public class nbSocket : MonoBehaviour
 
                     break;
 
-                case (short)SocketClass.MsgType.mClose:
+                case (short)nb_SocketClass.MsgType.ConnectExitRequest:
                     using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                     {
-                        //writer.Write(H);             //헤더
-                        //writer.Write((ushort)SocketClass.MsgType.mClose);
-                        //writer.Write((ushort)0);             //사이즈
-                        //ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
+                        writer.Write(H);             //헤더
+                        writer.Write((ushort)nb_SocketClass.MsgType.ConnectExitRequest);
+                        writer.Write((ushort)0);             //사이즈
+                        ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
 
-                        //writer.Close();
+                        writer.Close();
                     }
-                    //GlobalData.g_global.socketState = (int)SocketClass.STATE.mCloseComplete;
-                    return;
+                    nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.mCloseComplete;
+                    //return;
                     break;
 
                 case (short)nb_SocketClass.MsgType.GameLiftConnectRequest:
@@ -654,6 +745,7 @@ public class nbSocket : MonoBehaviour
                         var a = new GameLiftConnectRequest
                         {
                             PlayerSessionId = nb_GlobalData.g_global.gl_playerSessionId,
+                            SessionKey = nb_GlobalData.g_global.userSession.SessionKey,
                         };
 
                         var s = JsonConvert.SerializeObject(a);
@@ -734,6 +826,9 @@ public class nbSocket : MonoBehaviour
                         writer.Write(H);             //헤더
                         writer.Write((ushort)nb_SocketClass.MsgType.BlitzUsePowerUpRequest);
 
+                        Debug.Log("BlitzUsePowerUpRequest : " +
+                            nb_GlobalData.g_global.selectItemId.ToString());
+
                         var a = new BlitzUsePowerUpRequest
                         {
                         };
@@ -749,6 +844,26 @@ public class nbSocket : MonoBehaviour
                     }
                     break;
                 case (short)nb_SocketClass.MsgType.BlitzRefreshPowerUpRequest:
+                    using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                    {
+                        writer.Write(H);             //헤더
+                        writer.Write((ushort)nb_SocketClass.MsgType.BlitzUsePowerUpRequest);
+                        
+                        Debug.Log("BlitzRefreshPowerUpRequest");
+
+                        var a = new BlitzRefreshPowerUpRequest
+                        {
+                        };
+
+                        var s = JsonConvert.SerializeObject(a);
+                        byte[] body = new UTF8Encoding().GetBytes(s);
+
+                        writer.Write((ushort)s.Length);             //사이즈
+                        writer.Write(body);
+                        ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
+
+                        writer.Close();
+                    }
                     break;
                 case (short)nb_SocketClass.MsgType.BlitzGambleRequest:
                     break;
@@ -785,8 +900,8 @@ public class nbSocket : MonoBehaviour
 
             if (type != 97)
             {
-                Debug.Log(type + " ReturnByte.Length " + ReturnByte.Length.ToString() +
-                    " // " + byteText);
+                //Debug.Log(type + " ReturnByte.Length " + ReturnByte.Length.ToString() +
+                //    " // " + byteText);
             }
             st.Write(ReturnByte, 0, ReturnByte.Length);
             st.Flush();

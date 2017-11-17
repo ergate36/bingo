@@ -1,0 +1,21 @@
+﻿using MarigoldModel.Model;
+
+namespace MarigoldGame.Common
+{
+    public partial class Square
+    {
+        public int Number { get; set; } // 빙고 숫자
+        public bool Checked { get; set; } // 빙고 숫자가 체크되었는지 보여준다.
+        public PowerUp PowerUp { get; set; } // 칸에 묶여 있는 아이템. 중복 될 수 없다.
+        public int DustTime { get; internal set; }
+        public int Index { get; internal set; }
+
+        //public Square(int value, bool check = false)
+        //{
+        //    Index = -1; // 나중에 초기화 필요함.
+        //    Number = value;
+        //    Checked = check;
+        //    PowerUp = null;
+        //}
+    }
+}

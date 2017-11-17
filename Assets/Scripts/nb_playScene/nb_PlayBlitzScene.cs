@@ -49,7 +49,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
     List<GameObject> m_blindList;
     List<GameObject> daubItemList;
     List<GameObject> otherDaubList;
-    private float lastUseItemTime;
+    private float lastUseItemTime = 0;
     private int m_itemGaugeCount = 0;
     private bool m_bItemReady = false;
 
@@ -130,6 +130,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     //아이템
     float itemGaugeRate = 0;
+    bool itemCoolDown = false;
 
 
     void Awake()
@@ -192,7 +193,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         m_onBlind = false;
         m_onFrozen = false;
 
-        lastUseItemTime -= 11.0f;
+        lastUseItemTime -= 20.0f;
         m_itemGaugeCount = 0;
         m_bingoType = BingoType.kBingoType_NotBingo;
 
@@ -544,6 +545,88 @@ public class nb_PlayBlitzScene : MonoBehaviour
         //    Debug.Log("\"addball\" fail!! " + nb_GlobalData.g_global.BingoNumberCount.ToString() + " "
         //        + ballCount.ToString() + " " + nb_GlobalData.g_global.bingoball[1].ToString());
         //}
+
+        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzCheckNumberResponse_End)
+        {
+            //빙고 번호 선택
+            if (nb_GlobalData.g_global.selectItemId != 0)
+            {
+                int index = nb_GlobalData.g_global.getNormalItemIndex(
+                    nb_GlobalData.g_global.selectItemId);
+                playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().spriteName
+                    = nb_Item.nb_itemIconPath[index];
+                switch (index)
+                {
+                    case 1:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 83);
+                        break;
+                    case 2:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 82);
+                        break;
+                    case 3:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(88, 82);
+                        break;
+                    case 4:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 83);
+                        break;
+                    case 5:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(89, 85);
+                        break;
+                    case 6:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(88, 82);
+                        break;
+                    case 7:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(140, 73);
+                        break;
+                    case 8:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(93, 90);
+                        break;
+                    case 9:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(86, 84);
+                        break;
+                    case 10:
+                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 83);
+                        break;
+                }
+
+                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
+
+                lastUseItemTime = Time.time;
+            }
+
+            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+        }
+
+        if (itemCoolDown == true)
+        {
+            float coolTime = Time.time - lastUseItemTime;
+            if (coolTime > 20)
+            {
+                //쿨타임 끝
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                    "Charging...";
+                itemCoolDown = false;
+            }
+            else
+            {
+                //쿨타임
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                    (20 - (int)coolTime).ToString() + " second";
+            }
+        }
+        else
+        {
+            if (m_itemGaugeCount == 3)
+            {
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                    "Ready";
+            }
+            else
+            {
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                    "Charging...";
+            }
+        }
     }
 
     public void makeItem()
@@ -1128,8 +1211,33 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     public void onUseItem()
     {
-        if (m_itemGaugeCount != 2)
+        //아이템 게이지가 차야됨
+        if (m_itemGaugeCount <= 2)
             return;
+
+        if (nb_GlobalData.g_global.selectItemId == 0)
+        {
+            //선택된 아이템이 없음
+            return;
+        }
+
+        if (itemCoolDown == true)
+        {
+            //쿨타임 중
+            return;
+        }
+
+        //사용
+        nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.BlitzUsePowerUpRequest);
+        nb_GlobalData.g_global.selectItemId = 0;
+        itemCoolDown = true;
+        m_itemGaugeCount = 0;
+
+
+        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().spriteName
+            = "ui_money_normal";
+        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(92, 98);
+
         //if (nb_GlobalData.g_global.itemIndex == (int)Item.ItemType.Item_None)
         //    return;
         //bool needTarget = false;
@@ -1626,11 +1734,11 @@ public class nb_PlayBlitzScene : MonoBehaviour
             playScene_ui.m_bingoButton[1].gameObject.SetActive(false);
             playScene_ui.m_bingoButton[2].gameObject.SetActive(false);
             playScene_ui.m_bingoButton[3].gameObject.SetActive(false);
-            playScene_ui.m_item.gameObject.SetActive(false);
+            //playScene_ui.m_item.gameObject.SetActive(false);
             playScene_ui.m_itemCooltime.gameObject.SetActive(false);
-            playScene_ui.m_itemGauge[0].gameObject.SetActive(false);
-            playScene_ui.m_itemGauge[1].gameObject.SetActive(false);
-            playScene_ui.m_itemGauge[2].gameObject.SetActive(false);
+            //playScene_ui.m_itemGauge[0].gameObject.SetActive(false);
+            //playScene_ui.m_itemGauge[1].gameObject.SetActive(false);
+            //playScene_ui.m_itemGauge[2].gameObject.SetActive(false);
             if (m_shield_idle != null)
             {
                 DestroyImmediate(m_shield_idle);
@@ -1861,54 +1969,71 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     public void increaseGauge()
     {
-        if (m_onFrozen || m_bItemReady)
-        {
-            return;
-        }
+        //if (m_onFrozen || m_bItemReady)
+        //{
+        //    return;
+        //}
 
-        if (m_itemGaugeCount > 1)
+        if (nb_GlobalData.g_global.getTotalNormalPowerUpCount() == 0)
         {
-            return;
-        }
-
-        if (nb_GlobalData.g_global.myInfo.ItemCount == 0)
-        {
+            //가진 아이템이 없음
+            Debug.Log("increaseGauge fail : not enough item");
             return;
         }
 
         float coolTime = Time.time - lastUseItemTime;
 
-        if (coolTime < 11.0f)
+        if (coolTime < 20.0f)
         {
+            //아이템 쿨타임 중임
+            Debug.Log("increaseGauge fail : CoolTime");
             return;
         }
 
-        if (m_itemGaugeCount == 0)
+        if (m_itemGaugeCount > 2)
         {
-            playScene_ui.m_itemGauge[0].gameObject.SetActive(false);
-            playScene_ui.m_itemGauge[1].gameObject.SetActive(true);
-            playScene_ui.m_itemGauge[2].gameObject.SetActive(false);
+            //게이지가 가득참
+            return;
         }
-        else if (m_itemGaugeCount == 1)
-        {
 
-            playScene_ui.m_itemGauge[0].gameObject.SetActive(false);
-            playScene_ui.m_itemGauge[1].gameObject.SetActive(false);
-            playScene_ui.m_itemGauge[2].gameObject.SetActive(true);
-            //playScene_ui.m_talk_itemReady.GetComponent<AudioSource>().clip = nb_GlobalData.g_global.TalkSound[(int)Sound.TalkList.item_itemready];
-            //playScene_ui.m_talk_itemReady.GetComponent<AudioSource>().Play();
-            activeItem(nb_GlobalData.g_global.itemIndex);
-        }
         ++m_itemGaugeCount;
+
+        if (m_itemGaugeCount == 1)
+        {
+            //한칸
+            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.33f;
+
+            //Debug.Log("Item Debug Msg : Gauge 1/3");
+        }
+        else if (m_itemGaugeCount == 2)
+        {
+            //두칸
+            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.66f;
+
+            //Debug.Log("Item Debug Msg : Gauge 2/3");
+        }
+        else if (m_itemGaugeCount == 3)
+        {
+            //만땅
+            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 1.0f;
+            activeItem(nb_GlobalData.g_global.itemIndex);
+
+            //Debug.Log("Item Debug Msg : Gauge 3/3");
+
+           // nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.BlitzRefreshPowerUpRequest);
+        }
+
+
     }
 
     public IEnumerator activeItemReady()
     {
         playScene_ui.m_itemCooltime.gameObject.SetActive(true);
-        playScene_ui.m_itemGauge[0].gameObject.SetActive(false);
+        //playScene_ui.m_itemGauge[0].gameObject.SetActive(false);
+        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 1.0f;
 
         m_bItemReady = true;
-        yield return new WaitForSeconds(11.0f);
+        yield return new WaitForSeconds(20.0f);
 
         if (nb_GlobalData.g_global.ItemUseState == true)
         {
@@ -1922,7 +2047,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
             Item.ItemType type = (Item.ItemType)nb_GlobalData.g_global.itemIndex;
 
             playScene_ui.m_itemCooltime.gameObject.SetActive(false);
-            playScene_ui.m_itemGauge[0].gameObject.SetActive(true);
+            //playScene_ui.m_itemGauge[0].gameObject.SetActive(true);
+            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.0f;
             m_bItemReady = false;
         }
     }
@@ -2813,12 +2939,12 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     private void activeItem(int item_type)
     {
-        if (item_type == 0 || item_type > 12)
-        {
-            item_type = 3;
-        }
-        playScene_ui.m_item.gameObject.SetActive(true);
-        playScene_ui.m_item.GetComponent<UISprite>().spriteName = Item.itemImagePath[item_type];
+        //if (item_type == 0 || item_type > 12)
+        //{
+        //    item_type = 3;
+        //}
+        ////playScene_ui.m_item.gameObject.SetActive(true);
+        ////playScene_ui.m_item.GetComponent<UISprite>().spriteName = Item.itemImagePath[item_type];
     }
 
     public void resetGauge()
@@ -2827,10 +2953,11 @@ public class nb_PlayBlitzScene : MonoBehaviour
         lastUseItemTime = Time.time;
         m_itemGaugeCount = 0;
 
-        playScene_ui.m_itemGauge[0].gameObject.SetActive(true);
-        playScene_ui.m_itemGauge[1].gameObject.SetActive(false);
-        playScene_ui.m_itemGauge[2].gameObject.SetActive(false);
-        playScene_ui.m_item.gameObject.SetActive(false);
+        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.0f;
+        //playScene_ui.m_itemGauge[0].gameObject.SetActive(true);
+        //playScene_ui.m_itemGauge[1].gameObject.SetActive(false);
+        //playScene_ui.m_itemGauge[2].gameObject.SetActive(false);
+        //playScene_ui.m_item.gameObject.SetActive(false);
         StartCoroutine(activeItemReady());
     }
 
@@ -3372,5 +3499,24 @@ public class nb_PlayBlitzScene : MonoBehaviour
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), tex);
         }
 
+    }
+
+    public void setCellItem(int sheetIndex, int cellIndex, nb_Item.normal_ItemType type)
+    {
+        if (nb_Item.nb_daubItemImagePath[(int)type] == "item_unknown")
+        {
+            daubObjects[sheetIndex, cellIndex].gameObject.SetActive(false);
+            return;
+        }
+
+        daubObjects[sheetIndex, cellIndex].gameObject.SetActive(true);
+        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName = 
+            nb_Item.nb_daubItemImagePath[(int)type];
+    }
+
+    public void activeCellItem(int sheetIndex, int cellIndex)
+    {
+        //nb_GlobalData.g_global.sheetInfo.sheet[sheetIndex, cellIndex]
+        //m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
     }
 }

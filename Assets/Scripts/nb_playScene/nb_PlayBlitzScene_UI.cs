@@ -45,9 +45,9 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
    
     
     [HideInInspector]
-    public Transform        m_item;
+    public Transform        m_itemBtn;
     [HideInInspector]
-    public Transform[]      m_itemGauge;
+    public Transform      m_itemGauge;
     [HideInInspector]
     public Transform        m_itemCooltime;
 
@@ -181,6 +181,8 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
     {
         playUI = GameObject.Find(playUIPath).transform;
 
+        m_itemBtn = playUI.Find("item_btn");
+
         m_otherOut = playUI.Find("popup_OtherOut");
         m_baseBoard = playUI.Find("progress_info");
         m_bingoBoard = playUI.Find("bingo_sheet");
@@ -206,7 +208,6 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
         m_cells         = new Transform[4, 25];
         m_targets       = new Transform[4];
         m_targetSheets  = new Transform[4, 4];
-        m_itemGauge     = new Transform[3];
         m_targets       = new Transform[4];
         m_otherBingoSheets = new Transform[4, 4];
         m_othersName = new Transform[4];
@@ -276,11 +277,9 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
         m_othersName[3] = m_baseBoard.Find("users_name/name_03");
 
         // item gauge
-        //m_itemGauge[0] = m_ItemBoard.Find("gauge0");
-        //m_itemGauge[1] = m_ItemBoard.Find("gauge1");
-        //m_itemGauge[2] = m_ItemBoard.Find("gauge2");
-        //m_item = m_ItemBoard.Find("item");
-        //m_itemCooltime = m_ItemBoard.Find("gauge_cooltime");
+        m_itemGauge = m_itemBtn.Find("i_gauge");
+
+        m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
        
         //m_item.gameObject.SetActive(false);
         //m_itemCooltime.gameObject.SetActive(false);

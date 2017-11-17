@@ -10,6 +10,11 @@ public class stageArrow_btn : MonoBehaviour
 
 	void OnClick()
     {
+        if (nb_GlobalData.g_global.MainMenuActive == true)
+        {
+            return;
+        }
+
         if (nb_GlobalData.g_global.WorldStageSpineRefresh == false)
         {
             if (isLeft)

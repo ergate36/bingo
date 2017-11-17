@@ -57,6 +57,12 @@ public class nb_GlobalData : MonoBehaviour
 
     [HideInInspector]
     public BlitzCheckNumberResponse blitzCheckNumberResponse;
+    
+    [HideInInspector]
+    public BlitzRefreshPowerUpResponse blitzRefreshPowerUpResponse;
+    
+    [HideInInspector]
+    public BlitzUsePowerUpResponse blitzUsePowerUpResponse;
 
     // sounds
     [HideInInspector]
@@ -214,6 +220,11 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public int gl_port;
 
+    [HideInInspector]
+    public bool MainMenuActive = false;
+    [HideInInspector]
+    public bool MainShopActive = false;
+
     //lobby
     [HideInInspector]
     public bool LobbyMenuActive = false;
@@ -226,6 +237,10 @@ public class nb_GlobalData : MonoBehaviour
     public int CheckNumCardIndex = 0;
     [HideInInspector]
     public int CheckNumNumber = 0;
+
+    //select Item
+    [HideInInspector]
+    public int selectItemId = 0;
 
 
     void Awake()
@@ -246,6 +261,8 @@ public class nb_GlobalData : MonoBehaviour
         blitzCompleteBingoAlarm = new BlitzCompleteBingoAlarm();
         blitzCompleteBingoResponse = new BlitzCompleteBingoResponse();
         blitzCheckNumberResponse = new BlitzCheckNumberResponse();
+        blitzRefreshPowerUpResponse = new BlitzRefreshPowerUpResponse();
+        blitzUsePowerUpResponse = new BlitzUsePowerUpResponse();
 
 
         BGSound = new AudioClip[(int)Sound.BGSoundLIst.BGSound_MAX];
@@ -353,6 +370,57 @@ public class nb_GlobalData : MonoBehaviour
         for (int i = 0; i < size; ++i)
         {
             result += (int)(userPowerUpList[i].Count);
+        }
+
+        return result;
+    }
+
+    public int getNormalItemIndex(int infoId)
+    {
+        //1.single daub
+        //2.coin reward
+        //3.chest
+        //4.double daubs
+        //5.double exp
+        //6.double reward
+        //7.bomb
+        //8.instant win
+        //9.booster
+        //10.triple daubs
+        int result = 0;
+
+        switch(infoId)
+        {
+            case 5:
+                result = 1;
+                break;
+            case 6:
+                result = 2;
+                break;
+            case 3:
+                result = 3;
+                break;
+            case 8:
+                result = 4;
+                break;
+            case 9:
+                result = 5;
+                break;
+            case 11:
+                result = 6;
+                break;
+            case 1:
+                result = 7;
+                break;
+            case 13:
+                result = 8;
+                break;
+            case 15:
+                result = 9;
+                break;
+            case 17:
+                result = 10;
+                break;
         }
 
         return result;

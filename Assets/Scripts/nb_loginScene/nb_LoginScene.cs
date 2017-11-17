@@ -346,7 +346,7 @@ public class nb_LoginScene : MonoBehaviour
         //    GlobalData.g_global.itemip[i] = GlobalData.g_global.serverip[GlobalData.g_global.serverIndex];
         //    GlobalData.g_global.itemport[i] = GlobalData.g_global.serverport[GlobalData.g_global.serverIndex];
         //}
-        nbSocket.sCtrl.StartClient();
+        //nbSocket.sCtrl.StartClient();
         //nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.mServerInfoComplete;
         //// 로그인하면서 접속을 끊어버려서 응답을 못받는다.
         //Socket_Ctrl.sCtrl.FrontBeginWrite((int)SocketClass.MsgType.mServerInfoRequest);
@@ -471,7 +471,7 @@ public class nb_LoginScene : MonoBehaviour
     public void loginStart(string nickname)
     {
        // GlobalData.g_global.myEmail = "TEST";
-        nbSocket.sCtrl.StartClient();
+        //nbSocket.sCtrl.StartClient();
         //GlobalData.g_global.socketState = (int)SocketClass.STATE.mLoginIng;
         //Socket_Ctrl.sCtrl.FrontBeginWrite((int)SocketClass.MsgType.mLoginRequest);
     }

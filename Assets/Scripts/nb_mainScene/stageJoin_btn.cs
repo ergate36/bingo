@@ -17,6 +17,11 @@ public class stageJoin_btn : MonoBehaviour
     }
 	void OnClick()
     {
+        if (nb_GlobalData.g_global.MainMenuActive == true)
+        {
+            return;
+        }
+
         mainSceneUI = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase");
         buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
         for (int i = 0; i < buttons.Length; ++i)
@@ -34,8 +39,10 @@ public class stageJoin_btn : MonoBehaviour
 
         //게임리프트 서버 스테이지 접속 정보 가져옴
         Debug.Log("click stage connect button");
+
+        int stageId = 1;
         nbHttp.http.ConnectStage(
-            nb_GlobalData.g_global.userSession.SessionKey, 1);
+            nb_GlobalData.g_global.userSession.SessionKey, stageId);
             //nb_GlobalData.g_global.selectStageId);
     }
 

@@ -7,8 +7,8 @@ public class nb_LobbyBlitzStartCancel_btn : MonoBehaviour
     {
         if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.mMatchCancelIng)
         {
-            nb_GlobalData.g_global.serverFlag = 1;
-            nbSocket.sCtrl.StartClient();
+            //nb_GlobalData.g_global.serverFlag = 1;
+            //nbSocket.sCtrl.StartClient();
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
 
