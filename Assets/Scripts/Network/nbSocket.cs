@@ -531,17 +531,78 @@ public class nbSocket : MonoBehaviour
                     case (short)nb_SocketClass.MsgType.BlitzUsePowerUpResponse:
                         using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                         {
+                            //var body = JsonConvert.DeserializeObject<BlitzUsePowerUpResponse>(
+                            //    bodyText);
+
                             var body = JsonConvert.DeserializeObject<BlitzUsePowerUpResponse>(
-                                bodyText);
+                                bodyText,
+                                new JsonSerializerSettings()
+                                {
+                                    TypeNameHandling = TypeNameHandling.Objects,
+                                    Binder = new MarigoldSerializationBinder(),
+                                });
+
                             //아이템 사용 응답
                             Debug.Log("BlitzUsePowerUpResponse : " + bodyText.ToString());
 
                             nb_GlobalData.g_global.blitzUsePowerUpResponse = body;
 
-                            //if (body.Result == 0)
+                            if (body.Command.Type == CommandType.PLANT)
                             {
-                                nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzUsePowerUpResponse_End;
+                                PlantCommand plantCommand =
+                                    nb_GlobalData.g_global.blitzUsePowerUpResponse.Command as PlantCommand;
+
+                                int infoId = nb_GlobalData.g_global.selectItemId;
+
+                                foreach (var sub in plantCommand.SubCommandList)
+                                {
+                                    if (sub.Type == CommandType.PLANT)
+                                    {
+                                        PlantCommand subPlant = sub as PlantCommand;
+                                        
+                                        int sheet = subPlant.CardIndex;
+                                        int number = subPlant.Number;
+
+                                        nb_useItemData newData;
+                                        newData.infoId = infoId;
+                                        newData.sheet = sheet;
+                                        newData.number = number;
+
+                                        nb_GlobalData.g_global.useItemDataList.Add(newData);
+                                    }
+                                }
+                                Debug.Log("PlantCommand Result set End count : " + 
+                                    nb_GlobalData.g_global.useItemDataList.Count.ToString());
                             }
+                            else if (body.Command.Type == CommandType.DAUB)
+                            {
+                                DaubCommand daubCommand =
+                                    nb_GlobalData.g_global.blitzUsePowerUpResponse.Command as DaubCommand;
+
+                                int infoId = nb_GlobalData.g_global.selectItemId;
+
+                                foreach (var sub in daubCommand.SubCommandList)
+                                {
+                                    if (sub.Type == CommandType.DAUB)
+                                    {
+                                        DaubCommand subDaub = sub as DaubCommand;
+
+                                        int sheet = subDaub.CardIndex;
+                                        int number = subDaub.Number;
+
+                                        nb_useItemData newData;
+                                        newData.infoId = infoId;
+                                        newData.sheet = sheet;
+                                        newData.number = number;
+
+                                        nb_GlobalData.g_global.useItemDataList.Add(newData);
+                                    }
+                                }
+                                Debug.Log("DaubCommand Result set End count : " +
+                                    nb_GlobalData.g_global.useItemDataList.Count.ToString());
+                            }                            
+                            
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzUsePowerUpResponse_End;
                         }
                         break;
 
@@ -597,35 +658,65 @@ public class nbSocket : MonoBehaviour
                             if (nb_GlobalData.g_global.blitzCheckNumberResponse.
                                 Command.SubCommandList != null)
                             {
-                                IncreasePowerUpGaugeCommand powerGauge = 
-                                    nb_GlobalData.g_global.blitzCheckNumberResponse.
-                                    Command.SubCommandList[0] as IncreasePowerUpGaugeCommand;
-
-                                Debug.Log("powerGauge : " + powerGauge.PowerUpGauge.ToString());
-
-                                if (nb_GlobalData.g_global.blitzCheckNumberResponse.
-                                    Command.SubCommandList[0].SubCommandList != null)
+                                foreach (var sub in nb_GlobalData.g_global.blitzCheckNumberResponse.
+                                    Command.SubCommandList)
                                 {
-                                    SelectRandomPowerUpCommand select =
-                                        powerGauge.SubCommandList[0] as SelectRandomPowerUpCommand;
-
-                                    if (nb_GlobalData.g_global.selectItemId == 0)
+                                    if (sub.Type == CommandType.INCREASE_POWER_UP_GAUGE)
                                     {
-                                        //아이템 선택
-                                        nb_GlobalData.g_global.selectItemId = (int)select.SelectPowerUpId;
+                                        IncreasePowerUpGaugeCommand powerGauge =
+                                            sub as IncreasePowerUpGaugeCommand;
+
+                                        Debug.Log("powerGauge : " + powerGauge.PowerUpGauge.ToString());
+
+                                        if (powerGauge.SubCommandList != null)
+                                        {
+                                            if (powerGauge.SubCommandList[0].Type == CommandType.SELECT_RANDOM_POWER_UP)
+                                            {
+                                                SelectRandomPowerUpCommand select =
+                                                    powerGauge.SubCommandList[0] as SelectRandomPowerUpCommand;
+
+                                                if (nb_GlobalData.g_global.selectItemId == 0)
+                                                {
+                                                    //아이템 선택
+                                                    nb_GlobalData.g_global.selectItemId = (int)select.SelectPowerUpId;
+                                                }
+
+                                                Debug.Log("SelectRandomPowerUpCommand found : " +
+                                                    select.SelectPowerUpId.ToString());
+                                            }
+                                        }
+                                    }
+                                    else if (sub.Type == CommandType.BOMB)
+                                    {
+                                        BombCommand bomb = sub as BombCommand;
+
+                                        //todo:퍽탄
                                     }
 
-                                    Debug.Log("SelectRandomPowerUpCommand found : " + 
-                                        select.SelectPowerUpId.ToString());
-                                }
-                                else
-                                {
-                                    //Debug.Log("SelectRandomPowerUpCommand null");
                                 }
                             }
                             
                             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzCheckNumberResponse_End;
                             //nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.BlitzClearRewardAlarm:
+                        {
+                            // 게임 끝날을때 보상정보를 알려준다.
+                            var body = JsonConvert.DeserializeObject<ClearRewardCommand>(
+                                bodyText,
+                                new JsonSerializerSettings()
+                                {
+                                    TypeNameHandling = TypeNameHandling.Objects,
+                                    Binder = new MarigoldSerializationBinder(),
+                                });
+
+                            Debug.Log("BlitzClearRewardAlarm : " + bodyText.ToString());
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.BlitzRetryCollectionResponse:
+                        {
+                            // 못한 컬렉션 카드 저장 응답
                         }
                         break;
 
@@ -891,6 +982,11 @@ public class nbSocket : MonoBehaviour
                         ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
 
                         writer.Close();
+                    }
+                    break;
+                case (short)nb_SocketClass.MsgType.BlitzRetryCollectionRequest:
+                    {
+                        // 못한 컬렉션 카드를 다시 시도할 수 있게 저장한다.
                     }
                     break;
             }

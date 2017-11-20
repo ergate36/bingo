@@ -47,6 +47,11 @@ public class nbHttp : MonoBehaviour
         BuyStoreProductStart,
         BuyStoreProductSuccess,
 
+        
+        
+        //etc
+        NetworkFailTimeout = 9999,
+
     };
 
     public static nbHttpState state = nbHttpState.Wait;
@@ -127,6 +132,7 @@ public class nbHttp : MonoBehaviour
         else
         {
             Debug.Log("WWW Error : " + www.error);
+            nbHttp.state = nbHttpState.NetworkFailTimeout;
         }
     }
 

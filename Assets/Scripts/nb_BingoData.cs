@@ -817,8 +817,8 @@ public class nb_Item
     {
         "item_unknown",
         "item_unknown",
-        "ui_effect_gold",
-        "ui_effect_chest",
+        "ui_item_normal2",
+        "ui_item_normal3",
         "item_unknown",
         "ui_item_normal5",  //임시 이미지
         "ui_item_normal6",  //임시 이미지
@@ -845,7 +845,7 @@ public struct nb_Cell
 public struct nb_BingoSheet
 {
     public int sheetIndex;
-    public Cell[] cells;
+    public nb_Cell[] cells;
 }
 
 public struct nb_otherBingoState
@@ -954,4 +954,11 @@ public struct nb_materialInfo
 {
     public int material_Key;
     public int material_exp;
+}
+
+public struct nb_useItemData
+{
+    public int infoId;
+    public int sheet;
+    public int number;
 }

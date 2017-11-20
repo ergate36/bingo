@@ -40,7 +40,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
     public bool[] m_reloadSheets;
 
     [HideInInspector]
-    public BingoSheet[] m_myLocalSheets;
+    public nb_BingoSheet[] m_myLocalSheets;
 
     [HideInInspector]
     public GameObject[,] daubObjects;
@@ -131,6 +131,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
     //아이템
     float itemGaugeRate = 0;
     bool itemCoolDown = false;
+    int chestItemCount = 0;
+    bool itemBoosterOn = false;
 
 
     void Awake()
@@ -597,10 +599,27 @@ public class nb_PlayBlitzScene : MonoBehaviour
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
 
+        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzUsePowerUpResponse_End)
+        {
+            //아이템 사용 응답
+            runUseItemAction();
+
+            nb_GlobalData.g_global.selectItemId = 0;
+            itemCoolDown = true;
+            m_itemGaugeCount = 0;
+
+            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+        }
+
         if (itemCoolDown == true)
         {
+            float checkTime = 20;
+            if (itemBoosterOn)
+            {
+                checkTime = 10;
+            }
             float coolTime = Time.time - lastUseItemTime;
-            if (coolTime > 20)
+            if (coolTime > checkTime)
             {
                 //쿨타임 끝
                 playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
@@ -611,20 +630,36 @@ public class nb_PlayBlitzScene : MonoBehaviour
             {
                 //쿨타임
                 playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                    (20 - (int)coolTime).ToString() + " second";
+                    (checkTime - (int)coolTime).ToString() + " second";
             }
         }
         else
         {
-            if (m_itemGaugeCount == 3)
+            if (itemBoosterOn)
             {
-                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                    "Ready";
+                if (m_itemGaugeCount == 2)
+                {
+                    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                        "Ready";
+                }
+                else
+                {
+                    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                        "Charging...";
+                }
             }
             else
             {
-                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                    "Charging...";
+                if (m_itemGaugeCount == 3)
+                {
+                    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                        "Ready";
+                }
+                else
+                {
+                    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                        "Charging...";
+                }
             }
         }
     }
@@ -1229,9 +1264,6 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
         //사용
         nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.BlitzUsePowerUpRequest);
-        nb_GlobalData.g_global.selectItemId = 0;
-        itemCoolDown = true;
-        m_itemGaugeCount = 0;
 
 
         playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().spriteName
@@ -1599,22 +1631,42 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 //playScene_ui.m_cells[sheetIndex, index].GetComponent<UILabel>().text = "";
                 //
                 daubObjects[sheetIndex, index].GetComponent<UISprite>().spriteName = "ui_daub1";
+                daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().color = Color.white;
                 //playScene_ui.m_sound_daubEffect.GetComponent<AudioSource>().clip = nb_GlobalData.g_global.EffectSound[(int)Sound.EffSoundList.daub];
                 //playScene_ui.m_sound_daubEffect.GetComponent<AudioSource>().Play();
                 int tempitem = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
 
                 //visibleScore(playScene_ui.m_cells[sheetIndex, index].position, sheetIndex, index);
 
-                if (m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex > 0)
+                int itemIndex = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
+                if (itemIndex > 0)   //아이템 있는 칸 처리
                 {
-                    if (m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex != (int)Item.ItemType.Item_DirectBingo)
+                    if (itemIndex == 3)
                     {
-                        int itemIndex = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
-                        m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex = 0;
-                        StartCoroutine(activeDaubItemClick(sheetIndex, itemIndex, index));
-                        //playScene.visibleScore((Item.ItemType)itemIndex, playSceneUI.m_cells[m_cellIndexAtSendDaub].position);
-                        setItemDaubUI(sheetIndex, index, -1);
+                        //상자
+                        ++chestItemCount;
+                        playScene_ui.m_baseBoard.Find("i_icon2").GetComponent<UISprite>().spriteName = "ui_info_chest1";
+                        playScene_ui.m_baseBoard.Find("t_bonus_count").GetComponent<UILabel>().text = "x" + chestItemCount.ToString();
                     }
+                    else if (itemIndex == 6)
+                    {
+                        //따블 리워드
+                        playScene_ui.m_baseBoard.Find("i_icon3").GetComponent<UISprite>().spriteName = "ui_info_all1";
+                    }
+                    else if (itemIndex == 5)
+                    {
+                        //따블 경험치
+                        playScene_ui.m_baseBoard.Find("i_icon4").GetComponent<UISprite>().spriteName = "ui_info_xp1";
+                    }
+
+                    //if (m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex != (int)Item.ItemType.Item_DirectBingo)
+                    //{
+                    //    int itemIndex = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
+                    //    m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex = 0;
+                    //    StartCoroutine(activeDaubItemClick(sheetIndex, itemIndex, index));
+                    //    //playScene.visibleScore((Item.ItemType)itemIndex, playSceneUI.m_cells[m_cellIndexAtSendDaub].position);
+                    //    setItemDaubUI(sheetIndex, index, -1);
+                    //}
                 }
 
                 //170817: 아이템 나중에 다시 구현
@@ -1640,34 +1692,34 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 //    playScene_ui.m_sound_attackEffect.GetComponent<AudioSource>().Play();
                 //}
 
-                if (checkItemBingo(sheetIndex, index) == true)
-                {
-                    nb_GlobalData.g_global.sheetInfo.bingoSheet[sheetIndex] = true;
-                    /*
-                    if (myrankFlag)
-                    {
-                        nb_GlobalData.g_global.m_winnerList[rankInfo].nickname = nb_GlobalData.g_global.myInfo.nickName;
-                        nb_GlobalData.g_global.m_winnerList[rankInfo].monster_id = nb_GlobalData.g_global.sheetInfo.monsterId;
-                        nb_GlobalData.g_global.m_winnerList[rankInfo].rank = rankInfo+1;
+                //if (checkItemBingo(sheetIndex, index) == true)
+                //{
+                //    nb_GlobalData.g_global.sheetInfo.bingoSheet[sheetIndex] = true;
+                //    /*
+                //    if (myrankFlag)
+                //    {
+                //        nb_GlobalData.g_global.m_winnerList[rankInfo].nickname = nb_GlobalData.g_global.myInfo.nickName;
+                //        nb_GlobalData.g_global.m_winnerList[rankInfo].monster_id = nb_GlobalData.g_global.sheetInfo.monsterId;
+                //        nb_GlobalData.g_global.m_winnerList[rankInfo].rank = rankInfo+1;
 
-                        nb_GlobalData.g_global.myrank = rankInfo+1;
-                        rankInfo++;
-                        myrankFlag = false;
-                    }
-                    */
-                    StartCoroutine(activeBingoEffect(sheetIndex));
-                    /*
-                    nb_GlobalData.g_global.bingoCount--;
-                    if (nb_GlobalData.g_global.bingoCount <= 0)
-                    {
-                        nb_GlobalData.g_global.bingoCount = 0;
-                    }
-                    */
-                    //nb_GlobalData.g_global.callBingo = true;
-                    setBingo(sheetIndex);
+                //        nb_GlobalData.g_global.myrank = rankInfo+1;
+                //        rankInfo++;
+                //        myrankFlag = false;
+                //    }
+                //    */
+                //    StartCoroutine(activeBingoEffect(sheetIndex));
+                //    /*
+                //    nb_GlobalData.g_global.bingoCount--;
+                //    if (nb_GlobalData.g_global.bingoCount <= 0)
+                //    {
+                //        nb_GlobalData.g_global.bingoCount = 0;
+                //    }
+                //    */
+                //    //nb_GlobalData.g_global.callBingo = true;
+                //    setBingo(sheetIndex);
 
-                    StartCoroutine(bingoResult());
-                }
+                //    StartCoroutine(bingoResult());
+                //}
 
                 increaseGauge();
 
@@ -1693,9 +1745,18 @@ public class nb_PlayBlitzScene : MonoBehaviour
         {
             if (m_myLocalSheets[sheetIndex].cells[index].realDaub == false)
             {
+                //틀린답은 클릭하면 원래대로
                 m_myLocalSheets[sheetIndex].cells[index].daub = false;
 
                 daubObjects[sheetIndex, index].SetActive(false);
+                daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().color = Color.black;
+
+                int itemType = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
+                if (itemType != 0)
+                {
+                    setCellItem(sheetIndex, index, (nb_Item.normal_ItemType)itemType);
+                    //playScene_ui.m_cells[sheetIndex, index].GetComponent<UILabel>().text = "";
+                }
 
                 //changeCellColor(index, false);
 
@@ -1946,8 +2007,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
             StartCoroutine(activeDaubItemFocus(playScene_ui.m_cells[sheetIndex, cellIndex].position));
 
             GameObject daubItemObject = Instantiate(Resources.Load("game/daubItem")) as GameObject;
-            string path = Item.daubItemImagePath[itemIndex].ToString();
-            path += "_b";
+            string path = nb_Item.nb_daubItemImagePath[itemIndex].ToString();
+            //path += "_b";
             daubItemObject.GetComponent<UISprite>().spriteName = path;
 
 
@@ -1983,14 +2044,25 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
         float coolTime = Time.time - lastUseItemTime;
 
-        if (coolTime < 20.0f)
+        if (itemBoosterOn && coolTime < 10.0f)
+        {
+            //아이템 쿨타임 중임 : 부스터 상태
+            Debug.Log("increaseGauge fail : CoolTime(boost)");
+            return;
+        }
+        else if (itemBoosterOn == false && coolTime < 20.0f)
         {
             //아이템 쿨타임 중임
             Debug.Log("increaseGauge fail : CoolTime");
             return;
         }
 
-        if (m_itemGaugeCount > 2)
+        if (itemBoosterOn && m_itemGaugeCount > 1)
+        {
+            //게이지가 가득참 : 부스터 상태
+            return;
+        }
+        else if (itemBoosterOn == false && m_itemGaugeCount > 2)
         {
             //게이지가 가득참
             return;
@@ -2003,6 +2075,10 @@ public class nb_PlayBlitzScene : MonoBehaviour
             //한칸
             playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.33f;
 
+            if (itemBoosterOn)
+            {
+                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.5f;
+            }
             //Debug.Log("Item Debug Msg : Gauge 1/3");
         }
         else if (m_itemGaugeCount == 2)
@@ -2010,6 +2086,10 @@ public class nb_PlayBlitzScene : MonoBehaviour
             //두칸
             playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.66f;
 
+            if (itemBoosterOn)
+            {
+                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 1.0f;
+            }
             //Debug.Log("Item Debug Msg : Gauge 2/3");
         }
         else if (m_itemGaugeCount == 3)
@@ -2033,7 +2113,13 @@ public class nb_PlayBlitzScene : MonoBehaviour
         playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 1.0f;
 
         m_bItemReady = true;
-        yield return new WaitForSeconds(20.0f);
+
+        float wait = 20.0f;
+        if (itemBoosterOn)
+        {
+            wait = 10.0f;
+        }
+        yield return new WaitForSeconds(wait);
 
         if (nb_GlobalData.g_global.ItemUseState == true)
         {
@@ -2981,12 +3067,12 @@ public class nb_PlayBlitzScene : MonoBehaviour
     {
         int activeSheetCount = nb_GlobalData.g_global.sheetInfo.activeSheetCount;
 
-        m_myLocalSheets = new BingoSheet[activeSheetCount];
+        m_myLocalSheets = new nb_BingoSheet[activeSheetCount];
 
         // local Sheet init;
         for (int sheetIndex = 0; sheetIndex < activeSheetCount; ++sheetIndex)
         {
-            m_myLocalSheets[sheetIndex].cells = new Cell[25];
+            m_myLocalSheets[sheetIndex].cells = new nb_Cell[25];
             //playScene_ui.m_sheetbuttons[sheetIndex].GetComponent<UIImageButton>().isEnabled = true;
 
             for (int index = 0; index < 25; ++index)
@@ -3325,29 +3411,29 @@ public class nb_PlayBlitzScene : MonoBehaviour
         //}
 
 
-        if (checkItemBingo(sheetIndex, cellIndex) == true)
-        {
-            nb_GlobalData.g_global.sheetInfo.bingoSheet[sheetIndex] = true;
-            /*
-            if (myrankFlag)
-            {
-                nb_GlobalData.g_global.m_winnerList[rankInfo].nickname = nb_GlobalData.g_global.myInfo.nickName;
-                nb_GlobalData.g_global.m_winnerList[rankInfo].monster_id = nb_GlobalData.g_global.sheetInfo.monsterId;
-                nb_GlobalData.g_global.m_winnerList[rankInfo].rank = rankInfo+1;
+        //if (checkItemBingo(sheetIndex, cellIndex) == true)
+        //{
+        //    nb_GlobalData.g_global.sheetInfo.bingoSheet[sheetIndex] = true;
+        //    /*
+        //    if (myrankFlag)
+        //    {
+        //        nb_GlobalData.g_global.m_winnerList[rankInfo].nickname = nb_GlobalData.g_global.myInfo.nickName;
+        //        nb_GlobalData.g_global.m_winnerList[rankInfo].monster_id = nb_GlobalData.g_global.sheetInfo.monsterId;
+        //        nb_GlobalData.g_global.m_winnerList[rankInfo].rank = rankInfo+1;
 
-                nb_GlobalData.g_global.myrank = rankInfo+1;
-                rankInfo++;
-                myrankFlag = false;
-            }
-            */
-            StartCoroutine(activeBingoEffect(sheetIndex));
-            //nb_GlobalData.g_global.bingoCount = System.Math.Max(0, nb_GlobalData.g_global.bingoCount--);
-            //nb_GlobalData.g_global.callBingo = true;
-            setBingo(sheetIndex);
-            //nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.mGameMessageRequest;
-            StartCoroutine(bingoResult());
+        //        nb_GlobalData.g_global.myrank = rankInfo+1;
+        //        rankInfo++;
+        //        myrankFlag = false;
+        //    }
+        //    */
+        //    StartCoroutine(activeBingoEffect(sheetIndex));
+        //    //nb_GlobalData.g_global.bingoCount = System.Math.Max(0, nb_GlobalData.g_global.bingoCount--);
+        //    //nb_GlobalData.g_global.callBingo = true;
+        //    setBingo(sheetIndex);
+        //    //nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.mGameMessageRequest;
+        //    StartCoroutine(bingoResult());
 
-        }
+        //}
 
         StartCoroutine(activeDaubEffect(playScene_ui.m_cells[sheetIndex, cellIndex]));
         nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.GameMessageRequest);
@@ -3510,7 +3596,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         }
 
         daubObjects[sheetIndex, cellIndex].gameObject.SetActive(true);
-        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName = 
+        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName =
             nb_Item.nb_daubItemImagePath[(int)type];
     }
 
@@ -3518,5 +3604,54 @@ public class nb_PlayBlitzScene : MonoBehaviour
     {
         //nb_GlobalData.g_global.sheetInfo.sheet[sheetIndex, cellIndex]
         //m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
+    }
+
+    private void runUseItemAction()
+    {
+        foreach(var data in nb_GlobalData.g_global.useItemDataList)
+        {
+            int type = nb_GlobalData.g_global.getNormalItemIndex(data.infoId);
+            int cellIndex = findCellIndex(data.sheet, data.number);
+
+            if (type == 1 || type == 4 || type == 10)
+            {
+                //daub action
+                m_myLocalSheets[data.sheet].cells[cellIndex].realDaub = true;
+                m_myLocalSheets[data.sheet].cells[cellIndex].daub = true;
+                daubObjects[data.sheet, cellIndex].SetActive(true);
+                daubObjects[data.sheet, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
+                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
+            }
+            else
+            {
+                //sheet action
+
+                m_myLocalSheets[data.sheet].cells[cellIndex].itemEffectIndex = type;
+                setCellItem(data.sheet, cellIndex, (nb_Item.normal_ItemType)type);
+                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
+                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.black;
+            }
+
+            if (type == 9)
+            {
+                //부스터
+                itemBoosterOn = true;
+            }
+        }
+
+        nb_GlobalData.g_global.useItemDataList.Clear();
+    }
+
+    private int findCellIndex(int sheet, int number)
+    {
+        for(int i = 0; i < 25; ++i)
+        {
+            if (m_myLocalSheets[sheet].cells[i].number == number)
+            {
+                return i;
+            }
+        }
+
+        return 99;
     }
 }

@@ -87,7 +87,7 @@ public class nb_GlobalData : MonoBehaviour
     public int serverFlag = 0;
 
     [HideInInspector]
-    public SheetInfo sheetInfo;
+    public nb_SheetInfo sheetInfo;
 
 
     [HideInInspector]
@@ -191,14 +191,14 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public int SelectWorldStage;
 
-    [HideInInspector]
-    public bool WorldStageSpineRefresh;
+    //[HideInInspector]
+    //public bool WorldStageSpineRefresh;
 
-    [HideInInspector]
-    public bool WorldStageSpineSelectAni;
+    //[HideInInspector]
+    //public bool WorldStageSpineSelectAni;
 
-    [HideInInspector]
-    public string WorldStageSpineAnimation;
+    //[HideInInspector]
+    //public string WorldStageSpineAnimation;
 
 
 
@@ -242,6 +242,9 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public int selectItemId = 0;
 
+    [HideInInspector]
+    public List<nb_useItemData> useItemDataList;
+
 
     void Awake()
     {
@@ -280,7 +283,7 @@ public class nb_GlobalData : MonoBehaviour
         myInfo.waitTime = 100;
         myInfo.userKey = "0";
 
-        sheetInfo = new SheetInfo();
+        sheetInfo = new nb_SheetInfo();
         sheetInfo.bingoSheet = new bool[4];
         for (int i = 0; i < 4; ++i)
         {
@@ -298,12 +301,14 @@ public class nb_GlobalData : MonoBehaviour
 
         //스테이지 스파인
         SelectWorldStage = 1;
-        WorldStageSpineRefresh = false;
-        WorldStageSpineSelectAni = false;
-        WorldStageSpineAnimation = "wait1";
+        //WorldStageSpineRefresh = false;
+        //WorldStageSpineSelectAni = false;
+        //WorldStageSpineAnimation = "wait1";
 
         userPowerUpList = new List<UserPowerUp>();
         stageList = new List<Stage>();
+
+        useItemDataList = new List<nb_useItemData>();
 
 
         DontDestroyOnLoad(gameObject);

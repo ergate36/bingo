@@ -33,7 +33,7 @@ public class nb_MainScene : MonoBehaviour
     private int openTuto;
     
     public GameObject bgSpine;
-    private SkeletonAnimation sa;
+    //private SkeletonAnimation sa;
 
     public GameObject progress_popup;
 
@@ -70,10 +70,10 @@ public class nb_MainScene : MonoBehaviour
         buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
         GameObject mainUIRoot = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase") as GameObject;
 
-        sa = bgSpine.GetComponent<SkeletonAnimation>();
+        //sa = bgSpine.GetComponent<SkeletonAnimation>();
 
-        sa.AnimationName = nb_GlobalData.g_global.WorldStageSpineAnimation;
-        sa.loop = true;
+        //sa.AnimationName = nb_GlobalData.g_global.WorldStageSpineAnimation;
+        //sa.loop = true;
     }
 
     void Update()
@@ -114,46 +114,57 @@ public class nb_MainScene : MonoBehaviour
             }
             progress_popup.SetActive(false);
         }
-
-
-        if (nb_GlobalData.g_global.WorldStageSpineRefresh == true)
+        else if (nbHttp.state == nbHttp.nbHttpState.NetworkFailTimeout)
         {
-            nb_GlobalData.g_global.WorldStageSpineRefresh = false;
+            nbHttp.state = nbHttp.nbHttpState.Wait;
 
-            sa.AnimationState.SetAnimation(0,
-                nb_GlobalData.g_global.WorldStageSpineAnimation, false);
-
-            StartCoroutine("PlayBgWait");
+            buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
+            for (int i = 0; i < buttons.Length; ++i)
+            {
+                buttons[i].enabled = true;
+            }
+            progress_popup.SetActive(false);
         }
+
+
+        //if (nb_GlobalData.g_global.WorldStageSpineRefresh == true)
+        //{
+        //    nb_GlobalData.g_global.WorldStageSpineRefresh = false;
+
+        //    sa.AnimationState.SetAnimation(0,
+        //        nb_GlobalData.g_global.WorldStageSpineAnimation, false);
+
+        //    StartCoroutine("PlayBgWait");
+        //}
         
-        if (nb_GlobalData.g_global.WorldStageSpineSelectAni == true)
-        {
-            nb_GlobalData.g_global.WorldStageSpineSelectAni = false;
+        //if (nb_GlobalData.g_global.WorldStageSpineSelectAni == true)
+        //{
+        //    nb_GlobalData.g_global.WorldStageSpineSelectAni = false;
 
-            //sa.AnimationState.SetAnimation(0,
-            //    nb_GlobalData.g_global.WorldStageSpineAnimation, false);
+        //    //sa.AnimationState.SetAnimation(0,
+        //    //    nb_GlobalData.g_global.WorldStageSpineAnimation, false);
 
-            //StartCoroutine("PlayBgWait");
+        //    //StartCoroutine("PlayBgWait");
 
 
-            //
-            Application.LoadLevel("nb_LobbyScene");
+        //    //
+        //    Application.LoadLevel("nb_LobbyScene");
 
-            Resources.UnloadUnusedAssets();
-            System.GC.Collect();
-        }
+        //    Resources.UnloadUnusedAssets();
+        //    System.GC.Collect();
+        //}
     }
 
-    IEnumerator PlayBgWait()
-    {
-        yield return new WaitForSeconds(0.5f);
+    //IEnumerator PlayBgWait()
+    //{
+    //    yield return new WaitForSeconds(0.5f);
 
-        nb_GlobalData.g_global.WorldStageSpineAnimation = 
-            "wait" + nb_GlobalData.g_global.SelectWorldStage.ToString();
+    //    nb_GlobalData.g_global.WorldStageSpineAnimation = 
+    //        "wait" + nb_GlobalData.g_global.SelectWorldStage.ToString();
 
-        sa.AnimationState.SetAnimation(0,
-            nb_GlobalData.g_global.WorldStageSpineAnimation, true);
-    }
+    //    sa.AnimationState.SetAnimation(0,
+    //        nb_GlobalData.g_global.WorldStageSpineAnimation, true);
+    //}
 
 
     public IEnumerator GetWebImage(string friendKey)

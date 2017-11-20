@@ -1899,7 +1899,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: 0.969697
   mAtlas: {fileID: 114818427672374782, guid: 5c47288d36fbc5e438e4bc81d63d6b9c, type: 2}
-  mSpriteName: ui_info_all1
+  mSpriteName: ui_info_all2
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -8582,7 +8582,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: 1
   mAtlas: {fileID: 114818427672374782, guid: 5c47288d36fbc5e438e4bc81d63d6b9c, type: 2}
-  mSpriteName: ui_info_xp1
+  mSpriteName: ui_info_xp2
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -30680,7 +30680,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: 5.6571426
   mAtlas: {fileID: 114818427672374782, guid: 5c47288d36fbc5e438e4bc81d63d6b9c, type: 2}
-  mSpriteName: ui_button1_shadowcard
+  mSpriteName: ui_button1_card
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -31829,7 +31829,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: 1.0645162
   mAtlas: {fileID: 114818427672374782, guid: 5c47288d36fbc5e438e4bc81d63d6b9c, type: 2}
-  mSpriteName: ui_info_chest1
+  mSpriteName: ui_info_chest2
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -53724,8 +53724,8 @@ MonoBehaviour:
   m_otherOut: {fileID: 0}
   m_effectNotice: {fileID: 0}
   m_ballStart_pos: {fileID: 0}
-  m_item: {fileID: 0}
-  m_itemGauge: []
+  m_itemBtn: {fileID: 0}
+  m_itemGauge: {fileID: 0}
   m_itemCooltime: {fileID: 0}
   m_bingoSheetBG: []
   m_badBingoSheetBG: []

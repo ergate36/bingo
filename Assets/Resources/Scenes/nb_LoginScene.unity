@@ -4546,19 +4546,19 @@ MonoBehaviour:
   BingoMyBlitzRanking: 
   CallMyBingo: 0
   SelectWorldStage: 0
-  WorldStageSpineRefresh: 0
-  WorldStageSpineSelectAni: 0
-  WorldStageSpineAnimation: 
   InputSessionLoginKey: 
   InputSocialNickname: 
   selectStageId: 1
   gl_playerSessionId: 
   gl_ipAddress: 
   gl_port: 0
+  MainMenuActive: 0
+  MainShopActive: 0
   LobbyMenuActive: 0
   LobbyShopActive: 0
   CheckNumCardIndex: 0
   CheckNumNumber: 0
+  selectItemId: 0
 --- !u!114 &1527153953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4769,7 +4769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flag: 0
-  soundroot: {fileID: 100000, guid: 658dcfe088261aa448be36a854684f84, type: 2}
+  soundroot: {fileID: 1527153951}
   progress_popup: {fileID: 794504853}
   nickname_popup: {fileID: 740634288}
 --- !u!4 &1530369178
