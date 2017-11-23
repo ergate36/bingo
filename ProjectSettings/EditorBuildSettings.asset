@@ -74,3 +74,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/nb_PlayBlitzScene.unity
     guid: 62707906f4a417d45bcbd513c4950a14
+  - enabled: 1
+    path: Assets/Resources/Scenes/nb_BattleLobbyScene.unity
+    guid: 138325b06f0fcc148a82002ca69fcb71
+  - enabled: 1
+    path: Assets/Resources/Scenes/nb_BattlePlayScene.unity
+    guid: 46685be4213bb174e8ecab6bbebf1a28

@@ -4548,12 +4548,14 @@ MonoBehaviour:
   SelectWorldStage: 0
   InputSessionLoginKey: 
   InputSocialNickname: 
+  maxStage: 4
   selectStageId: 1
   gl_playerSessionId: 
   gl_ipAddress: 
   gl_port: 0
   MainMenuActive: 0
   MainShopActive: 0
+  MainStageMove: 0
   LobbyMenuActive: 0
   LobbyShopActive: 0
   CheckNumCardIndex: 0
@@ -4570,160 +4572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741476c04f537014281d7812a2bf308b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1527153954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1527153951}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1aae2ac805e1604895e8b32179737de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  srvURL: 
-  gameURL: 
-  lobbyURL: 
-  checkURL: 
-  writeList: 
-  rank_state: 0
-  roomkey: 0
-  bAutoSendReady: 0
-  callCount: 1
-  serverCallCount: 1
-  bingoCount: 0
-  itemIndex: 0
-  waitTime: 0
-  bingoRankId: 
-  tourPlayer_count: 0
-  lobby_count: 0
-  lobby_waitTime: 0
-  admission: 0
-  dailyInfo: 
-  detail_index: 0
-  item_count: 0
-  flag: 0
-  getCoin: 0
-  couponResult: 0
-  couponNum: 
-  bingoball: 
-  BGSound: []
-  EffectSound: []
-  BallSound: []
-  TalkSound: []
-  TutorialSound: []
-  sceneBeforeShop: 
-  gotoShopType: 0
-  isFirstLogin: 1
-  selectedCardNum: 0
-  selectedCardId: 0
-  listCardindex: 0
-  bingoFlag: 0
-  CardId: 0
-  selectedCardflag: 0
-  selectedCardNumber: 0
-  monsterFlag: 0
-  listType: 1
-  gameType: 0
-  myrank: 0
-  soundFlg: 0
-  pushFlg: 1
-  myBlockinfo: 0
-  socketState: 0
-  serverFlag: 0
-  popupstate: 0
-  rankCount: 0
-  monsterGachaId: 0
-  monsterGachaKey: 0
-  shopIndex: 0
-  shopTapindex: 0
-  getMailType: 0
-  getMailindex: 0
-  mixResultId: 0
-  myShield: 0
-  attack_id: 0
-  attack_index: 0
-  attack_sheetindex: 0
-  attacker_sheetindex: 0
-  target_id: 0
-  target_index: 0
-  target_sheetindex: 0
-  targeter_sheetindex: 0
-  outer_id: 0
-  urlCount: 0
-  callBingo: 0
-  event_period: 
-  invite_name: 
-  event_join: 0
-  rand_index: 0
-  friendRoom: 0
-  invite_able: 1
-  event_index: 0
-  event_btnindex: 0
-  event_phoneNumber: 
-  shop_flag: 0
-  event_flag: 0
-  closeType: 0
-  tutorialPage: 1
-  shopshop: 0
-  currentScene: 0
-  sendNum: 0
-  resultData: 0
-  eventtttt: 0
-  myPlayCard: 0
-  currentItemindex: 0
-  cardCount: 0
-  afterCardCount: 0
-  serverip: []
-  serverport: 
-  itemip: []
-  itemport: 
-  lobbyip: 
-  lobbyport: 0
-  selectSheet: 0
-  reviewIndex: 0
-  serverIndex: 0
-  modeIndex: 0
-  betting_index: 0
-  useItemCount: 0
-  connect_index: 0
-  login_num: 0
-  just_one: 0
-  servertesting: 0
-  loginState: 0
-  game_over: 0
-  mail_index: 0
-  myFriend: 
-  playCardIndex: 0
-  dailyIndex: 0
-  friendIndex: 0
-  selectFriendId: 0
-  selectFriendKey: 
-  selectFriendName: 
-  selectInvite: 0
-  win: 0
-  friend_count: 0
-  Invite_result: 0
-  updateUrl: 
-  testMessage: 
-  myEmail: 
-  cardflag: 0
-  ItemUseState: 0
-  soundFlag: 0
-  myRankFlag: 0
-  mWaitingRoomID: 0
-  mWaitingRoomJoinGameRemainSec: 0
-  mWaitingRoomEndGameRemainBingo: 0
-  mSelectBingoButtonIndex: -1
-  BingoNumberCount: 0
-  BingoRoomUserCount: 0
-  BingoRoomUserNameList: []
-  BingoRankingUserName1: 
-  BingoRankingUserName2: 
-  BingoRankingUserName3: 
-  BingoRankingUserNameX: 
-  BingoTotalFinishCount: 0
-  BingoLastFinishUserName: 
 --- !u!114 &1527153955
 MonoBehaviour:
   m_ObjectHideFlags: 0

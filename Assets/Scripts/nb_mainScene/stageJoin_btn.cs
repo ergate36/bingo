@@ -5,6 +5,10 @@ public class stageJoin_btn : MonoBehaviour
 {
     private GameObject mainSceneUI;
     private BoxCollider[] buttons;
+
+    public int stageIndex;
+    public bool battleMode = false;
+
     // Use this for initialization
     void Start()
     {
@@ -18,6 +22,11 @@ public class stageJoin_btn : MonoBehaviour
 	void OnClick()
     {
         if (nb_GlobalData.g_global.MainMenuActive == true)
+        {
+            return;
+        }
+
+        if (nb_GlobalData.g_global.MainShopActive == true)
         {
             return;
         }
@@ -38,12 +47,17 @@ public class stageJoin_btn : MonoBehaviour
         //StartCoroutine("stageSelect");
 
         //게임리프트 서버 스테이지 접속 정보 가져옴
-        Debug.Log("click stage connect button");
+        int stageId = stageIndex;
+        if(battleMode)
+        {
+            //배틀모드 스테이지id는 일반스테이지+100
+            stageId += 100;
+        }
 
-        int stageId = 1;
+        Debug.Log("click stage " + stageId.ToString() + " connect button");
+
         nbHttp.http.ConnectStage(
             nb_GlobalData.g_global.userSession.SessionKey, stageId);
-            //nb_GlobalData.g_global.selectStageId);
     }
 
     //IEnumerator stageSelect()

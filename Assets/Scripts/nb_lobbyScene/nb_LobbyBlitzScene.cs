@@ -58,6 +58,8 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.GameLiftConnectRequest);
 
         drawPowerUpMoney();
+
+        drawStageInfo();
     }
 
 
@@ -361,5 +363,24 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         UILabel textLabel = moneyGroup.Find("ticket_n_group/t_value").GetComponent<UILabel>();
         
         textLabel.text = nb_GlobalData.g_global.getTotalNormalPowerUpCount().ToString();
+    }
+
+    private void drawStageInfo()
+    {
+        Transform icon = m_nbLobbySceneUI.waitRemainRoot.Find("i_icon");
+        Transform name = m_nbLobbySceneUI.waitRemainRoot.Find("i_stage_name");
+
+        string iconPath = "stageicon" + nb_GlobalData.g_global.selectStageId.ToString();
+        string namePath = "stagename" + nb_GlobalData.g_global.selectStageId.ToString();
+        
+        icon.GetComponent<UISprite>().spriteName = iconPath;
+        name.GetComponent<UISprite>().spriteName = namePath;
+        icon.GetComponent<UISprite>().MakePixelPerfect();
+        name.GetComponent<UISprite>().MakePixelPerfect();
+
+        Transform bg = m_nbLobbySceneUI.uiRoot.transform.Find("layer0/bg");
+
+        //bg.GetComponent<UITexture>() Resources.Load("nb_images/stage/stage" + nb_GlobalData.g_global.selectStageId.ToString() as UITexture;
+        //bg.GetComponent<UITexture>().MakePixelPerfect();
     }
 }

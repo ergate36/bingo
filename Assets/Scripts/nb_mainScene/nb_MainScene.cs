@@ -31,15 +31,23 @@ public class nb_MainScene : MonoBehaviour
     private int tempJoin;
     private int temptuto;
     private int openTuto;
-    
-    public GameObject bgSpine;
-    //private SkeletonAnimation sa;
 
     public GameObject progress_popup;
 
+    public Transform parent_current;
+    public Transform parent_prev;
+    public Transform parent_next;
+
+    private GameObject bgLayer;
+
+    private bool selectBattleMode;
+
+    public float bgLayerMoveTime;
 
     void Awake()
     {
+        bgLayer = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase/layer_bg") as GameObject;
+
         nb_GlobalData.g_global_bgm1.Play();
         nb_GlobalData.g_global_bgm2.Stop();
         nb_GlobalData.g_global_bgm3.Stop();
@@ -49,31 +57,32 @@ public class nb_MainScene : MonoBehaviour
         popup = GameObject.Find("mainSceneUI/Camera/Anchor") as GameObject;
 
         mainSceneUI = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase");
-        buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
-        for (int i = 0; i < buttons.Length; ++i)
-        {
-            //buttons[i].enabled = false;
-        }
+        //buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
+        //for (int i = 0; i < buttons.Length; ++i)
+        //{
+        //    //buttons[i].enabled = false;
+        //}
 
-        int check = 0;
-        if (check == 1)
-        {
-            check = 0;
-            mainSceneUI = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase");
-            buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
-            for (int i = 0; i < buttons.Length; ++i)
-            {
-                //buttons[i].enabled = false;
-            }
-        }
+        //int check = 0;
+        //if (check == 1)
+        //{
+        //    check = 0;
+        //    mainSceneUI = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase");
+        //    buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
+        //    for (int i = 0; i < buttons.Length; ++i)
+        //    {
+        //        //buttons[i].enabled = false;
+        //    }
+        //}
         mainSceneUI = GameObject.Find("mainSceneUI");
-        buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
         GameObject mainUIRoot = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase") as GameObject;
 
-        //sa = bgSpine.GetComponent<SkeletonAnimation>();
 
-        //sa.AnimationName = nb_GlobalData.g_global.WorldStageSpineAnimation;
-        //sa.loop = true;
+
+        //선택한 스테이지 + 앞뒤 스테이지 로드
+        refreshStageView();
+
+        
     }
 
     void Update()
@@ -94,6 +103,7 @@ public class nb_MainScene : MonoBehaviour
         }
         else if (nbHttp.state == nbHttp.nbHttpState.ConnectStageSuccess)
         {
+            //일반모드
             Debug.Log("mainScene Update : ConnectStage Success, nb_lobbyScene Load");
             nbHttp.state = nbHttp.nbHttpState.Wait;
 
@@ -102,9 +112,32 @@ public class nb_MainScene : MonoBehaviour
 
             Application.LoadLevel("nb_LobbyScene");
         }
+        else if (nbHttp.state == nbHttp.nbHttpState.ConnectBattleStageSuccess)
+        {
+            //배틀모드
+            Debug.Log("mainScene Update : ConnectBattleStage Success, nb_battleLobbyScene Load");
+            nbHttp.state = nbHttp.nbHttpState.Wait;
+
+            Resources.UnloadUnusedAssets();
+            System.GC.Collect();
+
+            Application.LoadLevel("nb_BattleLobbyScene");
+        }
         else if (nbHttp.state == nbHttp.nbHttpState.ConnectStageFail)
         {
             Debug.Log("mainScene Update : ConnectStage failed");
+            nbHttp.state = nbHttp.nbHttpState.Wait;
+
+            buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
+            for (int i = 0; i < buttons.Length; ++i)
+            {
+                buttons[i].enabled = true;
+            }
+            progress_popup.SetActive(false);
+        }
+        else if (nbHttp.state == nbHttp.nbHttpState.ConnectBattleStageFail)
+        {
+            Debug.Log("mainScene Update : ConnectBattleStage failed");
             nbHttp.state = nbHttp.nbHttpState.Wait;
 
             buttons = mainSceneUI.GetComponentsInChildren<BoxCollider>();
@@ -127,44 +160,7 @@ public class nb_MainScene : MonoBehaviour
         }
 
 
-        //if (nb_GlobalData.g_global.WorldStageSpineRefresh == true)
-        //{
-        //    nb_GlobalData.g_global.WorldStageSpineRefresh = false;
-
-        //    sa.AnimationState.SetAnimation(0,
-        //        nb_GlobalData.g_global.WorldStageSpineAnimation, false);
-
-        //    StartCoroutine("PlayBgWait");
-        //}
-        
-        //if (nb_GlobalData.g_global.WorldStageSpineSelectAni == true)
-        //{
-        //    nb_GlobalData.g_global.WorldStageSpineSelectAni = false;
-
-        //    //sa.AnimationState.SetAnimation(0,
-        //    //    nb_GlobalData.g_global.WorldStageSpineAnimation, false);
-
-        //    //StartCoroutine("PlayBgWait");
-
-
-        //    //
-        //    Application.LoadLevel("nb_LobbyScene");
-
-        //    Resources.UnloadUnusedAssets();
-        //    System.GC.Collect();
-        //}
     }
-
-    //IEnumerator PlayBgWait()
-    //{
-    //    yield return new WaitForSeconds(0.5f);
-
-    //    nb_GlobalData.g_global.WorldStageSpineAnimation = 
-    //        "wait" + nb_GlobalData.g_global.SelectWorldStage.ToString();
-
-    //    sa.AnimationState.SetAnimation(0,
-    //        nb_GlobalData.g_global.WorldStageSpineAnimation, true);
-    //}
 
 
     public IEnumerator GetWebImage(string friendKey)
@@ -453,5 +449,311 @@ public class nb_MainScene : MonoBehaviour
         UILabel textLabel = moneyGroup.transform.Find("ticket_n_group/t_value").GetComponent<UILabel>();
 
         textLabel.text = nb_GlobalData.g_global.getTotalNormalPowerUpCount().ToString();
+    }
+
+    public void moveStageNext()
+    {
+        if (nb_GlobalData.g_global.selectStageId + 1 > nb_GlobalData.g_global.maxStage)
+        {
+            //Debug.Log("StageNextNull Return");
+            nb_GlobalData.g_global.MainStageMove = false;
+            return;
+        }
+
+        nb_GlobalData.g_global.selectStageId = nb_GlobalData.g_global.selectStageId + 1;
+
+        Vector3 vec = new Vector3();
+        vec.x = parent_prev.position.x;
+
+        iTween.MoveBy(bgLayer, vec, bgLayerMoveTime);
+
+        StartCoroutine("waitStageMoveNext");
+    }
+
+    public void moveStagePrev()
+    {
+        if (nb_GlobalData.g_global.selectStageId - 1 < 1)
+        {
+            //Debug.Log("StagePrevNull Return");
+            nb_GlobalData.g_global.MainStageMove = false;
+            return;
+        }
+
+        nb_GlobalData.g_global.selectStageId = nb_GlobalData.g_global.selectStageId - 1;
+
+        Vector3 vec = new Vector3();
+        vec.x = parent_next.position.x;
+
+        iTween.MoveBy(bgLayer, vec, bgLayerMoveTime);
+
+        StartCoroutine("waitStageMovePrev");
+    }
+
+    IEnumerator waitStageMoveNext()
+    {
+        Vector3 vec = new Vector3();
+        vec.x = parent_next.position.x * 2f;
+
+        Transform child = parent_next.transform.GetChild(0);
+        
+        if (child != null)
+        {
+            iTween.MoveBy(child.Find("icon").gameObject, vec, 0.4f);
+            child.Find("collection_info").gameObject.SetActive(false);
+            child.Find("gamestart_btn").gameObject.SetActive(false);
+            child.Find("name").gameObject.SetActive(false);     
+                    
+            if (child.Find("icon_sub") != null)
+            {
+                iTween.MoveBy(child.Find("icon_sub").gameObject, vec, 0.4f);
+                child.Find("collection_info_sub").gameObject.SetActive(false);
+                child.Find("gamestart_btn_sub").gameObject.SetActive(false);
+                child.Find("name_sub").gameObject.SetActive(false);     
+            }
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+        if (child != null)
+        {
+            iTween.MoveBy(child.Find("icon").gameObject, -vec, 0.4f);
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+        if (child != null)
+        { 
+            if (child.Find("icon_sub") != null)
+            {
+                iTween.MoveBy(child.Find("icon_sub").gameObject, -vec, 0.4f);
+            }
+        }
+
+        yield return new WaitForSeconds(0.4f);
+
+        if (child != null)
+        {
+            child.Find("collection_info").gameObject.SetActive(true);
+            child.Find("gamestart_btn").gameObject.SetActive(true);
+            child.Find("name").gameObject.SetActive(true);
+
+            if (child.Find("icon_sub") != null)
+            {
+                child.Find("collection_info_sub").gameObject.SetActive(true);
+                child.Find("gamestart_btn_sub").gameObject.SetActive(true);
+                child.Find("name_sub").gameObject.SetActive(true);
+            }
+        }
+
+        refreshStageNext();
+    }
+
+
+    IEnumerator waitStageMovePrev()
+    {
+        Vector3 vec = new Vector3();
+        vec.x = -parent_prev.position.x * 2f;
+
+        Transform child = parent_prev.transform.GetChild(0);
+
+        if (child != null)
+        {
+            iTween.MoveBy(child.Find("icon").gameObject, -vec, 0.4f);
+            child.Find("collection_info").gameObject.SetActive(false);
+            child.Find("gamestart_btn").gameObject.SetActive(false);
+            child.Find("name").gameObject.SetActive(false);
+
+            if (child.Find("icon_sub") != null)
+            {
+                iTween.MoveBy(child.Find("icon_sub").gameObject, -vec, 0.4f);
+                child.Find("collection_info_sub").gameObject.SetActive(false);
+                child.Find("gamestart_btn_sub").gameObject.SetActive(false);
+                child.Find("name_sub").gameObject.SetActive(false);
+            }
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+        if (child != null)
+        {
+            iTween.MoveBy(child.Find("icon").gameObject, vec, 0.4f);
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+        if (child != null)
+        {
+            if (child.Find("icon_sub") != null)
+            {
+                iTween.MoveBy(child.Find("icon_sub").gameObject, vec, 0.4f);
+            }
+        }
+
+        yield return new WaitForSeconds(0.4f);
+
+        if (child != null)
+        {
+            child.Find("collection_info").gameObject.SetActive(true);
+            child.Find("gamestart_btn").gameObject.SetActive(true);
+            child.Find("name").gameObject.SetActive(true);
+
+            if (child.Find("icon_sub") != null)
+            {
+                child.Find("collection_info_sub").gameObject.SetActive(true);
+                child.Find("gamestart_btn_sub").gameObject.SetActive(true);
+                child.Find("name_sub").gameObject.SetActive(true);
+            }
+        }
+
+        refreshStagePrev();
+    }
+
+    private void refreshStageNext()
+    {
+        int selectStage = nb_GlobalData.g_global.selectStageId;
+        int maxStage = nb_GlobalData.g_global.maxStage;
+        
+        for (int i = 0; i < parent_prev.transform.childCount; ++i)
+        {
+            GameObject.Destroy(parent_prev.transform.GetChild(i).gameObject);
+        }
+
+        parent_current.transform.GetChild(0).SetParent(parent_prev);
+        parent_next.transform.GetChild(0).SetParent(parent_current);
+
+        for (int i = 0; i < parent_prev.transform.childCount; ++i)
+        {
+            parent_prev.transform.GetChild(i).localPosition = Vector3.zero;
+        }
+        for (int i = 0; i < parent_current.transform.childCount; ++i)
+        {
+            parent_current.transform.GetChild(i).localPosition = Vector3.zero;
+        }
+        for (int i = 0; i < parent_next.transform.childCount; ++i)
+        {
+            parent_next.transform.GetChild(i).localPosition = Vector3.zero;
+        }
+
+        GameObject stage_next = null;
+        if (selectStage < maxStage)
+        {
+            stage_next = Instantiate(Resources.Load("game/stage" + (selectStage + 1).ToString())) as GameObject;
+            stage_next.transform.parent = parent_next;
+            stage_next.transform.localPosition = Vector3.zero;
+            stage_next.transform.localScale = Vector3.one;
+            stage_next.SetActive(true);
+        }
+        else
+        {
+            stage_next = null;
+        }
+
+        bgLayer.transform.position = Vector3.zero;
+
+        nb_GlobalData.g_global.MainStageMove = false;
+    }
+
+    private void refreshStagePrev()
+    {
+        int selectStage = nb_GlobalData.g_global.selectStageId;
+        int maxStage = nb_GlobalData.g_global.maxStage;
+
+        for (int i = 0; i < parent_next.transform.childCount; ++i)
+        {
+            GameObject.Destroy(parent_next.transform.GetChild(i).gameObject);
+        }
+
+        parent_current.transform.GetChild(0).SetParent(parent_next);
+        parent_prev.transform.GetChild(0).SetParent(parent_current);
+
+        for (int i = 0; i < parent_prev.transform.childCount; ++i)
+        {
+            parent_prev.transform.GetChild(i).localPosition = Vector3.zero;
+        }
+        for (int i = 0; i < parent_current.transform.childCount; ++i)
+        {
+            parent_current.transform.GetChild(i).localPosition = Vector3.zero;
+        }
+        for (int i = 0; i < parent_next.transform.childCount; ++i)
+        {
+            parent_next.transform.GetChild(i).localPosition = Vector3.zero;
+        }
+
+        GameObject stage_prev = null;
+        if (selectStage > 1)
+        {
+            stage_prev = Instantiate(Resources.Load("game/stage" + (selectStage - 1).ToString())) as GameObject;
+            stage_prev.transform.parent = parent_prev;
+            stage_prev.transform.localPosition = Vector3.zero;
+            stage_prev.transform.localScale = Vector3.one;
+            stage_prev.SetActive(true);
+        }
+        else
+        {
+            stage_prev = null;
+        }
+
+        bgLayer.transform.position = Vector3.zero;
+
+        nb_GlobalData.g_global.MainStageMove = false;
+    }
+
+    private void refreshStageView()
+    {
+        int selectStage = nb_GlobalData.g_global.selectStageId;
+        int maxStage = nb_GlobalData.g_global.maxStage;
+
+        bgLayer.transform.position = Vector3.zero;
+
+        for (int i = 0; i < parent_current.transform.childCount; ++i)
+        {
+            GameObject.Destroy(parent_current.transform.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < parent_prev.transform.childCount; ++i)
+        {
+            GameObject.Destroy(parent_prev.transform.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < parent_next.transform.childCount; ++i)
+        {
+            GameObject.Destroy(parent_next.transform.GetChild(i).gameObject);
+        }
+
+        GameObject stage_current = null;
+        GameObject stage_prev = null;
+        GameObject stage_next = null;
+
+        stage_current = Instantiate(Resources.Load("game/stage" + selectStage.ToString())) as GameObject;
+        stage_current.transform.parent = parent_current;
+        stage_current.transform.localPosition = Vector3.zero;
+        stage_current.transform.localScale = Vector3.one;
+        stage_current.SetActive(true);
+
+        if (selectStage > 1)
+        {
+            stage_prev = Instantiate(Resources.Load("game/stage" + (selectStage - 1).ToString())) as GameObject;
+            stage_prev.transform.parent = parent_prev;
+            stage_prev.transform.localPosition = Vector3.zero;
+            stage_prev.transform.localScale = Vector3.one;
+            stage_prev.SetActive(true);
+        }
+        else
+        {
+            stage_prev = null;
+        }
+
+        if (selectStage < maxStage)
+        {
+            stage_next = Instantiate(Resources.Load("game/stage" + (selectStage + 1).ToString())) as GameObject;
+            stage_next.transform.parent = parent_next;
+            stage_next.transform.localPosition = Vector3.zero;
+            stage_next.transform.localScale = Vector3.one;
+            stage_next.SetActive(true);
+        }
+        else
+        {
+            stage_next = null;
+        }
+
+        nb_GlobalData.g_global.MainStageMove = false;
     }
 }

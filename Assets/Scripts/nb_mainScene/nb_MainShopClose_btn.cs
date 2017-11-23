@@ -12,7 +12,7 @@ public class nb_MainShopClose_btn : MonoBehaviour
         if (nb_GlobalData.g_global.MainShopActive == true)
         {
             nb_GlobalData.g_global.MainShopActive = false;
-            mainLayer.SetActive(true);
+            //mainLayer.SetActive(true);
             shopObj.SetActive(false);
 
             var sound = soundObj.GetComponent<AudioSource>();

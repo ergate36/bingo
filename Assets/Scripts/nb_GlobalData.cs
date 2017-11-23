@@ -64,6 +64,19 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public BlitzUsePowerUpResponse blitzUsePowerUpResponse;
 
+    //protocol battle mode
+    [HideInInspector]
+    public MonsterStartGameAlarm monsterStartGameAlarm;
+
+    [HideInInspector]
+    public MonsterCallNumberAlarm monsterCallNumberAlarm;
+
+    [HideInInspector]
+    public MonsterCompleteBingoResponse monsterCompleteBingoResponse;
+
+    [HideInInspector]
+    public MonsterCompleteBingoAlarm monsterCompleteBingoAlarm;
+
     // sounds
     [HideInInspector]
     public AudioClip[] BGSound;
@@ -211,6 +224,8 @@ public class nb_GlobalData : MonoBehaviour
 
     //main
     [HideInInspector]
+    public int maxStage = 4;
+    [HideInInspector]
     public int selectStageId = 1;
 
     [HideInInspector]
@@ -224,6 +239,8 @@ public class nb_GlobalData : MonoBehaviour
     public bool MainMenuActive = false;
     [HideInInspector]
     public bool MainShopActive = false;
+    [HideInInspector]
+    public bool MainStageMove = false;
 
     //lobby
     [HideInInspector]
@@ -266,6 +283,10 @@ public class nb_GlobalData : MonoBehaviour
         blitzCheckNumberResponse = new BlitzCheckNumberResponse();
         blitzRefreshPowerUpResponse = new BlitzRefreshPowerUpResponse();
         blitzUsePowerUpResponse = new BlitzUsePowerUpResponse();
+        monsterStartGameAlarm = new MonsterStartGameAlarm();
+        monsterCallNumberAlarm = new MonsterCallNumberAlarm();
+        monsterCompleteBingoResponse = new MonsterCompleteBingoResponse();
+        monsterCompleteBingoAlarm = new MonsterCompleteBingoAlarm();
 
 
         BGSound = new AudioClip[(int)Sound.BGSoundLIst.BGSound_MAX];

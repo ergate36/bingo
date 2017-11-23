@@ -38,6 +38,9 @@ public class nbHttp : MonoBehaviour
         ConnectStageStart,
         ConnectStageSuccess,
         ConnectStageFail,
+        ConnectBattleStageStart,
+        ConnectBattleStageSuccess,
+        ConnectBattleStageFail,
 
         //shop/item
         GetUserPowerUpListStart,
@@ -294,7 +297,16 @@ public class nbHttp : MonoBehaviour
             return;
         }
 
-        state = nbHttpState.ConnectStageStart;
+        if (stageId > 100)
+        {
+            //배틀모드
+            state = nbHttpState.ConnectBattleStageStart;
+        }
+        else
+        {
+            //일반모드
+            state = nbHttpState.ConnectStageStart;
+        }
 
         string c = "Stage";
         string f = "ConnectStage";
@@ -446,6 +458,16 @@ public class nbHttp : MonoBehaviour
                 break;
             case nbHttpState.ConnectStageSuccess:
                 break;
+            case nbHttpState.ConnectBattleStageStart:
+                {
+                    state = nbHttpState.ConnectBattleStageSuccess;
+                    nb_GlobalData.g_global.gl_playerSessionId = data["playerSessionId"].ToString();
+                    nb_GlobalData.g_global.gl_ipAddress = data["ipAddress"].ToString();
+                    nb_GlobalData.g_global.gl_port = (int)data["port"];                    
+                }
+                break;
+            case nbHttpState.ConnectBattleStageSuccess:
+                break;
 
         //item, store
             case nbHttpState.GetUserPowerUpListStart:
@@ -525,6 +547,12 @@ public class nbHttp : MonoBehaviour
                 {
                     //스테이지 접속 실패
                     state = nbHttpState.ConnectStageFail;
+                }
+                break;
+            case nbHttpState.ConnectBattleStageStart:
+                {
+                    //스테이지 접속 실패
+                    state = nbHttpState.ConnectBattleStageFail;
                 }
                 break;
         }

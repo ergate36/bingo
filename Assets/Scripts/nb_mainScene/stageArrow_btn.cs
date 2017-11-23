@@ -6,39 +6,40 @@ public class stageArrow_btn : MonoBehaviour
 {
     public bool isLeft;
 
-    // Use this for initialization
+    public nb_MainScene main;
+
 
 	void OnClick()
     {
         if (nb_GlobalData.g_global.MainMenuActive == true)
         {
+            //Debug.Log("MenuOn Return");
             return;
         }
 
-        //if (nb_GlobalData.g_global.WorldStageSpineRefresh == false)
-        //{
-        //    if (isLeft)
-        //    {
-        //        if (nb_GlobalData.g_global.SelectWorldStage > 1)
-        //        {
-        //            nb_GlobalData.g_global.WorldStageSpineRefresh = true;
-        //            nb_GlobalData.g_global.WorldStageSpineAnimation =
-        //                "move" + nb_GlobalData.g_global.SelectWorldStage.ToString();
+        if (nb_GlobalData.g_global.MainShopActive == true)
+        {
+            //Debug.Log("ShopOn Return");
+            return;
+        }
 
-        //            nb_GlobalData.g_global.SelectWorldStage -= 1;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (nb_GlobalData.g_global.SelectWorldStage < 2)    //스테이지가 아직 2개 밖에 없음
-        //        {
-        //            nb_GlobalData.g_global.WorldStageSpineRefresh = true;
-        //            nb_GlobalData.g_global.WorldStageSpineAnimation =
-        //                "move" + nb_GlobalData.g_global.SelectWorldStage.ToString();
+        if (nb_GlobalData.g_global.MainStageMove == true)
+        {
+            //Debug.Log("MoveOn Return");
+            return;
+        }
 
-        //            nb_GlobalData.g_global.SelectWorldStage += 1;
-        //        }
-        //    }
-        //}
+        nb_GlobalData.g_global.MainStageMove = true;
+
+        if (isLeft)
+        {
+            //Debug.Log("click Left");
+            main.moveStagePrev();
+        }
+        else
+        {
+            //Debug.Log("click Right");
+            main.moveStageNext();
+        }
     }
 }

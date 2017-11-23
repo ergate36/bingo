@@ -309,7 +309,7 @@ public class nbSocket : MonoBehaviour
 
                             var body = JsonConvert.DeserializeObject<BlitzWaitRoomStatusAlarm>(
                                 bodyText);
-                            nb_GlobalData.g_global.blitzWaitRoomStatusAlarm = body;
+                            //nb_GlobalData.g_global.blitzWaitRoomStatusAlarm = body;
 
                             //nb_GlobalData.g_global.mWaitingRoomJoinGameRemainSec = body.remainSecond;
                             //nb_GlobalData.g_global.mWaitingRoomEndGameRemainBingo = body.remainBingo;
@@ -328,6 +328,7 @@ public class nbSocket : MonoBehaviour
 
                             int joinResult = body.Result;
 
+                            Debug.Log(bodyText.ToString());
                             Debug.Log("(1004) BlitzEnterGameResponse joinResult : " +
                                 joinResult.ToString());
 
@@ -720,6 +721,210 @@ public class nbSocket : MonoBehaviour
                         }
                         break;
 
+                    /////////////////// battle mode ///////////////////////////
+
+                    case (short)nb_SocketClass.MsgType.MonsterEnterGameResponse:
+                        using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                        {
+                            var body = JsonConvert.DeserializeObject<MonsterEnterGameResponse>(
+                                bodyText);
+                            //nb_GlobalData.g_global.blitzEnterGameResponse = body;
+
+                            int joinResult = body.Result;
+
+                            Debug.Log("(1204) MonsterEnterGameResponse joinResult : " +
+                                joinResult.ToString());
+                            if(joinResult != 0)
+                                Debug.Log("error : " + bodyText.ToString());
+
+                            if (joinResult == 0)
+                            {
+                                //Debug.Log("BlitzEnterGameResponse joinResult == 0");
+                                nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterEnterGameResponse_End;
+                            }
+
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.MonsterStartGameAlarm:
+                        using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                        {
+                            //1005
+                            Debug.Log("MonsterStartGameAlarm start");
+                            Debug.Log(bodyText);
+
+                            //try
+                            //{
+                            var trace = new MemoryTraceWriter();
+                            var message = JsonConvert.DeserializeObject(bodyText, new JsonSerializerSettings()
+                            {
+                                TypeNameHandling = TypeNameHandling.All,
+                                Binder = new MarigoldSerializationBinder(),
+                                TraceWriter = trace
+                            });
+                            //Debug.Log(trace);
+                            //}
+                            //catch (Exception e)
+                            //{
+                            //    Debug.Log("MonsterStartGameAlarm catch : " + e.ToString());
+                            //}
+
+                            //var body = JsonConvert.DeserializeObject<BlitzStartGameAlarm>(
+                            //    bodyText);
+                            MonsterStartGameAlarm body = (MonsterStartGameAlarm)message;
+                            nb_GlobalData.g_global.monsterStartGameAlarm.CardList = body.CardList;
+                            nb_GlobalData.g_global.monsterStartGameAlarm.UserNameList = body.UserNameList;
+
+
+                            Debug.Log("MonsterStartGameAlarm DeserializeObject");
+
+                            //빙고판세팅
+                            int cardCount = nb_GlobalData.g_global.sheetInfo.activeSheetCount;
+
+                            // 시트 초기화
+                            for (int i = 0; i < 25; i++)
+                            {
+                                nb_GlobalData.g_global.sheetInfo.sheet[0, i] = 0;
+                                nb_GlobalData.g_global.sheetInfo.sheet[1, i] = 0;
+                                nb_GlobalData.g_global.sheetInfo.sheet[2, i] = 0;
+                                nb_GlobalData.g_global.sheetInfo.sheet[3, i] = 0;
+                            }
+                            nb_GlobalData.g_global.BingoTotalFinishCount = 0;
+                            nb_GlobalData.g_global.BingoNumberCount = 0;
+                            nb_GlobalData.g_global.sheetInfo.shield = 0;
+                            nb_GlobalData.g_global.myShield = 0;
+                            nb_GlobalData.g_global.resetMyBlitzRanking();
+
+                            for (int card = 0; card < cardCount; ++card)
+                            {
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    nb_GlobalData.g_global.sheetInfo.bingoSheet[i] = false;
+                                }
+
+                                List<Square> cardData = body.CardList[card].SquareList;
+
+                                char[,] tempArray = new char[5, 5];
+                                for (int x = 0; x < 5; ++x)
+                                {
+                                    for (int y = 0; y < 5; ++y)
+                                    {
+                                        tempArray[x, y] = Convert.ToChar(cardData[(x * 5) + y].Number);
+                                    }
+                                }
+
+                                // 행렬 뒤집
+                                for (int x = 0; x < 5; ++x)
+                                {
+                                    string text = "";
+                                    for (int y = 0; y < 5; ++y)
+                                    {
+                                        nb_GlobalData.g_global.sheetInfo.
+                                            sheet[card, (x * 5) + y] = (int)tempArray[y, x];
+                                        text += ((int)tempArray[y, x]).ToString() + ", ";
+                                    }
+                                    //Debug.Log("Bingo Sheet " + card.ToString() + " : " + text);
+                                }
+                            }
+                            Debug.Log("Sheet Setting Finish");
+
+                            //유저 리스트
+                            int userCount = nb_GlobalData.g_global.monsterStartGameAlarm.UserNameList.Count;
+                            nb_GlobalData.g_global.BingoRoomUserCount = userCount;
+                            nb_GlobalData.g_global.BingoRoomUserNameList = new string[userCount];
+
+
+                            Debug.Log("@@ MonsterStartGameAlarm userCount : " +
+                                userCount.ToString());
+
+
+                            //int userCount = reader.ReadInt32();
+                            //nb_GlobalData.g_global.BingoRoomUserCount = userCount;
+                            //nb_GlobalData.g_global.BingoRoomUserNameList = new string[userCount];
+
+
+                            string temp = "@@ MonsterStartGameAlarm nameList : ";
+                            int count = 0;
+                            foreach (var user in nb_GlobalData.g_global.monsterStartGameAlarm.UserNameList)
+                            {
+                                nb_GlobalData.g_global.BingoRoomUserNameList[count] = user;
+                                ++count;
+                                temp += user + ", ";
+                            }
+                            //for (int i = 0; i < userCount; ++i)
+                            //{
+                            //    string userName = Encoding.UTF8.GetString(reader.ReadBytes(20)).Split(char.MinValue)[0];
+                            //    nb_GlobalData.g_global.BingoRoomUserNameList[i] = userName;
+                            //    temp += userName + ", ";
+                            //}
+
+                            //Debug.Log("userNameList : " + temp);
+
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterStartGameAlarm_End;
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.MonsterCallNumberAlarm:
+                        using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                        {
+                            //빙고 숫자 받음(1206)
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterCallNumberAlarm_End;
+
+                            var body = JsonConvert.DeserializeObject<MonsterCallNumberAlarm>(
+                                bodyText);
+                            nb_GlobalData.g_global.monsterCallNumberAlarm = body;
+
+                            int bingoNum = body.Number;
+
+                            nb_GlobalData.g_global.BingoNumberCount += 1;
+                            nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount] = bingoNum;
+
+                            Debug.Log("@@ mGameBingoNumberIng bingoNum : " +
+                                bingoNum.ToString() + "(" + nb_GlobalData.g_global.BingoNumberCount.ToString() + ")");
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.MonsterCompleteBingoResponse:
+                        using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                        {
+                            var body = JsonConvert.DeserializeObject<MonsterCompleteBingoResponse>(
+                                bodyText);
+                            nb_GlobalData.g_global.monsterCompleteBingoResponse = body;
+
+                            if (body.Result == 0)
+                            {
+                                nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterCompleteBingoResponse_End;
+                            }
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.MonsterCompleteBingoAlarm:
+                        using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                        {
+                            var body = JsonConvert.DeserializeObject<MonsterCompleteBingoAlarm>(
+                                bodyText);
+                            nb_GlobalData.g_global.monsterCompleteBingoAlarm = body;
+
+                            int rank = body.Ranking;
+                            //string userName = Encoding.UTF8.GetString(reader.ReadBytes(20)).Split(char.MinValue)[0];
+                            string userName = body.Name;
+
+                            Debug.Log("@@ MonsterCompleteBingoAlarm userName : " + userName);
+
+                            nb_GlobalData.g_global.BingoTotalFinishCount += 1;
+                            nb_GlobalData.g_global.BingoLastFinishUserName = userName;
+
+                            if (nb_GlobalData.g_global.callBingo == false)
+                            {
+                                //내가 완성했을땐 MonsterCompleteBingoResponse에서 스테이트를 변경
+                                nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterCompleteBingoAlarm_End;
+                            }
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.MonsterEndGameAlarm:
+                        using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                        {
+                            //게임 종료
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterEndGameAlarm_End;
+                        }
+                        break;
+
 
                         
 
@@ -987,6 +1192,29 @@ public class nbSocket : MonoBehaviour
                 case (short)nb_SocketClass.MsgType.BlitzRetryCollectionRequest:
                     {
                         // 못한 컬렉션 카드를 다시 시도할 수 있게 저장한다.
+                    }
+                    break;
+
+                /////////////////////// battle mode //////////////////////////
+                case (short)nb_SocketClass.MsgType.MonsterEnterGameRequest:
+                    using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                    {
+                        writer.Write(H);             //헤더
+                        writer.Write((ushort)nb_SocketClass.MsgType.MonsterEnterGameRequest);
+
+                        var a = new MonsterEnterGameRequest
+                        {
+                            CardCount = nb_GlobalData.g_global.sheetInfo.activeSheetCount,
+                        };
+
+                        var s = JsonConvert.SerializeObject(a);
+                        byte[] body = new UTF8Encoding().GetBytes(s);
+
+                        writer.Write((ushort)s.Length);             //사이즈
+                        writer.Write(body);
+                        ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
+
+                        writer.Close();
                     }
                     break;
             }

@@ -14,7 +14,7 @@ public class nb_MainShopOpen_btn : MonoBehaviour
         if (nb_GlobalData.g_global.MainShopActive == false)
         {
             nb_GlobalData.g_global.MainShopActive = true;
-            mainLayer.SetActive(false);
+            //mainLayer.SetActive(false);
             shopObj.SetActive(true);
 
             shopObj.transform.Find("tap1").gameObject.SetActive(false);

@@ -51,8 +51,8 @@ public class nb_SocketClass
         ScoreUpdateRequest = 225,	    //빙고결과 요청
         ScoreUpdateResponse = 226,	    //빙고결과 응답  
         // 블리츠 모드
-        BlitzEnterWaitRoomRequest = 1000,     // 대기룸 입장 요청
-        BlitzEnterWaitRoomResponse = 1001,     // 대기룸 입장 요청 응답
+        //BlitzEnterWaitRoomRequest = 1000,     // 대기룸 입장 요청
+        //BlitzEnterWaitRoomResponse = 1001,     // 대기룸 입장 요청 응답
         BlitzWaitRoomStatusAlarm = 1002,     // 대기룸 상태 알림
         BlitzEnterGameRequest = 1003,     // 게임 입장 요청
         BlitzEnterGameResponse = 1004,     // 게임 입장 요청 응답
@@ -185,6 +185,29 @@ public class nb_SocketClass
         BlitzClearRewardAlarm_End = 1020,
         BlitzRetryCollectionRequest_End = 1021,
         BlitzRetryCollectionResponse_End = 1022,
+
+        // Monster (서브 스테이지 모드)
+        MonsterEnterGameRequest_End = 1203,     // 게임 입장 요청
+        MonsterEnterGameResponse_End = 1204,     // 게임 입장 요청 응답
+        MonsterStartGameAlarm_End = 1205,     // 게임 시작 알림
+        MonsterCallNumberAlarm_End = 1206,     // 빙고 번호 알림
+        MonsterCompleteBingoRequest_End = 1207,     // 빙고 완성 요청
+        MonsterCompleteBingoResponse_End = 1208,     // 빙고 완성 요청 응답
+        MonsterCompleteBingoAlarm_End = 1209,     // 빙고 완성 알림
+        MonsterEndGameAlarm_End = 1210,     // 게임 끝 알림
+        MonsterUsePowerUpRequest_End = 1211,     // 아이템 사용 요청
+        MonsterUsePowerUpResponse_End = 1212,     // 아이템 사용 결과
+        // 
+        MonsterRefreshPowerUpRequest_End = 1213,     // 아이템 재확인 요청
+        MonsterRefreshPowerUpResponse_End = 1214,     // 아이템 재확인 응답
+        MonsterGambleRequest_End = 1215,     // 미니 게임 요청
+        MonsterGambleResponse_End = 1216,     // 미니 게임 응답
+        MonsterCheckNumberRequest_End = 1217,     // 빙고 숫자 체크 요청
+        MonsterCheckNumberResponse_End = 1218,     // 빙고 숫자 체크 응답
+        MonsterRobotStateAlarm_End = 1219,     // DEBUG용으로 로봇의 상태를 전달함.
+        MonsterClearRewardAlarm_End = 1220,     // 게임 끝날을때 보상정보를 알려준다.
+        MonsterRetryCollectionRequest_End = 1221,     // 못한 컬렉션 카드를 다시 시도할 수 있게 저장한다.
+        MonsterRetryCollectionResponse_End = 1222,     // 못한 컬렉션 카드 저장 응답
 
     };
 }
