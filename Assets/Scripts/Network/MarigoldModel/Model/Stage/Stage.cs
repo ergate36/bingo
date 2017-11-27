@@ -14,6 +14,8 @@ namespace MarigoldModel.Model
 
         public GameType GameType { get; set; } // 게임 타입
 
+        public long MiniGamblePriceId { get; set; } // 해당 스테이지에서 게임시 플레이할 수 있는 미니갬블에 대한 정보
+
         // TODO: 나중에 스테이지가 열리는 조건이 바뀔 수 있다.
 
         // TODO: 카테고리가 필요해질 수 있다.

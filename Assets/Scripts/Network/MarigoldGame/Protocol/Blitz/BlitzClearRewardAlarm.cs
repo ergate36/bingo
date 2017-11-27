@@ -6,7 +6,7 @@ using System.Text;
 using MarigoldModel.Commands;
 using MarigoldGame.Commands;
 
-namespace MarigoldGame.Protocol.Blitz
+namespace MarigoldGame.Protocol
 {
     class BlitzClearRewardAlarm : BaseProtocol
     {

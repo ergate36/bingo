@@ -22,13 +22,13 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
     public Transform m_effectLayer01Board;
     [HideInInspector]
     public Transform    m_effectLayer02Board;
-    [HideInInspector]
-    public Transform m_damageBoard;
-    private Transform   m_otherBoard;
-    [HideInInspector]
-    public Transform   m_targetBoard;
-    [HideInInspector]
-    public Transform   m_resultBoard;
+    //[HideInInspector]
+    //public Transform m_damageBoard;
+    //private Transform   m_otherBoard;
+    //[HideInInspector]
+    //public Transform   m_targetBoard;
+    //[HideInInspector]
+    //public Transform   m_resultBoard;
     
     [HideInInspector]
     public Transform   m_ItemBoard;
@@ -132,8 +132,6 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
     // buttons
     [HideInInspector]
     public BoxCollider[] buttons;
-    [HideInInspector]
-    public BoxCollider[] resultButtons;
 
 
     // noitemMsg
@@ -167,11 +165,7 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
 
     [HideInInspector]
     public Transform m_userList;
-
-    //게임종료 팝업
-    [HideInInspector]
-    public Transform popup_gameEnd;
-
+    
     //게임종료 이펙트
     [HideInInspector]
     public Transform effect_end;
@@ -190,18 +184,17 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
         m_daubBoard = playUI.Find("history_info");
         m_effectLayer01Board = playUI.Find("EffectBoard_Layer01");
         m_effectLayer02Board = playUI.Find("EffectBoard_Layer02");
-        m_otherBoard            = playUI.Find("Other_Board");
-        m_targetBoard           = playUI.Find("Target_Board");
+        //m_otherBoard            = playUI.Find("Other_Board");
+        //m_targetBoard           = playUI.Find("Target_Board");
         m_ItemBoard             = playUI.Find("Item_Board");
-        m_resultBoard           = playUI.Find("Result_Board");
+        //m_resultBoard           = playUI.Find("Result_Board");
         m_debugBoard            = playUI.Find("Debug_Board");
-        m_damageBoard = playUI.Find("Damage_Board");
+        //m_damageBoard = playUI.Find("Damage_Board");
         //noItemMsg = m_ItemBoard.Find("noItemMsg");
 
         m_rankBoard = playUI.Find("rank_info");
         m_userList = playUI.Find("player_list");
 
-        popup_gameEnd = playUI.Find("popup_GameEnd");
         effect_end = playUI.Find("effect_end");
       
         m_otherSheets   = new Transform[4, 4, 25];
@@ -221,10 +214,7 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
         label_bingoCount = m_baseBoard.Find("t_remain_count");
 
         buttons = playUI.GetComponentsInChildren<BoxCollider>();
-
-        Transform resultpopup = playUI.Find("popup_result");
-        resultButtons = resultpopup.GetComponentsInChildren<BoxCollider>();
-
+        
         m_daubBoardNumber = new Transform[75];
         for (int i = 0; i < 75; ++i)
         {
@@ -266,7 +256,7 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
         //m_talk_gameover = m_effectLayer02Board.Find("effect_gameover_talk");
         //m_eff_gameover.gameObject.SetActive(false);
 
-        m_otherOut.gameObject.SetActive(false);
+        //m_otherOut.gameObject.SetActive(false);
 
         m_gameScore = m_baseBoard.Find("gameScore");
 
@@ -296,7 +286,7 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
         m_bingoSheetBG[2].gameObject.SetActive(false);
         m_bingoSheetBG[3].gameObject.SetActive(false);
 
-        m_resultBoard.gameObject.SetActive(false);
+        //m_resultBoard.gameObject.SetActive(false);
         
         
         // mysheets

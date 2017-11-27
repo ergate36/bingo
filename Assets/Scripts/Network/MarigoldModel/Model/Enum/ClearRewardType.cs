@@ -4,6 +4,7 @@
     public enum ClearRewardType
     {
         CLEAR_RANKING_REWARD, // 빙고 완료시 랭킹에 따라 얻은 보상
+        COLLECTION, // 빙고 완료시 카드에 포함된 콜렉션 획득
         DOUBLE_GAME_MONEY,
         DOUBLE_EXPERIENCE,
         COIN, // COIN 상자 RandomRewardId를 가지며 게임이 끝날때 실제 보상이 결정된다.

@@ -1,7 +1,7 @@
 ﻿using MarigoldModel.Commands;
 using MarigoldModel.Model;
 
-namespace MarigoldGame.Game
+namespace MarigoldGame.Commands
 {
     internal class AvoidCommand : Command
     {

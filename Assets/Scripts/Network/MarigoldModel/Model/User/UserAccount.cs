@@ -23,5 +23,7 @@ namespace MarigoldModel.Model
         // 기본 정보로 보여주기 때문에 UserAccount에서 같이 처리하도록 함.
         public int Level { get; set; } // 캐릭터 레벨
         public int Experience { get; set; } // 캐릭터 경험치
+
+        public bool PrivateProfile { get; set; } // 유저가 자신의 정보를 다른 사람이 볼 수 있게 할지 결정한다.
     }
 }

@@ -1,4 +1,5 @@
-﻿using MarigoldModel.Commands;
+﻿using MarigoldGame.Common;
+using MarigoldModel.Commands;
 using MarigoldModel.Model;
 
 namespace MarigoldGame.Commands
@@ -9,5 +10,7 @@ namespace MarigoldGame.Commands
         {
 
         }
+
+        public Square Square { get; set; }
     }
 }

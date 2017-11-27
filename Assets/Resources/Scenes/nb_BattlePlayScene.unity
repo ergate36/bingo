@@ -2724,7 +2724,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3007
+  startingRenderQueue: 3009
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -20902,7 +20902,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3012
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -23435,8 +23435,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a7cb0c76e88174bb5be74caaaf066e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  root: {fileID: 1316920335}
-  root2: {fileID: 1737110381}
 --- !u!1 &1020676678
 GameObject:
   m_ObjectHideFlags: 0
@@ -24597,7 +24595,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1098877614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c72edb1693c24f341821a29086c96481, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ac305c22ef946c42878830417ffe5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sheetIndex: 0
@@ -31609,10 +31607,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1478627890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c72edb1693c24f341821a29086c96481, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ac305c22ef946c42878830417ffe5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sheetIndex: 0
+  sheetIndex: 2
 --- !u!65 &1478627893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41134,10 +41132,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1735838563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c72edb1693c24f341821a29086c96481, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ac305c22ef946c42878830417ffe5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sheetIndex: 0
+  sheetIndex: 1
 --- !u!65 &1735838566
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43148,10 +43146,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1804709975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c72edb1693c24f341821a29086c96481, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ac305c22ef946c42878830417ffe5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sheetIndex: 0
+  sheetIndex: 3
 --- !u!65 &1804709978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45813,7 +45811,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3012
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}

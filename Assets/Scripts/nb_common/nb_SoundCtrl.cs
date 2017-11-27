@@ -3,11 +3,11 @@ using System.Collections;
 
 public class nb_SoundCtrl : MonoBehaviour {
 	// Use this for initialization
-    public GameObject root;
-    public GameObject root2;
+    //public GameObject root;
+    //public GameObject root2;
 	void Start () {
-        root2.gameObject.SetActive(false);
-        root.gameObject.SetActive(false);
+        //root2.gameObject.SetActive(false);
+        //root.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -20,14 +20,14 @@ public class nb_SoundCtrl : MonoBehaviour {
         if (nb_GlobalData.g_global.socketState == (int)SocketClass.STATE.connectionFail
             || nb_GlobalData.g_global.socketState == (int)SocketClass.STATE.excessTime)
         {
-            root2.gameObject.SetActive(true);
+            //root2.gameObject.SetActive(true);
             nb_GlobalData.g_global.socketState = (int)SocketClass.STATE.waitSign;
         }
         if (nb_GlobalData.g_global.socketState == (int)SocketClass.STATE.NaverconnectionFail)
         {
-            root2.gameObject.SetActive(true);
-            Transform label = root2.transform.Find("Label");
-            label.GetComponent<UILabel>().text = "Failed to login with Facebook.";
+            //root2.gameObject.SetActive(true);
+            //Transform label = root2.transform.Find("Label");
+            //label.GetComponent<UILabel>().text = "Failed to login with Facebook.";
             nb_GlobalData.g_global.socketState = (int)SocketClass.STATE.waitSign;
         }
         nb_GlobalData.g_global.soundFlg = PlayerPrefs.GetInt("soundFlg");
@@ -51,7 +51,7 @@ public class nb_SoundCtrl : MonoBehaviour {
             else
             {
                 nb_GlobalData.g_global.invite_able = false;
-                root.SetActive(true);
+                //root.SetActive(true);
             }
             
         }

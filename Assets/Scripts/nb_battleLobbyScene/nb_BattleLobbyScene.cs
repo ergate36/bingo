@@ -274,9 +274,14 @@ public class nb_BattleLobbyScene : MonoBehaviour
         icon.GetComponent<UISprite>().MakePixelPerfect();
         name.GetComponent<UISprite>().MakePixelPerfect();
 
+        icon.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        name.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+
         Transform bg = m_nbLobbySceneUI.uiRoot.transform.Find("layer0/bg");
 
-        bg.GetComponent<UITexture>().name = "stage" + nb_GlobalData.g_global.selectStageId.ToString() + "_sub";
+        Texture texture = Resources.Load("nb_images/stage/stage" +
+            nb_GlobalData.g_global.selectStageId.ToString() + "_sub", typeof(Texture)) as Texture;
+        bg.GetComponent<UITexture>().mainTexture = texture;
         bg.GetComponent<UITexture>().MakePixelPerfect();
     }
 }

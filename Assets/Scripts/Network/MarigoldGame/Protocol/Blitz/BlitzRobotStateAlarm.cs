@@ -1,7 +1,6 @@
 ﻿using MarigoldGame.Common;
-//using MarigoldGame.Game.Blitz;
 
-namespace MarigoldGame.Protocol.Blitz
+namespace MarigoldGame.Protocol
 {
     public class BlitzRobotStateAlarm : BaseProtocol
     {

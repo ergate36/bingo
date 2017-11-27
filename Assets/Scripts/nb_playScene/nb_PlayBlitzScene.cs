@@ -32,7 +32,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
     private float ballTime = 7.0f;
     private int ballCount = 0;
 
-    public GameObject resultPopupRoot;
+    //public GameObject resultPopupRoot;
 
     private bool[] m_calledBallNumber;
 
@@ -133,6 +133,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
     bool itemCoolDown = false;
     int chestItemCount = 0;
     bool itemBoosterOn = false;
+    bool itemDoubleRewardOn = false;
+    bool itemDoubleExpOn = false;
 
 
     void Awake()
@@ -184,7 +186,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         isSceneEnd = false;
         // introMusic off
         //nb_GlobalData.g_global.GetComponent<AudioSource>().Pause();
-        resultPopupRoot.gameObject.SetActive(false);
+        //resultPopupRoot.gameObject.SetActive(false);
         playScene_ui = gameObject.GetComponent<nb_PlayBlitzScene_UI>();
         playScene_ui.label_bingoCount.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
         iTween.ScaleTo(playScene_ui.label_bingoCount.gameObject, iTween.Hash("x", 1f, "y", 1, "z", 1f, "easeType", "easeOutElastic", "time", 0.8f));
@@ -236,6 +238,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
         //
 
         ballCount = 1;
+
+        drawStageBg();
     }
 
     void Update()
@@ -557,44 +561,17 @@ public class nb_PlayBlitzScene : MonoBehaviour
                     nb_GlobalData.g_global.selectItemId);
                 playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().spriteName
                     = nb_Item.nb_itemIconPath[index];
-                switch (index)
-                {
-                    case 1:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 83);
-                        break;
-                    case 2:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 82);
-                        break;
-                    case 3:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(88, 82);
-                        break;
-                    case 4:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 83);
-                        break;
-                    case 5:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(89, 85);
-                        break;
-                    case 6:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(88, 82);
-                        break;
-                    case 7:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(140, 73);
-                        break;
-                    case 8:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(93, 90);
-                        break;
-                    case 9:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(86, 84);
-                        break;
-                    case 10:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 83);
-                        break;
-                }
+                playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().MakePixelPerfect();
 
                 playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
 
                 lastUseItemTime = Time.time;
             }
+
+            //누른셀이 폭탄이면 사용될것이야
+            runUseItemAction();
+
+            increaseGauge();
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
@@ -622,8 +599,6 @@ public class nb_PlayBlitzScene : MonoBehaviour
             if (coolTime > checkTime)
             {
                 //쿨타임 끝
-                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                    "Charging...";
                 itemCoolDown = false;
             }
             else
@@ -635,31 +610,23 @@ public class nb_PlayBlitzScene : MonoBehaviour
         }
         else
         {
-            if (itemBoosterOn)
+            if (nb_GlobalData.g_global.blitzGaugeState == 
+                (int)MarigoldModel.Model.PowerUpGaugeState.FULL)
             {
-                if (m_itemGaugeCount == 2)
-                {
-                    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                        "Ready";
-                }
-                else
-                {
-                    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                        "Charging...";
-                }
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                    "Ready";
             }
-            else
+            else if (nb_GlobalData.g_global.blitzGaugeState == 
+                (int)MarigoldModel.Model.PowerUpGaugeState.UP)
             {
-                if (m_itemGaugeCount == 3)
-                {
-                    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                        "Ready";
-                }
-                else
-                {
-                    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                        "Charging...";
-                }
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                    "Charging...";
+            }
+            else if (nb_GlobalData.g_global.blitzGaugeState ==
+                (int)MarigoldModel.Model.PowerUpGaugeState.STORE)
+            {
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                    "Empty";
             }
         }
     }
@@ -1247,7 +1214,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
     public void onUseItem()
     {
         //아이템 게이지가 차야됨
-        if (m_itemGaugeCount <= 2)
+        if (nb_GlobalData.g_global.blitzGaugeState != 1)
+        //if (m_itemGaugeCount <= 2)
             return;
 
         if (nb_GlobalData.g_global.selectItemId == 0)
@@ -1256,11 +1224,11 @@ public class nb_PlayBlitzScene : MonoBehaviour
             return;
         }
 
-        if (itemCoolDown == true)
-        {
-            //쿨타임 중
-            return;
-        }
+        //if (itemCoolDown == true)
+        //{
+        //    //쿨타임 중
+        //    return;
+        //}
 
         //사용
         nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.BlitzUsePowerUpRequest);
@@ -1268,7 +1236,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
         playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().spriteName
             = "ui_money_normal";
-        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(92, 98);
+        //playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(92, 98);
+        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().MakePixelPerfect();
 
         //if (nb_GlobalData.g_global.itemIndex == (int)Item.ItemType.Item_None)
         //    return;
@@ -1399,40 +1368,40 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     public void onEndGame()
     {
-        resultPopupRoot.gameObject.SetActive(true);
+        //resultPopupRoot.gameObject.SetActive(true);
 
-        int buttonCount = playScene_ui.buttons.Length;
-        int resultButtonCount = playScene_ui.resultButtons.Length;
+        //int buttonCount = playScene_ui.buttons.Length;
+        ////int resultButtonCount = playScene_ui.resultButtons.Length;
 
-        for (int i = 0; i < buttonCount; ++i)
-        {
-            playScene_ui.buttons[i].enabled = false;
-        }
+        //for (int i = 0; i < buttonCount; ++i)
+        //{
+        //    playScene_ui.buttons[i].enabled = false;
+        //}
 
-        for (int k = 0; k < resultButtonCount; ++k)
-        {
-            playScene_ui.resultButtons[k].enabled = true;
-        }
+        //for (int k = 0; k < resultButtonCount; ++k)
+        //{
+        //    playScene_ui.resultButtons[k].enabled = true;
+        //}
 
-        playScene_ui.m_ItemBoard.gameObject.SetActive(false);
-        playScene_ui.m_targetBoard.gameObject.SetActive(false);
+        //playScene_ui.m_ItemBoard.gameObject.SetActive(false);
+        //playScene_ui.m_targetBoard.gameObject.SetActive(false);
 
-        if (m_shield_idle != null)
-        {
-            DestroyImmediate(m_shield_idle);
-            m_shield_idle = null;
-        }
-        StopCoroutine("addBall");
-        StopCoroutine("callHeartbeat");
-        if (nb_GlobalData.g_global.gameType == 1)
-        {
-            StartCoroutine(resultPopupRoot.GetComponent<gameRanking>().initRanking());
-        }
+        //if (m_shield_idle != null)
+        //{
+        //    DestroyImmediate(m_shield_idle);
+        //    m_shield_idle = null;
+        //}
+        //StopCoroutine("addBall");
+        //StopCoroutine("callHeartbeat");
+        //if (nb_GlobalData.g_global.gameType == 1)
+        //{
+        //    StartCoroutine(resultPopupRoot.GetComponent<gameRanking>().initRanking());
+        //}
 
-        else
-        {
-            StartCoroutine(resultPopupRoot.GetComponent<battingRanking>().initRanking());
-        }
+        //else
+        //{
+        //    StartCoroutine(resultPopupRoot.GetComponent<battingRanking>().initRanking());
+        //}
 
         //        StartCoroutine(resultPopupRoot.GetComponent<ResultPopupCtrl>().initResut());
     }
@@ -1648,16 +1617,6 @@ public class nb_PlayBlitzScene : MonoBehaviour
                         playScene_ui.m_baseBoard.Find("i_icon2").GetComponent<UISprite>().spriteName = "ui_info_chest1";
                         playScene_ui.m_baseBoard.Find("t_bonus_count").GetComponent<UILabel>().text = "x" + chestItemCount.ToString();
                     }
-                    else if (itemIndex == 6)
-                    {
-                        //따블 리워드
-                        playScene_ui.m_baseBoard.Find("i_icon3").GetComponent<UISprite>().spriteName = "ui_info_all1";
-                    }
-                    else if (itemIndex == 5)
-                    {
-                        //따블 경험치
-                        playScene_ui.m_baseBoard.Find("i_icon4").GetComponent<UISprite>().spriteName = "ui_info_xp1";
-                    }
 
                     //if (m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex != (int)Item.ItemType.Item_DirectBingo)
                     //{
@@ -1721,7 +1680,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 //    StartCoroutine(bingoResult());
                 //}
 
-                increaseGauge();
+                //increaseGauge();
 
                 nb_GlobalData.g_global.CheckNumCardIndex = sheetIndex;
                 nb_GlobalData.g_global.CheckNumNumber = cellNumber;
@@ -1825,20 +1784,20 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 }
             }
 
-            playScene_ui.m_damageBoard.gameObject.SetActive(false);
+            //playScene_ui.m_damageBoard.gameObject.SetActive(false);
             foreach (GameObject blind in m_blindList)
             {
                 Destroy(blind.gameObject);
             }
-            playScene_ui.m_resultBoard.gameObject.SetActive(true);
+            //playScene_ui.m_resultBoard.gameObject.SetActive(true);
 
             GameObject gameoverEff = Instantiate(Resources.Load("effects/eff_notice_gameover")) as GameObject;
             Vector3 scale = gameoverEff.transform.localScale;
             Vector3 pos = gameoverEff.transform.localPosition;
 
-            gameoverEff.transform.parent = playScene_ui.m_resultBoard;
-            gameoverEff.transform.localPosition = pos;
-            gameoverEff.transform.localScale = scale;
+            //gameoverEff.transform.parent = playScene_ui.m_resultBoard;
+            //gameoverEff.transform.localPosition = pos;
+            //gameoverEff.transform.localScale = scale;
 
             //playScene_ui.m_talk_gameover.GetComponent<AudioSource>().clip = nb_GlobalData.g_global.TalkSound[(int)Sound.TalkList.game_over];
             //playScene_ui.m_talk_gameover.GetComponent<AudioSource>().Play();
@@ -1847,11 +1806,11 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
             yield return new WaitForSeconds(2f);
 
-            if (gameoverEff)
-            {
-                Destroy(gameoverEff);
-            }
-            onEndGame();
+            //if (gameoverEff)
+            //{
+            //    Destroy(gameoverEff);
+            //}
+            //onEndGame();
         }
     }
 
@@ -2035,40 +1994,44 @@ public class nb_PlayBlitzScene : MonoBehaviour
         //    return;
         //}
 
-        if (nb_GlobalData.g_global.getTotalNormalPowerUpCount() == 0)
+        if (nb_GlobalData.g_global.blitzGaugeState == 3)
+        //if (nb_GlobalData.g_global.getTotalNormalPowerUpCount() == 0)
         {
-            //가진 아이템이 없음
+            //가진 아이템이 없음 - todo:store
             Debug.Log("increaseGauge fail : not enough item");
             return;
         }
 
         float coolTime = Time.time - lastUseItemTime;
 
-        if (itemBoosterOn && coolTime < 10.0f)
+        if (nb_GlobalData.g_global.blitzGaugeState == 2)
+        //if (itemBoosterOn && coolTime < 10.0f)
         {
             //아이템 쿨타임 중임 : 부스터 상태
             Debug.Log("increaseGauge fail : CoolTime(boost)");
             return;
         }
-        else if (itemBoosterOn == false && coolTime < 20.0f)
-        {
-            //아이템 쿨타임 중임
-            Debug.Log("increaseGauge fail : CoolTime");
-            return;
-        }
+        //else if (itemBoosterOn == false && coolTime < 20.0f)
+        //{
+        //    //아이템 쿨타임 중임
+        //    Debug.Log("increaseGauge fail : CoolTime");
+        //    return;
+        //}
 
-        if (itemBoosterOn && m_itemGaugeCount > 1)
+        if (nb_GlobalData.g_global.blitzGaugeState == 1)
+        //if (itemBoosterOn && m_itemGaugeCount > 1)
         {
             //게이지가 가득참 : 부스터 상태
             return;
         }
-        else if (itemBoosterOn == false && m_itemGaugeCount > 2)
-        {
-            //게이지가 가득참
-            return;
-        }
+        //else if (itemBoosterOn == false && m_itemGaugeCount > 2)
+        //{
+        //    //게이지가 가득참
+        //    return;
+        //}
 
-        ++m_itemGaugeCount;
+        m_itemGaugeCount = nb_GlobalData.g_global.blitzGaugeValue;
+        //++m_itemGaugeCount;
 
         if (m_itemGaugeCount == 1)
         {
@@ -2501,89 +2464,89 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     public IEnumerator acvtiveDamageNotice(Item.ItemType attackType, float deleteTime)
     {
-        GameObject effect = null;
-        switch (attackType)
-        {
-            case Item.ItemType.Item_FrozenItem:
-                {
-                    effect = Instantiate(Resources.Load("effects/eff_notice_freeze")) as GameObject;
+        //GameObject effect = null;
+        //switch (attackType)
+        //{
+        //    case Item.ItemType.Item_FrozenItem:
+        //        {
+        //            effect = Instantiate(Resources.Load("effects/eff_notice_freeze")) as GameObject;
 
-                    //for (int i = 0; i < 25; ++i)
-                    //{
-                    //    playScene_ui.m_cells[i].GetComponent<BoxCollider>().enabled = false;
+        //            //for (int i = 0; i < 25; ++i)
+        //            //{
+        //            //    playScene_ui.m_cells[i].GetComponent<BoxCollider>().enabled = false;
 
-                    //}
-                    //for (int i = 0; i < 4; i++)
-                    //{
-                    //    playScene_ui.m_sheetbuttons[i].GetComponent<BoxCollider>().enabled = false;
-                    //}
-                    for (int s = 0; s < 4; s++)
-                    {
-                        //playScene_ui.m_sheetbuttons[i].GetComponent<BoxCollider>().enabled = false;
-                        for (int i = 0; i < 25; ++i)
-                        {
-                            playScene_ui.m_cells[s, i].GetComponent<BoxCollider>().enabled = false;
+        //            //}
+        //            //for (int i = 0; i < 4; i++)
+        //            //{
+        //            //    playScene_ui.m_sheetbuttons[i].GetComponent<BoxCollider>().enabled = false;
+        //            //}
+        //            for (int s = 0; s < 4; s++)
+        //            {
+        //                //playScene_ui.m_sheetbuttons[i].GetComponent<BoxCollider>().enabled = false;
+        //                for (int i = 0; i < 25; ++i)
+        //                {
+        //                    playScene_ui.m_cells[s, i].GetComponent<BoxCollider>().enabled = false;
 
-                        }
+        //                }
 
-                        GameObject.Find("bingo_btn_" + s).GetComponent<BoxCollider>().enabled = false;
-                    }
+        //                GameObject.Find("bingo_btn_" + s).GetComponent<BoxCollider>().enabled = false;
+        //            }
 
 
-                } break;
-            case Item.ItemType.Item_Blind_5:
-                {
-                    effect = Instantiate(Resources.Load("effects/eff_notice_blind")) as GameObject;
-                } break;
-            case Item.ItemType.Item_SwapSheet:
-                {
-                    effect = Instantiate(Resources.Load("effects/eff_notice_swap")) as GameObject;
+        //        } break;
+        //    case Item.ItemType.Item_Blind_5:
+        //        {
+        //            effect = Instantiate(Resources.Load("effects/eff_notice_blind")) as GameObject;
+        //        } break;
+        //    case Item.ItemType.Item_SwapSheet:
+        //        {
+        //            effect = Instantiate(Resources.Load("effects/eff_notice_swap")) as GameObject;
 
-                } break;
-            case Item.ItemType.Item_ShuffleSheet:
-                {
-                    effect = Instantiate(Resources.Load("effects/eff_notice_numbermix")) as GameObject;
-                } break;
-            case Item.ItemType.Item_Shield:
-                {
-                    effect = Instantiate(Resources.Load("effects/eff_notice_shield")) as GameObject;
-                } break;
-        }
+        //        } break;
+        //    case Item.ItemType.Item_ShuffleSheet:
+        //        {
+        //            effect = Instantiate(Resources.Load("effects/eff_notice_numbermix")) as GameObject;
+        //        } break;
+        //    case Item.ItemType.Item_Shield:
+        //        {
+        //            effect = Instantiate(Resources.Load("effects/eff_notice_shield")) as GameObject;
+        //        } break;
+        //}
 
-        Vector3 pos = effect.transform.localPosition;
-        Vector3 scale = effect.transform.localScale;
-        effect.transform.parent = playScene_ui.m_damageBoard;
-        effect.transform.localPosition = pos;
-        effect.transform.localScale = scale;
+        //Vector3 pos = effect.transform.localPosition;
+        //Vector3 scale = effect.transform.localScale;
+        //effect.transform.parent = playScene_ui.m_damageBoard;
+        //effect.transform.localPosition = pos;
+        //effect.transform.localScale = scale;
 
         yield return new WaitForSeconds(deleteTime);
 
-        if (effect)
-        {
-            Destroy(effect);
-        }
-        if (attackType == Item.ItemType.Item_FrozenItem)
-        {
-            m_onFrozen = false;
+        //if (effect)
+        //{
+        //    Destroy(effect);
+        //}
+        //if (attackType == Item.ItemType.Item_FrozenItem)
+        //{
+        //    m_onFrozen = false;
 
-            //for (int i = 0; i < 25; ++i)
-            //{
-            //    playScene_ui.m_cells[i].GetComponent<BoxCollider>().enabled = true;
-            //}
-            //for (int i = 0; i < 4; i++)
-            //{
-            //    playScene_ui.m_sheetbuttons[i].GetComponent<BoxCollider>().enabled = true;
-            //}
-            for (int s = 0; s < 4; s++)
-            {
-                //playScene_ui.m_sheetbuttons[i].GetComponent<BoxCollider>().enabled = true;
-                for (int i = 0; i < 25; ++i)
-                {
-                    playScene_ui.m_cells[s, i].GetComponent<BoxCollider>().enabled = true;
-                }
-                GameObject.Find("bingo_btn_" + s).GetComponent<BoxCollider>().enabled = true;
-            }
-        }
+        //    //for (int i = 0; i < 25; ++i)
+        //    //{
+        //    //    playScene_ui.m_cells[i].GetComponent<BoxCollider>().enabled = true;
+        //    //}
+        //    //for (int i = 0; i < 4; i++)
+        //    //{
+        //    //    playScene_ui.m_sheetbuttons[i].GetComponent<BoxCollider>().enabled = true;
+        //    //}
+        //    for (int s = 0; s < 4; s++)
+        //    {
+        //        //playScene_ui.m_sheetbuttons[i].GetComponent<BoxCollider>().enabled = true;
+        //        for (int i = 0; i < 25; ++i)
+        //        {
+        //            playScene_ui.m_cells[s, i].GetComponent<BoxCollider>().enabled = true;
+        //        }
+        //        GameObject.Find("bingo_btn_" + s).GetComponent<BoxCollider>().enabled = true;
+        //    }
+        //}
     }
 
     private IEnumerator activeShield()
@@ -3529,7 +3492,6 @@ public class nb_PlayBlitzScene : MonoBehaviour
         yield return new WaitForSeconds(1.4f);
 
         playScene_ui.effect_end.gameObject.SetActive(false);
-        playScene_ui.popup_gameEnd.gameObject.SetActive(true);
 
         StartCoroutine("EndResultSpine");
     }
@@ -3591,11 +3553,11 @@ public class nb_PlayBlitzScene : MonoBehaviour
     {
         if (nb_Item.nb_daubItemImagePath[(int)type] == "item_unknown")
         {
-            daubObjects[sheetIndex, cellIndex].gameObject.SetActive(false);
+            daubObjects[sheetIndex, cellIndex].SetActive(false);
             return;
         }
 
-        daubObjects[sheetIndex, cellIndex].gameObject.SetActive(true);
+        daubObjects[sheetIndex, cellIndex].SetActive(true);
         daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName =
             nb_Item.nb_daubItemImagePath[(int)type];
     }
@@ -3621,21 +3583,33 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 daubObjects[data.sheet, cellIndex].SetActive(true);
                 daubObjects[data.sheet, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
+                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.white;
+            }
+            else if (type == 5)
+            {
+                //double exp
+                itemDoubleExpOn = true;
+                playScene_ui.m_baseBoard.Find("i_icon4").GetComponent<UISprite>().spriteName = "ui_info_xp1";
+            }                
+            else if (type == 6)
+            {
+                //double reward
+                itemDoubleRewardOn = true;
+                playScene_ui.m_baseBoard.Find("i_icon3").GetComponent<UISprite>().spriteName = "ui_info_all1";
+            }
+            else if (type == 9)
+            {
+                //부스터
+                itemBoosterOn = true;
             }
             else
             {
                 //sheet action
-
                 m_myLocalSheets[data.sheet].cells[cellIndex].itemEffectIndex = type;
                 setCellItem(data.sheet, cellIndex, (nb_Item.normal_ItemType)type);
+                daubObjects[data.sheet, cellIndex].SetActive(true);
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.black;
-            }
-
-            if (type == 9)
-            {
-                //부스터
-                itemBoosterOn = true;
             }
         }
 
@@ -3653,5 +3627,15 @@ public class nb_PlayBlitzScene : MonoBehaviour
         }
 
         return 99;
+    }
+
+    private void drawStageBg()
+    {
+        Transform bg = playScene_ui.playUI.Find("layer0/bg");
+
+        Texture texture = Resources.Load("nb_images/stage/stage" +
+            nb_GlobalData.g_global.selectStageId.ToString(), typeof(Texture)) as Texture;
+        bg.GetComponent<UITexture>().mainTexture = texture;
+        bg.GetComponent<UITexture>().MakePixelPerfect();
     }
 }

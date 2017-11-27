@@ -14,12 +14,12 @@ public class battleplayScene_Bingo_btn : MonoBehaviour
 
     public SheetIndex sheetIndex;
 
-    GameObject playBlitzScene;
+    GameObject playScene;
 
 
     void Start()
     {
-        playBlitzScene = GameObject.Find("PlayBlitzScene") as GameObject;
+        playScene = GameObject.Find("BattlePlayScene") as GameObject;
     }
 
     void OnClick()
@@ -29,7 +29,7 @@ public class battleplayScene_Bingo_btn : MonoBehaviour
         //}
 
         nb_GlobalData.g_global.mSelectBingoButtonIndex = (int)sheetIndex;
-        playBlitzScene.GetComponent<nb_PlayBlitzScene>().onSendBingo((int)sheetIndex);
+        playScene.GetComponent<nb_battlePlayScene>().onSendBingo((int)sheetIndex);
 
         Debug.Log("select sheet count : " + ((int)sheetIndex).ToString());
 

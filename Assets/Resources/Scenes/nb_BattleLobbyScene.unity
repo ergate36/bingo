@@ -8022,7 +8022,7 @@ GameObject:
   - component: {fileID: 609887875}
   - component: {fileID: 609887876}
   m_Layer: 8
-  m_Name: t_stage_name
+  m_Name: i_stage_name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

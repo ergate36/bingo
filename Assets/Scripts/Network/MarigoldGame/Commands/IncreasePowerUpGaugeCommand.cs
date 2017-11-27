@@ -1,4 +1,5 @@
-﻿using MarigoldModel.Commands;
+﻿using MarigoldGame.Game;
+using MarigoldModel.Commands;
 using MarigoldModel.Model;
 
 namespace MarigoldGame.Commands
@@ -13,5 +14,6 @@ namespace MarigoldGame.Commands
         }
 
         public int PowerUpGauge { get; set; }
+        public PowerUpGaugeState CurrentGaugeState { get; set; }
     }
 }

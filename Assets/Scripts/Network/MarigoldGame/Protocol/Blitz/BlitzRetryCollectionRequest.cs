@@ -1,4 +1,4 @@
-﻿namespace MarigoldGame.Protocol.Blitz
+﻿namespace MarigoldGame.Protocol
 {
     public class BlitzRetryCollectionRequest : BaseProtocol
     {

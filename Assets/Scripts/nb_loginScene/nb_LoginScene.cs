@@ -32,10 +32,6 @@ public class nb_LoginScene : MonoBehaviour
     void Awake()
     {
         popup = GameObject.Find("loginSceneUI/Camera/Anchor");
-        popupdate = popup.transform.Find("popup_Update");
-        popupdate.gameObject.SetActive(false);
-
-
 
         //StartCoroutine("clickSet"); 
 

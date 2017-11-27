@@ -20,6 +20,6 @@ public class battleplayScene_Return_Lobby_btn : MonoBehaviour
         Resources.UnloadUnusedAssets();
         System.GC.Collect();
 
-        Application.LoadLevel("nb_LobbyScene");
+        Application.LoadLevel("nb_battleLobbyScene");
     }
 }

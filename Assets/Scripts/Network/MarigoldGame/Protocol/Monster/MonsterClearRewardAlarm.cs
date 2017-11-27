@@ -1,6 +1,6 @@
 ﻿using MarigoldGame.Commands;
 
-namespace MarigoldGame.Protocol.Monster
+namespace MarigoldGame.Protocol
 {
     class MonsterClearRewardAlarm : BaseProtocol
     {

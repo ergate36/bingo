@@ -1,6 +1,6 @@
 ﻿//using MarigoldGame.Game.Monster;
 
-namespace MarigoldGame.Protocol.Monster
+namespace MarigoldGame.Protocol
 {
     public class MonsterRobotStateAlarm : BaseProtocol
     {

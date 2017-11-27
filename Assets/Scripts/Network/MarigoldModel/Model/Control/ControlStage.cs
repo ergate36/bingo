@@ -9,7 +9,7 @@ namespace MarigoldModel.Model
     [Table("ControlStage")]
     public partial class ControlStage : BaseModel
     {
-        public int StageId { get; set; } // 현재 게임의 스테이지
+        public long StageId { get; set; } // 현재 게임의 스테이지
 
         // 중복으로 쓸려고할 경우가 생길 수 있으므로 변수를 없앨 수 있으면 없애자.
         // Redis로 옮긴다고 생각할 경우 INC 명령이 있기때문에 동기화 걱정없이 관리할 수 있다.

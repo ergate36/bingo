@@ -1,4 +1,4 @@
-﻿namespace MarigoldGame.Protocol.Monster
+﻿namespace MarigoldGame.Protocol
 {
     public class MonsterRetryCollectionRequest : BaseProtocol
     {

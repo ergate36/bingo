@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-//using System.Threading.Tasks;
-using MarigoldModel.Commands;
+﻿using MarigoldModel.Commands;
 
-namespace MarigoldGame.Protocol.Monster
+namespace MarigoldGame.Protocol
 {
     public class MonsterRetryCollectionResponse : BaseResponse
     {

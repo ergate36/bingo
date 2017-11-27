@@ -11,8 +11,6 @@ namespace MarigoldModel.Model
 
         public Int64 CollectionId { get; set; } // 재시도할 Collection의 아이디
 
-        public int DisplayOrder { get; set; } // 여러개일 경우 보여줄 순서
-
         public bool Used { get; set; } // 사용했는지 기록
         public DateTime UsedAt { get; set; } // 사용한 시간을 기록한다.
     }

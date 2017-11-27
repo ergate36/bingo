@@ -1,5 +1,4 @@
-﻿//using MarigoldGame.Game.Blitz;
-using MarigoldModel.Model;
+﻿using MarigoldModel.Model;
 
 namespace MarigoldGame.Protocol
 {

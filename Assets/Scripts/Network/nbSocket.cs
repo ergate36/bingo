@@ -311,8 +311,8 @@ public class nbSocket : MonoBehaviour
                                 bodyText);
                             //nb_GlobalData.g_global.blitzWaitRoomStatusAlarm = body;
 
-                            //nb_GlobalData.g_global.mWaitingRoomJoinGameRemainSec = body.remainSecond;
-                            //nb_GlobalData.g_global.mWaitingRoomEndGameRemainBingo = body.remainBingo;
+                            //nb_GlobalData.g_global.mWaitingRoomJoinGameRemainSec = body.RemainSecond;
+                            //nb_GlobalData.g_global.mWaitingRoomEndGameRemainBingo = body.RemainBingo;
 
                             //Debug.Log("(1002) BlitzWaitRoomStatusAlarm waitTime : " +
                             //    nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond.ToString() +
@@ -328,7 +328,7 @@ public class nbSocket : MonoBehaviour
 
                             int joinResult = body.Result;
 
-                            Debug.Log(bodyText.ToString());
+                            //Debug.Log(bodyText.ToString());
                             Debug.Log("(1004) BlitzEnterGameResponse joinResult : " +
                                 joinResult.ToString());
 
@@ -667,7 +667,13 @@ public class nbSocket : MonoBehaviour
                                         IncreasePowerUpGaugeCommand powerGauge =
                                             sub as IncreasePowerUpGaugeCommand;
 
-                                        Debug.Log("powerGauge : " + powerGauge.PowerUpGauge.ToString());
+                                        Debug.Log("powerGauge : " + powerGauge.PowerUpGauge.ToString() +
+                                            ", gaugeState : " + ((int)powerGauge.CurrentGaugeState).ToString());
+
+                                        nb_GlobalData.g_global.blitzGaugeValue = 
+                                            powerGauge.PowerUpGauge;
+                                        nb_GlobalData.g_global.blitzGaugeState =
+                                            (int)powerGauge.CurrentGaugeState;
 
                                         if (powerGauge.SubCommandList != null)
                                         {
@@ -691,7 +697,9 @@ public class nbSocket : MonoBehaviour
                                     {
                                         BombCommand bomb = sub as BombCommand;
 
-                                        //todo:퍽탄
+                                        // 퍽탄
+                                        Debug.Log("check bomb cell");
+                                        checkSubCommand(bomb.SubCommandList);
                                     }
 
                                 }
@@ -1286,7 +1294,36 @@ public class nbSocket : MonoBehaviour
         }
     }
 
+    public void checkSubCommand(List<Command> subCommand)
+    {
+        foreach (var sub in subCommand)
+        {
+            if (sub.Type == CommandType.CHECK_SQUARE)
+            {
+                CheckSquareCommand check = sub as CheckSquareCommand;
+                
+                nb_useItemData newData;
+                newData.infoId = 5; //single daub
+                newData.sheet = nb_GlobalData.g_global.CheckNumCardIndex;
+                newData.number = check.Square.Number;
 
+                nb_GlobalData.g_global.useItemDataList.Add(newData);
+
+                if (check.SubCommandList != null)
+                    checkSubCommand(check.SubCommandList);
+            }
+            else if(sub.Type == CommandType.BOMB)
+            {
+                //폭탄이 또 터짐
+                BombCommand bomb = sub as BombCommand;
+
+                if (bomb.SubCommandList != null)
+                    checkSubCommand(bomb.SubCommandList);
+            }
+
+        }
+
+    }
 
 
 

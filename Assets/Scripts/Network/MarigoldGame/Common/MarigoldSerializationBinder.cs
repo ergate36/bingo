@@ -1,11 +1,6 @@
 ﻿using Newtonsoft.Json.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using UnityEngine;
-
 
 namespace MarigoldGame.Common
 {
@@ -14,45 +9,15 @@ namespace MarigoldGame.Common
     // 클라이언트와 서버가 같은 파일을 사용할 필요가 있음.
     class MarigoldSerializationBinder : SerializationBinder
     {
-        //public void BindToName(Type serializedType, out string assemblyName, out string typeName)
-        //{
-        //    assemblyName = null;
-        //    typeName = serializedType.FullName;
-        //}
-
-        //public Type BindToType(string assemblyName, string typeName)
-        //{
-        //    return Type.GetType(typeName);
-        //}
+        public void BindToName(Type serializedType, out string assemblyName, out string typeName)
+        {
+            assemblyName = null;
+            typeName = serializedType.FullName;
+        }
 
         public override Type BindToType(string assemblyName, string typeName)
         {
-            //Debug.Log("assemblyName : " + assemblyName + ", typeName : " + typeName);
-
-            if (typeName == "System.Collections.Generic.List`1[[MarigoldGame.Common.Card, MarigoldGame]]")
-            {
-                return typeof(System.Collections.Generic.List<MarigoldGame.Common.Card>);
-            }
-
-            if (typeName == "System.Collections.Generic.List`1[[MarigoldGame.Common.Square, MarigoldGame]]")
-            {
-                return typeof(System.Collections.Generic.List<MarigoldGame.Common.Square>);
-            }
-
-            if (typeName == "System.Collections.Generic.List`1[[System.String, mscorlib]]")
-            {
-                return typeof(System.Collections.Generic.List<System.String>);
-            }
-
-            if (typeName == "MarigoldGame.Common.Square")
-            {
-                return typeof(MarigoldGame.Common.Square);
-            }
-
-            //Debug.Log("return : " + Type.GetType(typeName).ToString());
-
             return Type.GetType(typeName);
         }
-
     }
 }

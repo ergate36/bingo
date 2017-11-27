@@ -63,6 +63,9 @@
         BlitzClearRewardAlarm           = 1020,     // 게임 끝날을때 보상정보를 알려준다.
         BlitzRetryCollectionRequest     = 1021,     // 못한 컬렉션 카드를 다시 시도할 수 있게 저장한다.
         BlitzRetryCollectionResponse    = 1022,     // 못한 컬렉션 카드 저장 응답
+        BlitzChattingRequest            = 1023,     // 채팅 메시지 보내기
+        BlitzChattingResponse           = 1024,     // 채팅 메시지 응답(요청에 대한 응답. 채팅 메시지는 들어있지 않음)
+        BlitzChattingAlarm              = 1025,     // 채팅 메시지 알림
         // GameLift
         GameLiftConnectRequest          = 1101,     // 게임 리프트 인증 요청
         GameLiftConnectResponse         = 1102,     // 게임 리프트 인증 응답
@@ -88,6 +91,10 @@
         MonsterClearRewardAlarm = 1220,     // 게임 끝날을때 보상정보를 알려준다.
         MonsterRetryCollectionRequest = 1221,     // 못한 컬렉션 카드를 다시 시도할 수 있게 저장한다.
         MonsterRetryCollectionResponse = 1222,     // 못한 컬렉션 카드 저장 응답
+        MonsterOpponentStateAlarm = 1223, // 상대방 정보 알림
+        // DEBUG
+        KillServerRequest = 9777,
+        KillServerResponse = 9778,
     };
 }
 

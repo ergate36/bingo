@@ -64,6 +64,13 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public BlitzUsePowerUpResponse blitzUsePowerUpResponse;
 
+    // blitz etc
+    [HideInInspector]
+    public int blitzGaugeValue;
+    [HideInInspector]
+    public int blitzGaugeState;
+
+
     //protocol battle mode
     [HideInInspector]
     public MonsterStartGameAlarm monsterStartGameAlarm;

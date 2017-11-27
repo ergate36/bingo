@@ -30,5 +30,7 @@ namespace MarigoldModel.Model
         REFRESH_POWER_UP,
         SELECT_RANDOM_POWER_UP,
         SHIELD,
+        SAVE_RETRY_COLLECTION,
+        UPDATE_GAME_PLAYER,
     }
 }

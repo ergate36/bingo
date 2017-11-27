@@ -236,6 +236,8 @@ public class nb_battlePlayScene : MonoBehaviour
         //
 
         ballCount = 1;
+
+        drawStageBg();
     }
 
     void Update()
@@ -3571,7 +3573,7 @@ public class nb_battlePlayScene : MonoBehaviour
         Resources.UnloadUnusedAssets();
         System.GC.Collect();
 
-        Application.LoadLevel("nb_LobbyScene");
+        Application.LoadLevel("nb_battleLobbyScene");
     }
 
     void OnGUI()
@@ -3653,5 +3655,15 @@ public class nb_battlePlayScene : MonoBehaviour
         }
 
         return 99;
+    }
+
+    private void drawStageBg()
+    {
+        Transform bg = playScene_ui.playUI.Find("layer0/bg");
+
+        Texture texture = Resources.Load("nb_images/stage/stage" +
+            nb_GlobalData.g_global.selectStageId.ToString() + "_sub", typeof(Texture)) as Texture;
+        bg.GetComponent<UITexture>().mainTexture = texture;
+        bg.GetComponent<UITexture>().MakePixelPerfect();
     }
 }
