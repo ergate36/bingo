@@ -96,6 +96,29 @@ public class nb_LobbyBlitzScene : MonoBehaviour
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
             StartCoroutine(waitStart());
         }
+        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzWaitRoomStatusAlarm_End)
+        {
+            if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond > 0)
+            {
+                m_nbLobbySceneUI.waitTextImageSecond.gameObject.SetActive(true);
+                m_nbLobbySceneUI.waitTextImageBingo.gameObject.SetActive(false);
+                m_nbLobbySceneUI.countDown.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond.ToString();
+                m_nbLobbySceneUI.countDown2.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
+
+                //iTween.ScaleTo(m_nbLobbySceneUI.countDown.gameObject, iTween.Hash("x,", 1.2f, "y", 1.3f, "oncompletetarget", gameObject, "oncomplete", "completeScaling", "time", 0.3f));
+            }
+            else if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo > 0)
+            {
+                m_nbLobbySceneUI.waitTextImageSecond.gameObject.SetActive(false);
+                m_nbLobbySceneUI.waitTextImageBingo.gameObject.SetActive(true);
+                m_nbLobbySceneUI.countDown.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
+                m_nbLobbySceneUI.countDown2.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
+
+                //iTween.ScaleTo(m_nbLobbySceneUI.countDown2.gameObject, iTween.Hash("x,", 1.2f, "y", 1.3f, "oncompletetarget", gameObject, "oncomplete", "completeScaling", "time", 0.1f));
+            }
+
+            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+        }
     }
 
     private IEnumerator waitStart()
@@ -344,8 +367,8 @@ public class nb_LobbyBlitzScene : MonoBehaviour
 
     private void playStart()
     {
-        StopCoroutine("activeStartCountDown");
-        StartCoroutine("activeStartCountDown");
+        //StopCoroutine("activeStartCountDown");
+        //StartCoroutine("activeStartCountDown");
 
         m_nbLobbySceneUI.m_waitPopup.gameObject.SetActive(true);  //wait ui 활성화
         m_nbLobbySceneUI.cardSelectGroup.gameObject.SetActive(false);
@@ -360,9 +383,15 @@ public class nb_LobbyBlitzScene : MonoBehaviour
     public void drawPowerUpMoney()
     {
         Transform moneyGroup = m_nbLobbySceneUI.uiRoot.transform.Find("layer1/money_group");
-        UILabel textLabel = moneyGroup.Find("ticket_n_group/t_value").GetComponent<UILabel>();
-        
-        textLabel.text = nb_GlobalData.g_global.getTotalNormalPowerUpCount().ToString();
+        if (moneyGroup == null)
+        {
+            Debug.Log("moneyGroup null");
+        }
+        UILabel textLabel3 = moneyGroup.transform.Find("ticket_n_group/t_value").GetComponent<UILabel>();
+        UILabel textLabel4 = moneyGroup.transform.Find("ticket_b_group/t_value").GetComponent<UILabel>();
+
+        textLabel3.text = nb_GlobalData.g_global.getTotalNormalPowerUpCount().ToString();
+        textLabel4.text = nb_GlobalData.g_global.getTotalBattlePowerUpCount().ToString();
     }
 
     private void drawStageInfo()

@@ -60,9 +60,6 @@ public class nb_GlobalData : MonoBehaviour
     
     [HideInInspector]
     public BlitzRefreshPowerUpResponse blitzRefreshPowerUpResponse;
-    
-    [HideInInspector]
-    public BlitzUsePowerUpResponse blitzUsePowerUpResponse;
 
     // blitz etc
     [HideInInspector]
@@ -83,6 +80,15 @@ public class nb_GlobalData : MonoBehaviour
 
     [HideInInspector]
     public MonsterCompleteBingoAlarm monsterCompleteBingoAlarm;
+
+
+    // battle etc
+    [HideInInspector]
+    public int battleGaugeValue;
+    [HideInInspector]
+    public int battleGaugeState;
+
+
 
     // sounds
     [HideInInspector]
@@ -108,6 +114,15 @@ public class nb_GlobalData : MonoBehaviour
 
     [HideInInspector]
     public nb_SheetInfo sheetInfo;
+
+    [HideInInspector]
+    public nb_SheetInfo battleSheet1;
+
+    [HideInInspector]
+    public nb_SheetInfo battleSheet2;
+
+    [HideInInspector]
+    public nb_SheetInfo battleSheet3;
 
 
     [HideInInspector]
@@ -269,6 +284,15 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public List<nb_useItemData> useItemDataList;
 
+    [HideInInspector]
+    public bool useDoubleExp = false;
+
+    [HideInInspector]
+    public bool useDoubleReward = false;
+
+    [HideInInspector]
+    public bool useItemBoost = false;
+
 
     void Awake()
     {
@@ -289,7 +313,6 @@ public class nb_GlobalData : MonoBehaviour
         blitzCompleteBingoResponse = new BlitzCompleteBingoResponse();
         blitzCheckNumberResponse = new BlitzCheckNumberResponse();
         blitzRefreshPowerUpResponse = new BlitzRefreshPowerUpResponse();
-        blitzUsePowerUpResponse = new BlitzUsePowerUpResponse();
         monsterStartGameAlarm = new MonsterStartGameAlarm();
         monsterCallNumberAlarm = new MonsterCallNumberAlarm();
         monsterCompleteBingoResponse = new MonsterCompleteBingoResponse();
@@ -312,12 +335,24 @@ public class nb_GlobalData : MonoBehaviour
         myInfo.userKey = "0";
 
         sheetInfo = new nb_SheetInfo();
+        battleSheet1 = new nb_SheetInfo();
+        battleSheet2 = new nb_SheetInfo();
+        battleSheet3 = new nb_SheetInfo();
         sheetInfo.bingoSheet = new bool[4];
+        battleSheet1.bingoSheet = new bool[4];
+        battleSheet2.bingoSheet = new bool[4];
+        battleSheet3.bingoSheet = new bool[4];
         for (int i = 0; i < 4; ++i)
         {
             sheetInfo.bingoSheet[i] = false;
+            battleSheet1.bingoSheet[i] = false;
+            battleSheet2.bingoSheet[i] = false;
+            battleSheet3.bingoSheet[i] = false;
         }
         sheetInfo.sheet = new int[4, 25];
+        battleSheet1.sheet = new int[4, 25];
+        battleSheet2.sheet = new int[4, 25];
+        battleSheet3.sheet = new int[4, 25];
 
 
         bingoball = new int[75];
@@ -373,6 +408,9 @@ public class nb_GlobalData : MonoBehaviour
         for (int i = 0; i < 4; ++i)
         {
             sheetInfo.bingoSheet[i] = false;
+            battleSheet1.bingoSheet[i] = false;
+            battleSheet2.bingoSheet[i] = false;
+            battleSheet3.bingoSheet[i] = false;
         }
     }
 
@@ -402,6 +440,26 @@ public class nb_GlobalData : MonoBehaviour
         int result = 0;
         for (int i = 0; i < size; ++i)
         {
+            if (getNormalItemIndex((int)userPowerUpList[i].PowerUpId) == 0)
+            {
+                continue;
+            }
+            result += (int)(userPowerUpList[i].Count);
+        }
+
+        return result;
+    }
+    
+    public int getTotalBattlePowerUpCount()
+    {
+        int size = userPowerUpList.Count;
+        int result = 0;
+        for (int i = 0; i < size; ++i)
+        {
+            if (getBattleItemIndex((int)userPowerUpList[i].PowerUpId) == 0)
+            {
+                continue;
+            }
             result += (int)(userPowerUpList[i].Count);
         }
 
@@ -452,6 +510,57 @@ public class nb_GlobalData : MonoBehaviour
                 result = 9;
                 break;
             case 17:
+                result = 10;
+                break;
+        }
+
+        return result;
+    }
+
+    public int getBattleItemIndex(int infoId)
+    {
+        //1.single dust
+        //2.fog
+        //3.blind
+        //4.double dust
+        //5.shield
+        //6.mix
+        //7.jamming
+        //8.freezing
+        //9.avoid
+        //10.triple dust
+        int result = 0;
+
+        switch (infoId)
+        {
+            case 18:
+                result = 1;
+                break;
+            case 19:
+                result = 2;
+                break;
+            case 21:
+                result = 3;
+                break;
+            case 22:
+                result = 4;
+                break;
+            case 23:
+                result = 5;
+                break;
+            case 24:
+                result = 6;
+                break;
+            case 25:
+                result = 7;
+                break;
+            case 27:
+                result = 8;
+                break;
+            case 28:
+                result = 9;
+                break;
+            case 29:
                 result = 10;
                 break;
         }

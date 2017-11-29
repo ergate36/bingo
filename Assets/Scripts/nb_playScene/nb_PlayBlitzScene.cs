@@ -29,8 +29,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
         kBingoType_MAX,
     }
 
-    private float ballTime = 7.0f;
-    private int ballCount = 0;
+    //private float ballTime = 7.0f;
+    private int ballCount = 1;
 
     //public GameObject resultPopupRoot;
 
@@ -133,8 +133,6 @@ public class nb_PlayBlitzScene : MonoBehaviour
     bool itemCoolDown = false;
     int chestItemCount = 0;
     bool itemBoosterOn = false;
-    bool itemDoubleRewardOn = false;
-    bool itemDoubleExpOn = false;
 
 
     void Awake()
@@ -596,7 +594,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 checkTime = 10;
             }
             float coolTime = Time.time - lastUseItemTime;
-            if (coolTime > checkTime)
+            if (coolTime >= checkTime)
             {
                 //쿨타임 끝
                 itemCoolDown = false;
@@ -1588,6 +1586,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
             daubObjects[sheetIndex, index].SetActive(true);
             daubObjects[sheetIndex, index].GetComponentInChildren<UILabel>().text = cellNumber.ToString();
             daubObjects[sheetIndex, index].GetComponent<UISprite>().spriteName = "ui_daub1";
+            daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().color = Color.white;
             //if (m_calledBallNumber[m_myLocalSheets[sheetIndex].cells[index].number] == true)
             if (checkDaubNumber(cellNumber) == true)
                 //
@@ -1713,7 +1712,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 int itemType = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
                 if (itemType != 0)
                 {
-                    setCellItem(sheetIndex, index, (nb_Item.normal_ItemType)itemType);
+                    setCellItem(sheetIndex, index, (nb_Item.nb_ItemType)itemType);
                     //playScene_ui.m_cells[sheetIndex, index].GetComponent<UILabel>().text = "";
                 }
 
@@ -3549,7 +3548,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     }
 
-    public void setCellItem(int sheetIndex, int cellIndex, nb_Item.normal_ItemType type)
+    public void setCellItem(int sheetIndex, int cellIndex, nb_Item.nb_ItemType type)
     {
         if (nb_Item.nb_daubItemImagePath[(int)type] == "item_unknown")
         {
@@ -3585,18 +3584,6 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.white;
             }
-            else if (type == 5)
-            {
-                //double exp
-                itemDoubleExpOn = true;
-                playScene_ui.m_baseBoard.Find("i_icon4").GetComponent<UISprite>().spriteName = "ui_info_xp1";
-            }                
-            else if (type == 6)
-            {
-                //double reward
-                itemDoubleRewardOn = true;
-                playScene_ui.m_baseBoard.Find("i_icon3").GetComponent<UISprite>().spriteName = "ui_info_all1";
-            }
             else if (type == 9)
             {
                 //부스터
@@ -3606,11 +3593,29 @@ public class nb_PlayBlitzScene : MonoBehaviour
             {
                 //sheet action
                 m_myLocalSheets[data.sheet].cells[cellIndex].itemEffectIndex = type;
-                setCellItem(data.sheet, cellIndex, (nb_Item.normal_ItemType)type);
+                setCellItem(data.sheet, cellIndex, (nb_Item.nb_ItemType)type);
                 daubObjects[data.sheet, cellIndex].SetActive(true);
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.black;
             }
+        }
+
+
+        if (nb_GlobalData.g_global.useDoubleExp == true)
+        {
+            //double exp
+            playScene_ui.m_baseBoard.Find("i_icon4").GetComponent<UISprite>().spriteName = "ui_info_xp1";
+        }
+        else if (nb_GlobalData.g_global.useDoubleReward == true)
+        {
+            //double reward
+            playScene_ui.m_baseBoard.Find("i_icon3").GetComponent<UISprite>().spriteName = "ui_info_all1";
+        }
+        else if (nb_GlobalData.g_global.useItemBoost == true)
+        {
+            //boost
+            itemBoosterOn = true;
+            Debug.Log("Boost Item Active !!@#!@#!@#");
         }
 
         nb_GlobalData.g_global.useItemDataList.Clear();

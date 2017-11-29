@@ -95,6 +95,9 @@ public class nb_BattleLobbyScene : MonoBehaviour
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
             StartCoroutine(waitStart());
         }
+        //else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzWaitRoomStatusAlarm_End)
+        //{
+        //}
     }
 
     private IEnumerator waitStart()
@@ -256,9 +259,15 @@ public class nb_BattleLobbyScene : MonoBehaviour
     public void drawPowerUpMoney()
     {
         Transform moneyGroup = m_nbLobbySceneUI.uiRoot.transform.Find("layer1/money_group");
-        UILabel textLabel = moneyGroup.Find("ticket_n_group/t_value").GetComponent<UILabel>();
-        
-        textLabel.text = nb_GlobalData.g_global.getTotalNormalPowerUpCount().ToString();
+        if (moneyGroup == null)
+        {
+            Debug.Log("moneyGroup null");
+        }
+        UILabel textLabel3 = moneyGroup.transform.Find("ticket_n_group/t_value").GetComponent<UILabel>();
+        UILabel textLabel4 = moneyGroup.transform.Find("ticket_b_group/t_value").GetComponent<UILabel>();
+
+        textLabel3.text = nb_GlobalData.g_global.getTotalNormalPowerUpCount().ToString();
+        textLabel4.text = nb_GlobalData.g_global.getTotalBattlePowerUpCount().ToString();
     }
 
     private void drawStageInfo()

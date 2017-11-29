@@ -14,8 +14,8 @@ namespace MarigoldGame.Common
         public List<Square> SquareList { get; set; }
         // 이 카드로 빙고를 했을때 얻을 수 있는 콜렉션의 아이디
         public Int64 CollectionId { get; set; }
-        public int FogTime { get; internal set; }
+        public int FogTime { get; set; }
         public int Index { get; set; } // 이 카드의 순서. 서버와 클라이언트간에 비교를 위한 ID로 사용한다. 0번 부터 시작한다.
-        public int FreezeTime { get; internal set; }
+        public int FreezeTime { get; set; }
     }
 }

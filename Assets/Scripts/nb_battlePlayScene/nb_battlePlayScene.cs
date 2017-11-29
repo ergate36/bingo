@@ -29,8 +29,8 @@ public class nb_battlePlayScene : MonoBehaviour
         kBingoType_MAX,
     }
 
-    private float ballTime = 7.0f;
-    private int ballCount = 0;
+    //private float ballTime = 7.0f;
+    private int ballCount = 1;
 
     public GameObject resultPopupRoot;
 
@@ -555,53 +555,24 @@ public class nb_battlePlayScene : MonoBehaviour
             //빙고 번호 선택
             if (nb_GlobalData.g_global.selectItemId != 0)
             {
-                int index = nb_GlobalData.g_global.getNormalItemIndex(
+                int index = nb_GlobalData.g_global.getBattleItemIndex(
                     nb_GlobalData.g_global.selectItemId);
-                playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().spriteName
-                    = nb_Item.nb_itemIconPath[index];
-                switch (index)
+                if (index != 0)
                 {
-                    case 1:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 83);
-                        break;
-                    case 2:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 82);
-                        break;
-                    case 3:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(88, 82);
-                        break;
-                    case 4:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 83);
-                        break;
-                    case 5:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(89, 85);
-                        break;
-                    case 6:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(88, 82);
-                        break;
-                    case 7:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(140, 73);
-                        break;
-                    case 8:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(93, 90);
-                        break;
-                    case 9:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(86, 84);
-                        break;
-                    case 10:
-                        playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(83, 83);
-                        break;
+                    playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().spriteName
+                        = nb_Item.nb_itemIconPath[index + 10];
+                    playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().MakePixelPerfect();
+
+                    playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
+
+                    lastUseItemTime = Time.time;
                 }
-
-                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
-
-                lastUseItemTime = Time.time;
             }
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
 
-        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzUsePowerUpResponse_End)
+        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.MonsterUsePowerUpResponse_End)
         {
             //아이템 사용 응답
             runUseItemAction();
@@ -978,8 +949,8 @@ public class nb_battlePlayScene : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.BlitzCompleteBingoRequest);
-        nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzCompleteBingoRequest_End;
+        nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.MonsterCompleteBingoRequest);
+        nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterCompleteBingoRequest_End;
 
     }
 
@@ -1265,7 +1236,7 @@ public class nb_battlePlayScene : MonoBehaviour
         }
 
         //사용
-        nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.BlitzUsePowerUpRequest);
+        nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.MonsterUsePowerUpRequest);
 
 
         playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().spriteName
@@ -1728,7 +1699,7 @@ public class nb_battlePlayScene : MonoBehaviour
                 nb_GlobalData.g_global.CheckNumCardIndex = sheetIndex;
                 nb_GlobalData.g_global.CheckNumNumber = cellNumber;
 
-                nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.BlitzCheckNumberRequest);
+                nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.MonsterCheckNumberRequest);
 
                 //nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.mGameMessageIng;   // onsendDaub
                 //nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.mGameMessageRequest);
@@ -1756,7 +1727,7 @@ public class nb_battlePlayScene : MonoBehaviour
                 int itemType = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
                 if (itemType != 0)
                 {
-                    setCellItem(sheetIndex, index, (nb_Item.normal_ItemType)itemType);
+                    setCellItem(sheetIndex, index, (nb_Item.nb_ItemType)itemType);
                     //playScene_ui.m_cells[sheetIndex, index].GetComponent<UILabel>().text = "";
                 }
 
@@ -3589,7 +3560,7 @@ public class nb_battlePlayScene : MonoBehaviour
 
     }
 
-    public void setCellItem(int sheetIndex, int cellIndex, nb_Item.normal_ItemType type)
+    public void setCellItem(int sheetIndex, int cellIndex, nb_Item.nb_ItemType type)
     {
         if (nb_Item.nb_daubItemImagePath[(int)type] == "item_unknown")
         {
@@ -3612,33 +3583,33 @@ public class nb_battlePlayScene : MonoBehaviour
     {
         foreach(var data in nb_GlobalData.g_global.useItemDataList)
         {
-            int type = nb_GlobalData.g_global.getNormalItemIndex(data.infoId);
+            int type = nb_GlobalData.g_global.getBattleItemIndex(data.infoId);
             int cellIndex = findCellIndex(data.sheet, data.number);
 
-            if (type == 1 || type == 4 || type == 10)
-            {
-                //daub action
-                m_myLocalSheets[data.sheet].cells[cellIndex].realDaub = true;
-                m_myLocalSheets[data.sheet].cells[cellIndex].daub = true;
-                daubObjects[data.sheet, cellIndex].SetActive(true);
-                daubObjects[data.sheet, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
-            }
-            else
-            {
-                //sheet action
+            //if (type == 1 || type == 4 || type == 10)
+            //{
+            //    //daub action
+            //    m_myLocalSheets[data.sheet].cells[cellIndex].realDaub = true;
+            //    m_myLocalSheets[data.sheet].cells[cellIndex].daub = true;
+            //    daubObjects[data.sheet, cellIndex].SetActive(true);
+            //    daubObjects[data.sheet, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
+            //    daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
+            //}
+            //else
+            //{
+            //    //sheet action
 
-                m_myLocalSheets[data.sheet].cells[cellIndex].itemEffectIndex = type;
-                setCellItem(data.sheet, cellIndex, (nb_Item.normal_ItemType)type);
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.black;
-            }
+            //    m_myLocalSheets[data.sheet].cells[cellIndex].itemEffectIndex = type;
+            //    setCellItem(data.sheet, cellIndex, (nb_Item.normal_ItemType)type);
+            //    daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
+            //    daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.black;
+            //}
 
-            if (type == 9)
-            {
-                //부스터
-                itemBoosterOn = true;
-            }
+            //if (type == 9)
+            //{
+            //    //부스터
+            //    itemBoosterOn = true;
+            //}
         }
 
         nb_GlobalData.g_global.useItemDataList.Clear();

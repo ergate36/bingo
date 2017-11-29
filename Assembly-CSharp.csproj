@@ -876,9 +876,6 @@
  <Reference Include="Newtonsoft.Json">
  <HintPath>D:/bingo/bingo/BingoMonster_Client/Assets/UnityPackages/JsonNet/Newtonsoft.Json.dll</HintPath>
  </Reference>
- <Reference Include="Facebook.Unity.Gameroom">
- <HintPath>D:/bingo/bingo/BingoMonster_Client/Library/FacebookSDK/Facebook.Unity.Gameroom.dll</HintPath>
- </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

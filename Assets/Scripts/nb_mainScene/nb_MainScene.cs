@@ -446,9 +446,11 @@ public class nb_MainScene : MonoBehaviour
         {
             Debug.Log("moneyGroup null");
         }
-        UILabel textLabel = moneyGroup.transform.Find("ticket_n_group/t_value").GetComponent<UILabel>();
+        UILabel textLabel3 = moneyGroup.transform.Find("ticket_n_group/t_value").GetComponent<UILabel>();
+        UILabel textLabel4 = moneyGroup.transform.Find("ticket_b_group/t_value").GetComponent<UILabel>();
 
-        textLabel.text = nb_GlobalData.g_global.getTotalNormalPowerUpCount().ToString();
+        textLabel3.text = nb_GlobalData.g_global.getTotalNormalPowerUpCount().ToString();
+        textLabel4.text = nb_GlobalData.g_global.getTotalBattlePowerUpCount().ToString();
     }
 
     public void moveStageNext()

@@ -19,7 +19,7 @@ public class battleplayScene_ItemUse_btn : MonoBehaviour
         //    return;
         //}
 
-        playScene.GetComponent<nb_PlayBlitzScene>().onUseItem();
+        playScene.GetComponent<nb_battlePlayScene>().onUseItem();
     }
 
 

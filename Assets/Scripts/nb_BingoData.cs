@@ -75,6 +75,10 @@ public class nb_SocketClass
         BlitzClearRewardAlarm = 1020,     // 게임 끝날을때 보상정보를 알려준다.
         BlitzRetryCollectionRequest = 1021,     // 못한 컬렉션 카드를 다시 시도할 수 있게 저장한다.
         BlitzRetryCollectionResponse = 1022,     // 못한 컬렉션 카드 저장 응답
+
+        BlitzChattingRequest = 1023,     // 채팅 메시지 보내기
+        BlitzChattingResponse = 1024,     // 채팅 메시지 응답(요청에 대한 응답. 채팅 메시지는 들어있지 않음)
+        BlitzChattingAlarm = 1025,     // 채팅 메시지 알림
         
         // GameLift
         GameLiftConnectRequest = 1101,     // 게임 리프트 인증 요청
@@ -102,6 +106,7 @@ public class nb_SocketClass
         MonsterClearRewardAlarm = 1220,     // 게임 끝날을때 보상정보를 알려준다.
         MonsterRetryCollectionRequest = 1221,     // 못한 컬렉션 카드를 다시 시도할 수 있게 저장한다.
         MonsterRetryCollectionResponse = 1222,     // 못한 컬렉션 카드 저장 응답
+        MonsterOpponentStateAlarm = 1223, // 상대방 정보 알림
 
         KillServerRequest = 9777,   //서버 강제 종료
         KillServerResponse = 9778,
@@ -208,6 +213,8 @@ public class nb_SocketClass
         MonsterClearRewardAlarm_End = 1220,     // 게임 끝날을때 보상정보를 알려준다.
         MonsterRetryCollectionRequest_End = 1221,     // 못한 컬렉션 카드를 다시 시도할 수 있게 저장한다.
         MonsterRetryCollectionResponse_End = 1222,     // 못한 컬렉션 카드 저장 응답
+        
+        MonsterOpponentStateAlarm_End = 1223,
 
     };
 }
@@ -785,7 +792,7 @@ public class nb_Shop
 
 public class nb_Item
 {
-    public enum normal_ItemType
+    public enum nb_ItemType
     {
         Item_None = 0,
 	
@@ -799,6 +806,17 @@ public class nb_Item
 	    Item_8_InstantWin = 8,      //8.instant win
 	    Item_9_Booster = 9,         //9.booster
 	    Item_10_TripleDaub = 10,    //10.triple daubs
+
+        Item_11_SingleDust = 11,    //11.single dust
+        Item_12_Fog = 12,           //12.fog
+        Item_13_Blind = 13,         //13.blind
+        Item_14_DoubleDust = 14,    //14.double dust
+        Item_15_Shield = 15,        //15.shield
+        Item_16_Mix = 16,           //16.mix
+        Item_17_Jamming = 17,       //17.jamming
+        Item_18_Freezing = 18,      //18.freezing
+        Item_19_Avoid = 19,         //19.avoid
+        Item_20_TripleDust = 20,    //20.triple dust
     }
 
     static public string[] nb_itemIconPath =
@@ -814,6 +832,16 @@ public class nb_Item
         "ui_item_normal8",
         "ui_item_normal9",
         "ui_item_normal10",
+        "ui_item_battle1",
+        "ui_item_battle2",
+        "ui_item_battle3",
+        "ui_item_battle4",
+        "ui_item_battle5",
+        "ui_item_battle6",
+        "ui_item_battle7",
+        "ui_item_battle8",
+        "ui_item_battle9",
+        "ui_item_battle10",
     };
 
     static public string[] itemImageMent =

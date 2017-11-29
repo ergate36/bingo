@@ -305,14 +305,14 @@ public class nbSocket : MonoBehaviour
                     case (short)nb_SocketClass.MsgType.BlitzWaitRoomStatusAlarm:
                         using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                         {
-                            //nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzWaitRoomStatusAlarm_End;
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzWaitRoomStatusAlarm_End;
 
                             var body = JsonConvert.DeserializeObject<BlitzWaitRoomStatusAlarm>(
                                 bodyText);
-                            //nb_GlobalData.g_global.blitzWaitRoomStatusAlarm = body;
+                            nb_GlobalData.g_global.blitzWaitRoomStatusAlarm = body;
 
-                            //nb_GlobalData.g_global.mWaitingRoomJoinGameRemainSec = body.RemainSecond;
-                            //nb_GlobalData.g_global.mWaitingRoomEndGameRemainBingo = body.RemainBingo;
+                            nb_GlobalData.g_global.mWaitingRoomJoinGameRemainSec = body.RemainSecond;
+                            nb_GlobalData.g_global.mWaitingRoomEndGameRemainBingo = body.RemainBingo;
 
                             //Debug.Log("(1002) BlitzWaitRoomStatusAlarm waitTime : " +
                             //    nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond.ToString() +
@@ -328,7 +328,7 @@ public class nbSocket : MonoBehaviour
 
                             int joinResult = body.Result;
 
-                            //Debug.Log(bodyText.ToString());
+                            Debug.Log(bodyText.ToString());
                             Debug.Log("(1004) BlitzEnterGameResponse joinResult : " +
                                 joinResult.ToString());
 
@@ -388,6 +388,10 @@ public class nbSocket : MonoBehaviour
                             nb_GlobalData.g_global.sheetInfo.shield = 0;
                             nb_GlobalData.g_global.myShield = 0;
                             nb_GlobalData.g_global.resetMyBlitzRanking();
+
+                            nb_GlobalData.g_global.useDoubleExp = false;
+                            nb_GlobalData.g_global.useDoubleReward = false;
+                            nb_GlobalData.g_global.useItemBoost = false;
                             
                             for (int card = 0; card < cardCount; ++card)
                             {
@@ -545,13 +549,10 @@ public class nbSocket : MonoBehaviour
 
                             //아이템 사용 응답
                             Debug.Log("BlitzUsePowerUpResponse : " + bodyText.ToString());
-
-                            nb_GlobalData.g_global.blitzUsePowerUpResponse = body;
-
+                            
                             if (body.Command.Type == CommandType.PLANT)
                             {
-                                PlantCommand plantCommand =
-                                    nb_GlobalData.g_global.blitzUsePowerUpResponse.Command as PlantCommand;
+                                PlantCommand plantCommand = body.Command as PlantCommand;
 
                                 int infoId = nb_GlobalData.g_global.selectItemId;
 
@@ -577,8 +578,7 @@ public class nbSocket : MonoBehaviour
                             }
                             else if (body.Command.Type == CommandType.DAUB)
                             {
-                                DaubCommand daubCommand =
-                                    nb_GlobalData.g_global.blitzUsePowerUpResponse.Command as DaubCommand;
+                                DaubCommand daubCommand = body.Command as DaubCommand;
 
                                 int infoId = nb_GlobalData.g_global.selectItemId;
 
@@ -601,7 +601,24 @@ public class nbSocket : MonoBehaviour
                                 }
                                 Debug.Log("DaubCommand Result set End count : " +
                                     nb_GlobalData.g_global.useItemDataList.Count.ToString());
-                            }                            
+                            }
+                            else if (body.Command.Type == CommandType.CLEAR_REWARD)
+                            {
+                                ClearRewardCommand clearReward = body.Command as ClearRewardCommand;
+
+                                if (clearReward.ClearRewardType == ClearRewardType.DOUBLE_EXPERIENCE)
+                                {
+                                    nb_GlobalData.g_global.useDoubleExp = true;
+                                }
+                                else if (clearReward.ClearRewardType == ClearRewardType.DOUBLE_GAME_MONEY)
+                                {
+                                    nb_GlobalData.g_global.useDoubleReward = true;
+                                }
+                            }
+                            else if (body.Command.Type == CommandType.ACCELERATE_POWER_UP_GAUGE)
+                            {
+                                nb_GlobalData.g_global.useItemBoost = true;
+                            }
                             
                             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzUsePowerUpResponse_End;
                         }
@@ -885,7 +902,7 @@ public class nbSocket : MonoBehaviour
                             nb_GlobalData.g_global.BingoNumberCount += 1;
                             nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount] = bingoNum;
 
-                            Debug.Log("@@ mGameBingoNumberIng bingoNum : " +
+                            Debug.Log("@@ MonsterCallNumberAlarm bingoNum : " +
                                 bingoNum.ToString() + "(" + nb_GlobalData.g_global.BingoNumberCount.ToString() + ")");
                         }
                         break;
@@ -932,7 +949,182 @@ public class nbSocket : MonoBehaviour
                             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterEndGameAlarm_End;
                         }
                         break;
+                    case (short)nb_SocketClass.MsgType.MonsterUsePowerUpResponse:
+                        using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                        {
+                            var body = JsonConvert.DeserializeObject<MonsterUsePowerUpResponse>(
+                                bodyText,
+                                new JsonSerializerSettings()
+                                {
+                                    TypeNameHandling = TypeNameHandling.Objects,
+                                    Binder = new MarigoldSerializationBinder(),
+                                });
 
+                            //아이템 사용 응답
+                            Debug.Log("MonsterUsePowerUpResponse : " + bodyText.ToString());
+
+                            //nb_GlobalData.g_global.blitzUsePowerUpResponse = body;
+
+                            //if (body.Command.Type == CommandType.PLANT)
+                            //{
+                            //    PlantCommand plantCommand =
+                            //        nb_GlobalData.g_global.blitzUsePowerUpResponse.Command as PlantCommand;
+
+                            //    int infoId = nb_GlobalData.g_global.selectItemId;
+
+                            //    foreach (var sub in plantCommand.SubCommandList)
+                            //    {
+                            //        if (sub.Type == CommandType.PLANT)
+                            //        {
+                            //            PlantCommand subPlant = sub as PlantCommand;
+
+                            //            int sheet = subPlant.CardIndex;
+                            //            int number = subPlant.Number;
+
+                            //            nb_useItemData newData;
+                            //            newData.infoId = infoId;
+                            //            newData.sheet = sheet;
+                            //            newData.number = number;
+
+                            //            nb_GlobalData.g_global.useItemDataList.Add(newData);
+                            //        }
+                            //    }
+                            //    Debug.Log("PlantCommand Result set End count : " +
+                            //        nb_GlobalData.g_global.useItemDataList.Count.ToString());
+                            //}
+                            //else if (body.Command.Type == CommandType.DAUB)
+                            //{
+                            //    DaubCommand daubCommand =
+                            //        nb_GlobalData.g_global.blitzUsePowerUpResponse.Command as DaubCommand;
+
+                            //    int infoId = nb_GlobalData.g_global.selectItemId;
+
+                            //    foreach (var sub in daubCommand.SubCommandList)
+                            //    {
+                            //        if (sub.Type == CommandType.DAUB)
+                            //        {
+                            //            DaubCommand subDaub = sub as DaubCommand;
+
+                            //            int sheet = subDaub.CardIndex;
+                            //            int number = subDaub.Number;
+
+                            //            nb_useItemData newData;
+                            //            newData.infoId = infoId;
+                            //            newData.sheet = sheet;
+                            //            newData.number = number;
+
+                            //            nb_GlobalData.g_global.useItemDataList.Add(newData);
+                            //        }
+                            //    }
+                            //    Debug.Log("DaubCommand Result set End count : " +
+                            //        nb_GlobalData.g_global.useItemDataList.Count.ToString());
+                            //}
+
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterUsePowerUpResponse_End;
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.MonsterCheckNumberResponse:
+                        using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                        {
+                            var body = JsonConvert.DeserializeObject<MonsterCheckNumberResponse>(
+                                bodyText,
+                                new JsonSerializerSettings()
+                                {
+                                    TypeNameHandling = TypeNameHandling.Objects,
+                                    Binder = new MarigoldSerializationBinder(),
+                                });
+
+                            //빙고 숫자 체크 응답
+                            Debug.Log("MonsterCheckNumberResponse : " + bodyText.ToString());
+
+                            //nb_GlobalData.g_global.blitzCheckNumberResponse = body;
+
+                            Debug.Log("CheckSquareCommand found");
+
+                            if (body.Command.SubCommandList != null)
+                            {
+                                foreach (var sub in body.Command.SubCommandList)
+                                {
+                                    if (sub.Type == CommandType.INCREASE_POWER_UP_GAUGE)
+                                    {
+                                        IncreasePowerUpGaugeCommand powerGauge =
+                                            sub as IncreasePowerUpGaugeCommand;
+
+                                        Debug.Log("powerGauge : " + powerGauge.PowerUpGauge.ToString() +
+                                            ", gaugeState : " + ((int)powerGauge.CurrentGaugeState).ToString());
+
+                                        nb_GlobalData.g_global.battleGaugeValue =
+                                            powerGauge.PowerUpGauge;
+                                        nb_GlobalData.g_global.battleGaugeState =
+                                            (int)powerGauge.CurrentGaugeState;
+
+                                        if (powerGauge.SubCommandList != null)
+                                        {
+                                            if (powerGauge.SubCommandList[0].Type == CommandType.SELECT_RANDOM_POWER_UP)
+                                            {
+                                                SelectRandomPowerUpCommand select =
+                                                    powerGauge.SubCommandList[0] as SelectRandomPowerUpCommand;
+
+                                                if (nb_GlobalData.g_global.selectItemId == 0)
+                                                {
+                                                    //아이템 선택
+                                                    nb_GlobalData.g_global.selectItemId = (int)select.SelectPowerUpId;
+                                                }
+
+                                                Debug.Log("SelectRandomPowerUpCommand found : " +
+                                                    select.SelectPowerUpId.ToString());
+                                            }
+                                        }
+                                    }
+                                    //else if (sub.Type == CommandType.BOMB)
+                                    //{
+                                    //    BombCommand bomb = sub as BombCommand;
+
+                                    //    // 퍽탄
+                                    //    Debug.Log("check bomb cell");
+                                    //    checkSubCommand(bomb.SubCommandList);
+                                    //}
+
+                                }
+                            }
+
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterCheckNumberResponse_End;
+                            //nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.MonsterClearRewardAlarm:
+                        {
+                            // 게임 끝날을때 보상정보를 알려준다.
+                            var body = JsonConvert.DeserializeObject<MonsterClearRewardAlarm>(
+                                bodyText,
+                                new JsonSerializerSettings()
+                                {
+                                    TypeNameHandling = TypeNameHandling.Objects,
+                                    Binder = new MarigoldSerializationBinder(),
+                                });
+
+                            Debug.Log("MonsterClearRewardAlarm : " + bodyText.ToString());
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.MonsterRetryCollectionResponse:
+                        {
+                            // 못한 컬렉션 카드 저장 응답
+                        }
+                        break;
+                    case (short)nb_SocketClass.MsgType.MonsterOpponentStateAlarm:
+                        {
+                            // 상대방 정보 알림
+                            var body = JsonConvert.DeserializeObject<MonsterOpponentStateAlarm>(
+                                bodyText,
+                                new JsonSerializerSettings()
+                                {
+                                    TypeNameHandling = TypeNameHandling.Objects,
+                                    Binder = new MarigoldSerializationBinder(),
+                                });
+
+                            Debug.Log("MonsterOpponentStateAlarm : " + bodyText.ToString());
+                        }
+                        break;
 
                         
 
@@ -1213,6 +1405,76 @@ public class nbSocket : MonoBehaviour
                         var a = new MonsterEnterGameRequest
                         {
                             CardCount = nb_GlobalData.g_global.sheetInfo.activeSheetCount,
+                        };
+
+                        var s = JsonConvert.SerializeObject(a);
+                        byte[] body = new UTF8Encoding().GetBytes(s);
+
+                        writer.Write((ushort)s.Length);             //사이즈
+                        writer.Write(body);
+                        ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
+
+                        writer.Close();
+                    }
+                    break;
+                case (short)nb_SocketClass.MsgType.MonsterCompleteBingoRequest:
+                    using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                    {
+                        writer.Write(H);             //헤더
+                        writer.Write((ushort)nb_SocketClass.MsgType.MonsterCompleteBingoRequest);
+
+                        var a = new MonsterCompleteBingoRequest
+                        {
+                            CardIndex = nb_GlobalData.g_global.mSelectBingoButtonIndex,
+                        };
+
+                        var s = JsonConvert.SerializeObject(a);
+                        byte[] body = new UTF8Encoding().GetBytes(s);
+
+                        writer.Write((ushort)s.Length);             //사이즈
+                        writer.Write(body);
+                        ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
+
+                        writer.Close();
+                    }
+                    break;
+                case (short)nb_SocketClass.MsgType.MonsterUsePowerUpRequest:
+                    using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                    {
+                        writer.Write(H);             //헤더
+                        writer.Write((ushort)nb_SocketClass.MsgType.MonsterUsePowerUpRequest);
+
+                        Debug.Log("MonsterUsePowerUpRequest : " +
+                            nb_GlobalData.g_global.selectItemId.ToString());
+
+                        var a = new MonsterUsePowerUpRequest
+                        {
+                        };
+
+                        var s = JsonConvert.SerializeObject(a);
+                        byte[] body = new UTF8Encoding().GetBytes(s);
+
+                        writer.Write((ushort)s.Length);             //사이즈
+                        writer.Write(body);
+                        ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
+
+                        writer.Close();
+                    }
+                    break;
+                case (short)nb_SocketClass.MsgType.MonsterCheckNumberRequest:
+                    using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                    {
+                        writer.Write(H);             //헤더
+                        writer.Write((ushort)nb_SocketClass.MsgType.MonsterCheckNumberRequest);
+
+                        Debug.Log("MonsterCheckNumberRequest : " +
+                            nb_GlobalData.g_global.CheckNumCardIndex.ToString() + " / " +
+                            nb_GlobalData.g_global.CheckNumNumber.ToString());
+
+                        var a = new MonsterCheckNumberRequest
+                        {
+                            CardIndex = nb_GlobalData.g_global.CheckNumCardIndex,
+                            Number = nb_GlobalData.g_global.CheckNumNumber,
                         };
 
                         var s = JsonConvert.SerializeObject(a);

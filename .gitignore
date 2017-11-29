@@ -2,4 +2,5 @@
 bin/
 Temp/
 Library/metadata/
+Library/metadata/*
 Library/PlayerDataCache/
