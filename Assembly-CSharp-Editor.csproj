@@ -155,6 +155,7 @@
      <None Include="Assets\NGUI\ReadMe - 3.5.3.txt" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Eyes\eyes.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Utility\HiddenPass.shader" />
+     <None Include="Assets\Resources\spine\ui_item_effect.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Spine-Skeleton-Fill.shader" />
      <None Include="Assets\plugins\Android\res\values\version.xml" />
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
@@ -368,6 +369,9 @@
  </Reference>
  <Reference Include="Newtonsoft.Json">
  <HintPath>D:/bingo/bingo/BingoMonster_Client/Assets/UnityPackages/JsonNet/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity.Gameroom">
+ <HintPath>D:/bingo/bingo/BingoMonster_Client/Library/FacebookSDK/Facebook.Unity.Gameroom.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -957,7 +957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632b7e9e7170f3c479fedff9a8a49962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageIndex: 1
+  stageId: 1
   battleMode: 0
 --- !u!114 &114808907125321676
 MonoBehaviour:

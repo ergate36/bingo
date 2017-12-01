@@ -30,7 +30,7 @@ public class nb_battlePlayScene : MonoBehaviour
     }
 
     //private float ballTime = 7.0f;
-    private int ballCount = 1;
+    private int ballCount = 0;
 
     public GameObject resultPopupRoot;
 
@@ -235,7 +235,7 @@ public class nb_battlePlayScene : MonoBehaviour
 //        StartCoroutine("addBall", nb_GlobalData.g_global.bingoball[count]);
         //
 
-        ballCount = 1;
+        ballCount = 0;
 
         drawStageBg();
     }
@@ -533,7 +533,10 @@ public class nb_battlePlayScene : MonoBehaviour
 
         else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.MonsterCallNumberAlarm_End)
         {
-            StartCoroutine("addBall", nb_GlobalData.g_global.bingoball[ballCount]);
+            //if (ballCount < 75)
+            //{
+            //    StartCoroutine("addBall", nb_GlobalData.g_global.bingoball[ballCount]);
+            //}
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
@@ -583,6 +586,34 @@ public class nb_battlePlayScene : MonoBehaviour
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
+
+        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.MonsterOpponentStateAlarm_End)
+        {
+            //상대 시트 갱신
+            for (int playerNum = 0; playerNum < 3; ++playerNum)
+            {
+                for (int sheetIndex = 0; sheetIndex < 4; ++sheetIndex)
+                {
+                    for (int cellIndex = 0; cellIndex < 25; ++cellIndex)
+                    {
+                        bool daub = nb_GlobalData.g_global.
+                            battleSheet[playerNum].sheetDaub[sheetIndex, cellIndex];
+
+                        if (daub && playScene_ui.m_otherSheets[playerNum, sheetIndex, cellIndex].gameObject.active == false)
+                        {
+                            Debug.Log("Other Daub : P" + (playerNum + 1).ToString() + " - [" +
+                                sheetIndex.ToString() + ", " + cellIndex.ToString() + "]");
+                        }
+
+                        playScene_ui.m_otherSheets[playerNum, sheetIndex, cellIndex].
+                            gameObject.SetActive(daub);
+                    }
+                }
+            }
+
+            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+        }
+        
 
         if (itemCoolDown == true)
         {
@@ -634,6 +665,19 @@ public class nb_battlePlayScene : MonoBehaviour
                         "Charging...";
                 }
             }
+        }
+
+
+        //빙고 번호
+        if (nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount] != 0 &&
+            nb_GlobalData.g_global.BingoNumberCount < 75)
+        {
+            Debug.Log("addball : " + nb_GlobalData.g_global.BingoNumberCount + "." +
+                nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount]);
+
+            StartCoroutine("addBall", nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount]);
+
+            nb_GlobalData.g_global.BingoNumberCount += 1;
         }
     }
 

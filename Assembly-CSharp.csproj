@@ -188,6 +188,7 @@
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\BlindCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\BombCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\CalledNumberListCommand.cs" />
+     <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\CardStateCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\ChattingReceiveCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\ChattingSendCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\CheckCompleteBingoCommand.cs" />
@@ -203,6 +204,7 @@
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\MixCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\PlantCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\PlantSquareCommand.cs" />
+     <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\PlayerStateCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\RefreshPowerUpCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\SaveRetryCollectionCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\SelectRandomPowerUpCommand.cs" />
@@ -210,9 +212,13 @@
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Commands\UpdateGamePlayerCommand.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Common\Card.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Common\CompleteCard.cs" />
+     <Compile Include="Assets\Scripts\Network\MarigoldGame\Common\GamePlayer.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Common\MarigoldSerializationBinder.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Common\RobotCardState.cs" />
+     <Compile Include="Assets\Scripts\Network\MarigoldGame\Common\RobotPlayer.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Common\Square.cs" />
+     <Compile Include="Assets\Scripts\Network\MarigoldGame\Game\Monster\MonsterPlayer.cs" />
+     <Compile Include="Assets\Scripts\Network\MarigoldGame\Game\Monster\MonsterRobotPlayer.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Game\RetryCollection.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Protocol\BaseProtocol.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldGame\Protocol\BaseResponse.cs" />
@@ -338,7 +344,6 @@
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Stage\StageClearRankingReward.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Stage\StageCompleteCollectionReward.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Stage\StageFee.cs" />
-     <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Stage\StageGambleFee.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Store\Payment.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Store\PaymentFacebook.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Store\StoreProduct.cs" />
@@ -704,6 +709,7 @@
      <None Include="Assets\NGUI\ReadMe - 3.5.3.txt" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Eyes\eyes.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Utility\HiddenPass.shader" />
+     <None Include="Assets\Resources\spine\ui_item_effect.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Spine-Skeleton-Fill.shader" />
      <None Include="Assets\plugins\Android\res\values\version.xml" />
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
@@ -875,6 +881,9 @@
  </Reference>
  <Reference Include="Newtonsoft.Json">
  <HintPath>D:/bingo/bingo/BingoMonster_Client/Assets/UnityPackages/JsonNet/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity.Gameroom">
+ <HintPath>D:/bingo/bingo/BingoMonster_Client/Library/FacebookSDK/Facebook.Unity.Gameroom.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

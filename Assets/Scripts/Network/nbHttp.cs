@@ -289,7 +289,7 @@ public class nbHttp : MonoBehaviour
         startPost(c, f, post);
     }
 
-    public void ConnectStage(string session, long stageId)
+    public void ConnectStage(string session, long stageId, bool isBattle)
     {
         if (nbHttp.state != nbHttpState.Wait)
         {
@@ -297,7 +297,7 @@ public class nbHttp : MonoBehaviour
             return;
         }
 
-        if (stageId > 100)
+        if (isBattle)
         {
             //배틀모드
             state = nbHttpState.ConnectBattleStageStart;

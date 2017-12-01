@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,6 +26,7 @@ namespace MarigoldModel.Model
         public int PriceAssetCount { get; set; }
 
         // 구입시 받게되는 보상은 갯수가 여러개일 수 있어서 StoreProductReward 테이블에 별도로 분리되어있다.
+        [JsonIgnore]
         public List<StoreProductReward> StoreProductRewardList { get; set; }
     }
 }

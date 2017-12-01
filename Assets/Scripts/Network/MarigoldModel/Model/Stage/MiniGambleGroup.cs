@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -19,6 +20,7 @@ namespace MarigoldModel.Model
         public MiniGamblePrice MiniGamblePrice { get; set; }
 
         // foreign key
+        [JsonIgnore]
         public List<MiniGambleGroupSet> MiniGambleGroupSetList { get; internal set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -26,6 +27,8 @@ namespace MarigoldModel.Model
         public string CreateExcept { get; set; } // 타이머 생성시 예외상황을 기록(코드상에서 체크한다)
         public string UpdateExcept { get; set; } // 타이머 변경시 예외상황을 기록(코드상에서 체크한다)
         public int CoolTime { get; set; } // 타이머가 사용된 이후 다시 사용할 수 있는 시간(초)
-        internal IEnumerable<TimerCycleOrder> TimerCycleOrderList { get; set; }
+
+        [JsonIgnore]
+        public List<TimerCycleOrder> TimerCycleOrderList { get; set; }
     }
 }

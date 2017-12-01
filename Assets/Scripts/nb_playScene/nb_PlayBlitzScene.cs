@@ -30,7 +30,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
     }
 
     //private float ballTime = 7.0f;
-    private int ballCount = 1;
+    private int ballCount = 0;
 
     //public GameObject resultPopupRoot;
 
@@ -235,7 +235,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
 //        StartCoroutine("addBall", nb_GlobalData.g_global.bingoball[count]);
         //
 
-        ballCount = 1;
+        ballCount = 0;
 
         drawStageBg();
     }
@@ -533,7 +533,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
         else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzBingoNumberAlarm_End)
         {
-            StartCoroutine("addBall", nb_GlobalData.g_global.bingoball[ballCount]);
+            //StartCoroutine("addBall", nb_GlobalData.g_global.bingoball[ballCount]);
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
@@ -626,6 +626,19 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
                     "Empty";
             }
+        }
+
+
+        //빙고 번호
+        if (nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount] != 0 &&
+            nb_GlobalData.g_global.BingoNumberCount < 75)
+        {
+            Debug.Log("addball : " + nb_GlobalData.g_global.BingoNumberCount + "." +
+                nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount]);
+
+            StartCoroutine("addBall", nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount]);
+
+            nb_GlobalData.g_global.BingoNumberCount += 1;
         }
     }
 
@@ -3583,6 +3596,16 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 daubObjects[data.sheet, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.white;
+
+                GameObject effect = Instantiate(Resources.Load("game/ui_item_effect")) as GameObject;
+                effect.transform.SetParent(daubObjects[data.sheet, cellIndex].transform);
+                effect.transform.position = Vector3.zero;
+                effect.name = "effect";
+                Animation ani = effect.GetComponent<Animation>();
+                ani.name = "daub";
+                ani.Play();
+
+                StartCoroutine(removeEffect(daubObjects[data.sheet, cellIndex].transform, 1.0f));
             }
             else if (type == 9)
             {
@@ -3619,6 +3642,18 @@ public class nb_PlayBlitzScene : MonoBehaviour
         }
 
         nb_GlobalData.g_global.useItemDataList.Clear();
+    }
+
+    private IEnumerator removeEffect(Transform parent, float wait)
+    {
+        GameObject effect = parent.Find("effect").gameObject;
+        if (effect != null)
+        {
+            yield return new WaitForSeconds(wait);
+            GameObject.Destroy(effect);
+        }
+
+        yield return true;
     }
 
     private int findCellIndex(int sheet, int number)

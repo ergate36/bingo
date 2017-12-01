@@ -1,10 +1,12 @@
-﻿//using MarigoldGame.Game.Monster;
+﻿using MarigoldGame.Common;
+using MarigoldModel.Commands;
+using System.Collections.Generic;
 
 namespace MarigoldGame.Protocol
 {
     class MonsterOpponentStateAlarm : BaseProtocol
     {
-        //public MonsterPlayer MonsterPlayer { get; set; }
+        public Command Command { get; set; }
 
         public MonsterOpponentStateAlarm() : base(MessageType.MonsterOpponentStateAlarm)
         {

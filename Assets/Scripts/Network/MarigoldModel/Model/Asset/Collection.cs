@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace MarigoldModel.Model
 {
@@ -19,6 +20,7 @@ namespace MarigoldModel.Model
         public string SpriteName { get; set; } // 수집품의 이미지를 보여주기 위한 정보(client 정보)
 
         // foreign key 
+        [JsonIgnore]
         internal List<CollectionObtainLocation> CollectionObtainLocationList { get; set; }
 
         // foreign key

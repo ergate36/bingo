@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using MarigoldGame.Protocol;
+using MarigoldGame.Protocol.Common;
 using Newtonsoft.Json;
 using MarigoldGame.Common;
 using MarigoldGame.Commands;
@@ -181,6 +182,7 @@ public class nbSocket : MonoBehaviour
     {
         try
         {
+            //Debug.Log("offset : " + offset.ToString());
             st.BeginRead(buffer, offset, Size - offset, new AsyncCallback(FrontReadCallBack), st);
         }
         catch (Exception e)
@@ -203,6 +205,10 @@ public class nbSocket : MonoBehaviour
             //Debug.Log("read buffer : " + text);
 
             int EndSize = st.EndRead(ar);
+            if (EndSize > 0)
+            {
+                //Debug.Log("FrontReadCallBack EndSize = " + EndSize.ToString());
+            }
             //Debug.Log("FrontReadCallBack EndSize = " + EndSize.ToString());
             
             if (EndSize <= 0)
@@ -244,7 +250,7 @@ public class nbSocket : MonoBehaviour
 
 
 
-                //Debug.Log("response size : " + size.ToString() + ", bodyText : " + bodyText);
+                //Debug.Log(type.ToString() + "|response size : " + size.ToString() + ", bodyText : " + bodyText);
 
                 byte result = 0;
 
@@ -392,6 +398,8 @@ public class nbSocket : MonoBehaviour
                             nb_GlobalData.g_global.useDoubleExp = false;
                             nb_GlobalData.g_global.useDoubleReward = false;
                             nb_GlobalData.g_global.useItemBoost = false;
+
+                            nb_GlobalData.g_global.resetBingoBall();
                             
                             for (int card = 0; card < cardCount; ++card)
                             {
@@ -445,6 +453,10 @@ public class nbSocket : MonoBehaviour
                             int count = 0;
                             foreach (var user in nb_GlobalData.g_global.blitzStartGameAlarm.UserNameList)
                             {
+                                if (count < userCount)
+                                {
+                                    break;
+                                }
                                 nb_GlobalData.g_global.BingoRoomUserNameList[count] = user;
                                 ++count;
                                 temp += user + ", ";
@@ -457,6 +469,8 @@ public class nbSocket : MonoBehaviour
                             //}
 
                             //Debug.Log("userNameList : " + temp);
+
+                            nb_GlobalData.g_global.PlaySceneChange = true;
 
                             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzStartGameAlarm_End;
                         }
@@ -473,7 +487,6 @@ public class nbSocket : MonoBehaviour
 
                             int bingoNum = body.Number;
 
-                            nb_GlobalData.g_global.BingoNumberCount += 1;
                             nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount] = bingoNum;
 
                             Debug.Log("@@ mGameBingoNumberIng bingoNum : " +
@@ -757,6 +770,7 @@ public class nbSocket : MonoBehaviour
 
                             int joinResult = body.Result;
 
+                            Debug.Log("MonsterEnterGameResponse : " + bodyText);
                             Debug.Log("(1204) MonsterEnterGameResponse joinResult : " +
                                 joinResult.ToString());
                             if(joinResult != 0)
@@ -797,7 +811,6 @@ public class nbSocket : MonoBehaviour
                             //    bodyText);
                             MonsterStartGameAlarm body = (MonsterStartGameAlarm)message;
                             nb_GlobalData.g_global.monsterStartGameAlarm.CardList = body.CardList;
-                            nb_GlobalData.g_global.monsterStartGameAlarm.UserNameList = body.UserNameList;
 
 
                             Debug.Log("MonsterStartGameAlarm DeserializeObject");
@@ -818,6 +831,8 @@ public class nbSocket : MonoBehaviour
                             nb_GlobalData.g_global.sheetInfo.shield = 0;
                             nb_GlobalData.g_global.myShield = 0;
                             nb_GlobalData.g_global.resetMyBlitzRanking();
+
+                            nb_GlobalData.g_global.resetBingoBall();
 
                             for (int card = 0; card < cardCount; ++card)
                             {
@@ -853,28 +868,48 @@ public class nbSocket : MonoBehaviour
                             Debug.Log("Sheet Setting Finish");
 
                             //유저 리스트
-                            int userCount = nb_GlobalData.g_global.monsterStartGameAlarm.UserNameList.Count;
-                            nb_GlobalData.g_global.BingoRoomUserCount = userCount;
-                            nb_GlobalData.g_global.BingoRoomUserNameList = new string[userCount];
+                            //int num = 0;
+                            //if (body.Command.Type == CommandType.NONE)
+                            {
+                                //string temp = "@@ MonsterStartGameAlarm nameList : ";
+
+                                //foreach (var sub in body.Command.SubCommandList)
+                                //{
+                                //    if (sub.Type  == CommandType.NONE)
+                                //    {
+                                //        PlayerStateCommand player = sub as PlayerStateCommand;
+
+                                //        nb_GlobalData.g_global.BingoBattleUserList[num] = player;
+                                //        temp += player.Name + ", ";
+                                //    }
+                                //    ++num;
+                                //}
+                                //Debug.Log("userNameList : " + temp);
+                            }
 
 
-                            Debug.Log("@@ MonsterStartGameAlarm userCount : " +
-                                userCount.ToString());
-
-
-                            //int userCount = reader.ReadInt32();
+                            //int userCount = nb_GlobalData.g_global.monsterStartGameAlarm.UserNameList.Count;
                             //nb_GlobalData.g_global.BingoRoomUserCount = userCount;
                             //nb_GlobalData.g_global.BingoRoomUserNameList = new string[userCount];
 
 
-                            string temp = "@@ MonsterStartGameAlarm nameList : ";
-                            int count = 0;
-                            foreach (var user in nb_GlobalData.g_global.monsterStartGameAlarm.UserNameList)
-                            {
-                                nb_GlobalData.g_global.BingoRoomUserNameList[count] = user;
-                                ++count;
-                                temp += user + ", ";
-                            }
+                            //Debug.Log("@@ MonsterStartGameAlarm userCount : " +
+                            //    userCount.ToString());
+
+
+                            ////int userCount = reader.ReadInt32();
+                            ////nb_GlobalData.g_global.BingoRoomUserCount = userCount;
+                            ////nb_GlobalData.g_global.BingoRoomUserNameList = new string[userCount];
+
+
+                            
+                            //int count = 0;
+                            //foreach (var user in nb_GlobalData.g_global.monsterStartGameAlarm.UserNameList)
+                            //{
+                            //    nb_GlobalData.g_global.BingoRoomUserNameList[count] = user;
+                            //    ++count;
+                            //    temp += user + ", ";
+                            //}
                             //for (int i = 0; i < userCount; ++i)
                             //{
                             //    string userName = Encoding.UTF8.GetString(reader.ReadBytes(20)).Split(char.MinValue)[0];
@@ -883,6 +918,8 @@ public class nbSocket : MonoBehaviour
                             //}
 
                             //Debug.Log("userNameList : " + temp);
+
+                            nb_GlobalData.g_global.PlaySceneChange = true;
 
                             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterStartGameAlarm_End;
                         }
@@ -899,10 +936,9 @@ public class nbSocket : MonoBehaviour
 
                             int bingoNum = body.Number;
 
-                            nb_GlobalData.g_global.BingoNumberCount += 1;
                             nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount] = bingoNum;
 
-                            Debug.Log("@@ MonsterCallNumberAlarm bingoNum : " +
+                            Debug.Log(" // MonsterCallNumberAlarm bingoNum : " +
                                 bingoNum.ToString() + "(" + nb_GlobalData.g_global.BingoNumberCount.ToString() + ")");
                         }
                         break;
@@ -1039,7 +1075,7 @@ public class nbSocket : MonoBehaviour
 
                             //nb_GlobalData.g_global.blitzCheckNumberResponse = body;
 
-                            Debug.Log("CheckSquareCommand found");
+                            //Debug.Log("CheckSquareCommand found");
 
                             if (body.Command.SubCommandList != null)
                             {
@@ -1122,10 +1158,106 @@ public class nbSocket : MonoBehaviour
                                     Binder = new MarigoldSerializationBinder(),
                                 });
 
-                            Debug.Log("MonsterOpponentStateAlarm : " + bodyText.ToString());
+                            //Debug.Log("MonsterOpponentStateAlarm : " + bodyText.ToString());
+                            //Debug.Log(" // MonsterOpponentStateAlarm on");
+                            
+                            //if (body.Command.Type == CommandType.NONE)
+                            {
+                                int playerCount = 0;
+                                //Debug.Log("body.Command.SubCommandList size : " + body.Command.SubCommandList.Count);
+                                foreach (var sub in body.Command.SubCommandList)
+                                {
+                                    //if (sub.Type == CommandType.NONE)
+                                    {
+                                        //Debug.Log("playerCount : " + playerCount);
+                                        //플레이어
+                                        PlayerStateCommand player = sub as PlayerStateCommand;
+
+                                        //Debug.Log("player.Name == " + player.Name +
+                                        //    ", nb_GlobalData.g_global.userAccount.Name == " +
+                                        //    nb_GlobalData.g_global.myInfo.nickName);
+                                        if (player.Name.ToString() == nb_GlobalData.g_global.userAccount.Name)
+                                        {
+                                            //Debug.Log("continue");
+                                            continue;   //guid로 바꿔야됨
+                                        }
+
+                                        nb_GlobalData.g_global.BingoBattleUserList[playerCount] = player;
+
+                                        nb_GlobalData.g_global.battleSheet[playerCount].nickname = player.Name;
+                                        nb_GlobalData.g_global.battleSheet[playerCount].guid = player.GamePlayerId.ToString();
+
+
+                                        //Debug.Log("playerCount " + playerCount + " sub.SubCommandList : " + sub.SubCommandList.Count);
+                                        int cardCount = 0;
+                                        foreach (var sub2 in sub.SubCommandList)
+                                        {
+                                            CardStateCommand card = sub2 as CardStateCommand;
+
+                                            nb_GlobalData.g_global.battleSheet[playerCount].bingoSheet[cardCount] = false;
+
+                                            bool[] tempCard = new bool[25];
+                                            for (int i = 0; i < 25; ++i)
+                                            {
+                                                tempCard[i] = false;
+                                            }
+                                            
+                                            foreach (var cellIndex in card.CheckedIndexList)
+                                            {
+                                                tempCard[cellIndex] = true;
+                                            }
+
+                                            bool[,] tempDaub = new bool[5, 5];
+                                            for (int x = 0; x < 5; ++x)
+                                            {
+                                                for (int y = 0; y < 5; ++y)
+                                                {
+                                                    tempDaub[x, y] = tempCard[(x * 5) + y];
+                                                }
+                                            }
+
+                                            // 행렬 뒤집
+                                            for (int x = 0; x < 5; ++x)
+                                            {
+                                                string text = "";
+                                                for (int y = 0; y < 5; ++y)
+                                                {
+                                                    nb_GlobalData.g_global.battleSheet[playerCount].
+                                                        sheetDaub[cardCount, (x * 5) + y] = tempDaub[y, x];
+                                                }
+                                            }
+
+                                            ++cardCount;
+                                        }
+                                        nb_GlobalData.g_global.battleSheet[playerCount].activeSheetCount = cardCount;
+                                    }
+                                    ++playerCount;
+                                }
+                            }
+
+                            //Debug.Log("MonsterOpponentStateAlarm End");
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.MonsterOpponentStateAlarm_End;
                         }
                         break;
 
+
+                        //kill server
+                    case (short)nb_SocketClass.MsgType.KillServerResponse:
+                        {
+                            //주거라 서버
+                            var body = JsonConvert.DeserializeObject<KillServerResponse>(
+                                bodyText,
+                                new JsonSerializerSettings()
+                                {
+                                    TypeNameHandling = TypeNameHandling.Objects,
+                                    Binder = new MarigoldSerializationBinder(),
+                                });
+
+                            Debug.Log("KillServerResponse : " + bodyText.ToString());
+
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.KillServerResponse_End;
+                        }
+                        break;
                         
 
                 }
@@ -1475,6 +1607,31 @@ public class nbSocket : MonoBehaviour
                         {
                             CardIndex = nb_GlobalData.g_global.CheckNumCardIndex,
                             Number = nb_GlobalData.g_global.CheckNumNumber,
+                        };
+
+                        var s = JsonConvert.SerializeObject(a);
+                        byte[] body = new UTF8Encoding().GetBytes(s);
+
+                        writer.Write((ushort)s.Length);             //사이즈
+                        writer.Write(body);
+                        ReturnByte = ((MemoryStream)writer.BaseStream).ToArray();
+
+                        writer.Close();
+                    }
+                    break;
+
+                    
+                    //kill server
+                case (short)nb_SocketClass.MsgType.KillServerRequest:
+                    using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
+                    {
+                        writer.Write(H);             //헤더
+                        writer.Write((ushort)nb_SocketClass.MsgType.KillServerRequest);
+
+                        Debug.Log("KillServerRequest call");
+
+                        var a = new KillServerRequest
+                        {
                         };
 
                         var s = JsonConvert.SerializeObject(a);

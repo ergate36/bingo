@@ -3,24 +3,35 @@ using System.Collections;
 
 public class nb_BattleLobbyFullScreen_btn : MonoBehaviour
 {
-    //public GameObject menuObj;
+    GameObject lobbyScene;
 
     void Start()
     {
+        lobbyScene = GameObject.Find("battleLobbyScene") as GameObject;
         
     }
 
     void OnClick()
     {
-        if (Screen.fullScreen)
+        //if (Screen.fullScreen)
+        //{
+        //    Screen.SetResolution(Screen.height, Screen.width, false);
+        //}
+        //else
+        //{
+        //    Screen.SetResolution(Screen.height, Screen.width, true);
+        //}
+        //Debug.Log("fullScreen button Click! h : " + Screen.height
+        //    + ", w : " + Screen.width + ", isFull : " + Screen.fullScreen.ToString());
+
+        if (lobbyScene.GetComponent<nb_BattleLobbyScene>().killingServer == true)
         {
-            Screen.SetResolution(Screen.height, Screen.width, false);
+            Debug.Log("killingServer Progress");
+            return;
         }
-        else
-        {
-            Screen.SetResolution(Screen.height, Screen.width, true);
-        }
-        Debug.Log("fullScreen button Click! h : " + Screen.height
-            + ", w : " + Screen.width + ", isFull : " + Screen.fullScreen.ToString());
+
+        //서버 주거라
+        nbSocket.sCtrl.FrontBeginWrite((int)nb_SocketClass.MsgType.KillServerRequest);
+        lobbyScene.GetComponent<nb_BattleLobbyScene>().killingServer = true;
     }
 }

@@ -216,6 +216,9 @@ public class nb_SocketClass
         
         MonsterOpponentStateAlarm_End = 1223,
 
+
+        KillServerRequest_End = 9777,   //서버 강제 종료
+        KillServerResponse_End = 9778,
     };
 }
 
@@ -387,12 +390,14 @@ public struct nb_PlayerInfo
 public struct nb_SheetInfo
 {
     public long     userID;
-    public string   nickname;
+    public string nickname;
+    public string guid;
     public int monsterId;
     public long     roomkey;
     public int      activeSheetCount;
     public bool[]   bingoSheet;
-    public int[,]   sheet;
+    public int[,] sheet;
+    public bool[,] sheetDaub;
     public int shield;
     public int betting_index;
 }
@@ -832,16 +837,16 @@ public class nb_Item
         "ui_item_normal8",
         "ui_item_normal9",
         "ui_item_normal10",
-        "ui_item_battle1",
-        "ui_item_battle2",
-        "ui_item_battle3",
-        "ui_item_battle4",
-        "ui_item_battle5",
-        "ui_item_battle6",
-        "ui_item_battle7",
-        "ui_item_battle8",
-        "ui_item_battle9",
-        "ui_item_battle10",
+        "ui_item_battel1",  //battle 오타인데 일단 그냥 씀
+        "ui_item_battel2",
+        "ui_item_battel3",
+        "ui_item_battel4",
+        "ui_item_battel5",
+        "ui_item_battel6",
+        "ui_item_battel7",
+        "ui_item_battel8",
+        "ui_item_battel9",
+        "ui_item_battel10",
     };
 
     static public string[] itemImageMent =

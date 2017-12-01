@@ -55,7 +55,7 @@ MonoBehaviour:
   mSprites:
   - name: stage1
     x: 0
-    y: 97
+    y: 1073
     width: 1440
     height: 975
     borderLeft: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: title
     x: 0
-    y: 1073
+    y: 97
     width: 1440
     height: 975
     borderLeft: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_lobbyback
-    x: 2970
+    x: 2162
     y: 1619
     width: 807
     height: 429
@@ -106,10 +106,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_lobbyback1
-    x: 2162
+    x: 2970
     y: 1619
     width: 807
     height: 429
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_menu_back
+    x: 1441
+    y: 614
+    width: 347
+    height: 945
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -132,8 +145,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_menuback1
-    x: 1441
-    y: 614
+    x: 2162
+    y: 673
     width: 347
     height: 945
     borderLeft: 0

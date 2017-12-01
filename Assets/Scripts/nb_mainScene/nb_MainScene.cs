@@ -88,7 +88,8 @@ public class nb_MainScene : MonoBehaviour
     void Update()
     {
         //http
-        if (nbHttp.state == nbHttp.nbHttpState.ConnectStageStart)
+        if (nbHttp.state == nbHttp.nbHttpState.ConnectStageStart ||
+            nbHttp.state == nbHttp.nbHttpState.ConnectBattleStageStart)
         {
             if(progress_popup.active == false)
             {

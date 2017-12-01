@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MarigoldModel.Model;
 using MarigoldGame.Protocol;
+using MarigoldGame.Commands;
 
 
 public class nb_GlobalData : MonoBehaviour
@@ -116,14 +117,7 @@ public class nb_GlobalData : MonoBehaviour
     public nb_SheetInfo sheetInfo;
 
     [HideInInspector]
-    public nb_SheetInfo battleSheet1;
-
-    [HideInInspector]
-    public nb_SheetInfo battleSheet2;
-
-    [HideInInspector]
-    public nb_SheetInfo battleSheet3;
-
+    public nb_SheetInfo[] battleSheet;
 
     [HideInInspector]
     public nb_MyInfo myInfo;
@@ -198,6 +192,9 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public string[] BingoRoomUserNameList;
 
+    [HideInInspector]
+    public PlayerStateCommand[] BingoBattleUserList;
+
 
     [HideInInspector]
     public string BingoRankingUserName1;
@@ -271,6 +268,9 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public bool LobbyShopActive = false;
 
+    [HideInInspector]
+    public bool PlaySceneChange = false;
+
     //check number
     [HideInInspector]
     public int CheckNumCardIndex = 0;
@@ -329,34 +329,37 @@ public class nb_GlobalData : MonoBehaviour
         blitzWaitRoomStatusAlarm.RemainBingo = 0;
         blitzWaitRoomStatusAlarm.RemainSecond = 0;
 
+        BingoBattleUserList = new PlayerStateCommand[3];
+
         myInfo = new nb_MyInfo();
         myInfo.deviceId = "null";
         myInfo.waitTime = 100;
         myInfo.userKey = "0";
 
         sheetInfo = new nb_SheetInfo();
-        battleSheet1 = new nb_SheetInfo();
-        battleSheet2 = new nb_SheetInfo();
-        battleSheet3 = new nb_SheetInfo();
+        battleSheet = new nb_SheetInfo[3];
         sheetInfo.bingoSheet = new bool[4];
-        battleSheet1.bingoSheet = new bool[4];
-        battleSheet2.bingoSheet = new bool[4];
-        battleSheet3.bingoSheet = new bool[4];
+        battleSheet[0].bingoSheet = new bool[4];
+        battleSheet[1].bingoSheet = new bool[4];
+        battleSheet[2].bingoSheet = new bool[4];
         for (int i = 0; i < 4; ++i)
         {
             sheetInfo.bingoSheet[i] = false;
-            battleSheet1.bingoSheet[i] = false;
-            battleSheet2.bingoSheet[i] = false;
-            battleSheet3.bingoSheet[i] = false;
+            battleSheet[0].bingoSheet[i] = false;
+            battleSheet[1].bingoSheet[i] = false;
+            battleSheet[2].bingoSheet[i] = false;
         }
         sheetInfo.sheet = new int[4, 25];
-        battleSheet1.sheet = new int[4, 25];
-        battleSheet2.sheet = new int[4, 25];
-        battleSheet3.sheet = new int[4, 25];
+        battleSheet[0].sheet = new int[4, 25];
+        battleSheet[1].sheet = new int[4, 25];
+        battleSheet[2].sheet = new int[4, 25];
+        battleSheet[0].sheetDaub = new bool[4, 25];
+        battleSheet[1].sheetDaub = new bool[4, 25];
+        battleSheet[2].sheetDaub = new bool[4, 25];
 
 
         bingoball = new int[75];
-
+        resetBingoBall();
 
         BingoMyBlitzRanking = new int[4];
         resetMyBlitzRanking();
@@ -408,9 +411,9 @@ public class nb_GlobalData : MonoBehaviour
         for (int i = 0; i < 4; ++i)
         {
             sheetInfo.bingoSheet[i] = false;
-            battleSheet1.bingoSheet[i] = false;
-            battleSheet2.bingoSheet[i] = false;
-            battleSheet3.bingoSheet[i] = false;
+            battleSheet[0].bingoSheet[i] = false;
+            battleSheet[1].bingoSheet[i] = false;
+            battleSheet[2].bingoSheet[i] = false;
         }
     }
 
@@ -566,5 +569,13 @@ public class nb_GlobalData : MonoBehaviour
         }
 
         return result;
+    }
+
+    public void resetBingoBall()
+    {
+        for (int i = 0; i < 75; ++i)
+        {
+            bingoball[i] = 0;
+        }
     }
 }

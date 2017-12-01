@@ -22,6 +22,9 @@ public class nb_BattleLobbyScene : MonoBehaviour
     private GameObject sound_notice;
     private bool readyflag = false;
 
+    [HideInInspector]
+    public bool killingServer = false;
+
     void Awake()
     {
         readyflag = false;
@@ -80,7 +83,7 @@ public class nb_BattleLobbyScene : MonoBehaviour
         {
             Debug.Log("=== WAIT START ===");
             //입장 요청 응답 - 대기열 상태
-            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.mGameJoinIng;
+            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
             
             onReady(nb_GlobalData.g_global.sheetInfo.activeSheetCount);
 
@@ -89,15 +92,33 @@ public class nb_BattleLobbyScene : MonoBehaviour
         else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.MonsterStartGameAlarm_End)
         {
             //게임시작 알람
-            Debug.Log("=== GAME START ===");
-            m_nbLobbySceneUI.cancel_btn.GetComponent<BoxCollider>().enabled = false;
+            //Debug.Log("=== GAME START ===");
+            //m_nbLobbySceneUI.cancel_btn.GetComponent<BoxCollider>().enabled = false;
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
-            StartCoroutine(waitStart());
+            //StartCoroutine(waitStart());
         }
         //else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzWaitRoomStatusAlarm_End)
         //{
         //}
+
+        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.KillServerResponse_End)
+        {
+            //서버 주금 완료
+            Debug.Log("KillServerResponse_End");
+            killingServer = false;
+
+            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+        }
+
+        if (nb_GlobalData.g_global.PlaySceneChange)
+        {
+            nb_GlobalData.g_global.PlaySceneChange = false;
+
+            Debug.Log("=== GAME START ===");
+            m_nbLobbySceneUI.cancel_btn.GetComponent<BoxCollider>().enabled = false;
+            StartCoroutine(waitStart());
+        }
     }
 
     private IEnumerator waitStart()

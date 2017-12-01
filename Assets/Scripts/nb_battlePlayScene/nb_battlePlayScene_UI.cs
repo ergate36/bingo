@@ -172,7 +172,7 @@ public class nb_battlePlayScene_UI : MonoBehaviour
         m_daubBoard = playUI.Find("history_info");
         m_effectLayer01Board = playUI.Find("EffectBoard_Layer01");
         m_effectLayer02Board = playUI.Find("EffectBoard_Layer02");
-        m_otherBoard            = playUI.Find("Other_Board");
+        m_otherBoard = playUI.Find("other_sheets");
         m_targetBoard           = playUI.Find("Target_Board");
         m_ItemBoard             = playUI.Find("Item_Board");
         m_resultBoard           = playUI.Find("Result_Board");
@@ -183,7 +183,7 @@ public class nb_battlePlayScene_UI : MonoBehaviour
         popup_gameEnd = playUI.Find("popup_GameEnd");
         effect_end = playUI.Find("effect_end");
       
-        m_otherSheets   = new Transform[4, 4, 25];
+        m_otherSheets   = new Transform[3, 4, 25];
         m_cells         = new Transform[4, 25];
         m_targets       = new Transform[4];
         m_targetSheets  = new Transform[4, 4];
@@ -298,33 +298,33 @@ public class nb_battlePlayScene_UI : MonoBehaviour
         }
 
         // other sheets
-        //for (int otherIndex = 0; otherIndex < 4; ++otherIndex)
-        //{
-        //    string otherPath = "other_0" + otherIndex.ToString();
+        for (int otherIndex = 0; otherIndex < 3; ++otherIndex)
+        {
+            string otherPath = "player_sheets_" + (otherIndex + 1).ToString();
 
-        //    for (int sheetIndex = 0; sheetIndex < 4; ++sheetIndex)
-        //    {
-        //        string sheetPath = otherPath + "/sheet_0" + sheetIndex.ToString();
+            for (int sheetIndex = 0; sheetIndex < 4; ++sheetIndex)
+            {
+                string sheetPath = otherPath + "/sheet" + (sheetIndex + 1).ToString();
 
-        //        for (int cellIndex = 0; cellIndex < 25; ++cellIndex)
-        //        {
-        //            string cellPath = sheetPath;
-        //            if (cellIndex < 10)
-        //            {
-        //                cellPath += "/cell_0";
-        //            }
-        //            else
-        //            {
-        //                cellPath += "/cell_";
-        //            }
+                for (int cellIndex = 0; cellIndex < 25; ++cellIndex)
+                {
+                    string cellPath = sheetPath + "/other_sheet";
+                    if (cellIndex < 10)
+                    {
+                        cellPath += "/other_daub_0";
+                    }
+                    else
+                    {
+                        cellPath += "/other_daub_";
+                    }
 
-        //            cellPath += cellIndex.ToString();
+                    cellPath += cellIndex.ToString();
 
-        //            //   Debug.Log(cellPath);
-        //            m_otherSheets[otherIndex, sheetIndex, cellIndex] = m_otherBoard.Find(cellPath);
-        //        }
-        //    }
-        //}
+                    //   Debug.Log(cellPath);
+                    m_otherSheets[otherIndex, sheetIndex, cellIndex] = m_otherBoard.Find(cellPath);
+                }
+            }
+        }
 
         // target
         //for (int otherIndex = 0; otherIndex < 4; ++otherIndex)

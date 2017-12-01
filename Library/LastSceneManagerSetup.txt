@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/Scenes/nb_LoginScene.unity
+- path: Assets/Resources/Scenes/nb_PlayBlitzScene.unity
   isLoaded: 1
   isActive: 1

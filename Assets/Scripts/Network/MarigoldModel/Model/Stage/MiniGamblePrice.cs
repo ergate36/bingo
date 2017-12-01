@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace MarigoldModel.Model
 {
@@ -14,7 +13,10 @@ namespace MarigoldModel.Model
         public int PriceAssetCount { get; set; }
 
         // foreign key
+        [JsonIgnore]
         public List<MiniGambleGroup> MiniGambleGroupList { get; set; }
+
+        [JsonIgnore]
         public List<MiniGamblePriceSet> MiniGamblePriceSetList { get; set; }
     }
 }

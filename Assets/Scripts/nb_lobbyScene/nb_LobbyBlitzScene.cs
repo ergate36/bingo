@@ -90,11 +90,11 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzStartGameAlarm_End)
         {
             //게임시작 알람
-            Debug.Log("=== GAME START ===");
-            m_nbLobbySceneUI.cancel_btn.GetComponent<BoxCollider>().enabled = false;
+            //Debug.Log("=== GAME START ===");
+            //m_nbLobbySceneUI.cancel_btn.GetComponent<BoxCollider>().enabled = false;
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
-            StartCoroutine(waitStart());
+            //StartCoroutine(waitStart());
         }
         else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzWaitRoomStatusAlarm_End)
         {
@@ -118,6 +118,15 @@ public class nb_LobbyBlitzScene : MonoBehaviour
             }
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+        }
+
+        if (nb_GlobalData.g_global.PlaySceneChange)
+        {
+            nb_GlobalData.g_global.PlaySceneChange = false;
+
+            Debug.Log("=== GAME START ===");
+            m_nbLobbySceneUI.cancel_btn.GetComponent<BoxCollider>().enabled = false;
+            StartCoroutine(waitStart());
         }
     }
 

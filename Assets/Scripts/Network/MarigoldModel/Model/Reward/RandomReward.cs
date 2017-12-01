@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MarigoldModel.Model
@@ -12,6 +13,7 @@ namespace MarigoldModel.Model
 
         public int TotalRate { get; set; } // RandomRewardSet의 확률을 전부 더한 값
 
+        [JsonIgnore]
         public List<RandomRewardSet> RandomRewardSetList { get; internal set; }
     }
 }
