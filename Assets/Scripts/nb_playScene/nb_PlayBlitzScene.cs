@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Spine.Unity;
 
 public class nb_PlayBlitzScene : MonoBehaviour
 {
@@ -131,8 +132,10 @@ public class nb_PlayBlitzScene : MonoBehaviour
     //아이템
     float itemGaugeRate = 0;
     bool itemCoolDown = false;
-    int chestItemCount = 0;
+    //int chestItemCount = 0;
     bool itemBoosterOn = false;
+
+    GameObject gaugeSpine;
 
 
     void Awake()
@@ -149,6 +152,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
         nb_GlobalData.g_global_bgm1.Stop();
         nb_GlobalData.g_global_bgm2.Stop();
         nb_GlobalData.g_global_bgm4.Stop();
+
+        nb_GlobalData.g_global.chestItemCount = 0;
 
         StartCoroutine("playGameBGM");
     }
@@ -236,6 +241,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
         //
 
         ballCount = 0;
+
+        gaugeSpine = playScene_ui.m_itemBtn.Find("spine").gameObject;
 
         drawStageBg();
     }
@@ -507,8 +514,13 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 playScene_ui.m_rankBoard.Find("player_ranking_x/t_player_name").GetComponent<UILabel>().text =
                     nb_GlobalData.g_global.BingoLastFinishUserName;
 
-                playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text =
-                    nb_GlobalData.g_global.BingoTotalFinishCount.ToString() + "th";
+                //playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text =
+                //    nb_GlobalData.g_global.BingoTotalFinishCount.ToString() + "th";
+                playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILocalize>().key = "Rank_x";
+                string text = nb_GlobalData.g_global.BingoTotalFinishCount.ToString() + 
+                    playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text;
+
+                playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text = text;
             }
             else
             {
@@ -586,6 +598,9 @@ public class nb_PlayBlitzScene : MonoBehaviour
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
 
+        //부스터 이펙트
+        playScene_ui.m_itemBtn.Find("booster").gameObject.SetActive(itemBoosterOn);
+
         if (itemCoolDown == true)
         {
             float checkTime = 20;
@@ -598,12 +613,35 @@ public class nb_PlayBlitzScene : MonoBehaviour
             {
                 //쿨타임 끝
                 itemCoolDown = false;
+
+                nb_GlobalData.g_global.blitzGaugeState = (int)MarigoldModel.Model.PowerUpGaugeState.UP;
             }
             else
             {
                 //쿨타임
+
+                float rate = coolTime / checkTime;
+                rate = rate < 0 ? 0 : rate;
+                rate = rate > 1 ? 1 : rate;
+
+                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = rate;
+
                 playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
                     (checkTime - (int)coolTime).ToString() + " second";
+
+                SkeletonAnimation ani = gaugeSpine.GetComponent<SkeletonAnimation>();
+                if (ani.AnimationName != "cooling down")
+                {
+                    ani.AnimationName = "cooling down";
+                    ani.loop = true;
+                }
+
+                Vector3 center = playScene_ui.m_itemBtn.Find("i_bg").localPosition;
+                int x = (int)center.x - 85 + ((int)(coolTime / checkTime) * 18);
+
+                gaugeSpine.transform.localPosition = center;
+                gaugeSpine.transform.localPosition =
+                    new Vector3(x, center.y);
             }
         }
         else
@@ -611,20 +649,78 @@ public class nb_PlayBlitzScene : MonoBehaviour
             if (nb_GlobalData.g_global.blitzGaugeState == 
                 (int)MarigoldModel.Model.PowerUpGaugeState.FULL)
             {
-                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                    "Ready";
+                //playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                //    "Ready";
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
+                    "ItemReady";
+
+                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 1;
+
+                SkeletonAnimation ani = gaugeSpine.GetComponent<SkeletonAnimation>();
+                if (ani.AnimationName != "power-ups")
+                {
+                    ani.AnimationName = "power-ups";
+                    ani.loop = true;
+                }
             }
             else if (nb_GlobalData.g_global.blitzGaugeState == 
                 (int)MarigoldModel.Model.PowerUpGaugeState.UP)
             {
-                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                    "Charging...";
+                //playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                //    "Charging...";
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
+                    "ItemCharging";
+
+                SkeletonAnimation ani = gaugeSpine.GetComponent<SkeletonAnimation>();
+                if (ani.AnimationName != "charging")
+                {
+                    ani.AnimationName = "charging";
+                    ani.loop = true;
+
+                    Vector3 center = playScene_ui.m_itemBtn.Find("i_bg").localPosition;
+                    gaugeSpine.transform.localPosition = center;
+                    if (nb_GlobalData.g_global.blitzGaugeValue == 0)
+                    {
+                        gaugeSpine.transform.localPosition =
+                            new Vector3(center.x - 85, center.y);
+
+                        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
+                    }
+                    else if (nb_GlobalData.g_global.blitzGaugeValue == 1)
+                    {
+                        if (itemBoosterOn)
+                        {
+                            gaugeSpine.transform.localPosition = center;
+
+                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.5f;
+                        }
+                        else
+                        {
+                            gaugeSpine.transform.localPosition =
+                                new Vector3(center.x - 30, center.y);
+
+                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.33f;
+                        }
+                    }
+                    else if (nb_GlobalData.g_global.blitzGaugeValue == 2)
+                    {
+                        if (!itemBoosterOn)
+                        {
+                            gaugeSpine.transform.localPosition =
+                                new Vector3(center.x + 30, center.y);
+
+                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.66f;
+                        }
+                    }
+                }
             }
             else if (nb_GlobalData.g_global.blitzGaugeState ==
                 (int)MarigoldModel.Model.PowerUpGaugeState.STORE)
             {
-                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                    "Empty";
+                //playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                //    "Empty";
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
+                    "ItemEmpty";
             }
         }
 
@@ -633,8 +729,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
         if (nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount] != 0 &&
             nb_GlobalData.g_global.BingoNumberCount < 75)
         {
-            Debug.Log("addball : " + nb_GlobalData.g_global.BingoNumberCount + "." +
-                nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount]);
+            //Debug.Log("addball : " + nb_GlobalData.g_global.BingoNumberCount + "." +
+            //    nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount]);
 
             StartCoroutine("addBall", nb_GlobalData.g_global.bingoball[nb_GlobalData.g_global.BingoNumberCount]);
 
@@ -1600,6 +1696,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
             daubObjects[sheetIndex, index].GetComponentInChildren<UILabel>().text = cellNumber.ToString();
             daubObjects[sheetIndex, index].GetComponent<UISprite>().spriteName = "ui_daub1";
             daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().color = Color.white;
+            daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().effectColor = Color.black;
             //if (m_calledBallNumber[m_myLocalSheets[sheetIndex].cells[index].number] == true)
             if (checkDaubNumber(cellNumber) == true)
                 //
@@ -1613,6 +1710,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 //
                 daubObjects[sheetIndex, index].GetComponent<UISprite>().spriteName = "ui_daub1";
                 daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().color = Color.white;
+                daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().effectColor = Color.black;
                 //playScene_ui.m_sound_daubEffect.GetComponent<AudioSource>().clip = nb_GlobalData.g_global.EffectSound[(int)Sound.EffSoundList.daub];
                 //playScene_ui.m_sound_daubEffect.GetComponent<AudioSource>().Play();
                 int tempitem = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
@@ -1622,12 +1720,45 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 int itemIndex = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
                 if (itemIndex > 0)   //아이템 있는 칸 처리
                 {
+                    GameObject effect = Instantiate(Resources.Load("game/ui_item_effect")) as GameObject;
+                    effect.transform.SetParent(daubObjects[sheetIndex, index].transform);
+                    effect.transform.position = daubObjects[sheetIndex, index].transform.position;
+                    effect.transform.localScale = Vector3.one;
+                    effect.name = "effect";
+                    SkeletonAnimation ani = effect.GetComponentInChildren<SkeletonAnimation>();
+
                     if (itemIndex == 3)
                     {
                         //상자
-                        ++chestItemCount;
+                        ++nb_GlobalData.g_global.chestItemCount;
                         playScene_ui.m_baseBoard.Find("i_icon2").GetComponent<UISprite>().spriteName = "ui_info_chest1";
-                        playScene_ui.m_baseBoard.Find("t_bonus_count").GetComponent<UILabel>().text = "x" + chestItemCount.ToString();
+                        playScene_ui.m_baseBoard.Find("t_bonus_count").GetComponent<UILabel>().text = 
+                            "x" + nb_GlobalData.g_global.chestItemCount.ToString();
+
+                        ani.AnimationName = "chest2";
+
+                        StartCoroutine(removeEffect(daubObjects[sheetIndex, index].transform, 0.7f));
+                    }
+                    else if (itemIndex == 2)
+                    {
+                        //코인
+                        ani.AnimationName = "coin2";
+
+                        StartCoroutine(removeEffect(daubObjects[sheetIndex, index].transform, 0.633f));
+                    }
+                    else if (itemIndex == 7)
+                    {
+                        //폭탄
+                        ani.AnimationName = "bomb2";
+
+                        StartCoroutine(removeEffect(daubObjects[sheetIndex, index].transform, 0.3f));
+                    }
+                    else if (itemIndex == 8)
+                    {
+                        //인스턴트 윈
+                        ani.AnimationName = "instant2";
+
+                        StartCoroutine(removeEffect(daubObjects[sheetIndex, index].transform, 4.667f));
                     }
 
                     //if (m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex != (int)Item.ItemType.Item_DirectBingo)
@@ -1721,6 +1852,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
                 daubObjects[sheetIndex, index].SetActive(false);
                 daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().color = Color.black;
+                daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().effectColor = Color.white;
 
                 int itemType = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
                 if (itemType != 0)
@@ -2006,6 +2138,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
         //    return;
         //}
 
+        return;
+
         if (nb_GlobalData.g_global.blitzGaugeState == 3)
         //if (nb_GlobalData.g_global.getTotalNormalPowerUpCount() == 0)
         {
@@ -2019,8 +2153,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
         if (nb_GlobalData.g_global.blitzGaugeState == 2)
         //if (itemBoosterOn && coolTime < 10.0f)
         {
-            //아이템 쿨타임 중임 : 부스터 상태
-            Debug.Log("increaseGauge fail : CoolTime(boost)");
+            //아이템 쿨타임 중임
+            Debug.Log("increaseGauge fail : CoolTime");
             return;
         }
         //else if (itemBoosterOn == false && coolTime < 20.0f)
@@ -3152,7 +3286,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
         playScene_ui.m_rankBoard.Find("player_ranking_x/t_player_name").GetComponent<UILabel>().text =
             nb_GlobalData.g_global.BingoRankingUserNameX;
 
-        playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text = "4th";
+        //playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text = "4th";
+        playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILocalize>().key = "Rank_4";
     }
 
     public IEnumerator addBall(int number)
@@ -3572,6 +3707,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         daubObjects[sheetIndex, cellIndex].SetActive(true);
         daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName =
             nb_Item.nb_daubItemImagePath[(int)type];
+        //daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().MakePixelPerfect();
     }
 
     public void activeCellItem(int sheetIndex, int cellIndex)
@@ -3582,6 +3718,10 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     private void runUseItemAction()
     {
+        Transform center = playScene_ui.m_bingoBoard.Find("sheet_center");
+
+        Debug.Log("run Item Effect Count : " + nb_GlobalData.g_global.useItemDataList.Count);
+
         foreach(var data in nb_GlobalData.g_global.useItemDataList)
         {
             int type = nb_GlobalData.g_global.getNormalItemIndex(data.infoId);
@@ -3596,16 +3736,65 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 daubObjects[data.sheet, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.white;
+                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().effectColor = Color.black;
 
                 GameObject effect = Instantiate(Resources.Load("game/ui_item_effect")) as GameObject;
                 effect.transform.SetParent(daubObjects[data.sheet, cellIndex].transform);
-                effect.transform.position = Vector3.zero;
+                effect.transform.position = daubObjects[data.sheet, cellIndex].transform.position;
+                effect.transform.localScale = Vector3.one;
                 effect.name = "effect";
-                Animation ani = effect.GetComponent<Animation>();
-                ani.name = "daub";
-                ani.Play();
+                SkeletonAnimation ani = effect.GetComponentInChildren<SkeletonAnimation>();
+                ani.AnimationName = "daub";
 
-                StartCoroutine(removeEffect(daubObjects[data.sheet, cellIndex].transform, 1.0f));
+                StartCoroutine(removeDaubEffect(daubObjects[data.sheet, cellIndex].transform, 0.967f));
+            }
+            else if (type == 11)
+            {
+                //폭탄 터짐
+                m_myLocalSheets[data.sheet].cells[cellIndex].realDaub = true;
+                m_myLocalSheets[data.sheet].cells[cellIndex].daub = true;
+                daubObjects[data.sheet, cellIndex].SetActive(true);
+                daubObjects[data.sheet, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
+                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
+                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.white;
+                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().effectColor = Color.black;
+
+                GameObject effect = Instantiate(Resources.Load("game/ui_item_effect")) as GameObject;
+                effect.transform.SetParent(daubObjects[data.sheet, cellIndex].transform);
+                effect.transform.position = daubObjects[data.sheet, cellIndex].transform.position;
+                effect.transform.localScale = Vector3.one;
+                effect.name = "effect";
+                SkeletonAnimation ani = effect.GetComponentInChildren<SkeletonAnimation>();
+                ani.AnimationName = "bomb2";
+
+                StartCoroutine(removeEffect(daubObjects[data.sheet, cellIndex].transform, 0.3f));
+
+            }
+            else if (type == 5)
+            {
+                //경험치 두배
+                GameObject effect = Instantiate(Resources.Load("game/ui_item_effect")) as GameObject;
+                effect.transform.SetParent(center);
+                effect.transform.position = center.position;
+                effect.transform.localScale = Vector3.one;
+                effect.name = "effect";
+                SkeletonAnimation ani = effect.GetComponentInChildren<SkeletonAnimation>();
+                ani.AnimationName = "exp2";
+
+                StartCoroutine(removeDaubEffect(center, 1.1f));
+            }
+            else if (type == 6)
+            {
+                //보상 두배
+                GameObject effect = Instantiate(Resources.Load("game/ui_item_effect")) as GameObject;
+                effect.transform.SetParent(center);
+                effect.transform.position = center.position;
+                effect.transform.localScale = Vector3.one;
+                effect.name = "effect";
+                SkeletonAnimation ani = effect.GetComponentInChildren<SkeletonAnimation>();
+                ani.AnimationName = "all2";
+
+                StartCoroutine(removeDaubEffect(center, 1.1f));
             }
             else if (type == 9)
             {
@@ -3618,8 +3807,39 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 m_myLocalSheets[data.sheet].cells[cellIndex].itemEffectIndex = type;
                 setCellItem(data.sheet, cellIndex, (nb_Item.nb_ItemType)type);
                 daubObjects[data.sheet, cellIndex].SetActive(true);
+
+                GameObject effect = Instantiate(Resources.Load("game/ui_item_effect")) as GameObject;
+                effect.transform.SetParent(daubObjects[data.sheet, cellIndex].transform);
+                effect.transform.position = daubObjects[data.sheet, cellIndex].transform.position;
+                effect.transform.localScale = Vector3.one;
+                effect.name = "effect";
+
+                SkeletonAnimation ani = effect.GetComponentInChildren<SkeletonAnimation>();
+
+                if (type == 2)
+                {
+                    ani.AnimationName = "coin1";
+                    StartCoroutine(removeEffect(daubObjects[data.sheet, cellIndex].transform, 0.733f));
+                }
+                else if (type == 3)
+                {
+                    ani.AnimationName = "chest1";
+                    StartCoroutine(removeEffect(daubObjects[data.sheet, cellIndex].transform, 0.667f));
+                }
+                else if (type == 7)
+                {
+                    ani.AnimationName = "bomb1";
+                    StartCoroutine(removeEffect(daubObjects[data.sheet, cellIndex].transform, 0.8f));
+                }
+                else if (type == 8)
+                {
+                    ani.AnimationName = "instant1";
+                    StartCoroutine(removeEffect(daubObjects[data.sheet, cellIndex].transform, 0.733f));
+                }
+
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
                 daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.black;
+                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().effectColor = Color.white;
             }
         }
 
@@ -3644,16 +3864,32 @@ public class nb_PlayBlitzScene : MonoBehaviour
         nb_GlobalData.g_global.useItemDataList.Clear();
     }
 
-    private IEnumerator removeEffect(Transform parent, float wait)
+    private IEnumerator removeDaubEffect(Transform parent, float wait)
     {
         GameObject effect = parent.Find("effect").gameObject;
         if (effect != null)
         {
+            //Debug.Log("remove effect");
             yield return new WaitForSeconds(wait);
             GameObject.Destroy(effect);
         }
 
         yield return true;
+    }
+
+    private IEnumerator removeEffect(Transform parent, float wait)
+    {
+        GameObject effect = parent.Find("effect").gameObject;
+        if (effect != null)
+        {
+            //Debug.Log("remove effect");
+            parent.GetComponent<UISprite>().enabled = false;
+
+            yield return new WaitForSeconds(wait);
+            GameObject.Destroy(effect);
+            parent.GetComponent<UISprite>().enabled = true;
+        }
+
     }
 
     private int findCellIndex(int sheet, int number)

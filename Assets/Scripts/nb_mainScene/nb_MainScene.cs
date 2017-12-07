@@ -78,10 +78,22 @@ public class nb_MainScene : MonoBehaviour
         GameObject mainUIRoot = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase") as GameObject;
 
 
+        //닉네임
+        if (nb_GlobalData.g_global.fb_active == false)
+        {
+            nb_GlobalData.g_global.InputSocialNickname = nb_GlobalData.g_global.userAccount.Name;
+        }
+        Debug.Log("Nickname : " + nb_GlobalData.g_global.InputSocialNickname);
+        mainUIRoot.transform.Find("layer_base/player_info/profile_name").GetComponent<UILabel>().text
+            = nb_GlobalData.g_global.InputSocialNickname;
 
         //선택한 스테이지 + 앞뒤 스테이지 로드
         refreshStageView();
 
+
+        //ticket test
+        nb_GlobalData.g_global.myInfo.ticketCount = 999;
+        //
         
     }
 
@@ -99,7 +111,8 @@ public class nb_MainScene : MonoBehaviour
                     buttons[i].enabled = false;
                 }
                 progress_popup.SetActive(true);
-                progress_popup.transform.Find("text").GetComponent<UILabel>().text = "stage connecting";
+                //progress_popup.transform.Find("text").GetComponent<UILabel>().text = "stage connecting";
+                progress_popup.transform.Find("text").GetComponent<UILocalize>().key = "MainMsg_StageConnecting";
             }
         }
         else if (nbHttp.state == nbHttp.nbHttpState.ConnectStageSuccess)
@@ -501,38 +514,38 @@ public class nb_MainScene : MonoBehaviour
         
         if (child != null)
         {
-            iTween.MoveBy(child.Find("icon").gameObject, vec, 0.4f);
+            iTween.MoveBy(child.Find("icon").gameObject, vec, bgLayerMoveTime * 0.4f);
             child.Find("collection_info").gameObject.SetActive(false);
             child.Find("gamestart_btn").gameObject.SetActive(false);
             child.Find("name").gameObject.SetActive(false);     
                     
             if (child.Find("icon_sub") != null)
             {
-                iTween.MoveBy(child.Find("icon_sub").gameObject, vec, 0.4f);
+                iTween.MoveBy(child.Find("icon_sub").gameObject, vec, bgLayerMoveTime * 0.4f);
                 child.Find("collection_info_sub").gameObject.SetActive(false);
                 child.Find("gamestart_btn_sub").gameObject.SetActive(false);
                 child.Find("name_sub").gameObject.SetActive(false);     
             }
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(bgLayerMoveTime * 0.3f);
 
         if (child != null)
         {
-            iTween.MoveBy(child.Find("icon").gameObject, -vec, 0.4f);
+            iTween.MoveBy(child.Find("icon").gameObject, -vec, bgLayerMoveTime * 0.4f);
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(bgLayerMoveTime * 0.3f);
 
         if (child != null)
         { 
             if (child.Find("icon_sub") != null)
             {
-                iTween.MoveBy(child.Find("icon_sub").gameObject, -vec, 0.4f);
+                iTween.MoveBy(child.Find("icon_sub").gameObject, -vec, bgLayerMoveTime * 0.4f);
             }
         }
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(bgLayerMoveTime * 0.4f);
 
         if (child != null)
         {
@@ -561,38 +574,38 @@ public class nb_MainScene : MonoBehaviour
 
         if (child != null)
         {
-            iTween.MoveBy(child.Find("icon").gameObject, -vec, 0.4f);
+            iTween.MoveBy(child.Find("icon").gameObject, -vec, bgLayerMoveTime * 0.4f);
             child.Find("collection_info").gameObject.SetActive(false);
             child.Find("gamestart_btn").gameObject.SetActive(false);
             child.Find("name").gameObject.SetActive(false);
 
             if (child.Find("icon_sub") != null)
             {
-                iTween.MoveBy(child.Find("icon_sub").gameObject, -vec, 0.4f);
+                iTween.MoveBy(child.Find("icon_sub").gameObject, -vec, bgLayerMoveTime * 0.4f);
                 child.Find("collection_info_sub").gameObject.SetActive(false);
                 child.Find("gamestart_btn_sub").gameObject.SetActive(false);
                 child.Find("name_sub").gameObject.SetActive(false);
             }
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(bgLayerMoveTime * 0.3f);
 
         if (child != null)
         {
-            iTween.MoveBy(child.Find("icon").gameObject, vec, 0.4f);
+            iTween.MoveBy(child.Find("icon").gameObject, vec, bgLayerMoveTime * 0.4f);
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(bgLayerMoveTime * 0.3f);
 
         if (child != null)
         {
             if (child.Find("icon_sub") != null)
             {
-                iTween.MoveBy(child.Find("icon_sub").gameObject, vec, 0.4f);
+                iTween.MoveBy(child.Find("icon_sub").gameObject, vec, bgLayerMoveTime * 0.4f);
             }
         }
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(bgLayerMoveTime * 0.4f);
 
         if (child != null)
         {
@@ -746,6 +759,7 @@ public class nb_MainScene : MonoBehaviour
 
         if (selectStage < maxStage)
         {
+            //Debug.Log("next stage refresh selectStage : " + selectStage + ", max : " + maxStage);
             stage_next = Instantiate(Resources.Load("game/stage" + (selectStage + 1).ToString())) as GameObject;
             stage_next.transform.parent = parent_next;
             stage_next.transform.localPosition = Vector3.zero;

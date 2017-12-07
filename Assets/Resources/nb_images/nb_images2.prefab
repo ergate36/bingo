@@ -93,7 +93,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_lobbyback
-    x: 2162
+    x: 2970
     y: 1619
     width: 807
     height: 429
@@ -106,7 +106,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_lobbyback1
-    x: 2970
+    x: 2162
     y: 1619
     width: 807
     height: 429

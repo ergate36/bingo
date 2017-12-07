@@ -36,14 +36,14 @@ public class loginStart_btn : MonoBehaviour {
     void OnClick()
     {
         //nbHttp.http.CreateUserSession();  //팝업에서 처리
+        if (nb_GlobalData.g_global.FB_TEST == true)
+        {
+            return; //fb 으로 테스트
+        }
 
         GameObject popup = GameObject.Find("loginSceneUI/Camera/Anchor/popup_login");
         popup.SetActive(true);
 
         uiRoot.transform.Find("bg").GetComponent<BoxCollider>().enabled = false;
-
-        //ticker test
-        nb_GlobalData.g_global.myInfo.ticketCount = 999;
-        //
     }
 }

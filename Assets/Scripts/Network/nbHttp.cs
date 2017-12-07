@@ -42,6 +42,10 @@ public class nbHttp : MonoBehaviour
         ConnectBattleStageSuccess,
         ConnectBattleStageFail,
 
+        //stage-minigame
+        PlayMiniGambleStart,
+        PlayMiniGambleSuccess,
+
         //shop/item
         GetUserPowerUpListStart,
         GetUserPowerUpListSuccess,
@@ -318,6 +322,29 @@ public class nbHttp : MonoBehaviour
         startPost(c, f, post);
     }
 
+    public void PlayMiniGamble(string session, long stageId, 
+        long miniGameblePriceSetId, long miniGambleGroupId)
+    {
+        if (nbHttp.state != nbHttpState.Wait)
+        {
+            Debug.Log("PlayMiniGamble fail, state : " + nbHttp.state.ToString());
+            return;
+        }
+
+        state = nbHttpState.PlayMiniGambleStart;
+
+        string c = "Stage";
+        string f = "PlayMiniGamble";
+
+        Dictionary<string, string> post = new Dictionary<string, string>();
+        post.Add("session", session);
+        post.Add("stageId", stageId.ToString());
+        post.Add("miniGameblePriceSetId", miniGameblePriceSetId.ToString());
+        post.Add("miniGambleGroupId", miniGambleGroupId.ToString());
+
+        startPost(c, f, post);
+    }
+
     public void GetPowerUpList()
     {
         if (nbHttp.state != nbHttpState.Wait)
@@ -467,6 +494,16 @@ public class nbHttp : MonoBehaviour
                 }
                 break;
             case nbHttpState.ConnectBattleStageSuccess:
+                break;
+
+            case nbHttpState.PlayMiniGambleStart:
+                {
+                    state = nbHttpState.PlayMiniGambleSuccess;
+                    Debug.Log("PlayMiniGambleStart start : " + data);
+                    //data["Status"]
+                }
+                break;
+            case nbHttpState.PlayMiniGambleSuccess:
                 break;
 
         //item, store

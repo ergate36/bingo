@@ -67,43 +67,50 @@ public class nb_LoginScene : MonoBehaviour
         {
             //세션 생성중 표시
             progress_popup.SetActive(true);
-            progress_popup.transform.Find("text").GetComponent<UILabel>().text = "create session";
+            //progress_popup.transform.Find("text").GetComponent<UILabel>().text = "create session";
+            progress_popup.transform.Find("text").GetComponent<UILocalize>().key = "LoginMsg_CreateSession";
         }
         else if (nbHttp.state == nbHttp.nbHttpState.ConnectSocialStart)
         {
             //소셜 로그인 시도중
             progress_popup.SetActive(true);
-            progress_popup.transform.Find("text").GetComponent<UILabel>().text = "social login";
+            //progress_popup.transform.Find("text").GetComponent<UILabel>().text = "social login";
+            progress_popup.transform.Find("text").GetComponent<UILocalize>().key = "LoginMsg_SocialLogin";
         }
         else if (nbHttp.state == nbHttp.nbHttpState.CreateUserAccountStart)
         {
             //계정 생성중 표시
             progress_popup.SetActive(true);
-            progress_popup.transform.Find("text").GetComponent<UILabel>().text = "create account";
+            //progress_popup.transform.Find("text").GetComponent<UILabel>().text = "create account";
+            progress_popup.transform.Find("text").GetComponent<UILocalize>().key = "LoginMsg_CreateAccount";
         }
         else if (nbHttp.state == nbHttp.nbHttpState.ConnectUserAccountStart)
         {
             //계정 접속중 표시
             progress_popup.SetActive(true);
-            progress_popup.transform.Find("text").GetComponent<UILabel>().text = "connect server";
+            //progress_popup.transform.Find("text").GetComponent<UILabel>().text = "connect server";
+            progress_popup.transform.Find("text").GetComponent<UILocalize>().key = "LoginMsg_ConnectServer";
         }
         else if (nbHttp.state == nbHttp.nbHttpState.BindSocialStart)
         {
             //접속한 계정 소셜 바인드
             progress_popup.SetActive(true);
-            progress_popup.transform.Find("text").GetComponent<UILabel>().text = "social bind";
+            //progress_popup.transform.Find("text").GetComponent<UILabel>().text = "social bind";
+            progress_popup.transform.Find("text").GetComponent<UILocalize>().key = "LoginMsg_SocialBind";
         }
         else if (nbHttp.state == nbHttp.nbHttpState.GetStageListStart)
         {
             //스테이지 정보 불러옴
             progress_popup.SetActive(true);
-            progress_popup.transform.Find("text").GetComponent<UILabel>().text = "stage loading";
+            //progress_popup.transform.Find("text").GetComponent<UILabel>().text = "stage loading";
+            progress_popup.transform.Find("text").GetComponent<UILocalize>().key = "LoginMsg_StageLoading";
         }
         else if (nbHttp.state == nbHttp.nbHttpState.GetUserPowerUpListStart)
         {
             //유저 아이템 불러옴
             progress_popup.SetActive(true);
-            progress_popup.transform.Find("text").GetComponent<UILabel>().text = "get useritem";
+            //progress_popup.transform.Find("text").GetComponent<UILabel>().text = "get useritem";
+            progress_popup.transform.Find("text").GetComponent<UILocalize>().key = "LoginMsg_GetUserItem";
         }
 
         //success
@@ -195,13 +202,27 @@ public class nb_LoginScene : MonoBehaviour
         //fail
         if (nbHttp.state == nbHttp.nbHttpState.ConnectSocialFail)
         {
-            //소셜 로그인 실패 - 소셜키로 계정 생성 시도
-            Debug.Log("LoginScene Update : ConnectSocialFail, open nickname popup");
-            nbHttp.state = nbHttp.nbHttpState.Wait;
-            progress_popup.SetActive(false);
+            if (nb_GlobalData.g_global.fb_active == true)
+            {
+                Debug.Log("LoginScene Update : ConnectSocialFail, create account by FB nickname");
+                nbHttp.state = nbHttp.nbHttpState.Wait;
+                //소셜 로그인 실패 - 소셜키로 계정 생성 시도
 
-            //닉네임 팝업
-            nickname_popup.SetActive(true);
+                //페북 닉네임으로 계정 생성
+                nbHttp.http.CreateUserAccount(
+                    nb_GlobalData.g_global.userSession.SessionKey,
+                    nb_GlobalData.g_global.InputSocialNickname);
+            }
+            else
+            {
+                //에뮬 : 닉네임 팝업
+                Debug.Log("LoginScene Update : ConnectSocialFail, open nickname popup");
+                nbHttp.state = nbHttp.nbHttpState.Wait;
+
+                progress_popup.SetActive(false);
+                nickname_popup.SetActive(true);
+            }
+
         }
         else if (nbHttp.state == nbHttp.nbHttpState.ConnectUserAccountFail)
         {

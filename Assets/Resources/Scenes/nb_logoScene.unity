@@ -138,8 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alpha: 0
   tex: {fileID: 2800000, guid: 7ea48b39a3abb3c4fa55a0de343e5bfd, type: 3}
-  fadeInOutSpeed: 0.25
-  logoDisplayTime: 0.5
+  fadeInOutSpeed: 0.1
+  logoDisplayTime: 0.1
 --- !u!212 &87987793
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5ecb5660b11414fb042fb826e03b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scalingStyle: 2
+  scalingStyle: 0
   manualHeight: 1440
-  minimumHeight: 1080
-  maximumHeight: 1536
+  minimumHeight: 796
+  maximumHeight: 1592

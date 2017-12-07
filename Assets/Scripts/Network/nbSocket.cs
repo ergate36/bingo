@@ -453,7 +453,7 @@ public class nbSocket : MonoBehaviour
                             int count = 0;
                             foreach (var user in nb_GlobalData.g_global.blitzStartGameAlarm.UserNameList)
                             {
-                                if (count < userCount)
+                                if (count >= userCount)
                                 {
                                     break;
                                 }
@@ -468,7 +468,7 @@ public class nbSocket : MonoBehaviour
                             //    temp += userName + ", ";
                             //}
 
-                            //Debug.Log("userNameList : " + temp);
+                            Debug.Log("userNameList : " + temp);
 
                             nb_GlobalData.g_global.PlaySceneChange = true;
 
@@ -533,6 +533,7 @@ public class nbSocket : MonoBehaviour
                         using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                         {
                             //게임 종료
+                            Debug.Log("BlitzEndGameAlarm : " + bodyText);
                             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzEndGameAlarm_End;
                         }
                         break;
@@ -627,10 +628,24 @@ public class nbSocket : MonoBehaviour
                                 {
                                     nb_GlobalData.g_global.useDoubleReward = true;
                                 }
+
+                                nb_useItemData newData;
+                                newData.infoId = nb_GlobalData.g_global.selectItemId;
+                                newData.sheet = 0;
+                                newData.number = 0;
+
+                                nb_GlobalData.g_global.useItemDataList.Add(newData);
                             }
                             else if (body.Command.Type == CommandType.ACCELERATE_POWER_UP_GAUGE)
                             {
                                 nb_GlobalData.g_global.useItemBoost = true;
+
+                                nb_useItemData newData;
+                                newData.infoId = nb_GlobalData.g_global.selectItemId;
+                                newData.sheet = 0;
+                                newData.number = 0;
+
+                                nb_GlobalData.g_global.useItemDataList.Add(newData);
                             }
                             
                             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzUsePowerUpResponse_End;
@@ -728,8 +743,9 @@ public class nbSocket : MonoBehaviour
                                         BombCommand bomb = sub as BombCommand;
 
                                         // 퍽탄
-                                        Debug.Log("check bomb cell");
-                                        checkSubCommand(bomb.SubCommandList);
+                                        //Debug.Log("check bomb cell");
+                                        if (bomb.SubCommandList != null)
+                                            checkSubCommand(bomb.SubCommandList);
                                     }
 
                                 }
@@ -1713,8 +1729,9 @@ public class nbSocket : MonoBehaviour
         }
     }
 
-    public void checkSubCommand(List<Command> subCommand)
+    private void checkSubCommand(List<Command> subCommand)
     {
+        //Debug.Log("checkSubcCommand Count : " + subCommand.Count);
         foreach (var sub in subCommand)
         {
             if (sub.Type == CommandType.CHECK_SQUARE)
@@ -1722,24 +1739,35 @@ public class nbSocket : MonoBehaviour
                 CheckSquareCommand check = sub as CheckSquareCommand;
                 
                 nb_useItemData newData;
-                newData.infoId = 5; //single daub
+                newData.infoId = 2; //bomb
                 newData.sheet = nb_GlobalData.g_global.CheckNumCardIndex;
                 newData.number = check.Square.Number;
 
                 nb_GlobalData.g_global.useItemDataList.Add(newData);
 
+                if (check.Square.PowerUp != null)
+                {
+                    if (check.Square.PowerUp.StringParam == "CHEST")
+                    {
+                        nb_GlobalData.g_global.chestItemCount += 1;
+                    }
+                }
+
+                //Debug.Log("check Square Number : " + check.Square.Number);
+
                 if (check.SubCommandList != null)
                     checkSubCommand(check.SubCommandList);
             }
-            else if(sub.Type == CommandType.BOMB)
+            else if (sub.Type == CommandType.BOMB)
             {
+                //Debug.Log("check bomb start");
+
                 //폭탄이 또 터짐
                 BombCommand bomb = sub as BombCommand;
 
                 if (bomb.SubCommandList != null)
                     checkSubCommand(bomb.SubCommandList);
             }
-
         }
 
     }

@@ -61,10 +61,10 @@ public class nb_LobbyBlitzSceneUI : MonoBehaviour {
     public Transform cardSelectGroup;
 
     [HideInInspector]
-    public Transform waitTextImageSecond;
+    public Transform waitTextLabelSecond;
 
     [HideInInspector]
-    public Transform waitTextImageBingo;
+    public Transform waitTextLabelBingo;
 
     void Awake()
     {
@@ -89,8 +89,8 @@ public class nb_LobbyBlitzSceneUI : MonoBehaviour {
 
         cardSelectGroup = uiRoot.transform.Find("layer1/card_selection");
         
-        waitTextImageSecond = waitRemainRoot.Find("i_second_img");
-        waitTextImageBingo = waitRemainRoot.Find("i_bingo_img");
+        waitTextLabelSecond = waitRemainRoot.Find("t_second");
+        waitTextLabelBingo = waitRemainRoot.Find("t_bingo");
 
     }
 

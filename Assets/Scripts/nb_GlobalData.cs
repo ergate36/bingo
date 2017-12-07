@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using MarigoldModel.Model;
 using MarigoldGame.Protocol;
 using MarigoldGame.Commands;
-
+using Facebook.Unity;
 
 public class nb_GlobalData : MonoBehaviour
 {
@@ -14,6 +14,10 @@ public class nb_GlobalData : MonoBehaviour
     public static AudioSource g_global_bgm2 = null;
     public static AudioSource g_global_bgm3 = null;
     public static AudioSource g_global_bgm4 = null;
+
+    public bool FB_TEST;    //페북 테스트
+    [HideInInspector]
+    public bool fb_active;
 
     // model
     [HideInInspector]
@@ -243,7 +247,7 @@ public class nb_GlobalData : MonoBehaviour
 
     //main
     [HideInInspector]
-    public int maxStage = 4;
+    public int maxStage = 5;
     [HideInInspector]
     public int selectStageId = 1;
 
@@ -293,11 +297,15 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public bool useItemBoost = false;
 
+    [HideInInspector]
+    public int chestItemCount = 0;
 
     void Awake()
     {
-        Application.runInBackground = true;
+        Localization.language = "English";  //언어
+        //Localization.language = "Korean";  //언어
 
+        Application.runInBackground = true;
 
         baseUserModel = new BaseUserModel();
         baseModel = new BaseModel();
@@ -481,6 +489,7 @@ public class nb_GlobalData : MonoBehaviour
         //8.instant win
         //9.booster
         //10.triple daubs
+        //11.bomb action
         int result = 0;
 
         switch(infoId)
@@ -514,6 +523,9 @@ public class nb_GlobalData : MonoBehaviour
                 break;
             case 17:
                 result = 10;
+                break;
+            case 2:
+                result = 11;
                 break;
         }
 

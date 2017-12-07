@@ -67,6 +67,15 @@ public class nb_LobbyBlitzScene : MonoBehaviour
     void Update()
     {
         //socket
+        if (nb_GlobalData.g_global.PlaySceneChange)
+        {
+            nb_GlobalData.g_global.PlaySceneChange = false;
+
+            Debug.Log("=== GAME START ===");
+            m_nbLobbySceneUI.cancel_btn.GetComponent<BoxCollider>().enabled = false;
+            StartCoroutine(waitStart());
+        }
+
         if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.GameLiftConnectResponse_End)
         {
             readyflag = true;
@@ -100,8 +109,8 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         {
             if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond > 0)
             {
-                m_nbLobbySceneUI.waitTextImageSecond.gameObject.SetActive(true);
-                m_nbLobbySceneUI.waitTextImageBingo.gameObject.SetActive(false);
+                m_nbLobbySceneUI.waitTextLabelSecond.gameObject.SetActive(true);
+                m_nbLobbySceneUI.waitTextLabelBingo.gameObject.SetActive(false);
                 m_nbLobbySceneUI.countDown.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond.ToString();
                 m_nbLobbySceneUI.countDown2.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
 
@@ -109,8 +118,8 @@ public class nb_LobbyBlitzScene : MonoBehaviour
             }
             else if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo > 0)
             {
-                m_nbLobbySceneUI.waitTextImageSecond.gameObject.SetActive(false);
-                m_nbLobbySceneUI.waitTextImageBingo.gameObject.SetActive(true);
+                m_nbLobbySceneUI.waitTextLabelSecond.gameObject.SetActive(false);
+                m_nbLobbySceneUI.waitTextLabelBingo.gameObject.SetActive(true);
                 m_nbLobbySceneUI.countDown.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
                 m_nbLobbySceneUI.countDown2.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
 
@@ -118,15 +127,6 @@ public class nb_LobbyBlitzScene : MonoBehaviour
             }
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
-        }
-
-        if (nb_GlobalData.g_global.PlaySceneChange)
-        {
-            nb_GlobalData.g_global.PlaySceneChange = false;
-
-            Debug.Log("=== GAME START ===");
-            m_nbLobbySceneUI.cancel_btn.GetComponent<BoxCollider>().enabled = false;
-            StartCoroutine(waitStart());
         }
     }
 
@@ -213,8 +213,8 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         
         if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond > 0)
         {
-            m_nbLobbySceneUI.waitTextImageSecond.gameObject.SetActive(true);
-            m_nbLobbySceneUI.waitTextImageBingo.gameObject.SetActive(false);
+            m_nbLobbySceneUI.waitTextLabelSecond.gameObject.SetActive(true);
+            m_nbLobbySceneUI.waitTextLabelBingo.gameObject.SetActive(false);
             m_nbLobbySceneUI.countDown.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond.ToString();
             m_nbLobbySceneUI.countDown2.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
 
@@ -222,8 +222,8 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         }
         else if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo > 0)
         {
-            m_nbLobbySceneUI.waitTextImageSecond.gameObject.SetActive(false);
-            m_nbLobbySceneUI.waitTextImageBingo.gameObject.SetActive(true);
+            m_nbLobbySceneUI.waitTextLabelSecond.gameObject.SetActive(false);
+            m_nbLobbySceneUI.waitTextLabelBingo.gameObject.SetActive(true);
             m_nbLobbySceneUI.countDown.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
             m_nbLobbySceneUI.countDown2.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
 

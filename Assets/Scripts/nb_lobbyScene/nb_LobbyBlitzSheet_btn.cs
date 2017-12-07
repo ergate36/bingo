@@ -92,6 +92,9 @@ public class nb_LobbyBlitzSheet_btn : MonoBehaviour {
 
         else
         {
+            //todo: 입장 재화 부족
+
+
 
             //GameObject mainSceneUI = GameObject.Find("lobbyBlitzSceneUI/Camera/Anchor/lobby_layer_Item");
 
@@ -113,9 +116,9 @@ public class nb_LobbyBlitzSheet_btn : MonoBehaviour {
             //}
 
 
-            popup = GameObject.Find("lobbySceneUI/Camera/Anchor") as GameObject;
-            popup_ticket = popup.transform.Find("popup_ticket");
-            popup_ticket.gameObject.SetActive(true);
+            //popup = GameObject.Find("lobbySceneUI/Camera/Anchor") as GameObject;
+            //popup_ticket = popup.transform.Find("popup_ticket");
+            //popup_ticket.gameObject.SetActive(true);
         }
     }
 }

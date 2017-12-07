@@ -1,0 +1,97 @@
+
+ui_guage.png
+size: 2048,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+amber
+  rotate: false
+  xy: 2, 2
+  size: 19, 19
+  orig: 19, 19
+  offset: 0, 0
+  index: -1
+gaugewhite1
+  rotate: false
+  xy: 1550, 22
+  size: 86, 86
+  orig: 86, 86
+  offset: 0, 0
+  index: -1
+gaugewhite2
+  rotate: false
+  xy: 1130, 50
+  size: 216, 58
+  orig: 216, 58
+  offset: 0, 0
+  index: -1
+item/booster1
+  rotate: false
+  xy: 2, 23
+  size: 211, 85
+  orig: 211, 85
+  offset: 0, 0
+  index: -1
+item/booster2
+  rotate: false
+  xy: 215, 29
+  size: 211, 79
+  orig: 211, 79
+  offset: 0, 0
+  index: -1
+item/booster3
+  rotate: false
+  xy: 1348, 33
+  size: 200, 75
+  orig: 200, 75
+  offset: 0, 0
+  index: -1
+item/booster4
+  rotate: false
+  xy: 428, 64
+  size: 232, 44
+  orig: 232, 44
+  offset: 0, 0
+  index: -1
+item/booster5
+  rotate: false
+  xy: 662, 64
+  size: 232, 44
+  orig: 232, 44
+  offset: 0, 0
+  index: -1
+item/booster6
+  rotate: false
+  xy: 896, 64
+  size: 232, 44
+  orig: 232, 44
+  offset: 0, 0
+  index: -1
+ui_money_gold
+  rotate: false
+  xy: 1638, 29
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1
+ui_money_gold1
+  rotate: true
+  xy: 1720, 39
+  size: 69, 80
+  orig: 69, 80
+  offset: 0, 0
+  index: -1
+ui_money_gold2
+  rotate: true
+  xy: 1802, 52
+  size: 56, 80
+  orig: 56, 80
+  offset: 0, 0
+  index: -1
+ui_money_gold3
+  rotate: true
+  xy: 428, 35
+  size: 27, 81
+  orig: 27, 81
+  offset: 0, 0
+  index: -1

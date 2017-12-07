@@ -262,6 +262,7 @@
      <None Include="Assets\plugins\Android\res\drawable\common_signin_btn_icon_dark.xml" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Spine-Skeleton.shader" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_picker_item_background.xml" />
+     <None Include="Assets\Resources\Localization.txt" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_like.xml" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_image.xml" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_blue.xml" />
@@ -289,6 +290,7 @@
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Spine-SkeletonLit.shader" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\SpriteSpecular.cginc" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
+     <None Include="Assets\Resources\spine\ui_guage.atlas.txt" />
      <None Include="Assets\plugins\Android\res\values-ldpi\dimens.xml" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_picker_list_selector.xml" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\FootSoldier\Equipment\Equipment.atlas.txt" />
