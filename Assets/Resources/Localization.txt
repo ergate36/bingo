@@ -58,3 +58,6 @@ Login_TestId,Test Id\nLogin,테스트ID로\n로그인
 Lobby_MatchStartTitle,Round starts soon!,라운드 시작이 얼마 남지 않았습니다.
 Lobby_MatchStartMsg,Get ready... the game's about to start!,준비 하세요.. 게임이 곧 시작합니다!
 Lobby_MiniGamble,Mini Gamble,작은 도박
+Lobby_MiniGambleMsg,Enjoy mini gambling while waiting!,기다리면서 작은 도박을 즐기세요!
+Lobby_MiniGambleBet,Bet:,배팅:
+Lobby_MiniGambleShuffle,Shuffle,섞기

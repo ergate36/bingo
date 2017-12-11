@@ -271,6 +271,7 @@
      <None Include="Assets\plugins\Android\res\values\drawables.xml" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
      <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />
+     <None Include="Assets\Resources\spine\ui_minigame.atlas.txt" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_search_bar_layout.xml" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Spineunitygirl\Doi.atlas.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Depth.shader" />

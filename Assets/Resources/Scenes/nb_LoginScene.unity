@@ -4660,9 +4660,9 @@ MonoBehaviour:
   mText: Login_TestId
   mFontSize: 30
   mFontStyle: 0
-  mAlignment: 2
-  mEncoding: 0
-  mMaxLineCount: 1
+  mAlignment: 0
+  mEncoding: 1
+  mMaxLineCount: 2
   mEffectStyle: 2
   mEffectColor: {r: 0.13725491, g: 0.25882354, b: 0.3529412, a: 1}
   mSymbols: 1
@@ -5413,9 +5413,9 @@ MonoBehaviour:
   mText: Login_Facebook
   mFontSize: 30
   mFontStyle: 0
-  mAlignment: 2
-  mEncoding: 0
-  mMaxLineCount: 1
+  mAlignment: 0
+  mEncoding: 1
+  mMaxLineCount: 2
   mEffectStyle: 2
   mEffectColor: {r: 0.13725491, g: 0.25882354, b: 0.3529412, a: 1}
   mSymbols: 1

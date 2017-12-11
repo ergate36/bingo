@@ -67,7 +67,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: stage1
-    x: 0
+    x: 1841
     y: 3574
     width: 1840
     height: 522
@@ -80,45 +80,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: stage1_back1
-    x: 1841
-    y: 2765
-    width: 1840
-    height: 285
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: stage1_back2
-    x: 1841
-    y: 2529
-    width: 1840
-    height: 235
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: stage2
-    x: 1841
-    y: 3574
-    width: 1840
-    height: 522
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: stage2_back1
     x: 0
     y: 2242
     width: 1840
@@ -131,7 +92,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: stage2_back2
+  - name: stage1_back2
     x: 0
     y: 1148
     width: 1840
@@ -144,7 +105,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: stage3
+  - name: stage2
     x: 0
     y: 3051
     width: 1840
@@ -157,7 +118,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: stage3_back1
+  - name: stage2_back1
     x: 0
     y: 1956
     width: 1840
@@ -170,9 +131,48 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: stage3_back2
+  - name: stage2_back2
     x: 0
     y: 912
+    width: 1840
+    height: 235
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: stage3
+    x: 0
+    y: 3574
+    width: 1840
+    height: 522
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: stage3_back1
+    x: 1841
+    y: 2765
+    width: 1840
+    height: 285
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: stage3_back2
+    x: 1841
+    y: 2529
     width: 1840
     height: 235
     borderLeft: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: stageicon1
-    x: 1363
+    x: 1259
     y: 13
     width: 472
     height: 426
@@ -303,14 +303,14 @@ MonoBehaviour:
   - name: stageicon3
     x: 675
     y: 93
-    width: 687
+    width: 583
     height: 346
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
+    paddingLeft: 26
+    paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
   - name: stageicon4

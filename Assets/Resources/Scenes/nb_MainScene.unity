@@ -15080,7 +15080,7 @@ MonoBehaviour:
   parent_current: {fileID: 666345659}
   parent_prev: {fileID: 777019213}
   parent_next: {fileID: 1978264186}
-  bgLayerMoveTime: 0.2
+  bgLayerMoveTime: 0.75
 --- !u!4 &1772163327
 Transform:
   m_ObjectHideFlags: 0
