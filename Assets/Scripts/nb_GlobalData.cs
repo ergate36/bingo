@@ -13,11 +13,21 @@ public class nb_GlobalData : MonoBehaviour
     public static AudioSource g_global_bgm1 = null;
     public static AudioSource g_global_bgm2 = null;
     public static AudioSource g_global_bgm3 = null;
-    public static AudioSource g_global_bgm4 = null;
-
+    public static AudioSource g_global_bgm4 = null;    
+    
     public bool FB_TEST;    //페북 테스트
     [HideInInspector]
     public bool fb_active;
+
+    
+    //user
+    [HideInInspector]
+    public List<nb_userMoney> myMoney;
+
+
+    //util function
+    [HideInInspector]
+    public nbUtil util; 
 
     // model
     [HideInInspector]
@@ -37,6 +47,25 @@ public class nb_GlobalData : MonoBehaviour
 
     [HideInInspector]
     public List<Stage> stageList;
+
+    [HideInInspector]
+    public List<MiniGambleGroup> miniGambleGroupList;
+
+    [HideInInspector]
+    public List<MiniGambleGroupSet> miniGambleGroupSetList;
+
+    [HideInInspector]
+    public List<MiniGamblePrice> miniGamblePriceList;
+
+    [HideInInspector]
+    public List<MiniGamblePriceSet> miniGamblePriceSetList;
+
+    [HideInInspector]
+    public long miniGameRewardType;
+    [HideInInspector]
+    public long miniGameRewardId;
+    [HideInInspector]
+    public long miniGameRewardValue;
 
     // protocol 
     [HideInInspector]
@@ -249,7 +278,9 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public int maxStage = 5;
     [HideInInspector]
-    public int selectStageId = 1;
+    public int selectStageIndex = 1;
+    [HideInInspector]
+    public int selectStageId = 0;
 
     [HideInInspector]
     public string gl_playerSessionId;
@@ -306,6 +337,8 @@ public class nb_GlobalData : MonoBehaviour
         //Localization.language = "Korean";  //언어
 
         Application.runInBackground = true;
+        
+        util = new nbUtil();
 
         baseUserModel = new BaseUserModel();
         baseModel = new BaseModel();
@@ -381,8 +414,17 @@ public class nb_GlobalData : MonoBehaviour
 
         userPowerUpList = new List<UserPowerUp>();
         stageList = new List<Stage>();
+        miniGambleGroupList = new List<MiniGambleGroup>();
+        miniGambleGroupSetList = new List<MiniGambleGroupSet>();
+        miniGamblePriceList = new List<MiniGamblePrice>();
+        miniGamblePriceSetList = new List<MiniGamblePriceSet>();
 
         useItemDataList = new List<nb_useItemData>();
+        myMoney = new List<nb_userMoney>();
+
+        miniGameRewardType = 0;
+        miniGameRewardId = 0;
+        miniGameRewardValue = 0;
 
 
         DontDestroyOnLoad(gameObject);

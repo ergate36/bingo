@@ -46,6 +46,7 @@ public class stageJoin_btn : MonoBehaviour
 
         Debug.Log("click stage " + stageId.ToString() + " connect button");
 
+        nb_GlobalData.g_global.selectStageId = stageId;
         nbHttp.http.ConnectStage(
             nb_GlobalData.g_global.userSession.SessionKey, stageId, battleMode);
     }

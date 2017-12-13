@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using MarigoldModel.Model;
 using MarigoldModel.Commands;
+using MarigoldGame.Common;
 
 public class nbHttp : MonoBehaviour
 {
@@ -46,9 +47,13 @@ public class nbHttp : MonoBehaviour
         PlayMiniGambleStart,
         PlayMiniGambleSuccess,
 
-        //shop/item
+        //item/money
         GetUserPowerUpListStart,
         GetUserPowerUpListSuccess,
+        GetUserGameMoneyListStart,
+        GetUserGameMoneyListSuccess,
+
+        //shop
         GetPowerListStart,
         GetPowerListSuccess,
         BuyStoreProductStart,
@@ -323,13 +328,18 @@ public class nbHttp : MonoBehaviour
     }
 
     public void PlayMiniGamble(string session, long stageId, 
-        long miniGameblePriceSetId, long miniGambleGroupId)
+        long miniGamblePriceSetId, long miniGambleGroupId)
     {
         if (nbHttp.state != nbHttpState.Wait)
         {
             Debug.Log("PlayMiniGamble fail, state : " + nbHttp.state.ToString());
             return;
         }
+
+        //Debug.Log("PlayMiniGamble session : " + session);
+        //Debug.Log("PlayMiniGamble stageId : " + stageId);
+        //Debug.Log("PlayMiniGamble miniGamblePriceSetId : " + miniGamblePriceSetId);
+        //Debug.Log("PlayMiniGamble miniGambleGroupId : " + miniGambleGroupId);
 
         state = nbHttpState.PlayMiniGambleStart;
 
@@ -339,7 +349,7 @@ public class nbHttp : MonoBehaviour
         Dictionary<string, string> post = new Dictionary<string, string>();
         post.Add("session", session);
         post.Add("stageId", stageId.ToString());
-        post.Add("miniGameblePriceSetId", miniGameblePriceSetId.ToString());
+        post.Add("miniGamblePriceSetId", miniGamblePriceSetId.ToString());
         post.Add("miniGambleGroupId", miniGambleGroupId.ToString());
 
         startPost(c, f, post);
@@ -378,6 +388,25 @@ public class nbHttp : MonoBehaviour
         post.Add("session", session);
 
         startPost(c, f, post); 
+    }
+
+    public void GetUserGameMoneyList(string session)
+    {
+        if (nbHttp.state != nbHttpState.Wait)
+        {
+            Debug.Log("GetUserGameMoneyList fail, state : " + nbHttp.state.ToString());
+            return;
+        }
+
+        state = nbHttpState.GetUserGameMoneyListStart;
+
+        string c = "Player";
+        string f = "GetUserGameMoneyList";
+
+        Dictionary<string, string> post = new Dictionary<string, string>();
+        post.Add("session", session);
+
+        startPost(c, f, post);
     }
 
     public void BuyStoreProduct(string session, long storeProductId, string receipt)
@@ -464,11 +493,52 @@ public class nbHttp : MonoBehaviour
                     nb_GlobalData.g_global.stageList.Clear();
 
                     int count = data["stageList"].Count;
+                    Debug.Log("count = data[stageList].Count : " + count);
                     for (int i = 0; i < count; ++i)
                     {
                         nb_GlobalData.g_global.stageList.Add(
                             JsonConvert.DeserializeObject<Stage>(
                             data["stageList"][i].ToJson())
+                            );
+                    }
+
+                    count = data["miniGambleGroupList"].Count;
+                    //Debug.Log("count = data[miniGambleGroupList].Count : " + count);
+                    for (int i = 0; i < count; ++i)
+                    {
+                        nb_GlobalData.g_global.miniGambleGroupList.Add(
+                            JsonConvert.DeserializeObject<MiniGambleGroup>(
+                            data["miniGambleGroupList"][i].ToJson())
+                            );
+                    }
+
+                    count = data["miniGambleGroupSetList"].Count;
+                    //Debug.Log("count = data[miniGambleGroupSetList].Count : " + count);
+                    for (int i = 0; i < count; ++i)
+                    {
+                        nb_GlobalData.g_global.miniGambleGroupSetList.Add(
+                            JsonConvert.DeserializeObject<MiniGambleGroupSet>(
+                            data["miniGambleGroupSetList"][i].ToJson())
+                            );
+                    }
+
+                    count = data["miniGamblePriceList"].Count;
+                    //Debug.Log("count = data[miniGamblePriceList].Count : " + count);
+                    for (int i = 0; i < count; ++i)
+                    {
+                        nb_GlobalData.g_global.miniGamblePriceList.Add(
+                            JsonConvert.DeserializeObject<MiniGamblePrice>(
+                            data["miniGamblePriceList"][i].ToJson())
+                            );
+                    }
+
+                    count = data["miniGamblePriceSetList"].Count;
+                    //Debug.Log("count = data[miniGamblePriceSetList].Count : " + count);
+                    for (int i = 0; i < count; ++i)
+                    {
+                        nb_GlobalData.g_global.miniGamblePriceSetList.Add(
+                            JsonConvert.DeserializeObject<MiniGamblePriceSet>(
+                            data["miniGamblePriceSetList"][i].ToJson())
                             );
                     }
                 }
@@ -499,8 +569,114 @@ public class nbHttp : MonoBehaviour
             case nbHttpState.PlayMiniGambleStart:
                 {
                     state = nbHttpState.PlayMiniGambleSuccess;
-                    Debug.Log("PlayMiniGambleStart start : " + data);
-                    //data["Status"]
+                    
+                    //addAseet
+                    AddAssetCommand addAsset = JsonConvert.DeserializeObject<AddAssetCommand>(
+                        data["command"][1][1].ToJson());
+
+                    nb_GlobalData.g_global.miniGameRewardType = (long)addAsset.AssetType;
+                    nb_GlobalData.g_global.miniGameRewardId = addAsset.AssetId;
+                    nb_GlobalData.g_global.miniGameRewardValue = addAsset.AssetCount;
+
+                    //게임머니 습득
+                    if (addAsset.AssetType == AssetType.GAME_MONEY)
+                    {
+                        Debug.Log("addGameMoney Before : " +
+                            nb_GlobalData.g_global.util.getGameMoney(GameMoneyId.COIN));
+                        nb_GlobalData.g_global.util.addGameMoney(
+                            (GameMoneyId)addAsset.AssetId,
+                            addAsset.AssetCount);
+                        Debug.Log("addGameMoney after : " +
+                            nb_GlobalData.g_global.util.getGameMoney(GameMoneyId.COIN));
+                    }
+                    else if (addAsset.AssetType == AssetType.EXPERIENCE)
+                    {
+                        //todo:경험치 추가
+                        Debug.Log("PlayMiniGambleSuccess Exp Add : +" + addAsset.AssetCount);
+                    }
+                    else if (addAsset.AssetType == AssetType.POWER_UP)
+                    {
+                        //todo:아이템 추가
+                        Debug.Log("PlayMiniGambleSuccess item Add : +" + addAsset.AssetCount);
+                    }
+
+
+                    //removeAsset                    
+                    RemoveAssetCommand removeAsset = JsonConvert.DeserializeObject<RemoveAssetCommand>(
+                        data["command"][1][0].ToJson());
+
+                    //게임머니 소모
+                    if (removeAsset.AssetType == AssetType.GAME_MONEY)
+                    {
+                        //통신전 사용할때 소모되게 한다.
+                        //nb_GlobalData.g_global.util.useGameMoney(
+                        //    (GameMoneyId)removeAsset.AssetId,
+                        //    removeAsset.AssetCount);
+                    }
+                    else
+                    {
+                        Debug.Log("Fail remove error AssetType : " + removeAsset.AssetType);
+                    }
+
+
+
+
+                    //Debug.Log("command result.SubCommandList count : " + result.SubCommandList.Count);
+
+                    //foreach (var sub in result.SubCommandList)
+                    //{
+                    //    if (sub.Type == CommandType.ADD_ASSET)  //1
+                    //    {
+                    //        Debug.Log("sub.Type == CommandType.ADD_ASSET");
+                    //        AddAssetCommand addAsset = sub as AddAssetCommand;
+
+                    //        nb_GlobalData.g_global.miniGameRewardType = (long)addAsset.AssetType;
+                    //        nb_GlobalData.g_global.miniGameRewardId = addAsset.AssetId;
+                    //        nb_GlobalData.g_global.miniGameRewardValue = addAsset.AssetCount;
+
+                    //        //게임머니 습득
+                    //        if (addAsset.AssetType == AssetType.GAME_MONEY)
+                    //        {
+                    //            nb_GlobalData.g_global.util.addGameMoney(
+                    //                (GameMoneyId)addAsset.AssetId,
+                    //                addAsset.AssetCount);
+                    //        }
+                    //        else if(addAsset.AssetType == AssetType.EXPERIENCE)
+                    //        {
+                    //            //todo:경험치 추가
+                    //            Debug.Log("PlayMiniGambleSuccess Exp Add : +" + addAsset.AssetCount);
+                    //        }
+                    //        else if (addAsset.AssetType == AssetType.POWER_UP)
+                    //        {
+                    //            //todo:아이템 추가
+                    //            Debug.Log("PlayMiniGambleSuccess item Add : +" + addAsset.AssetCount);
+                    //        }
+                    //    }
+                    //    else if (sub.Type == CommandType.REMOVE_ASSET)  //2
+                    //    {
+                    //        Debug.Log("sub.Type == CommandType.REMOVE_ASSET");
+                    //        RemoveAssetCommand removeAsset = sub as RemoveAssetCommand;
+                           
+                    //        Debug.Log("removeAsset.AssetCount : " + removeAsset.AssetCount);
+
+                    //        if (removeAsset == null)
+                    //        {
+                    //            Debug.Log("removeAsset is Null");
+                    //        }
+
+                    //        //게임머니 소모
+                    //        if (removeAsset.AssetType == AssetType.GAME_MONEY)
+                    //        {
+                    //            nb_GlobalData.g_global.util.useGameMoney(
+                    //                (GameMoneyId)removeAsset.AssetId,
+                    //                removeAsset.AssetCount);
+                    //        }
+                    //        else
+                    //        {
+                    //            Debug.Log("Fail remove error AssetType : " + removeAsset.AssetType);
+                    //        }
+                    //    }
+                    //}
                 }
                 break;
             case nbHttpState.PlayMiniGambleSuccess:
@@ -523,6 +699,25 @@ public class nbHttp : MonoBehaviour
                 }
                 break;
             case nbHttpState.GetUserPowerUpListSuccess:
+                break;
+            case nbHttpState.GetUserGameMoneyListStart:
+                {
+                    state = nbHttpState.GetUserGameMoneyListSuccess;
+                    nb_GlobalData.g_global.myMoney.Clear();
+
+                    int count = data["userGameMoneyList"].Count;
+                    for (int i = 0; i < count; ++i)
+                    {
+                        var money = JsonConvert.DeserializeObject<UserGameMoney>(
+                            data["userGameMoneyList"][i].ToJson());
+                        nb_GlobalData.g_global.util.addGameMoney(
+                            (GameMoneyId)money.GameMoneyId, money.Count);
+                        Debug.Log(i + " money.GameMoneyId : " + money.GameMoneyId + 
+                            " / money.Count : " + money.Count);
+                    }
+                }
+                break;
+            case nbHttpState.GetUserGameMoneyListSuccess:
                 break;
             case nbHttpState.GetPowerListStart:
                 break;

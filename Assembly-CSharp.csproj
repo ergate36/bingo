@@ -519,6 +519,7 @@
      <Compile Include="Assets\Scripts\nb_lobbyScene\nb_LobbyBlitzShopOpen_btn.cs" />
      <Compile Include="Assets\Scripts\nb_lobbyScene\nb_LobbyBlitzShopTap_btn.cs" />
      <Compile Include="Assets\Scripts\nb_lobbyScene\nb_LobbyBlitzStartCancel_btn.cs" />
+     <Compile Include="Assets\Scripts\nb_lobbyScene\nb_killserver_btn.cs" />
      <Compile Include="Assets\Scripts\nb_loginScene\loginStart_btn.cs" />
      <Compile Include="Assets\Scripts\nb_loginScene\nb_LoginScene.cs" />
      <Compile Include="Assets\Scripts\nb_loginScene\nb_login_poup_btn.cs" />
@@ -526,6 +527,7 @@
      <Compile Include="Assets\Scripts\nb_loginScene\nb_test_fb_btn.cs" />
      <Compile Include="Assets\Scripts\nb_loginScene\nb_test_id_btn.cs" />
      <Compile Include="Assets\Scripts\nb_logoScene\nb_LogoScene.cs" />
+     <Compile Include="Assets\Scripts\nb_logoScene\nb_LogoTest.cs" />
      <Compile Include="Assets\Scripts\nb_mainScene\nb_MainScene.cs" />
      <Compile Include="Assets\Scripts\nb_mainScene\nb_MainShop.cs" />
      <Compile Include="Assets\Scripts\nb_mainScene\nb_MainShopBuy_btn.cs" />
@@ -535,6 +537,7 @@
      <Compile Include="Assets\Scripts\nb_mainScene\stageArrow_btn.cs" />
      <Compile Include="Assets\Scripts\nb_mainScene\stageJoin_btn.cs" />
      <Compile Include="Assets\Scripts\nb_minigame\nb_minigame.cs" />
+     <Compile Include="Assets\Scripts\nb_minigame\nb_minigame_bet_ctrl_btn.cs" />
      <Compile Include="Assets\Scripts\nb_minigame\nb_minigame_card_btn.cs" />
      <Compile Include="Assets\Scripts\nb_minigame\nb_minigame_shuffle_btn.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\nb_PlayBlitzScene.cs" />
@@ -546,6 +549,7 @@
      <Compile Include="Assets\Scripts\nb_playScene\playScene_SheetNum_btn.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\playScene_Sheet_Cell.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\playScene_Target_btn.cs" />
+     <Compile Include="Assets\Scripts\nb_util\nbUtil.cs" />
      <Compile Include="Assets\Scripts\playScene\ItemUse_Effect.cs" />
      <Compile Include="Assets\Scripts\playScene\PlayBlitzScene.cs" />
      <Compile Include="Assets\Scripts\playScene\PlayBlitzScene_UI.cs" />

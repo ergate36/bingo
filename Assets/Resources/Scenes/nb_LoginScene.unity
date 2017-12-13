@@ -1659,7 +1659,7 @@ MonoBehaviour:
     target: {fileID: 0}
     relative: 1
     absolute: 0
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 0.29411766}
   mPivot: 4
   mWidth: 808
   mHeight: 128
@@ -4252,6 +4252,7 @@ MonoBehaviour:
   InputSessionLoginKey: 
   InputSocialNickname: 
   maxStage: 5
+  selectStageIndex: 1
   selectStageId: 1
   gl_playerSessionId: 
   gl_ipAddress: 

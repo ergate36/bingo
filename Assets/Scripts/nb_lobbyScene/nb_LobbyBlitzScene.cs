@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using MarigoldModel.Model;
 public class nb_LobbyBlitzScene : MonoBehaviour
 {
+    public Transform gameMoneyGroup;
 
     private nb_LobbyBlitzSceneUI m_nbLobbySceneUI;
     private float alpha;
@@ -60,6 +62,7 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         drawPowerUpMoney();
 
         drawStageInfo();
+        redrawGameMoney();
     }
 
 
@@ -408,8 +411,8 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         Transform icon = m_nbLobbySceneUI.waitRemainRoot.Find("i_icon");
         Transform name = m_nbLobbySceneUI.waitRemainRoot.Find("i_stage_name");
 
-        string iconPath = "stageicon" + nb_GlobalData.g_global.selectStageId.ToString();
-        string namePath = "stagename" + nb_GlobalData.g_global.selectStageId.ToString();
+        string iconPath = "stageicon" + nb_GlobalData.g_global.selectStageIndex.ToString();
+        string namePath = "stagename" + nb_GlobalData.g_global.selectStageIndex.ToString();
         
         icon.GetComponent<UISprite>().spriteName = iconPath;
         name.GetComponent<UISprite>().spriteName = namePath;
@@ -422,8 +425,20 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         Transform bg = m_nbLobbySceneUI.uiRoot.transform.Find("layer0/bg");
 
         Texture texture = Resources.Load("nb_images/stage/stage" + 
-            nb_GlobalData.g_global.selectStageId.ToString(), typeof(Texture)) as Texture;
+            nb_GlobalData.g_global.selectStageIndex.ToString(), typeof(Texture)) as Texture;
         bg.GetComponent<UITexture>().mainTexture = texture;
         bg.GetComponent<UITexture>().MakePixelPerfect();
+    }
+
+
+    void redrawGameMoney()
+    {
+        Transform gold = gameMoneyGroup.Find("gold_group/t_value");
+        Transform credit = gameMoneyGroup.Find("credit_group/t_value");
+
+        gold.GetComponent<UILabel>().text = nb_GlobalData.g_global.util.GetCommaNumber(
+            (int)nb_GlobalData.g_global.util.getGameMoney(GameMoneyId.COIN));
+        credit.GetComponent<UILabel>().text = nb_GlobalData.g_global.util.GetCommaNumber(
+            (int)nb_GlobalData.g_global.util.getGameMoney(GameMoneyId.CREDIT));
     }
 }

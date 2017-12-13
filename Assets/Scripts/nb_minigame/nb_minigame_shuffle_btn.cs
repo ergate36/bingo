@@ -14,8 +14,11 @@ public class nb_minigame_shuffle_btn : MonoBehaviour
             return;
         }
 
-        minigame.runShuffleCard();
+        bool result = minigame.runShuffleCard();
 
-        this.gameObject.SetActive(false);
+        if (result == true)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

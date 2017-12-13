@@ -296,8 +296,8 @@ public class nb_BattleLobbyScene : MonoBehaviour
         Transform icon = m_nbLobbySceneUI.waitRemainRoot.Find("i_icon");
         Transform name = m_nbLobbySceneUI.waitRemainRoot.Find("i_stage_name");
 
-        string iconPath = "stageicon" + nb_GlobalData.g_global.selectStageId.ToString() + "_sub";
-        string namePath = "stagename" + nb_GlobalData.g_global.selectStageId.ToString() + "_sub";
+        string iconPath = "stageicon" + nb_GlobalData.g_global.selectStageIndex.ToString() + "_sub";
+        string namePath = "stagename" + nb_GlobalData.g_global.selectStageIndex.ToString() + "_sub";
         
         icon.GetComponent<UISprite>().spriteName = iconPath;
         name.GetComponent<UISprite>().spriteName = namePath;
@@ -310,7 +310,7 @@ public class nb_BattleLobbyScene : MonoBehaviour
         Transform bg = m_nbLobbySceneUI.uiRoot.transform.Find("layer0/bg");
 
         Texture texture = Resources.Load("nb_images/stage/stage" +
-            nb_GlobalData.g_global.selectStageId.ToString() + "_sub", typeof(Texture)) as Texture;
+            nb_GlobalData.g_global.selectStageIndex.ToString() + "_sub", typeof(Texture)) as Texture;
         bg.GetComponent<UITexture>().mainTexture = texture;
         bg.GetComponent<UITexture>().MakePixelPerfect();
     }

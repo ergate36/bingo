@@ -178,10 +178,19 @@ public class nb_LoginScene : MonoBehaviour
         }
         else if (nbHttp.state == nbHttp.nbHttpState.GetUserPowerUpListSuccess)
         {
-            Debug.Log("LoginScene Update : GetUserPowerUpList Success, LoadLevel nb_MainScene");
+            Debug.Log("LoginScene Update : GetUserPowerUpList Success, GetUserGameMoneyList Start");
             nbHttp.state = nbHttp.nbHttpState.Wait;
 
-            //아이템 정보 불러옴 - 메인씬 이동
+            //아이템 정보 불러옴 - 게임 머니 불러옴
+            nbHttp.http.GetUserGameMoneyList(
+                nb_GlobalData.g_global.userSession.SessionKey);
+        }
+        else if (nbHttp.state == nbHttp.nbHttpState.GetUserGameMoneyListSuccess)
+        {
+            Debug.Log("LoginScene Update : GetUserGameMoneyList Success, LoadLevel nb_MainScene");
+            nbHttp.state = nbHttp.nbHttpState.Wait;
+
+            //게임 머니 불러옴 - 메인씬 이동
             Resources.UnloadUnusedAssets();
             System.GC.Collect();
             Application.LoadLevel("nb_MainScene");

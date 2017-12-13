@@ -1,4 +1,5 @@
-﻿public struct nb_gameData
+﻿using MarigoldModel.Model;
+public struct nb_gameData
 {
     public long userID;
     public string nickname;
@@ -1017,4 +1018,10 @@ public struct nb_useItemData
     public int infoId;
     public int sheet;
     public int number;
+}
+
+public struct nb_userMoney
+{
+    public GameMoneyId id;
+    public long value;
 }

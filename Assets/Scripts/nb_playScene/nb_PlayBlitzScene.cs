@@ -575,7 +575,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
                 playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
 
-                lastUseItemTime = Time.time;
+                //lastUseItemTime = Time.time;
             }
 
             //누른셀이 폭탄이면 사용될것이야
@@ -591,9 +591,12 @@ public class nb_PlayBlitzScene : MonoBehaviour
             //아이템 사용 응답
             runUseItemAction();
 
+            playScene_ui.m_itemGauge.GetComponent<UISprite>().spriteName = "ui_item_gauge1";
             nb_GlobalData.g_global.selectItemId = 0;
             itemCoolDown = true;
             m_itemGaugeCount = 0;
+
+            lastUseItemTime = Time.time;
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
@@ -601,6 +604,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
         //부스터 이펙트
         playScene_ui.m_itemBtn.Find("booster").gameObject.SetActive(itemBoosterOn);
 
+        SkeletonAnimation ani = gaugeSpine.GetComponent<SkeletonAnimation>();
+        Vector3 center = playScene_ui.m_itemBtn.Find("i_bg").localPosition;
         if (itemCoolDown == true)
         {
             float checkTime = 20;
@@ -614,6 +619,17 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 //쿨타임 끝
                 itemCoolDown = false;
 
+                ani.AnimationName = "charging";
+                ani.loop = true;
+
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
+                    "ItemCharging";
+                playScene_ui.m_itemBtn.Find("t_label").BroadcastMessage("OnLocalize");
+                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
+                playScene_ui.m_itemGauge.GetComponent<UISprite>().spriteName = "ui_item_gauge2";
+                gaugeSpine.transform.localPosition =
+                    new Vector3(center.x - 85, center.y);
+
                 nb_GlobalData.g_global.blitzGaugeState = (int)MarigoldModel.Model.PowerUpGaugeState.UP;
             }
             else
@@ -624,20 +640,20 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 rate = rate < 0 ? 0 : rate;
                 rate = rate > 1 ? 1 : rate;
 
-                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = rate;
+                float fixRate = 1 - (rate * 0.88f);
+                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = fixRate;
 
                 playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
                     (checkTime - (int)coolTime).ToString() + " second";
 
-                SkeletonAnimation ani = gaugeSpine.GetComponent<SkeletonAnimation>();
                 if (ani.AnimationName != "cooling down")
                 {
                     ani.AnimationName = "cooling down";
                     ani.loop = true;
                 }
 
-                Vector3 center = playScene_ui.m_itemBtn.Find("i_bg").localPosition;
-                int x = (int)center.x - 85 + ((int)(coolTime / checkTime) * 18);
+                //int x = (int)center.x - 85 + ((int)(coolTime / checkTime) * 18);
+                int x = (int)center.x - 85 + (int)((1 - rate) * 185);
 
                 gaugeSpine.transform.localPosition = center;
                 gaugeSpine.transform.localPosition =
@@ -649,78 +665,79 @@ public class nb_PlayBlitzScene : MonoBehaviour
             if (nb_GlobalData.g_global.blitzGaugeState == 
                 (int)MarigoldModel.Model.PowerUpGaugeState.FULL)
             {
-                //playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                //    "Ready";
-                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
-                    "ItemReady";
-
-                playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 1;
-
-                SkeletonAnimation ani = gaugeSpine.GetComponent<SkeletonAnimation>();
                 if (ani.AnimationName != "power-ups")
                 {
                     ani.AnimationName = "power-ups";
                     ani.loop = true;
+
+                    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
+                        "ItemReady";
+                    playScene_ui.m_itemBtn.Find("t_label").BroadcastMessage("OnLocalize");
+
+                    playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 1;
+
+                    gaugeSpine.transform.localPosition =
+                        new Vector3(center.x - 31, center.y + 1);
                 }
             }
             else if (nb_GlobalData.g_global.blitzGaugeState == 
                 (int)MarigoldModel.Model.PowerUpGaugeState.UP)
             {
-                //playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                //    "Charging...";
-                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
-                    "ItemCharging";
-
-                SkeletonAnimation ani = gaugeSpine.GetComponent<SkeletonAnimation>();
                 if (ani.AnimationName != "charging")
                 {
                     ani.AnimationName = "charging";
                     ani.loop = true;
 
-                    Vector3 center = playScene_ui.m_itemBtn.Find("i_bg").localPosition;
-                    gaugeSpine.transform.localPosition = center;
-                    if (nb_GlobalData.g_global.blitzGaugeValue == 0)
+                    playScene_ui.m_itemGauge.GetComponent<UISprite>().spriteName = "ui_item_gauge2";
+
+                    Debug.Log("charging spine");
+                }
+                playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
+                    "ItemCharging";
+                playScene_ui.m_itemBtn.Find("t_label").BroadcastMessage("OnLocalize");
+
+                gaugeSpine.transform.localPosition = new Vector3(center.x - 85, center.y);
+                if (nb_GlobalData.g_global.blitzGaugeValue == 0)
+                {
+                    gaugeSpine.transform.localPosition =
+                        new Vector3(center.x - 85, center.y);
+
+                    playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
+                }
+                else if (nb_GlobalData.g_global.blitzGaugeValue == 1)
+                {
+                    if (itemBoosterOn)
+                    {
+                        gaugeSpine.transform.localPosition = center;
+
+                        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.5f;
+                    }
+                    else
                     {
                         gaugeSpine.transform.localPosition =
-                            new Vector3(center.x - 85, center.y);
+                            new Vector3(center.x - 30, center.y);
 
-                        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
+                        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.37f;
                     }
-                    else if (nb_GlobalData.g_global.blitzGaugeValue == 1)
+                }
+                else if (nb_GlobalData.g_global.blitzGaugeValue == 2)
+                {
+                    if (!itemBoosterOn)
                     {
-                        if (itemBoosterOn)
-                        {
-                            gaugeSpine.transform.localPosition = center;
+                        gaugeSpine.transform.localPosition =
+                            new Vector3(center.x + 30, center.y);
 
-                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.5f;
-                        }
-                        else
-                        {
-                            gaugeSpine.transform.localPosition =
-                                new Vector3(center.x - 30, center.y);
-
-                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.33f;
-                        }
-                    }
-                    else if (nb_GlobalData.g_global.blitzGaugeValue == 2)
-                    {
-                        if (!itemBoosterOn)
-                        {
-                            gaugeSpine.transform.localPosition =
-                                new Vector3(center.x + 30, center.y);
-
-                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.66f;
-                        }
+                        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.66f;
                     }
                 }
             }
+
             else if (nb_GlobalData.g_global.blitzGaugeState ==
                 (int)MarigoldModel.Model.PowerUpGaugeState.STORE)
             {
-                //playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
-                //    "Empty";
                 playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
                     "ItemEmpty";
+                playScene_ui.m_itemBtn.Find("t_label").BroadcastMessage("OnLocalize");
             }
         }
 
@@ -2205,7 +2222,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         {
             //만땅
             playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 1.0f;
-            activeItem(nb_GlobalData.g_global.itemIndex);
+            //activeItem(nb_GlobalData.g_global.itemIndex);
 
             //Debug.Log("Item Debug Msg : Gauge 3/3");
 
@@ -2220,6 +2237,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         playScene_ui.m_itemCooltime.gameObject.SetActive(true);
         //playScene_ui.m_itemGauge[0].gameObject.SetActive(false);
         playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 1.0f;
+        playScene_ui.m_itemGauge.GetComponent<UISprite>().spriteName = "ui_item_gauge2";
 
         m_bItemReady = true;
 
@@ -3720,7 +3738,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
     {
         Transform center = playScene_ui.m_bingoBoard.Find("sheet_center");
 
-        Debug.Log("run Item Effect Count : " + nb_GlobalData.g_global.useItemDataList.Count);
+        //Debug.Log("run Item Effect Count : " + nb_GlobalData.g_global.useItemDataList.Count);
 
         foreach(var data in nb_GlobalData.g_global.useItemDataList)
         {
@@ -3910,7 +3928,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         Transform bg = playScene_ui.playUI.Find("layer0/bg");
 
         Texture texture = Resources.Load("nb_images/stage/stage" +
-            nb_GlobalData.g_global.selectStageId.ToString(), typeof(Texture)) as Texture;
+            nb_GlobalData.g_global.selectStageIndex.ToString(), typeof(Texture)) as Texture;
         bg.GetComponent<UITexture>().mainTexture = texture;
         bg.GetComponent<UITexture>().MakePixelPerfect();
     }

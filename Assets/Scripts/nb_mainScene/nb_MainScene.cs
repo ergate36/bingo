@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using Spine.Unity;
+using MarigoldModel.Model;
 
 public class nb_MainScene : MonoBehaviour
 {
@@ -245,6 +246,7 @@ public class nb_MainScene : MonoBehaviour
         //    GlobalData.g_global.GetComponent<AudioSource>().Play();
 
 
+        drawGameMoney();
         drawPowerUpMoney();
     }
 
@@ -453,6 +455,23 @@ public class nb_MainScene : MonoBehaviour
         //}
     }
 
+    public void drawGameMoney()
+    {
+        GameObject moneyGroup = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase/money_group") as GameObject;
+        if (moneyGroup == null)
+        {
+            Debug.Log("moneyGroup null");
+        }
+        UILabel textLabel1 = moneyGroup.transform.Find("gold_group/t_value").GetComponent<UILabel>();
+        UILabel textLabel2 = moneyGroup.transform.Find("credit_group/t_value").GetComponent<UILabel>();
+
+        long value1 = nb_GlobalData.g_global.util.getGameMoney(GameMoneyId.COIN);
+        long value2 = nb_GlobalData.g_global.util.getGameMoney(GameMoneyId.CREDIT);
+
+        textLabel1.text = nb_GlobalData.g_global.util.GetCommaNumber((int)value1);
+        textLabel2.text = nb_GlobalData.g_global.util.GetCommaNumber((int)value2);
+    }
+
     public void drawPowerUpMoney()
     {
         GameObject moneyGroup = GameObject.Find("mainSceneUI/Camera/Anchor/mainBase/money_group") as GameObject;
@@ -469,14 +488,14 @@ public class nb_MainScene : MonoBehaviour
 
     public void moveStageNext()
     {
-        if (nb_GlobalData.g_global.selectStageId + 1 > nb_GlobalData.g_global.maxStage)
+        if (nb_GlobalData.g_global.selectStageIndex + 1 > nb_GlobalData.g_global.maxStage)
         {
             //Debug.Log("StageNextNull Return");
             nb_GlobalData.g_global.MainStageMove = false;
             return;
         }
 
-        nb_GlobalData.g_global.selectStageId = nb_GlobalData.g_global.selectStageId + 1;
+        nb_GlobalData.g_global.selectStageIndex = nb_GlobalData.g_global.selectStageIndex + 1;
 
         Vector3 vec = new Vector3();
         vec.x = parent_prev.position.x;
@@ -488,14 +507,14 @@ public class nb_MainScene : MonoBehaviour
 
     public void moveStagePrev()
     {
-        if (nb_GlobalData.g_global.selectStageId - 1 < 1)
+        if (nb_GlobalData.g_global.selectStageIndex - 1 < 1)
         {
             //Debug.Log("StagePrevNull Return");
             nb_GlobalData.g_global.MainStageMove = false;
             return;
         }
 
-        nb_GlobalData.g_global.selectStageId = nb_GlobalData.g_global.selectStageId - 1;
+        nb_GlobalData.g_global.selectStageIndex = nb_GlobalData.g_global.selectStageIndex - 1;
 
         Vector3 vec = new Vector3();
         vec.x = parent_next.position.x;
@@ -626,7 +645,7 @@ public class nb_MainScene : MonoBehaviour
 
     private void refreshStageNext()
     {
-        int selectStage = nb_GlobalData.g_global.selectStageId;
+        int selectStage = nb_GlobalData.g_global.selectStageIndex;
         int maxStage = nb_GlobalData.g_global.maxStage;
         
         for (int i = 0; i < parent_prev.transform.childCount; ++i)
@@ -671,7 +690,7 @@ public class nb_MainScene : MonoBehaviour
 
     private void refreshStagePrev()
     {
-        int selectStage = nb_GlobalData.g_global.selectStageId;
+        int selectStage = nb_GlobalData.g_global.selectStageIndex;
         int maxStage = nb_GlobalData.g_global.maxStage;
 
         for (int i = 0; i < parent_next.transform.childCount; ++i)
@@ -716,7 +735,7 @@ public class nb_MainScene : MonoBehaviour
 
     private void refreshStageView()
     {
-        int selectStage = nb_GlobalData.g_global.selectStageId;
+        int selectStage = nb_GlobalData.g_global.selectStageIndex;
         int maxStage = nb_GlobalData.g_global.maxStage;
 
         bgLayer.transform.position = Vector3.zero;

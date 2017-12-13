@@ -3677,7 +3677,7 @@ public class nb_battlePlayScene : MonoBehaviour
         Transform bg = playScene_ui.playUI.Find("layer0/bg");
 
         Texture texture = Resources.Load("nb_images/stage/stage" +
-            nb_GlobalData.g_global.selectStageId.ToString() + "_sub", typeof(Texture)) as Texture;
+            nb_GlobalData.g_global.selectStageIndex.ToString() + "_sub", typeof(Texture)) as Texture;
         bg.GetComponent<UITexture>().mainTexture = texture;
         bg.GetComponent<UITexture>().MakePixelPerfect();
     }
