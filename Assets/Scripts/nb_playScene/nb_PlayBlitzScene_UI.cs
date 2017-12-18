@@ -170,6 +170,9 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
     [HideInInspector]
     public Transform effect_end;
 
+    //collection
+    [HideInInspector]
+    public Transform[] m_collection;
 
     void Awake()
     {
@@ -220,6 +223,8 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
         {
             m_daubBoardNumber[i] = m_daubBoard.Find("number_group/t_number_" + (i + 1).ToString());
         }
+
+        m_collection = new Transform[4];
 
         Init_UIControls();
     }
@@ -383,6 +388,10 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
         //    noItemMsg.gameObject.SetActive(false);
         //}
 
+        m_collection[0] = m_bingoBoard.Find("sheet_0").transform.Find("collection");
+        m_collection[1] = m_bingoBoard.Find("sheet_1").transform.Find("collection");
+        m_collection[2] = m_bingoBoard.Find("sheet_2").transform.Find("collection");
+        m_collection[3] = m_bingoBoard.Find("sheet_3").transform.Find("collection");
     }
 
 }

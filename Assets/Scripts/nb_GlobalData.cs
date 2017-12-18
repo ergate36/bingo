@@ -61,11 +61,16 @@ public class nb_GlobalData : MonoBehaviour
     public List<MiniGamblePriceSet> miniGamblePriceSetList;
 
     [HideInInspector]
+    public List<StageFee> stageFeeList;
+
+    [HideInInspector]
     public long miniGameRewardType;
     [HideInInspector]
     public long miniGameRewardId;
     [HideInInspector]
     public long miniGameRewardValue;
+    [HideInInspector]
+    public MiniGameState miniGameState;
 
     // protocol 
     [HideInInspector]
@@ -276,7 +281,7 @@ public class nb_GlobalData : MonoBehaviour
 
     //main
     [HideInInspector]
-    public int maxStage = 5;
+    public int maxStage;
     [HideInInspector]
     public int selectStageIndex = 1;
     [HideInInspector]
@@ -295,6 +300,9 @@ public class nb_GlobalData : MonoBehaviour
     public bool MainShopActive = false;
     [HideInInspector]
     public bool MainStageMove = false;
+
+    //shop
+    public bool ShopMenuActive = false;
 
     //lobby
     [HideInInspector]
@@ -397,6 +405,7 @@ public class nb_GlobalData : MonoBehaviour
         battleSheet[0].sheetDaub = new bool[4, 25];
         battleSheet[1].sheetDaub = new bool[4, 25];
         battleSheet[2].sheetDaub = new bool[4, 25];
+        sheetInfo.collectionId = new int[4];
 
 
         bingoball = new int[75];
@@ -407,6 +416,7 @@ public class nb_GlobalData : MonoBehaviour
 
 
         //스테이지 스파인
+        maxStage = 9;
         SelectWorldStage = 1;
         //WorldStageSpineRefresh = false;
         //WorldStageSpineSelectAni = false;
@@ -418,6 +428,7 @@ public class nb_GlobalData : MonoBehaviour
         miniGambleGroupSetList = new List<MiniGambleGroupSet>();
         miniGamblePriceList = new List<MiniGamblePrice>();
         miniGamblePriceSetList = new List<MiniGamblePriceSet>();
+        stageFeeList = new List<StageFee>();
 
         useItemDataList = new List<nb_useItemData>();
         myMoney = new List<nb_userMoney>();
@@ -426,6 +437,7 @@ public class nb_GlobalData : MonoBehaviour
         miniGameRewardId = 0;
         miniGameRewardValue = 0;
 
+        miniGameState = MiniGameState.DISABLE;
 
         DontDestroyOnLoad(gameObject);
     }

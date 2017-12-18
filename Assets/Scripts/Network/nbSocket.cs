@@ -388,6 +388,11 @@ public class nbSocket : MonoBehaviour
                                 nb_GlobalData.g_global.sheetInfo.sheet[1, i] = 0;
                                 nb_GlobalData.g_global.sheetInfo.sheet[2, i] = 0;
                                 nb_GlobalData.g_global.sheetInfo.sheet[3, i] = 0;
+
+                                if (i < 4)
+                                {
+                                    nb_GlobalData.g_global.sheetInfo.collectionId[i] = 0;
+                                }
                             }
                             nb_GlobalData.g_global.BingoTotalFinishCount = 0;
                             nb_GlobalData.g_global.BingoNumberCount = 0;
@@ -431,6 +436,10 @@ public class nbSocket : MonoBehaviour
                                     }
                                     //Debug.Log("Bingo Sheet " + card.ToString() + " : " + text);
                                 }
+
+                                //콜럭션 카드
+                                nb_GlobalData.g_global.sheetInfo.collectionId[card] = 
+                                    (int)body.CardList[card].CollectionId;
                             }
                             Debug.Log("Sheet Setting Finish");
 

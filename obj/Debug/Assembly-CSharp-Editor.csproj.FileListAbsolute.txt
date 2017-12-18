@@ -118,6 +118,6 @@ D:\bingo\bingo\BingoMonster_Client\obj\Debug\Assembly-CSharp-Editor.csprojResolv
 D:\bingo\bingo\BingoMonster_Client\obj\Debug\Assembly-CSharp-Editor.dll
 D:\bingo\bingo\BingoMonster_Client\obj\Debug\Assembly-CSharp-Editor.pdb
 D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\UnityEditor.WebGL.Extensions.dll
-D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\Facebook.Unity.Gameroom.dll
 D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\LitJson.dll
 D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\Newtonsoft.Json.dll
+D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\Facebook.Unity.Gameroom.dll

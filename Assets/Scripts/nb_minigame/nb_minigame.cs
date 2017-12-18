@@ -103,6 +103,11 @@ public class nb_minigame : MonoBehaviour
             return false;
         }
 
+        if (nb_GlobalData.g_global.miniGameState != MiniGameState.TEST)
+        {
+            nb_GlobalData.g_global.miniGameState = MiniGameState.ANIMATE;
+        }
+
         betParent.gameObject.SetActive(false);
 
         beforeMoney.id = (GameMoneyId)defaultAssetId;
@@ -198,7 +203,7 @@ public class nb_minigame : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator miniGameRewardAction(int cardIndex) //todo:보상 종류, 수량 추가 해야됨
+    private IEnumerator miniGameRewardAction(int cardIndex)
     {
         //Debug.Log("[minigame]miniGameRewardAction start");
         if (card[cardIndex] != null)
@@ -270,6 +275,11 @@ public class nb_minigame : MonoBehaviour
 
             betParent.gameObject.SetActive(true);
             this.transform.Find("i_shuffle_btn").gameObject.SetActive(true);
+
+            if (nb_GlobalData.g_global.miniGameState != MiniGameState.TEST)
+            {
+                nb_GlobalData.g_global.miniGameState = MiniGameState.WAIT;
+            }
         }
         yield return null;
     }

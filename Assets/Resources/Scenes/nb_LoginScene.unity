@@ -4207,6 +4207,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FB_TEST: 1
   fb_active: 0
+  miniGameRewardType: 0
+  miniGameRewardId: 0
+  miniGameRewardValue: 0
+  miniGameState: 0
   blitzGaugeValue: 0
   blitzGaugeState: 0
   battleGaugeValue: 0
@@ -4260,6 +4264,7 @@ MonoBehaviour:
   MainMenuActive: 0
   MainShopActive: 0
   MainStageMove: 0
+  ShopMenuActive: 0
   LobbyMenuActive: 0
   LobbyShopActive: 0
   PlaySceneChange: 0

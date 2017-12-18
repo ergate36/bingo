@@ -66,6 +66,10 @@ public class nb_LobbyBlitzSceneUI : MonoBehaviour {
     [HideInInspector]
     public Transform waitTextLabelBingo;
 
+    //mini game
+    [HideInInspector]
+    public Transform miniGameGroup;
+
     void Awake()
     {
         m_sheetBtn = new Transform[4];
@@ -91,6 +95,8 @@ public class nb_LobbyBlitzSceneUI : MonoBehaviour {
         
         waitTextLabelSecond = waitRemainRoot.Find("t_second");
         waitTextLabelBingo = waitRemainRoot.Find("t_bingo");
+
+        miniGameGroup = uiRoot.transform.Find("minigame");
 
     }
 

@@ -67,6 +67,6 @@ D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\UnityEngine.VR.xml
 D:\bingo\bingo\BingoMonster_Client\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 D:\bingo\bingo\BingoMonster_Client\obj\Debug\Assembly-CSharp.dll
 D:\bingo\bingo\BingoMonster_Client\obj\Debug\Assembly-CSharp.pdb
-D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\Facebook.Unity.Gameroom.dll
 D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\LitJson.dll
 D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\Newtonsoft.Json.dll
+D:\bingo\bingo\BingoMonster_Client\Temp\bin\Debug\Facebook.Unity.Gameroom.dll

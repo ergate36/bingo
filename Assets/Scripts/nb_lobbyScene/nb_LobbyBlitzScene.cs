@@ -63,12 +63,39 @@ public class nb_LobbyBlitzScene : MonoBehaviour
 
         drawStageInfo();
         redrawGameMoney();
+
+        m_nbLobbySceneUI.miniGameGroup.gameObject.SetActive(false);
+
+        if (nb_GlobalData.g_global.miniGameState != MiniGameState.TEST)
+        {
+            nb_GlobalData.g_global.miniGameState = MiniGameState.DISABLE;
+        }
     }
 
 
 
     void Update()
     {
+        if (nb_GlobalData.g_global.miniGameState != MiniGameState.TEST)
+        {
+            if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond < 10)
+            {
+                //10초 미만이면 미니 게임 시작을 막는다.
+                //미니 게임 연출중이면 기다린다.
+                if (nb_GlobalData.g_global.miniGameState == MiniGameState.ANIMATE ||
+                    nb_GlobalData.g_global.miniGameState == MiniGameState.DISABLE)
+                {
+                    //대기중일때만 변경
+                }
+                else if (nb_GlobalData.g_global.miniGameState == MiniGameState.WAIT)
+                {
+                    m_nbLobbySceneUI.m_waitPopup.gameObject.SetActive(true);
+                    m_nbLobbySceneUI.cardSelectGroup.gameObject.SetActive(false);
+                    m_nbLobbySceneUI.miniGameGroup.gameObject.SetActive(false);
+                }
+            }
+        }
+
         //socket
         if (nb_GlobalData.g_global.PlaySceneChange)
         {
@@ -166,17 +193,18 @@ public class nb_LobbyBlitzScene : MonoBehaviour
     }
     private void activeReadyPopup()
     {
-        BoxCollider[] buttons = m_nbLobbySceneUI.uiRoot.GetComponentsInChildren<BoxCollider>();
+        BoxCollider[] buttons = m_nbLobbySceneUI.uiRoot.transform.Find("layer1").
+            GetComponentsInChildren<BoxCollider>();
         for (int i = 0; i < buttons.Length; ++i)
         {
             buttons[i].enabled = false;
         }   //대기중 뒤쪽 화면 ui 버튼 모두 비활성화
 
-        BoxCollider[] popupButtons = m_nbLobbySceneUI.m_waitPopup.GetComponentsInChildren<BoxCollider>();
-        for (int i = 0; i < popupButtons.Length; ++i)
-        {
-            popupButtons[i].enabled = true;
-        }   //wait ui 버튼 활성화
+        //BoxCollider[] popupButtons = m_nbLobbySceneUI.m_waitPopup.GetComponentsInChildren<BoxCollider>();
+        //for (int i = 0; i < popupButtons.Length; ++i)
+        //{
+        //    popupButtons[i].enabled = true;
+        //}   //wait ui 버튼 활성화
 
         //sound_notice.GetComponent<AudioSource>().Play();
         
@@ -381,9 +409,34 @@ public class nb_LobbyBlitzScene : MonoBehaviour
     {
         //StopCoroutine("activeStartCountDown");
         //StartCoroutine("activeStartCountDown");
+        long priceId = 0;
+        foreach (var stage in nb_GlobalData.g_global.stageList)
+        {
+            if (stage.Id == nb_GlobalData.g_global.selectStageId)
+            {
+                priceId = stage.MiniGamblePriceId;
+                break;
+            }
+        }
+        if (priceId == 0)
+        {
+            //미니게임 정보가 엄서 - 그냥 대기
+            m_nbLobbySceneUI.m_waitPopup.gameObject.SetActive(true);
+            m_nbLobbySceneUI.cardSelectGroup.gameObject.SetActive(false);
+            m_nbLobbySceneUI.miniGameGroup.gameObject.SetActive(false);
+        }
+        else
+        {
+            m_nbLobbySceneUI.m_waitPopup.gameObject.SetActive(false);
+            m_nbLobbySceneUI.cardSelectGroup.gameObject.SetActive(false);
+            m_nbLobbySceneUI.miniGameGroup.gameObject.SetActive(true);  //미니 게임 활성화
 
-        m_nbLobbySceneUI.m_waitPopup.gameObject.SetActive(true);  //wait ui 활성화
-        m_nbLobbySceneUI.cardSelectGroup.gameObject.SetActive(false);
+            if (nb_GlobalData.g_global.miniGameState != MiniGameState.TEST)
+            {
+                nb_GlobalData.g_global.miniGameState = MiniGameState.WAIT;
+            }
+        }
+
     }
 
     private void completeScaling()

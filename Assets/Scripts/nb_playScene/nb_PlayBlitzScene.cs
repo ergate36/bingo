@@ -245,6 +245,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         gaugeSpine = playScene_ui.m_itemBtn.Find("spine").gameObject;
 
         drawStageBg();
+        drawCollectionCard();
     }
 
     void Update()
@@ -3725,7 +3726,10 @@ public class nb_PlayBlitzScene : MonoBehaviour
         daubObjects[sheetIndex, cellIndex].SetActive(true);
         daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName =
             nb_Item.nb_daubItemImagePath[(int)type];
-        //daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().MakePixelPerfect();
+        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().MakePixelPerfect();
+        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().color = new Color(255, 255, 255, 128);
+        daubObjects[sheetIndex, cellIndex].transform.localScale = new Vector3(0.5f, 0.5f);
+
     }
 
     public void activeCellItem(int sheetIndex, int cellIndex)
@@ -3931,5 +3935,24 @@ public class nb_PlayBlitzScene : MonoBehaviour
             nb_GlobalData.g_global.selectStageIndex.ToString(), typeof(Texture)) as Texture;
         bg.GetComponent<UITexture>().mainTexture = texture;
         bg.GetComponent<UITexture>().MakePixelPerfect();
+    }
+
+    private void drawCollectionCard()
+    {
+        return;
+
+
+        for (int i = 0; i < 4; ++i)
+        {
+            if (nb_GlobalData.g_global.sheetInfo.collectionId[i] != 0)
+            {
+                playScene_ui.m_collection[i].gameObject.SetActive(true);
+                var sprite = playScene_ui.m_collection[i].GetComponent<UISprite>();
+                sprite.atlas.name = "collection";
+                sprite.spriteName = "collection";
+                sprite.MakePixelPerfect();
+                playScene_ui.m_collection[i].localScale = new Vector3(0.8f, 0.8f);
+            }
+        }
     }
 }

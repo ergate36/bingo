@@ -400,7 +400,8 @@ public struct nb_SheetInfo
     public int[,] sheet;
     public bool[,] sheetDaub;
     public int shield;
-    public int betting_index;
+    //public int betting_index;
+    public int[] collectionId;
 }
 
 public struct nb_BandInfo
@@ -1024,4 +1025,12 @@ public struct nb_userMoney
 {
     public GameMoneyId id;
     public long value;
+}
+
+public enum MiniGameState
+{
+    DISABLE,    //비활성화
+    WAIT,       //활성화-대기중
+    ANIMATE,    //활성화-연출중
+    TEST,       //테스트중
 }

@@ -778,7 +778,7 @@ public class nb_MainScene : MonoBehaviour
 
         if (selectStage < maxStage)
         {
-            //Debug.Log("next stage refresh selectStage : " + selectStage + ", max : " + maxStage);
+            Debug.Log("next stage refresh selectStage : " + selectStage + ", max : " + maxStage);
             stage_next = Instantiate(Resources.Load("game/stage" + (selectStage + 1).ToString())) as GameObject;
             stage_next.transform.parent = parent_next;
             stage_next.transform.localPosition = Vector3.zero;

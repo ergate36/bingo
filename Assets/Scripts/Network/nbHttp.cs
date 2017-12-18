@@ -541,6 +541,16 @@ public class nbHttp : MonoBehaviour
                             data["miniGamblePriceSetList"][i].ToJson())
                             );
                     }
+
+                    count = data["StageFeeList"].Count;
+                    Debug.Log("count = data[StageFeeList].Count : " + count);
+                    for (int i = 0; i < count; ++i)
+                    {
+                        nb_GlobalData.g_global.stageFeeList.Add(
+                            JsonConvert.DeserializeObject<StageFee>(
+                            data["StageFeeList"][i].ToJson())
+                            );
+                    }
                 }
                 break;
             case nbHttpState.GetStageListSuccess:
