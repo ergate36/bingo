@@ -71,4 +71,17 @@ public class nbUtil
         newMoney.value = current - useValue;
         nb_GlobalData.g_global.myMoney.Add(newMoney);
     }
+
+    public Collection findCollection(int id)
+    {
+        foreach(var col in nb_GlobalData.g_global.collectionList)
+        {
+            if (col.Id == id)
+            {
+                return col;
+            }
+        }
+
+        return null;
+    }
 }

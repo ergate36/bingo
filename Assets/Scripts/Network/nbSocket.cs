@@ -392,6 +392,7 @@ public class nbSocket : MonoBehaviour
                                 if (i < 4)
                                 {
                                     nb_GlobalData.g_global.sheetInfo.collectionId[i] = 0;
+                                    nb_GlobalData.g_global.InstantBingo[i] = false;
                                 }
                             }
                             nb_GlobalData.g_global.BingoTotalFinishCount = 0;
@@ -755,6 +756,11 @@ public class nbSocket : MonoBehaviour
                                         //Debug.Log("check bomb cell");
                                         if (bomb.SubCommandList != null)
                                             checkSubCommand(bomb.SubCommandList);
+                                    }
+                                    else if (sub.Type == CommandType.INSTANT_WIN)
+                                    {
+                                        //빙고
+                                        checkInstantWin();
                                     }
 
                                 }
@@ -1777,8 +1783,22 @@ public class nbSocket : MonoBehaviour
                 if (bomb.SubCommandList != null)
                     checkSubCommand(bomb.SubCommandList);
             }
+            else if (sub.Type == CommandType.INSTANT_WIN)
+            {
+                checkInstantWin();
+            }
         }
 
+    }
+
+    private void checkInstantWin()
+    {
+        nb_useItemData newData;
+        newData.infoId = 13; //instant win
+        newData.sheet = nb_GlobalData.g_global.CheckNumCardIndex;
+        newData.number = nb_GlobalData.g_global.CheckNumNumber;
+
+        nb_GlobalData.g_global.useItemDataList.Add(newData);
     }
 
 

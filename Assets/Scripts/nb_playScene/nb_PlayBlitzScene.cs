@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Spine.Unity;
+using MarigoldModel.Model;
 
 public class nb_PlayBlitzScene : MonoBehaviour
 {
@@ -488,59 +489,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
             nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzCompleteBingoResponse_End)
         {
             //순위 갱신
-            if (nb_GlobalData.g_global.callBingo)
-            {
-                //내가 부른 빙고
-                nb_GlobalData.g_global.addMyBlitzRanking(
-                    nb_GlobalData.g_global.BingoTotalFinishCount);
-            }
-
-            if (nb_GlobalData.g_global.BingoTotalFinishCount == 1)
-            {
-                playScene_ui.m_rankBoard.Find("player_ranking_1/t_player_name").GetComponent<UILabel>().text =
-                    nb_GlobalData.g_global.BingoLastFinishUserName;
-            }
-            else if (nb_GlobalData.g_global.BingoTotalFinishCount == 2)
-            {
-                playScene_ui.m_rankBoard.Find("player_ranking_2/t_player_name").GetComponent<UILabel>().text =
-                    nb_GlobalData.g_global.BingoLastFinishUserName;
-            }
-            else if (nb_GlobalData.g_global.BingoTotalFinishCount == 3)
-            {
-                playScene_ui.m_rankBoard.Find("player_ranking_3/t_player_name").GetComponent<UILabel>().text =
-                    nb_GlobalData.g_global.BingoLastFinishUserName;
-            }
-            else if (nb_GlobalData.g_global.BingoTotalFinishCount >= 4)
-            {
-                playScene_ui.m_rankBoard.Find("player_ranking_x/t_player_name").GetComponent<UILabel>().text =
-                    nb_GlobalData.g_global.BingoLastFinishUserName;
-
-                //playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text =
-                //    nb_GlobalData.g_global.BingoTotalFinishCount.ToString() + "th";
-                playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILocalize>().key = "Rank_x";
-                string text = nb_GlobalData.g_global.BingoTotalFinishCount.ToString() + 
-                    playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text;
-
-                playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text = text;
-            }
-            else
-            {
-                nb_GlobalData.g_global.BingoLastFinishUserName = "-";
-            }
-
-            if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo <= 5)
-            {
-                playScene_ui.label_bingoCount.GetComponent<UILabel>().color = Color.red;
-            }
-
-            //남은 빙고 숫자 갱신
-            playScene_ui.label_bingoCount.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
-            iTween.ScaleTo(playScene_ui.label_bingoCount.gameObject, 
-                iTween.Hash("x,", 1.2f, "y", 1.3f, "oncompletetarget", gameObject,
-                "oncomplete", "completeScaling", "time", 0.3f));
-
-
-            nb_GlobalData.g_global.callBingo = false;
+            updateCompleteBingo();
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
 
@@ -1086,6 +1035,12 @@ public class nb_PlayBlitzScene : MonoBehaviour
             if (checkColBingo(sheetIndex, i) || checkRowBingo(sheetIndex, i))
                 return true;
         }
+
+        if (nb_GlobalData.g_global.InstantBingo[sheetIndex] == true)
+        {
+            return true;
+        }
+         
         return false;
     }
     bool checkRowBingo(int sheetIndex, int row)
@@ -1712,9 +1667,12 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
             daubObjects[sheetIndex, index].SetActive(true);
             daubObjects[sheetIndex, index].GetComponentInChildren<UILabel>().text = cellNumber.ToString();
-            daubObjects[sheetIndex, index].GetComponent<UISprite>().spriteName = "ui_daub1";
-            daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().color = Color.white;
-            daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().effectColor = Color.black;
+            daubObjects[sheetIndex, index].GetComponentInChildren<UISprite>().spriteName = "ui_daub1";
+            daubObjects[sheetIndex, index].GetComponentInChildren<UISprite>().MakePixelPerfect();
+            daubObjects[sheetIndex, index].GetComponentInChildren<UILabel>().color = Color.white;
+            daubObjects[sheetIndex, index].GetComponentInChildren<UILabel>().effectColor = Color.black;
+            daubObjects[sheetIndex, index].GetComponentInChildren<UISprite>().alpha = 1f;
+            daubObjects[sheetIndex, index].transform.Find("img").localScale = Vector3.one;
             //if (m_calledBallNumber[m_myLocalSheets[sheetIndex].cells[index].number] == true)
             if (checkDaubNumber(cellNumber) == true)
                 //
@@ -1726,9 +1684,12 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 m_myLocalSheets[sheetIndex].cells[index].realDaub = true;
                 //playScene_ui.m_cells[sheetIndex, index].GetComponent<UILabel>().text = "";
                 //
-                daubObjects[sheetIndex, index].GetComponent<UISprite>().spriteName = "ui_daub1";
-                daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().color = Color.white;
-                daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().effectColor = Color.black;
+                daubObjects[sheetIndex, index].GetComponentInChildren<UISprite>().spriteName = "ui_daub1";
+                daubObjects[sheetIndex, index].GetComponentInChildren<UISprite>().MakePixelPerfect();
+                daubObjects[sheetIndex, index].GetComponentInChildren<UILabel>().color = Color.white;
+                daubObjects[sheetIndex, index].GetComponentInChildren<UILabel>().effectColor = Color.black;
+                daubObjects[sheetIndex, index].GetComponentInChildren<UISprite>().alpha = 1f;
+                daubObjects[sheetIndex, index].transform.Find("img").localScale = Vector3.one;
                 //playScene_ui.m_sound_daubEffect.GetComponent<AudioSource>().clip = nb_GlobalData.g_global.EffectSound[(int)Sound.EffSoundList.daub];
                 //playScene_ui.m_sound_daubEffect.GetComponent<AudioSource>().Play();
                 int tempitem = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
@@ -1776,7 +1737,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
                         //인스턴트 윈
                         ani.AnimationName = "instant2";
 
-                        StartCoroutine(removeEffect(daubObjects[sheetIndex, index].transform, 4.667f));
+                        StartCoroutine(instantWin(daubObjects[sheetIndex, index].transform, sheetIndex));
                     }
 
                     //if (m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex != (int)Item.ItemType.Item_DirectBingo)
@@ -1869,8 +1830,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 m_myLocalSheets[sheetIndex].cells[index].daub = false;
 
                 daubObjects[sheetIndex, index].SetActive(false);
-                daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().color = Color.black;
-                daubObjects[sheetIndex, index].transform.Find("num").GetComponent<UILabel>().effectColor = Color.white;
+                daubObjects[sheetIndex, index].GetComponentInChildren<UILabel>().color = Color.black;
+                daubObjects[sheetIndex, index].GetComponentInChildren<UILabel>().effectColor = Color.white;
 
                 int itemType = m_myLocalSheets[sheetIndex].cells[index].itemEffectIndex;
                 if (itemType != 0)
@@ -2437,7 +2398,10 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 setDaub(sheetIndex, cellIndex, true, true);
 
                 daubObjects[sheetIndex, cellIndex].gameObject.SetActive(true);
-                daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
+                daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().spriteName = "ui_daub1";
+                daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().MakePixelPerfect();
+                daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().alpha = 1f;
+                daubObjects[sheetIndex, cellIndex].transform.Find("img").localScale = Vector3.one;
 
             }
         }
@@ -3144,7 +3108,10 @@ public class nb_PlayBlitzScene : MonoBehaviour
             if (correct)
             {
                 daubObjects[sheetIndex, cellIndex].SetActive(true);
-                daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
+                daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().spriteName = "ui_daub1";
+                daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().MakePixelPerfect();
+                daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().alpha = 1f;
+                daubObjects[sheetIndex, cellIndex].transform.Find("img").localScale = Vector3.one;
 
                 playScene_ui.m_cells[sheetIndex, cellIndex].GetComponent<UILabel>().text = "";
             }
@@ -3243,7 +3210,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
                         //setDaub(sheetIndex, cellIndex, true, true);
 
                         daubObjects[sheetIndex, cellIndex].gameObject.SetActive(true);
-                        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName = "ui_card_center";
+                        daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().spriteName = "ui_card_center";
                         daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UILabel>().text = "";
                     }
                 }
@@ -3305,8 +3272,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         playScene_ui.m_rankBoard.Find("player_ranking_x/t_player_name").GetComponent<UILabel>().text =
             nb_GlobalData.g_global.BingoRankingUserNameX;
 
-        //playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text = "4th";
-        playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILocalize>().key = "Rank_4";
+        playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text = "4th";
     }
 
     public IEnumerator addBall(int number)
@@ -3486,7 +3452,10 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
         m_myLocalSheets[sheetIndex].cells[cellIndex].realDaub = true;
         playScene_ui.m_cells[sheetIndex, cellIndex].GetComponent<UILabel>().text = "";
-        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
+        daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().spriteName = "ui_daub1";
+        daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().MakePixelPerfect();
+        daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().alpha = 1f;
+        daubObjects[sheetIndex, cellIndex].transform.Find("img").localScale = Vector3.one;
         //playScene_ui.m_sound_daubEffect.GetComponent<AudioSource>().clip = nb_GlobalData.g_global.EffectSound[(int)Sound.EffSoundList.daub];
         //playScene_ui.m_sound_daubEffect.GetComponent<AudioSource>().Play();
         int tempitem = m_myLocalSheets[sheetIndex].cells[cellIndex].itemEffectIndex;
@@ -3724,11 +3693,12 @@ public class nb_PlayBlitzScene : MonoBehaviour
         }
 
         daubObjects[sheetIndex, cellIndex].SetActive(true);
-        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().spriteName =
+        daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().spriteName =
             nb_Item.nb_daubItemImagePath[(int)type];
-        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().MakePixelPerfect();
-        daubObjects[sheetIndex, cellIndex].GetComponent<UISprite>().color = new Color(255, 255, 255, 128);
-        daubObjects[sheetIndex, cellIndex].transform.localScale = new Vector3(0.5f, 0.5f);
+        daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().MakePixelPerfect();
+        //daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().color = new Color(255, 255, 255, 128);
+        daubObjects[sheetIndex, cellIndex].GetComponentInChildren<UISprite>().alpha = 0.5f;
+        daubObjects[sheetIndex, cellIndex].transform.Find("img").localScale = new Vector3(0.7f, 0.7f);
 
     }
 
@@ -3755,10 +3725,14 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 m_myLocalSheets[data.sheet].cells[cellIndex].realDaub = true;
                 m_myLocalSheets[data.sheet].cells[cellIndex].daub = true;
                 daubObjects[data.sheet, cellIndex].SetActive(true);
-                daubObjects[data.sheet, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.white;
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().effectColor = Color.black;
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UISprite>().spriteName = "ui_card_center";
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UISprite>().MakePixelPerfect();
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().enabled = false;
+                //daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().text = data.number.ToString();
+                //daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().color = Color.white;
+                //daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().effectColor = Color.black;
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UISprite>().alpha = 1f;
+                daubObjects[data.sheet, cellIndex].transform.Find("img").localScale = Vector3.one;
 
                 GameObject effect = Instantiate(Resources.Load("game/ui_item_effect")) as GameObject;
                 effect.transform.SetParent(daubObjects[data.sheet, cellIndex].transform);
@@ -3776,10 +3750,14 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 m_myLocalSheets[data.sheet].cells[cellIndex].realDaub = true;
                 m_myLocalSheets[data.sheet].cells[cellIndex].daub = true;
                 daubObjects[data.sheet, cellIndex].SetActive(true);
-                daubObjects[data.sheet, cellIndex].GetComponent<UISprite>().spriteName = "ui_daub1";
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.white;
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().effectColor = Color.black;
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UISprite>().spriteName = "ui_card_center";
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UISprite>().MakePixelPerfect();
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().enabled = false;
+                //daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().text = data.number.ToString();
+                //daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().color = Color.white;
+                //daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().effectColor = Color.black;
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UISprite>().alpha = 1f;
+                daubObjects[data.sheet, cellIndex].transform.Find("img").localScale = Vector3.one;
 
                 GameObject effect = Instantiate(Resources.Load("game/ui_item_effect")) as GameObject;
                 effect.transform.SetParent(daubObjects[data.sheet, cellIndex].transform);
@@ -3826,6 +3804,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
             else
             {
                 //sheet action
+                if (cellIndex == 99) return;
+
                 m_myLocalSheets[data.sheet].cells[cellIndex].itemEffectIndex = type;
                 setCellItem(data.sheet, cellIndex, (nb_Item.nb_ItemType)type);
                 daubObjects[data.sheet, cellIndex].SetActive(true);
@@ -3857,11 +3837,13 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 {
                     ani.AnimationName = "instant1";
                     StartCoroutine(removeEffect(daubObjects[data.sheet, cellIndex].transform, 0.733f));
+
+                    nb_GlobalData.g_global.InstantBingo[data.sheet] = true;
                 }
 
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().text = data.number.ToString();
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().color = Color.black;
-                daubObjects[data.sheet, cellIndex].transform.Find("num").GetComponent<UILabel>().effectColor = Color.white;
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().text = data.number.ToString();
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().color = Color.black;
+                daubObjects[data.sheet, cellIndex].GetComponentInChildren<UILabel>().effectColor = Color.white;
             }
         }
 
@@ -3905,13 +3887,33 @@ public class nb_PlayBlitzScene : MonoBehaviour
         if (effect != null)
         {
             //Debug.Log("remove effect");
-            parent.GetComponent<UISprite>().enabled = false;
+            parent.GetComponentInChildren<UISprite>().enabled = false;
 
             yield return new WaitForSeconds(wait);
             GameObject.Destroy(effect);
-            parent.GetComponent<UISprite>().enabled = true;
+            parent.GetComponentInChildren<UISprite>().enabled = true;
         }
 
+    }
+
+    private IEnumerator instantWin(Transform parent, int sheetIndex)
+    {
+        GameObject effect = parent.Find("effect").gameObject;
+        if (effect != null)
+        {
+            Transform touchObjects = playScene_ui.m_bingoBoard.Find("sheet_" + sheetIndex.ToString());
+            setTouchDisableChildren(touchObjects);
+
+            //Debug.Log("remove effect");
+            parent.GetComponentInChildren<UISprite>().enabled = false;
+
+            yield return new WaitForSeconds(2.0f);
+            GameObject.Destroy(effect);
+            parent.GetComponentInChildren<UISprite>().enabled = true;
+
+            //인스턴트 윈
+            onSendBingo(sheetIndex);
+        }
     }
 
     private int findCellIndex(int sheet, int number)
@@ -3939,20 +3941,86 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     private void drawCollectionCard()
     {
-        return;
-
-
         for (int i = 0; i < 4; ++i)
         {
             if (nb_GlobalData.g_global.sheetInfo.collectionId[i] != 0)
             {
+                Collection col = nb_GlobalData.g_global.util.findCollection(
+                    nb_GlobalData.g_global.sheetInfo.collectionId[i]);
+
+                if (col == null) continue;
+
                 playScene_ui.m_collection[i].gameObject.SetActive(true);
                 var sprite = playScene_ui.m_collection[i].GetComponent<UISprite>();
-                sprite.atlas.name = "collection";
-                sprite.spriteName = "collection";
+                sprite.atlas.name = col.AtlasName;
+                sprite.spriteName = col.SpriteName;
                 sprite.MakePixelPerfect();
+                sprite.color = Color.black;
+                sprite.alpha = 0.4f;
                 playScene_ui.m_collection[i].localScale = new Vector3(0.8f, 0.8f);
             }
+        }
+    }
+
+    private void updateCompleteBingo()
+    {
+        if (nb_GlobalData.g_global.callBingo)
+        {
+            //내가 부른 빙고
+            nb_GlobalData.g_global.addMyBlitzRanking(
+                nb_GlobalData.g_global.BingoTotalFinishCount);
+            Debug.Log("updateCompleteBingo my call");
+        }
+
+        if (nb_GlobalData.g_global.BingoTotalFinishCount == 1)
+        {
+            playScene_ui.m_rankBoard.Find("player_ranking_1/t_player_name").GetComponent<UILabel>().text =
+                nb_GlobalData.g_global.BingoLastFinishUserName;
+        }
+        else if (nb_GlobalData.g_global.BingoTotalFinishCount == 2)
+        {
+            playScene_ui.m_rankBoard.Find("player_ranking_2/t_player_name").GetComponent<UILabel>().text =
+                nb_GlobalData.g_global.BingoLastFinishUserName;
+        }
+        else if (nb_GlobalData.g_global.BingoTotalFinishCount == 3)
+        {
+            playScene_ui.m_rankBoard.Find("player_ranking_3/t_player_name").GetComponent<UILabel>().text =
+                nb_GlobalData.g_global.BingoLastFinishUserName;
+        }
+        else if (nb_GlobalData.g_global.BingoTotalFinishCount >= 4)
+        {
+            playScene_ui.m_rankBoard.Find("player_ranking_x/t_player_name").GetComponent<UILabel>().text =
+                nb_GlobalData.g_global.BingoLastFinishUserName;
+
+            playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text =
+                nb_GlobalData.g_global.BingoTotalFinishCount.ToString() + "th";
+        }
+        else
+        {
+            nb_GlobalData.g_global.BingoLastFinishUserName = "-";
+        }
+
+        if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo <= 5)
+        {
+            playScene_ui.label_bingoCount.GetComponent<UILabel>().color = Color.red;
+        }
+
+        //남은 빙고 숫자 갱신
+        playScene_ui.label_bingoCount.GetComponent<UILabel>().text = nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString();
+        iTween.ScaleTo(playScene_ui.label_bingoCount.gameObject,
+            iTween.Hash("x,", 1.2f, "y", 1.3f, "oncompletetarget", gameObject,
+            "oncomplete", "completeScaling", "time", 0.3f));
+
+
+        nb_GlobalData.g_global.callBingo = false;
+    }
+
+    public void setTouchDisableChildren(Transform parent)
+    {
+        BoxCollider[] objects = parent.GetComponentsInChildren<BoxCollider>();
+        for (int i = 0; i < objects.Length; ++i)
+        {
+            objects[i].enabled = false;
         }
     }
 }

@@ -756,7 +756,6 @@
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Goblins\goblins.atlas.txt" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_search_box.xml" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Strechyman\stretchyman-diffuse-pma.atlas.txt" />
-     <None Include="Assets\Resources\spine\ui_worldmap.atlas.txt" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_title_bar_stub.xml" />
      <None Include="Assets\Resources\spine\ui_reward.atlas.txt" />
      <None Include="Assets\Resources\spine\ui_bingo.atlas.txt" />
@@ -784,6 +783,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font (SoftClip).shader" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_loginbutton_silver.xml" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpritesPixelLit.shader" />
+     <None Include="Assets\Resources\spine\ui_reward_effect.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Raggedy Spineboy\Raggedy Spineboy.atlas.txt" />
      <None Include="Assets\plugins\Android\res\values-xhdpi\dimens.xml" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Spine-Skeleton-Tint.shader" />
@@ -823,6 +823,7 @@
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Spine-Skeleton.shader" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_picker_item_background.xml" />
      <None Include="Assets\Resources\Localization.txt" />
+     <None Include="Assets\Resources\spine\ui_levelup.atlas.txt" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_like.xml" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_image.xml" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_blue.xml" />

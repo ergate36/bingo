@@ -7,8 +7,8 @@ repeat: none
 bingo/badcall
   rotate: false
   xy: 2, 104
-  size: 362, 78
-  orig: 362, 78
+  size: 362, 81
+  orig: 362, 81
   offset: 0, 0
   index: -1
 bingo/box
@@ -20,8 +20,8 @@ bingo/box
   index: -1
 bingo/x
   rotate: false
-  xy: 2, 184
-  size: 322, 321
-  orig: 322, 321
+  xy: 2, 187
+  size: 320, 320
+  orig: 320, 320
   offset: 0, 0
   index: -1

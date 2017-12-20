@@ -27,6 +27,9 @@ public class playScene_Bingo_btn : MonoBehaviour
         //if(GlobalData.g_global.bingoCount == 0 ){
         //    return;
         //}
+        
+        Transform touchObjects = this.transform.parent;
+        playBlitzScene.GetComponent<nb_PlayBlitzScene>().setTouchDisableChildren(touchObjects);
 
         nb_GlobalData.g_global.mSelectBingoButtonIndex = (int)sheetIndex;
         playBlitzScene.GetComponent<nb_PlayBlitzScene>().onSendBingo((int)sheetIndex);

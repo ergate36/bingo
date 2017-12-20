@@ -1,0 +1,76 @@
+
+ui_levelup.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+levelup/star
+  rotate: false
+  xy: 2, 171
+  size: 350, 325
+  orig: 350, 325
+  offset: 0, 0
+  index: -1
+levelup/star1
+  rotate: false
+  xy: 354, 250
+  size: 190, 161
+  orig: 190, 161
+  offset: 0, 0
+  index: -1
+levelup/star2
+  rotate: false
+  xy: 307, 64
+  size: 206, 75
+  orig: 206, 75
+  offset: 0, 0
+  index: -1
+levelup/star3
+  rotate: false
+  xy: 354, 413
+  size: 284, 83
+  orig: 284, 83
+  offset: 0, 0
+  index: -1
+levelup/star4
+  rotate: false
+  xy: 354, 141
+  size: 194, 107
+  orig: 194, 107
+  offset: 0, 0
+  index: -1
+levelup/star5
+  rotate: false
+  xy: 727, 232
+  size: 162, 171
+  orig: 162, 171
+  offset: 0, 0
+  index: -1
+levelup/star6
+  rotate: false
+  xy: 2, 2
+  size: 303, 167
+  orig: 303, 167
+  offset: 0, 0
+  index: -1
+levelup/star7
+  rotate: false
+  xy: 640, 405
+  size: 231, 91
+  orig: 231, 91
+  offset: 0, 0
+  index: -1
+levelup/star8
+  rotate: false
+  xy: 307, 6
+  size: 204, 56
+  orig: 204, 56
+  offset: 0, 0
+  index: -1
+levelup/whitestar
+  rotate: false
+  xy: 550, 240
+  size: 175, 163
+  orig: 175, 163
+  offset: 0, 0
+  index: -1

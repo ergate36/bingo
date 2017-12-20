@@ -502,6 +502,16 @@ public class nbHttp : MonoBehaviour
                             );
                     }
 
+                    count = data["collectionList"].Count;
+                    Debug.Log("count = data[collectionList].Count : " + count);
+                    for (int i = 0; i < count; ++i)
+                    {
+                        nb_GlobalData.g_global.collectionList.Add(
+                            JsonConvert.DeserializeObject<Collection>(
+                            data["collectionList"][i].ToJson())
+                            );
+                    }
+
                     count = data["miniGambleGroupList"].Count;
                     //Debug.Log("count = data[miniGambleGroupList].Count : " + count);
                     for (int i = 0; i < count; ++i)
@@ -542,15 +552,15 @@ public class nbHttp : MonoBehaviour
                             );
                     }
 
-                    count = data["StageFeeList"].Count;
-                    Debug.Log("count = data[StageFeeList].Count : " + count);
-                    for (int i = 0; i < count; ++i)
-                    {
-                        nb_GlobalData.g_global.stageFeeList.Add(
-                            JsonConvert.DeserializeObject<StageFee>(
-                            data["StageFeeList"][i].ToJson())
-                            );
-                    }
+                    //count = data["StageFeeList"].Count;
+                    //Debug.Log("count = data[StageFeeList].Count : " + count);
+                    //for (int i = 0; i < count; ++i)
+                    //{
+                    //    nb_GlobalData.g_global.stageFeeList.Add(
+                    //        JsonConvert.DeserializeObject<StageFee>(
+                    //        data["StageFeeList"][i].ToJson())
+                    //        );
+                    //}
                 }
                 break;
             case nbHttpState.GetStageListSuccess:

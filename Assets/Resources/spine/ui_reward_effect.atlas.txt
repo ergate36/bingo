@@ -1,0 +1,69 @@
+
+ui_reward_effect.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+reward/bingo
+  rotate: false
+  xy: 772, 381
+  size: 371, 126
+  orig: 371, 126
+  offset: 0, 0
+  index: -1
+reward/bingotrophy1
+  rotate: true
+  xy: 1145, 323
+  size: 184, 219
+  orig: 184, 219
+  offset: 0, 0
+  index: -1
+reward/bingotrophy2
+  rotate: true
+  xy: 1366, 323
+  size: 184, 219
+  orig: 184, 219
+  offset: 0, 0
+  index: -1
+reward/bingotrophy3
+  rotate: true
+  xy: 1587, 323
+  size: 184, 219
+  orig: 184, 219
+  offset: 0, 0
+  index: -1
+reward/bingotrophy4
+  rotate: true
+  xy: 1808, 326
+  size: 181, 214
+  orig: 181, 214
+  offset: 0, 0
+  index: -1
+reward/card
+  rotate: true
+  xy: 772, 172
+  size: 207, 244
+  orig: 207, 244
+  offset: 0, 0
+  index: -1
+reward/chest1
+  rotate: false
+  xy: 470, 2
+  size: 238, 225
+  orig: 238, 225
+  offset: 0, 0
+  index: -1
+reward/chest2
+  rotate: false
+  xy: 470, 229
+  size: 300, 278
+  orig: 300, 278
+  offset: 0, 0
+  index: -1
+reward/light
+  rotate: false
+  xy: 2, 11
+  size: 466, 496
+  orig: 466, 496
+  offset: 0, 0
+  index: -1

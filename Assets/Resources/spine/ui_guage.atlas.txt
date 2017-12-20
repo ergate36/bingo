@@ -6,91 +6,112 @@ filter: Linear,Linear
 repeat: none
 amber
   rotate: false
-  xy: 2, 2
+  xy: 1738, 58
   size: 19, 19
   orig: 19, 19
   offset: 0, 0
   index: -1
 gaugewhite1
   rotate: false
-  xy: 1550, 22
+  xy: 1856, 37
   size: 86, 86
   orig: 86, 86
   offset: 0, 0
   index: -1
 gaugewhite2
   rotate: false
-  xy: 1130, 50
+  xy: 1154, 19
   size: 216, 58
   orig: 216, 58
   offset: 0, 0
   index: -1
 item/booster1
   rotate: false
-  xy: 2, 23
+  xy: 728, 38
   size: 211, 85
   orig: 211, 85
   offset: 0, 0
   index: -1
 item/booster2
   rotate: false
-  xy: 215, 29
+  xy: 941, 44
   size: 211, 79
   orig: 211, 79
   offset: 0, 0
   index: -1
 item/booster3
   rotate: false
-  xy: 1348, 33
+  xy: 1372, 2
   size: 200, 75
   orig: 200, 75
   offset: 0, 0
   index: -1
 item/booster4
   rotate: false
-  xy: 428, 64
+  xy: 1154, 79
   size: 232, 44
   orig: 232, 44
   offset: 0, 0
   index: -1
 item/booster5
   rotate: false
-  xy: 662, 64
+  xy: 1388, 79
   size: 232, 44
   orig: 232, 44
   offset: 0, 0
   index: -1
 item/booster6
   rotate: false
-  xy: 896, 64
+  xy: 1622, 79
   size: 232, 44
   orig: 232, 44
   offset: 0, 0
   index: -1
+item/booster7
+  rotate: false
+  xy: 2, 33
+  size: 240, 90
+  orig: 240, 90
+  offset: 0, 0
+  index: -1
+item/booster8
+  rotate: false
+  xy: 244, 33
+  size: 240, 90
+  orig: 240, 90
+  offset: 0, 0
+  index: -1
+item/booster9
+  rotate: false
+  xy: 486, 33
+  size: 240, 90
+  orig: 240, 90
+  offset: 0, 0
+  index: -1
 ui_money_gold
   rotate: false
-  xy: 1638, 29
+  xy: 1944, 44
   size: 80, 79
   orig: 80, 79
   offset: 0, 0
   index: -1
 ui_money_gold1
   rotate: true
-  xy: 1720, 39
+  xy: 1574, 8
   size: 69, 80
   orig: 69, 80
   offset: 0, 0
   index: -1
 ui_money_gold2
   rotate: true
-  xy: 1802, 52
+  xy: 1656, 21
   size: 56, 80
   orig: 56, 80
   offset: 0, 0
   index: -1
 ui_money_gold3
   rotate: true
-  xy: 428, 35
+  xy: 2, 4
   size: 27, 81
   orig: 27, 81
   offset: 0, 0

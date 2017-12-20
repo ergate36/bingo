@@ -4,142 +4,156 @@ size: 1024,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+box1
+  rotate: false
+  xy: 331, 19
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+glow1
+  rotate: false
+  xy: 593, 129
+  size: 125, 122
+  orig: 125, 122
+  offset: 0, 0
+  index: -1
 item/all2
   rotate: false
-  xy: 237, 100
+  xy: 2, 97
   size: 157, 154
   orig: 157, 154
   offset: 0, 0
   index: -1
 item/all2a
   rotate: false
-  xy: 553, 16
+  xy: 462, 51
   size: 79, 77
   orig: 79, 77
   offset: 0, 0
   index: -1
 item/bingostar1
   rotate: true
-  xy: 773, 11
+  xy: 767, 77
   size: 64, 62
   orig: 64, 62
   offset: 0, 0
   index: -1
 item/bingostar2
   rotate: false
-  xy: 909, 97
+  xy: 831, 81
   size: 64, 62
   orig: 64, 62
   offset: 0, 0
   index: -1
 item/bomb1
   rotate: false
-  xy: 704, 6
+  xy: 698, 60
   size: 67, 67
   orig: 67, 67
   offset: 0, 0
   index: -1
 item/chest1
-  rotate: true
-  xy: 634, 2
+  rotate: false
+  xy: 625, 59
   size: 71, 68
   orig: 71, 68
   offset: 0, 0
   index: -1
 item/chest2
-  rotate: false
-  xy: 379, 15
+  rotate: true
+  xy: 935, 161
   size: 90, 83
   orig: 90, 83
   offset: 0, 0
   index: -1
 item/circle
   rotate: false
-  xy: 555, 124
+  xy: 320, 121
   size: 130, 130
   orig: 130, 130
   offset: 0, 0
   index: -1
 item/exp2
   rotate: false
-  xy: 396, 100
+  xy: 161, 97
   size: 157, 154
   orig: 157, 154
   offset: 0, 0
   index: -1
 item/h1
   rotate: false
-  xy: 902, 161
+  xy: 144, 2
   size: 104, 93
   orig: 104, 93
   offset: 0, 0
   index: -1
 item/h2
   rotate: false
-  xy: 687, 146
+  xy: 720, 143
   size: 106, 108
   orig: 106, 108
   offset: 0, 0
   index: -1
 item/h3
   rotate: false
-  xy: 795, 148
+  xy: 828, 145
   size: 105, 106
   orig: 105, 106
   offset: 0, 0
   index: -1
 item/instant
   rotate: false
-  xy: 837, 26
+  xy: 767, 13
   size: 64, 62
   orig: 64, 62
   offset: 0, 0
   index: -1
-item/light
-  rotate: false
-  xy: 2, 6
-  size: 233, 248
-  orig: 233, 248
+item/light1
+  rotate: true
+  xy: 452, 130
+  size: 121, 139
+  orig: 121, 139
   offset: 0, 0
   index: -1
 item/smoke
   rotate: true
-  xy: 769, 77
+  xy: 833, 12
   size: 67, 56
   orig: 67, 56
   offset: 0, 0
   index: -1
 item/ui_item_normal7
   rotate: false
-  xy: 237, 25
+  xy: 2, 22
   size: 140, 73
   orig: 140, 73
   offset: 0, 0
   index: -1
 item/ui_money_gold
-  rotate: false
-  xy: 471, 19
+  rotate: true
+  xy: 250, 15
   size: 80, 79
   orig: 80, 79
   offset: 0, 0
   index: -1
 item/ui_money_gold1
   rotate: true
-  xy: 687, 75
+  xy: 543, 58
   size: 69, 80
   orig: 69, 80
   offset: 0, 0
   index: -1
 item/ui_money_gold2
   rotate: true
-  xy: 827, 90
+  xy: 935, 103
   size: 56, 80
   orig: 56, 80
   offset: 0, 0
   index: -1
 item/ui_money_gold3
-  rotate: true
-  xy: 555, 95
+  rotate: false
+  xy: 433, 38
   size: 27, 81
   orig: 27, 81
   offset: 0, 0

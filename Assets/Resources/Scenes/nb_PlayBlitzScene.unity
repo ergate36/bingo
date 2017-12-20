@@ -1477,7 +1477,6 @@ GameObject:
   m_Component:
   - component: {fileID: 59866802}
   - component: {fileID: 59866803}
-  - component: {fileID: 59866804}
   m_Layer: 8
   m_Name: t_rank_text
   m_TagString: Untagged
@@ -1559,18 +1558,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &59866804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 59866801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa69d5b40401f77469779cf7f6fc94a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: Rank_4
 --- !u!1 &64211435
 GameObject:
   m_ObjectHideFlags: 0
@@ -3125,7 +3112,6 @@ GameObject:
   m_Component:
   - component: {fileID: 161059586}
   - component: {fileID: 161059587}
-  - component: {fileID: 161059588}
   m_Layer: 8
   m_Name: t_rank_text
   m_TagString: Untagged
@@ -3207,18 +3193,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &161059588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 161059585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa69d5b40401f77469779cf7f6fc94a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: Rank_2
 --- !u!1 &163848484
 GameObject:
   m_ObjectHideFlags: 0
@@ -10052,7 +10026,6 @@ GameObject:
   m_Component:
   - component: {fileID: 511556842}
   - component: {fileID: 511556843}
-  - component: {fileID: 511556844}
   m_Layer: 8
   m_Name: t_rank_text
   m_TagString: Untagged
@@ -10134,18 +10107,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &511556844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 511556841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa69d5b40401f77469779cf7f6fc94a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: Rank_3
 --- !u!1 &513768427
 GameObject:
   m_ObjectHideFlags: 0
@@ -27813,7 +27774,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1411716766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9, y: -60, z: 0}
+  m_LocalPosition: {x: -3, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 115148550}
@@ -36790,7 +36751,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1736784633}
   - component: {fileID: 1736784634}
-  - component: {fileID: 1736784635}
   m_Layer: 8
   m_Name: t_rank_text
   m_TagString: Untagged
@@ -36872,18 +36832,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &1736784635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1736784632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa69d5b40401f77469779cf7f6fc94a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: Rank_1
 --- !u!1 &1737984063
 GameObject:
   m_ObjectHideFlags: 0
@@ -46163,6 +46111,7 @@ MonoBehaviour:
   m_rankBoard: {fileID: 0}
   m_userList: {fileID: 0}
   effect_end: {fileID: 0}
+  m_collection: []
 --- !u!82 &2119042067
 AudioSource:
   m_ObjectHideFlags: 0

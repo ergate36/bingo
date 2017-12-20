@@ -49,6 +49,9 @@ public class nb_GlobalData : MonoBehaviour
     public List<Stage> stageList;
 
     [HideInInspector]
+    public List<Collection> collectionList;
+
+    [HideInInspector]
     public List<MiniGambleGroup> miniGambleGroupList;
 
     [HideInInspector]
@@ -319,6 +322,9 @@ public class nb_GlobalData : MonoBehaviour
     public int CheckNumCardIndex = 0;
     [HideInInspector]
     public int CheckNumNumber = 0;
+    [HideInInspector]
+    public bool[] InstantBingo;
+
 
     //select Item
     [HideInInspector]
@@ -424,6 +430,7 @@ public class nb_GlobalData : MonoBehaviour
 
         userPowerUpList = new List<UserPowerUp>();
         stageList = new List<Stage>();
+        collectionList = new List<Collection>();
         miniGambleGroupList = new List<MiniGambleGroup>();
         miniGambleGroupSetList = new List<MiniGambleGroupSet>();
         miniGamblePriceList = new List<MiniGamblePrice>();
@@ -438,6 +445,12 @@ public class nb_GlobalData : MonoBehaviour
         miniGameRewardValue = 0;
 
         miniGameState = MiniGameState.DISABLE;
+
+        InstantBingo = new bool[4];
+        for (int i = 0; i < 4; ++i)
+        {
+            InstantBingo[i] = false;
+        }
 
         DontDestroyOnLoad(gameObject);
     }
