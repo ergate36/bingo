@@ -25,6 +25,7 @@ namespace MarigoldModel.Model
 
         // foreign key
         public Int64 StageId { get; set; }
+        [JsonIgnore]
         public Stage Stage { get; set; }
     }
 }

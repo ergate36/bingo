@@ -326,6 +326,13 @@ public class nb_PlayBlitzScene : MonoBehaviour
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
 
+        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzWaitRoomStatusAlarm_End)
+        {
+            nb_GlobalData.g_global.IsGamePlaying = true;
+
+            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+        }
+
         else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BingoRankingAlarm_End)
         {
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
@@ -485,10 +492,26 @@ public class nb_PlayBlitzScene : MonoBehaviour
         //    }
         //}
 
-        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzCompleteBingoAlarm_End ||
-            nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzCompleteBingoResponse_End)
+        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzCompleteBingoResponse_End)
+        {
+            if (nb_GlobalData.g_global.callBingo)
+            {
+                //내가 부른 빙고
+                nb_GlobalData.g_global.addMyBlitzRanking(
+                    nb_GlobalData.g_global.BingoTotalFinishCount);
+                Debug.Log("updateCompleteBingo my call");
+
+                nb_GlobalData.g_global.callBingo = false;
+            }
+            updateCompleteBingo();
+
+            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+        }
+
+        else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzCompleteBingoAlarm_End)
         {
             //순위 갱신
+            Debug.Log("game update : completeBingoAlarm - " + nb_GlobalData.g_global.BingoLastFinishUserName);
             updateCompleteBingo();
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
@@ -1315,7 +1338,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
 
         playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().spriteName
-            = "ui_money_normal";
+            = "ui_item_gaugeicon1";
         //playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().SetDimensions(92, 98);
         playScene_ui.m_itemBtn.Find("i_icon").GetComponent<UISprite>().MakePixelPerfect();
 
@@ -3609,6 +3632,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
         //Debug.Log("runGameOver() : " + resultText);
 
+        playScene_ui.label_bingoCount.GetComponent<UILabel>().text = "0";
+
         playScene_ui.effect_end.gameObject.SetActive(true);
 
         playScene_ui.m_effectLayer02Board.Find(
@@ -3627,6 +3652,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
         yield return new WaitForSeconds(1.4f);
 
         playScene_ui.effect_end.gameObject.SetActive(false);
+        playScene_ui.popup_gameEnd.gameObject.SetActive(true);
 
         StartCoroutine("EndResultSpine");
     }
@@ -3951,12 +3977,18 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 if (col == null) continue;
 
                 playScene_ui.m_collection[i].gameObject.SetActive(true);
-                var sprite = playScene_ui.m_collection[i].GetComponent<UISprite>();
-                sprite.atlas.name = col.AtlasName;
-                sprite.spriteName = col.SpriteName;
-                sprite.MakePixelPerfect();
-                sprite.color = Color.black;
-                sprite.alpha = 0.4f;
+                Texture texture = Resources.Load("nb_images/collection/" +
+                    col.AtlasName + "/" + col.SpriteName, typeof(Texture)) as Texture;
+                playScene_ui.m_collection[i].GetComponent<UITexture>().mainTexture = texture;
+                playScene_ui.m_collection[i].GetComponent<UITexture>().MakePixelPerfect();
+                playScene_ui.m_collection[i].GetComponent<UITexture>().color = new Color(0.22f, 0.3f, 0.47f);
+                playScene_ui.m_collection[i].GetComponent<UITexture>().alpha = 0.4f;
+                //var sprite = playScene_ui.m_collection[i].GetComponent<UISprite>();
+                //sprite.atlas.name = col.AtlasName;
+                //sprite.spriteName = col.SpriteName;
+                //sprite.MakePixelPerfect();
+                //sprite.color = Color.black;
+                //sprite.alpha = 0.4f;
                 playScene_ui.m_collection[i].localScale = new Vector3(0.8f, 0.8f);
             }
         }
@@ -3964,45 +3996,55 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     private void updateCompleteBingo()
     {
+        int lastRank = nb_GlobalData.g_global.BingoTotalFinishCount;
+
         if (nb_GlobalData.g_global.callBingo)
         {
             //내가 부른 빙고
             nb_GlobalData.g_global.addMyBlitzRanking(
                 nb_GlobalData.g_global.BingoTotalFinishCount);
             Debug.Log("updateCompleteBingo my call");
+
+            nb_GlobalData.g_global.callBingo = false;
         }
 
-        if (nb_GlobalData.g_global.BingoTotalFinishCount == 1)
+        for (int rank = 1; rank <= lastRank; ++rank)
         {
-            playScene_ui.m_rankBoard.Find("player_ranking_1/t_player_name").GetComponent<UILabel>().text =
-                nb_GlobalData.g_global.BingoLastFinishUserName;
-        }
-        else if (nb_GlobalData.g_global.BingoTotalFinishCount == 2)
-        {
-            playScene_ui.m_rankBoard.Find("player_ranking_2/t_player_name").GetComponent<UILabel>().text =
-                nb_GlobalData.g_global.BingoLastFinishUserName;
-        }
-        else if (nb_GlobalData.g_global.BingoTotalFinishCount == 3)
-        {
-            playScene_ui.m_rankBoard.Find("player_ranking_3/t_player_name").GetComponent<UILabel>().text =
-                nb_GlobalData.g_global.BingoLastFinishUserName;
-        }
-        else if (nb_GlobalData.g_global.BingoTotalFinishCount >= 4)
-        {
-            playScene_ui.m_rankBoard.Find("player_ranking_x/t_player_name").GetComponent<UILabel>().text =
-                nb_GlobalData.g_global.BingoLastFinishUserName;
+            if (rank == 1)
+            {
+                playScene_ui.m_rankBoard.Find("player_ranking_1/t_player_name").GetComponent<UILabel>().text =
+                    nb_GlobalData.g_global.BingoRanking[rank - 1];
+            }
+            else if (rank == 2)
+            {
+                playScene_ui.m_rankBoard.Find("player_ranking_2/t_player_name").GetComponent<UILabel>().text =
+                    nb_GlobalData.g_global.BingoRanking[rank - 1];
+            }
+            else if (rank == 3)
+            {
+                playScene_ui.m_rankBoard.Find("player_ranking_3/t_player_name").GetComponent<UILabel>().text =
+                    nb_GlobalData.g_global.BingoRanking[rank - 1];
+            }
+            else if (rank >= 4)
+            {
+                playScene_ui.m_rankBoard.Find("player_ranking_x/t_player_name").GetComponent<UILabel>().text =
+                    nb_GlobalData.g_global.BingoRanking[rank - 1];
 
-            playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text =
-                nb_GlobalData.g_global.BingoTotalFinishCount.ToString() + "th";
-        }
-        else
-        {
-            nb_GlobalData.g_global.BingoLastFinishUserName = "-";
+                playScene_ui.m_rankBoard.Find("player_ranking_x/t_rank_text").GetComponent<UILabel>().text =
+                    rank.ToString() + "th";
+            }
+            else
+            {
+                nb_GlobalData.g_global.BingoLastFinishUserName = "-";
+
+                Debug.Log("updateCompleteBingo - ???");
+            }
         }
 
         if (nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo <= 5)
         {
             playScene_ui.label_bingoCount.GetComponent<UILabel>().color = Color.red;
+            playScene_ui.label_bingoCount.GetComponent<UILabel>().effectColor = Color.black;
         }
 
         //남은 빙고 숫자 갱신
@@ -4010,9 +4052,6 @@ public class nb_PlayBlitzScene : MonoBehaviour
         iTween.ScaleTo(playScene_ui.label_bingoCount.gameObject,
             iTween.Hash("x,", 1.2f, "y", 1.3f, "oncompletetarget", gameObject,
             "oncomplete", "completeScaling", "time", 0.3f));
-
-
-        nb_GlobalData.g_global.callBingo = false;
     }
 
     public void setTouchDisableChildren(Transform parent)

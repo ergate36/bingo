@@ -61,3 +61,5 @@ Lobby_MiniGamble,Mini Gamble,작은 도박
 Lobby_MiniGambleMsg,Enjoy mini gambling while waiting!,기다리면서 작은 도박을 즐기세요!
 Lobby_MiniGambleBet,Bet:,배팅:
 Lobby_MiniGambleShuffle,Shuffle,섞기
+Rewards,Rewards,보상
+RewardsFrom,Rewards From,획득한 보상

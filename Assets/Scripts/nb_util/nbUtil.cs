@@ -84,4 +84,30 @@ public class nbUtil
 
         return null;
     }
+
+    public Collection findCollection(string spriteName)
+    {
+        foreach (var col in nb_GlobalData.g_global.collectionList)
+        {
+            if (col.SpriteName == spriteName)
+            {
+                return col;
+            }
+        }
+
+        return null;
+    }
+
+    public int getUserCollectionCount(long colId)
+    {
+        foreach (var col in nb_GlobalData.g_global.userCollectionList)
+        {
+            if (col.CollectionId == colId)
+            {
+                return (int)col.Count;
+            }
+        }
+
+        return 0;
+    }
 }

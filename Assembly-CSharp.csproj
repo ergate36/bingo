@@ -313,6 +313,7 @@
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Asset\PowerUp.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Asset\Timer.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Asset\TimerCycleOrder.cs" />
+     <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Asset\TreasureBox.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\BaseModel.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\BaseUserModel.cs" />
      <Compile Include="Assets\Scripts\Network\MarigoldModel\Model\Common\TimePost.cs" />
@@ -531,6 +532,7 @@
      <Compile Include="Assets\Scripts\nb_minigame\nb_minigame_bet_ctrl_btn.cs" />
      <Compile Include="Assets\Scripts\nb_minigame\nb_minigame_card_btn.cs" />
      <Compile Include="Assets\Scripts\nb_minigame\nb_minigame_shuffle_btn.cs" />
+     <Compile Include="Assets\Scripts\nb_playScene\nb_GameResult_popup.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\nb_PlayBlitzScene.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\nb_PlayBlitzScene_UI.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\playScene_Bingo_btn.cs" />

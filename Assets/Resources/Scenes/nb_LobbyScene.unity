@@ -8217,7 +8217,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3016
+  startingRenderQueue: 3014
   mAlpha: 1
   mClipping: 3
   mClipRange: {x: 0, y: 0, z: 280, w: 320}
@@ -15244,7 +15244,6 @@ MonoBehaviour:
   m_layerItem: {fileID: 0}
   m_UIPlayerCount: {fileID: 0}
   m_sheetBtn: []
-  m_UIWaitTime: {fileID: 0}
   m_waitPopup: {fileID: 0}
   ready: []
   wait: []
@@ -20853,7 +20852,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3020
+  startingRenderQueue: 3014
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}

@@ -52,6 +52,9 @@ public class nb_GlobalData : MonoBehaviour
     public List<Collection> collectionList;
 
     [HideInInspector]
+    public List<UserCollection> userCollectionList;
+
+    [HideInInspector]
     public List<MiniGambleGroup> miniGambleGroupList;
 
     [HideInInspector]
@@ -259,19 +262,13 @@ public class nb_GlobalData : MonoBehaviour
     public int[] BingoMyBlitzRanking;
 
     [HideInInspector]
+    public string[] BingoRanking;
+
+    [HideInInspector]
     public bool CallMyBingo = false;
 
     [HideInInspector]
     public int SelectWorldStage;
-
-    //[HideInInspector]
-    //public bool WorldStageSpineRefresh;
-
-    //[HideInInspector]
-    //public bool WorldStageSpineSelectAni;
-
-    //[HideInInspector]
-    //public string WorldStageSpineAnimation;
 
 
 
@@ -317,6 +314,10 @@ public class nb_GlobalData : MonoBehaviour
     [HideInInspector]
     public bool PlaySceneChange = false;
 
+    [HideInInspector]
+    public bool IsGamePlaying = false;
+
+
     //check number
     [HideInInspector]
     public int CheckNumCardIndex = 0;
@@ -344,6 +345,10 @@ public class nb_GlobalData : MonoBehaviour
 
     [HideInInspector]
     public int chestItemCount = 0;
+
+    //reward
+    [HideInInspector]
+    public List<ClearRewardCommand> clearRewardList;
 
     void Awake()
     {
@@ -424,13 +429,11 @@ public class nb_GlobalData : MonoBehaviour
         //스테이지 스파인
         maxStage = 9;
         SelectWorldStage = 1;
-        //WorldStageSpineRefresh = false;
-        //WorldStageSpineSelectAni = false;
-        //WorldStageSpineAnimation = "wait1";
 
         userPowerUpList = new List<UserPowerUp>();
         stageList = new List<Stage>();
         collectionList = new List<Collection>();
+        userCollectionList = new List<UserCollection>();
         miniGambleGroupList = new List<MiniGambleGroup>();
         miniGambleGroupSetList = new List<MiniGambleGroupSet>();
         miniGamblePriceList = new List<MiniGamblePrice>();
@@ -451,6 +454,8 @@ public class nb_GlobalData : MonoBehaviour
         {
             InstantBingo[i] = false;
         }
+
+        clearRewardList = new List<ClearRewardCommand>();
 
         DontDestroyOnLoad(gameObject);
     }

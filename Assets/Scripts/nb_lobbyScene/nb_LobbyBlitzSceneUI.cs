@@ -22,9 +22,6 @@ public class nb_LobbyBlitzSceneUI : MonoBehaviour {
     public Transform[] m_sheetBtn;
 
     [HideInInspector]
-    public Transform m_UIWaitTime;
-
-    [HideInInspector]
     public Transform m_waitPopup;
 
     [HideInInspector]
@@ -102,10 +99,7 @@ public class nb_LobbyBlitzSceneUI : MonoBehaviour {
 
     // Use this for initialization
     void Start()
-    {
-        m_UIWaitTime = uiRoot.transform.Find("popup_wait/ment_wait/countDown");
-        
+    {        
         m_waitPopup.gameObject.SetActive(false);
-
     }
 }

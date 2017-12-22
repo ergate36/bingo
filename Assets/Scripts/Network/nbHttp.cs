@@ -52,6 +52,8 @@ public class nbHttp : MonoBehaviour
         GetUserPowerUpListSuccess,
         GetUserGameMoneyListStart,
         GetUserGameMoneyListSuccess,
+        GetUserCollectionListStart,
+        GetUserCollectionListSuccess,
 
         //shop
         GetPowerListStart,
@@ -409,6 +411,25 @@ public class nbHttp : MonoBehaviour
         startPost(c, f, post);
     }
 
+    public void GetUserCollectionList(string session)
+    {
+        if (nbHttp.state != nbHttpState.Wait)
+        {
+            Debug.Log("GetUserCollectionList fail, state : " + nbHttp.state.ToString());
+            return;
+        }
+
+        state = nbHttpState.GetUserCollectionListStart;
+
+        string c = "Player";
+        string f = "GetUserCollectionList";
+
+        Dictionary<string, string> post = new Dictionary<string, string>();
+        post.Add("session", session);
+
+        startPost(c, f, post);
+    }
+
     public void BuyStoreProduct(string session, long storeProductId, string receipt)
     {
         if (nbHttp.state != nbHttpState.Wait)
@@ -552,15 +573,15 @@ public class nbHttp : MonoBehaviour
                             );
                     }
 
-                    //count = data["StageFeeList"].Count;
+                    count = data["stageFeeList"].Count;
                     //Debug.Log("count = data[StageFeeList].Count : " + count);
-                    //for (int i = 0; i < count; ++i)
-                    //{
-                    //    nb_GlobalData.g_global.stageFeeList.Add(
-                    //        JsonConvert.DeserializeObject<StageFee>(
-                    //        data["StageFeeList"][i].ToJson())
-                    //        );
-                    //}
+                    for (int i = 0; i < count; ++i)
+                    {
+                        nb_GlobalData.g_global.stageFeeList.Add(
+                            JsonConvert.DeserializeObject<StageFee>(
+                            data["stageFeeList"][i].ToJson())
+                            );
+                    }
                 }
                 break;
             case nbHttpState.GetStageListSuccess:
@@ -742,6 +763,23 @@ public class nbHttp : MonoBehaviour
             case nbHttpState.GetPowerListStart:
                 break;
             case nbHttpState.GetPowerListSuccess:
+                break;
+            case nbHttpState.GetUserCollectionListStart:
+                {
+                    state = nbHttpState.GetUserCollectionListSuccess;
+                    nb_GlobalData.g_global.userCollectionList.Clear();
+
+                    int count = data["userCollectionList"].Count;
+                    for (int i = 0; i < count; ++i)
+                    {
+                        nb_GlobalData.g_global.userCollectionList.Add(
+                            JsonConvert.DeserializeObject<UserCollection>(
+                            data["userCollectionList"][i].ToJson())
+                            );
+                    }
+                }
+                break;
+            case nbHttpState.GetUserCollectionListSuccess:
                 break;
             case nbHttpState.BuyStoreProductStart:
                 {

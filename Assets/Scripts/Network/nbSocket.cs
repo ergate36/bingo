@@ -311,7 +311,7 @@ public class nbSocket : MonoBehaviour
                     case (short)nb_SocketClass.MsgType.BlitzWaitRoomStatusAlarm:
                         using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                         {
-                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzWaitRoomStatusAlarm_End;
+                            //Debug.Log("BlitzWaitRoomStatusAlarm : " + bodyText);
 
                             var body = JsonConvert.DeserializeObject<BlitzWaitRoomStatusAlarm>(
                                 bodyText);
@@ -323,6 +323,11 @@ public class nbSocket : MonoBehaviour
                             //Debug.Log("(1002) BlitzWaitRoomStatusAlarm waitTime : " +
                             //    nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainSecond.ToString() +
                             //    ", remainBingo : " + nb_GlobalData.g_global.blitzWaitRoomStatusAlarm.RemainBingo.ToString());
+
+                            if (nb_GlobalData.g_global.IsGamePlaying == false)
+                            {
+                                nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzWaitRoomStatusAlarm_End;
+                            }
                         }
                         break;
                     case (short)nb_SocketClass.MsgType.BlitzEnterGameResponse:
@@ -449,6 +454,12 @@ public class nbSocket : MonoBehaviour
                             nb_GlobalData.g_global.BingoRoomUserCount = userCount;
                             nb_GlobalData.g_global.BingoRoomUserNameList = new string[userCount];
 
+                            nb_GlobalData.g_global.BingoRanking = new string[userCount];
+                            for(int i = 0; i < userCount; ++i)
+                            {
+                                nb_GlobalData.g_global.BingoRanking[i] = "";
+                            }
+
 
                             Debug.Log("@@ BlitzStartGameAlarm userCount : " +
                                 userCount.ToString());
@@ -519,6 +530,7 @@ public class nbSocket : MonoBehaviour
                     case (short)nb_SocketClass.MsgType.BlitzCompleteBingoAlarm:
                         using (BinaryWriter writer = new BinaryWriter(new MemoryStream()))
                         {
+                            Debug.Log("BlitzCompleteBingoAlarm : " + bodyText);
                             var body = JsonConvert.DeserializeObject<BlitzCompleteBingoAlarm>(
                                 bodyText);
                             nb_GlobalData.g_global.blitzCompleteBingoAlarm = body;
@@ -527,16 +539,15 @@ public class nbSocket : MonoBehaviour
                             //string userName = Encoding.UTF8.GetString(reader.ReadBytes(20)).Split(char.MinValue)[0];
                             string userName = body.Name;
 
-                            Debug.Log("@@ BlitzCompleteBingoAlarm userName : " + userName);
+                            //Debug.Log("@@ BlitzCompleteBingoAlarm userName : " + userName);
 
-                            nb_GlobalData.g_global.BingoTotalFinishCount += 1;
+                            nb_GlobalData.g_global.BingoRanking[rank - 1] = userName;
+
+                            //nb_GlobalData.g_global.BingoTotalFinishCount += 1;
+                            nb_GlobalData.g_global.BingoTotalFinishCount = rank;
                             nb_GlobalData.g_global.BingoLastFinishUserName = userName;
 
-                            if (nb_GlobalData.g_global.callBingo == false)
-                            {
-                                //내가 완성했을땐 BlitzCompleteBingoResponse에서 스테이트를 변경
-                                nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzCompleteBingoAlarm_End;
-                            }
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzCompleteBingoAlarm_End;
                         }
                         break;
                     case (short)nb_SocketClass.MsgType.BlitzEndGameAlarm:
@@ -772,6 +783,7 @@ public class nbSocket : MonoBehaviour
                         break;
                     case (short)nb_SocketClass.MsgType.BlitzClearRewardAlarm:
                         {
+                            Debug.Log("BlitzClearRewardAlarm : " + bodyText.ToString());
                             // 게임 끝날을때 보상정보를 알려준다.
                             var body = JsonConvert.DeserializeObject<ClearRewardCommand>(
                                 bodyText,
@@ -781,7 +793,15 @@ public class nbSocket : MonoBehaviour
                                     Binder = new MarigoldSerializationBinder(),
                                 });
 
-                            Debug.Log("BlitzClearRewardAlarm : " + bodyText.ToString());
+                            nb_GlobalData.g_global.clearRewardList.Clear();
+
+                            foreach (var sub in body.SubCommandList)
+                            {
+                                ClearRewardCommand reward = sub as ClearRewardCommand;
+                                //reward.
+                            }
+                            
+
                         }
                         break;
                     case (short)nb_SocketClass.MsgType.BlitzRetryCollectionResponse:
@@ -1290,6 +1310,11 @@ public class nbSocket : MonoBehaviour
                         }
                         break;
                         
+                    default:
+                        {
+                            Debug.Log("*** soket default : " + bodyText);
+                        }
+                        break;
 
                 }
 

@@ -33,6 +33,8 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         nb_GlobalData.g_global_bgm2.Play();
         nb_GlobalData.g_global_bgm3.Stop();
         nb_GlobalData.g_global_bgm4.Stop();
+
+        nb_GlobalData.g_global.IsGamePlaying = false;
     }
     // Use this for initialization
 
@@ -168,6 +170,8 @@ public class nb_LobbyBlitzScene : MonoBehaviour
         Resources.UnloadUnusedAssets();
         System.GC.Collect();
 
+        nb_GlobalData.g_global.IsGamePlaying = true;
+
         //Application.LoadLevel("PlayScene");
         Application.LoadLevel("nb_PlayBlitzScene");
     }
@@ -208,7 +212,7 @@ public class nb_LobbyBlitzScene : MonoBehaviour
 
         //sound_notice.GetComponent<AudioSource>().Play();
         
-        iTween.MoveTo(m_nbLobbySceneUI.m_waitPopup.gameObject, iTween.Hash("x", 0, "y", 0, "easeType", "easeOutElastic", "time", 1));
+        //iTween.MoveTo(m_nbLobbySceneUI.m_waitPopup.gameObject, iTween.Hash("x", 0, "y", 0, "easeType", "easeOutElastic", "time", 1));
     }
 
 

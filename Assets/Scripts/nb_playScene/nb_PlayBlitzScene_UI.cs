@@ -166,6 +166,10 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
     [HideInInspector]
     public Transform m_userList;
     
+    //리워드 팝업
+    [HideInInspector]
+    public Transform popup_gameEnd;
+
     //게임종료 이펙트
     [HideInInspector]
     public Transform effect_end;
@@ -197,6 +201,8 @@ public class nb_PlayBlitzScene_UI : MonoBehaviour
 
         m_rankBoard = playUI.Find("rank_info");
         m_userList = playUI.Find("player_list");
+
+        popup_gameEnd = playUI.Find("popup_GameEnd");
 
         effect_end = playUI.Find("effect_end");
       
