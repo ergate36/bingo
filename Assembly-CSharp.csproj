@@ -178,6 +178,7 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
+     <Compile Include="Assets\Resources\nb_effect\nb_Effect.cs" />
      <Compile Include="Assets\Scripts\AndroidManager.cs" />
      <Compile Include="Assets\Scripts\BingoData.cs" />
      <Compile Include="Assets\Scripts\Constants.cs" />
@@ -533,6 +534,7 @@
      <Compile Include="Assets\Scripts\nb_minigame\nb_minigame_card_btn.cs" />
      <Compile Include="Assets\Scripts\nb_minigame\nb_minigame_shuffle_btn.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\nb_GameResult_popup.cs" />
+     <Compile Include="Assets\Scripts\nb_playScene\nb_GameResult_rotate.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\nb_PlayBlitzScene.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\nb_PlayBlitzScene_UI.cs" />
      <Compile Include="Assets\Scripts\nb_playScene\playScene_Bingo_btn.cs" />

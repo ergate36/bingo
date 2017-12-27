@@ -49,6 +49,9 @@ public class nb_GlobalData : MonoBehaviour
     public List<Stage> stageList;
 
     [HideInInspector]
+    public List<StageClearRankingReward> stageClearRankingRewardList;
+
+    [HideInInspector]
     public List<Collection> collectionList;
 
     [HideInInspector]
@@ -432,6 +435,7 @@ public class nb_GlobalData : MonoBehaviour
 
         userPowerUpList = new List<UserPowerUp>();
         stageList = new List<Stage>();
+        stageClearRankingRewardList = new List<StageClearRankingReward>();
         collectionList = new List<Collection>();
         userCollectionList = new List<UserCollection>();
         miniGambleGroupList = new List<MiniGambleGroup>();

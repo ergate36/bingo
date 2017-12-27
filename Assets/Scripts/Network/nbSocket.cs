@@ -799,9 +799,10 @@ public class nbSocket : MonoBehaviour
                             {
                                 ClearRewardCommand reward = sub as ClearRewardCommand;
                                 //reward.
+                                nb_GlobalData.g_global.clearRewardList.Add(reward);
                             }
-                            
 
+                            nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.BlitzClearRewardAlarm_End;
                         }
                         break;
                     case (short)nb_SocketClass.MsgType.BlitzRetryCollectionResponse:

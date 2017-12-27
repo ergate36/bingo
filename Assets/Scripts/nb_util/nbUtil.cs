@@ -110,4 +110,20 @@ public class nbUtil
 
         return 0;
     }
+
+    public int getStageClearRewardValue(int stageId, int rank, AssetType type, int assetId)
+    {
+        foreach (var reward in nb_GlobalData.g_global.stageClearRankingRewardList)
+        {
+            if (reward.StageId == stageId &&
+                reward.Ranking == rank &&
+                reward.AssetType == type &&
+                reward.AssetId == assetId)
+            {
+                return (int)reward.AssetCount;
+            }
+        }
+
+        return 0;
+    }
 }

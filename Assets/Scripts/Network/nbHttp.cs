@@ -523,8 +523,18 @@ public class nbHttp : MonoBehaviour
                             );
                     }
 
+                    count = data["stageClearRankingRewardList"].Count;
+                    //Debug.Log("count = data[stageClearRankingRewardList].Count : " + count);
+                    for (int i = 0; i < count; ++i)
+                    {
+                        nb_GlobalData.g_global.stageClearRankingRewardList.Add(
+                            JsonConvert.DeserializeObject<StageClearRankingReward>(
+                            data["stageClearRankingRewardList"][i].ToJson())
+                            );
+                    }
+
                     count = data["collectionList"].Count;
-                    Debug.Log("count = data[collectionList].Count : " + count);
+                    //Debug.Log("count = data[collectionList].Count : " + count);
                     for (int i = 0; i < count; ++i)
                     {
                         nb_GlobalData.g_global.collectionList.Add(

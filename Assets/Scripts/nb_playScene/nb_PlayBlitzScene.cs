@@ -138,6 +138,8 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
     GameObject gaugeSpine;
 
+    public nb_GameResult_popup resultScene;
+
 
     void Awake()
     {
@@ -322,6 +324,15 @@ public class nb_PlayBlitzScene : MonoBehaviour
         {
             //게임오버
             runGameOver();
+
+        //    nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
+        //}
+
+        //else if (nb_GlobalData.g_global.socketState == (int)nb_SocketClass.STATE.BlitzClearRewardAlarm_End)
+        //{
+            //리워드
+            Debug.Log("playScene update BlitzClearRewardAlarm_End");
+            setTouchDisableChildren(playScene_ui.playUI);
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
@@ -573,6 +584,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
             nb_GlobalData.g_global.socketState = (int)nb_SocketClass.STATE.waitSign;
         }
+
 
         //부스터 이펙트
         playScene_ui.m_itemBtn.Find("booster").gameObject.SetActive(itemBoosterOn);
@@ -3654,14 +3666,16 @@ public class nb_PlayBlitzScene : MonoBehaviour
         playScene_ui.effect_end.gameObject.SetActive(false);
         playScene_ui.popup_gameEnd.gameObject.SetActive(true);
 
+        resultScene.startReward();
+
         StartCoroutine("EndResultSpine");
     }
 
     private IEnumerator EndResultSpine()
     {
-        yield return new WaitForSeconds(18.0f);
+        yield return new WaitForSeconds(60.0f);
 
-        //메인메뉴로 보내버려
+        //대기실로 보냄
 
         fadeOut = true;
         fadeOutTimer = Time.time;

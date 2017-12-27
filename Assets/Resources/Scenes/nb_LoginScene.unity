@@ -4251,6 +4251,7 @@ MonoBehaviour:
   BingoTotalFinishCount: 0
   BingoLastFinishUserName: 
   BingoMyBlitzRanking: 
+  BingoRanking: []
   CallMyBingo: 0
   SelectWorldStage: 0
   InputSessionLoginKey: 
@@ -4268,8 +4269,10 @@ MonoBehaviour:
   LobbyMenuActive: 0
   LobbyShopActive: 0
   PlaySceneChange: 0
+  IsGamePlaying: 0
   CheckNumCardIndex: 0
   CheckNumNumber: 0
+  InstantBingo: 
   selectItemId: 0
   useDoubleExp: 0
   useDoubleReward: 0
