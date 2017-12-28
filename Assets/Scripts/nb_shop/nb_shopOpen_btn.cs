@@ -4,6 +4,7 @@ using System.Collections;
 public class nb_shopOpen_btn : MonoBehaviour
 {
     private BoxCollider[] buttons;
+    private MeshRenderer[] spineRenderers;
 
     public GameObject shopObj;
     public GameObject mainLayer;
@@ -30,7 +31,13 @@ public class nb_shopOpen_btn : MonoBehaviour
             {
                 buttons[i].enabled = false;
             }
-            
+
+            spineRenderers = mainLayer.GetComponentsInChildren<MeshRenderer>();
+            for (int i = 0; i < spineRenderers.Length; ++i)
+            {
+                spineRenderers[i].enabled = false;
+            }
+
             shopObj.SetActive(true);
 
             //shopObj.transform.Find("tap1").gameObject.SetActive(false);

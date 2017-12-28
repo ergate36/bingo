@@ -52,6 +52,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
     List<GameObject> daubItemList;
     List<GameObject> otherDaubList;
     private float lastUseItemTime = 0;
+    private float lastCheckRate = 0;
     private int m_itemGaugeCount = 0;
     private bool m_bItemReady = false;
 
@@ -677,11 +678,62 @@ public class nb_PlayBlitzScene : MonoBehaviour
 
                     Debug.Log("charging spine");
                 }
+
+                //float checkRate = 0.33f;
+                //float coolTime = Time.time - lastUseItemTime;
+                //if (coolTime >= checkTime)
+                //{
+                //    //쿨타임 끝
+                //    itemCoolDown = false;
+
+                //    ani.AnimationName = "charging";
+                //    ani.loop = true;
+
+                //    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
+                //        "ItemCharging";
+                //    playScene_ui.m_itemBtn.Find("t_label").BroadcastMessage("OnLocalize");
+                //    playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0;
+                //    playScene_ui.m_itemGauge.GetComponent<UISprite>().spriteName = "ui_item_gauge2";
+                //    gaugeSpine.transform.localPosition =
+                //        new Vector3(center.x - 85, center.y);
+
+                //    nb_GlobalData.g_global.blitzGaugeState = (int)MarigoldModel.Model.PowerUpGaugeState.UP;
+                //}
+                //else
+                //{
+                //    //쿨타임
+
+                //    float rate = coolTime / checkTime;
+                //    rate = rate < 0 ? 0 : rate;
+                //    rate = rate > 1 ? 1 : rate;
+
+                //    float fixRate = 1 - (rate * 0.88f);
+                //    playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = fixRate;
+
+                //    playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILabel>().text =
+                //        (checkTime - (int)coolTime).ToString() + " second";
+
+                //    if (ani.AnimationName != "cooling down")
+                //    {
+                //        ani.AnimationName = "cooling down";
+                //        ani.loop = true;
+                //    }
+
+                //    //int x = (int)center.x - 85 + ((int)(coolTime / checkTime) * 18);
+                //    int x = (int)center.x - 85 + (int)((1 - rate) * 185);
+
+                //    gaugeSpine.transform.localPosition = center;
+                //    gaugeSpine.transform.localPosition =
+                //        new Vector3(x, center.y);
+                //}
+
                 playScene_ui.m_itemBtn.Find("t_label").GetComponent<UILocalize>().key =
                     "ItemCharging";
                 playScene_ui.m_itemBtn.Find("t_label").BroadcastMessage("OnLocalize");
 
                 gaugeSpine.transform.localPosition = new Vector3(center.x - 85, center.y);
+
+                float checkRate = 0;
                 if (nb_GlobalData.g_global.blitzGaugeValue == 0)
                 {
                     gaugeSpine.transform.localPosition =
@@ -691,28 +743,77 @@ public class nb_PlayBlitzScene : MonoBehaviour
                 }
                 else if (nb_GlobalData.g_global.blitzGaugeValue == 1)
                 {
+                    //한칸
                     if (itemBoosterOn)
                     {
-                        gaugeSpine.transform.localPosition = center;
+                        checkRate = 0.5f;
+                        if (lastCheckRate < checkRate)
+                        {
+                            float rate = lastCheckRate / checkRate;
+                            rate = rate < 0 ? 0 : rate;
+                            rate = rate > checkRate ? checkRate : rate;
 
-                        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.5f;
+                            float fixRate = checkRate - (rate * 0.88f);
+                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = fixRate;
+
+                            int x = (int)center.x - 85 + (int)((checkRate - rate) * 185);
+                            gaugeSpine.transform.localPosition = new Vector3(x, center.y);
+                        }
+                        else
+                        {
+                            gaugeSpine.transform.localPosition = center;
+
+                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = checkRate;
+                        }
                     }
                     else
                     {
-                        gaugeSpine.transform.localPosition =
-                            new Vector3(center.x - 30, center.y);
+                        checkRate = 0.37f;
+                        if (lastCheckRate < checkRate)
+                        {
+                            float rate = lastCheckRate / checkRate;
+                            rate = rate < 0 ? 0 : rate;
+                            rate = rate > checkRate ? checkRate : rate;
 
-                        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.37f;
+                            float fixRate = checkRate - (rate * 0.88f);
+                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = fixRate;
+
+                            int x = (int)center.x - 85 + (int)((checkRate - rate) * 185);
+                            gaugeSpine.transform.localPosition = new Vector3(x, center.y);
+                        }
+                        else
+                        {
+                            gaugeSpine.transform.localPosition =
+                                new Vector3(center.x - 30, center.y);
+
+                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = checkRate;
+                        }
                     }
                 }
                 else if (nb_GlobalData.g_global.blitzGaugeValue == 2)
                 {
                     if (!itemBoosterOn)
                     {
-                        gaugeSpine.transform.localPosition =
-                            new Vector3(center.x + 30, center.y);
+                        checkRate = 0.66f;
+                        if (lastCheckRate < checkRate)
+                        {
+                            float rate = lastCheckRate / checkRate;
+                            rate = rate < 0 ? 0 : rate;
+                            rate = rate > checkRate ? checkRate : rate;
 
-                        playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = 0.66f;
+                            float fixRate = checkRate - (rate * 0.88f);
+                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = fixRate;
+
+                            int x = (int)center.x - 85 + (int)((checkRate - rate) * 185);
+                            gaugeSpine.transform.localPosition = new Vector3(x, center.y);
+                        }
+                        else
+                        {
+                            gaugeSpine.transform.localPosition =
+                                new Vector3(center.x + 30, center.y);
+
+                            playScene_ui.m_itemGauge.GetComponent<UISprite>().fillAmount = checkRate;
+                        }
                     }
                 }
             }
@@ -3675,7 +3776,7 @@ public class nb_PlayBlitzScene : MonoBehaviour
     {
         yield return new WaitForSeconds(60.0f);
 
-        //대기실로 보냄
+        //대기실로
 
         fadeOut = true;
         fadeOutTimer = Time.time;

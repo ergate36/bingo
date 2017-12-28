@@ -608,25 +608,104 @@ public class nb_GameResult_popup : MonoBehaviour
 
         if (check)  //하나라도 먹은 상자가 잇음
         {
+            var expIcon = this.transform.Find("bg/i_level_star").gameObject;
+            effectParent[5].transform.Find("spine").gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+
             foreach (var reward in nb_GlobalData.g_global.clearRewardList)
             {
                 if (reward.ClearRewardType == ClearRewardType.CHEST)
                 {
+                    GameObject start = effectParent[5].transform.Find("icon_start_pos").gameObject;
+                    GameObject end = effectParent[5].transform.Find("icon_end_pos").gameObject;
+                    string iconName = "";
                     if (reward.AssetType == AssetType.GAME_MONEY)
                     {
-
+                        if (reward.AssetId == 1)
+                        {
+                            iconName = "ui_money_gold";
+                        }
+                        else if (reward.AssetId == 2)
+                        {
+                            iconName = "ui_money_credit";
+                        }
                     }
                     else if (reward.AssetType == AssetType.EXPERIENCE)
                     {
-
+                        iconName = "ui_money_exp";
                     }
-                    else if (reward.AssetType == AssetType.RANDOM_REWARD)
+                    else if (reward.AssetType == AssetType.POWER_UP)
                     {
-
+                        iconName = "ui_money_normal";
                     }
+
+                    GameObject icon = effectParent[5].transform.Find("icon").gameObject;
+                    GameObject value = effectParent[5].transform.Find("value").gameObject;
+
+                    icon.SetActive(true);
+                    icon.transform.localPosition = start.transform.localPosition;
+                    icon.transform.localScale = start.transform.localScale;
+                    icon.GetComponent<UISprite>().name = iconName;
+
+                    value.SetActive(true);
+                    value.GetComponent<UILabel>().text =
+                        "+" + nb_GlobalData.g_global.util.GetCommaNumber(reward.AssetCount);
+                    value.transform.localScale = new Vector3(2, 2);
+
+                    iTween.ScaleTo(icon, end.transform.localScale, AnimationSpeedRate * 0.5f);
+                    iTween.MoveTo(icon, end.transform.localPosition, AnimationSpeedRate * 0.5f);
+                    iTween.ScaleTo(value, Vector3.one, AnimationSpeedRate * 0.5f);
+                    
+                    yield return new WaitForSeconds(AnimationSpeedRate * 1.5f);
+                    iTween.Stop(icon);
+                    iTween.Stop(value);
+
+                    iTween.ScaleTo(icon, new Vector3(0.5f, 0.5f), AnimationSpeedRate * 0.25f);
+                    if (reward.AssetType == AssetType.GAME_MONEY)
+                    {
+                        if (reward.AssetId == 1)
+                        {
+                            iTween.MoveTo(icon, totalCoinIcon.transform.position, AnimationSpeedRate * 0.75f);
+                            yield return new WaitForSeconds(AnimationSpeedRate * 0.75f);
+                            AnimateNumber(totalCoinValue.GetComponent<UILabel>(),
+                                currentCoin, currentCoin + reward.AssetCount, AnimationSpeedRate * 0.5f);
+                            currentCoin += reward.AssetCount;
+                        }
+                        else if (reward.AssetId == 2)
+                        {
+                            iTween.MoveTo(icon, totalCreditIcon.transform.position, AnimationSpeedRate * 0.75f);
+                            yield return new WaitForSeconds(AnimationSpeedRate * 0.75f);
+                            AnimateNumber(totalCreditValue.GetComponent<UILabel>(),
+                                currentCredit, currentCredit + reward.AssetCount, AnimationSpeedRate * 0.5f);
+                            currentCredit += reward.AssetCount;
+                        }
+                    }
+                    else if (reward.AssetType == AssetType.EXPERIENCE)
+                    {
+                        iTween.MoveTo(icon, expIcon.transform.position, AnimationSpeedRate * 0.75f);
+                        yield return new WaitForSeconds(AnimationSpeedRate * 0.75f);
+
+                        //todo: exp gauge
+                    }
+                    else if (reward.AssetType == AssetType.POWER_UP)
+                    {
+                        iTween.MoveTo(icon, totalPowerUp1Value.transform.position, AnimationSpeedRate * 0.75f);
+                        yield return new WaitForSeconds(AnimationSpeedRate * 0.75f);
+
+                        totalPowerUp1Value.GetComponent<UILabel>().text = 
+                            (currentPowerUp1 + reward.AssetCount).ToString();
+                        currentPowerUp1 += reward.AssetCount;
+                    }
+                    icon.SetActive(false);
+                    value.SetActive(false);
+                    iTween.Stop(icon);
+
+                    yield return new WaitForSeconds(AnimationSpeedRate * 1.5f);
                 }
             }
         }
+
+        effectParent[5].SetActive(false);
 
         yield return null;
     }

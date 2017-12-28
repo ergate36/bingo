@@ -1,0 +1,111 @@
+
+sydney.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/sydney/light1
+  rotate: false
+  xy: 121, 489
+  size: 449, 46
+  orig: 449, 46
+  offset: 0, 0
+  index: -1
+img/sydney/light3
+  rotate: true
+  xy: 2, 295
+  size: 646, 45
+  orig: 646, 45
+  offset: 0, 0
+  index: -1
+img/sydney/lighti2
+  rotate: false
+  xy: 121, 441
+  size: 445, 46
+  orig: 445, 46
+  offset: 0, 0
+  index: -1
+img/sydney/ob1
+  rotate: false
+  xy: 121, 650
+  size: 524, 68
+  orig: 524, 68
+  offset: 0, 0
+  index: -1
+img/sydney/ob2
+  rotate: false
+  xy: 121, 720
+  size: 457, 221
+  orig: 457, 221
+  offset: 0, 0
+  index: -1
+img/sydney/ob3
+  rotate: false
+  xy: 121, 376
+  size: 261, 31
+  orig: 261, 31
+  offset: 0, 0
+  index: -1
+img/sydney/ob4
+  rotate: false
+  xy: 572, 467
+  size: 157, 68
+  orig: 157, 68
+  offset: 0, 0
+  index: -1
+img/sydney/spotlight
+  rotate: false
+  xy: 2, 2
+  size: 44, 291
+  orig: 44, 291
+  offset: 0, 0
+  index: -1
+img/sydney/twingkle1
+  rotate: false
+  xy: 121, 409
+  size: 418, 30
+  orig: 418, 30
+  offset: 0, 0
+  index: -1
+img/sydney/twingkle2
+  rotate: false
+  xy: 644, 979
+  size: 296, 32
+  orig: 296, 32
+  offset: 0, 0
+  index: -1
+img/sydney/twingkle3
+  rotate: true
+  xy: 580, 723
+  size: 218, 26
+  orig: 218, 26
+  offset: 0, 0
+  index: -1
+img/sydney/water1
+  rotate: false
+  xy: 121, 537
+  size: 623, 50
+  orig: 623, 50
+  offset: 0, 0
+  index: -1
+img/sydney/water2
+  rotate: false
+  xy: 121, 589
+  size: 556, 59
+  orig: 556, 59
+  offset: 0, 0
+  index: -1
+img/sydney/waterlight1
+  rotate: false
+  xy: 2, 943
+  size: 640, 68
+  orig: 640, 68
+  offset: 0, 0
+  index: -1
+img/sydney/waterlight2
+  rotate: true
+  xy: 49, 329
+  size: 612, 70
+  orig: 612, 70
+  offset: 0, 0
+  index: -1

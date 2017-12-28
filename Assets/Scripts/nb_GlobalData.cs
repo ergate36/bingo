@@ -73,6 +73,9 @@ public class nb_GlobalData : MonoBehaviour
     public List<StageFee> stageFeeList;
 
     [HideInInspector]
+    public List<PlayerLevelRequirement> playerLevelRequirement;
+
+    [HideInInspector]
     public long miniGameRewardType;
     [HideInInspector]
     public long miniGameRewardId;
@@ -443,6 +446,7 @@ public class nb_GlobalData : MonoBehaviour
         miniGamblePriceList = new List<MiniGamblePrice>();
         miniGamblePriceSetList = new List<MiniGamblePriceSet>();
         stageFeeList = new List<StageFee>();
+        playerLevelRequirement = new List<PlayerLevelRequirement>();
 
         useItemDataList = new List<nb_useItemData>();
         myMoney = new List<nb_userMoney>();
@@ -487,6 +491,8 @@ public class nb_GlobalData : MonoBehaviour
         {
             g_global_bgm4 = GameObject.Find("nb_GlobalObject/bgm4").GetComponent<AudioSource>();
         }
+
+        playerLevelRequirementTempData();
     }
 
 
@@ -664,6 +670,25 @@ public class nb_GlobalData : MonoBehaviour
         for (int i = 0; i < 75; ++i)
         {
             bingoball[i] = 0;
+        }
+    }
+
+    //임시 데이터
+    private void playerLevelRequirementTempData()
+    {
+        Debug.Log("[test]playerLevelRequirementTempData setting");
+        for (int i = 1; i <= 100; ++i)
+        {
+            PlayerLevelRequirement temp = new PlayerLevelRequirement();
+            temp.Id = i;
+            temp.PlayerLevel = i;
+            temp.RequireExperience = 1000 + ((i - 2) * 100);
+            if (i == 1)
+            {
+                temp.RequireExperience = 0;
+            }
+
+            playerLevelRequirement.Add(temp);
         }
     }
 }

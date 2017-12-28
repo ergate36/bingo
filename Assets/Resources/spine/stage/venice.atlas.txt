@@ -1,0 +1,125 @@
+
+venice.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+venice/bird1
+  rotate: false
+  xy: 2, 32
+  size: 34, 28
+  orig: 34, 28
+  offset: 0, 0
+  index: -1
+venice/bird2
+  rotate: false
+  xy: 397, 420
+  size: 34, 28
+  orig: 34, 28
+  offset: 0, 0
+  index: -1
+venice/bird3
+  rotate: false
+  xy: 2, 2
+  size: 34, 28
+  orig: 34, 28
+  offset: 0, 0
+  index: -1
+venice/gondola
+  rotate: false
+  xy: 2, 71
+  size: 120, 46
+  orig: 120, 46
+  offset: 0, 0
+  index: -1
+venice/object
+  rotate: false
+  xy: 2, 490
+  size: 1003, 276
+  orig: 1003, 276
+  offset: 0, 0
+  index: -1
+venice/shine
+  rotate: false
+  xy: 2, 119
+  size: 393, 369
+  orig: 393, 369
+  offset: 0, 0
+  index: -1
+venice/smoke1
+  rotate: false
+  xy: 506, 471
+  size: 20, 8
+  orig: 20, 8
+  offset: 0, 0
+  index: -1
+venice/smoke2
+  rotate: false
+  xy: 179, 106
+  size: 34, 11
+  orig: 34, 11
+  offset: 0, 0
+  index: -1
+venice/smoke3
+  rotate: false
+  xy: 124, 98
+  size: 53, 19
+  orig: 53, 19
+  offset: 0, 0
+  index: -1
+venice/twinkle1
+  rotate: false
+  xy: 397, 459
+  size: 107, 29
+  orig: 107, 29
+  offset: 0, 0
+  index: -1
+venice/twinkle2
+  rotate: false
+  xy: 124, 73
+  size: 26, 23
+  orig: 26, 23
+  offset: 0, 0
+  index: -1
+venice/water1
+  rotate: true
+  xy: 1007, 681
+  size: 85, 10
+  orig: 85, 10
+  offset: 0, 0
+  index: -1
+venice/water2
+  rotate: false
+  xy: 397, 450
+  size: 61, 7
+  orig: 61, 7
+  offset: 0, 0
+  index: -1
+venice/water3
+  rotate: false
+  xy: 2, 62
+  size: 79, 7
+  orig: 79, 7
+  offset: 0, 0
+  index: -1
+venice/water4
+  rotate: false
+  xy: 83, 63
+  size: 24, 6
+  orig: 24, 6
+  offset: 0, 0
+  index: -1
+venice/water5
+  rotate: false
+  xy: 506, 481
+  size: 56, 7
+  orig: 56, 7
+  offset: 0, 0
+  index: -1
+venice/water6
+  rotate: true
+  xy: 1007, 630
+  size: 49, 9
+  orig: 49, 9
+  offset: 0, 0
+  index: -1

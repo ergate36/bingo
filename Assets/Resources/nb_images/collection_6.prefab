@@ -54,161 +54,161 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: a10f9a9e42109a140b776ccd98d02ef6, type: 2}
   mSprites:
   - name: collection_6_1
-    x: 0
-    y: 421
-    width: 92
-    height: 91
+    x: 237
+    y: 263
+    width: 142
+    height: 296
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: collection_6_10
     x: 0
-    y: 237
-    width: 92
-    height: 91
+    y: 13
+    width: 195
+    height: 228
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: collection_6_11
-    x: 0
-    y: 145
-    width: 92
-    height: 91
+    x: 237
+    y: 560
+    width: 246
+    height: 237
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: collection_6_12
-    x: 93
-    y: 421
-    width: 92
-    height: 91
+    x: 0
+    y: 506
+    width: 234
+    height: 234
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: collection_6_2
-    x: 0
-    y: 53
-    width: 92
-    height: 91
+    x: 497
+    y: 861
+    width: 288
+    height: 163
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: collection_6_3
-    x: 93
-    y: 329
-    width: 92
-    height: 91
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
-  - name: collection_6_4
-    x: 186
-    y: 421
-    width: 92
-    height: 91
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
-  - name: collection_6_5
-    x: 372
-    y: 421
-    width: 92
-    height: 91
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
-  - name: collection_6_6
-    x: 279
-    y: 421
-    width: 92
-    height: 91
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
-  - name: collection_6_7
     x: 0
-    y: 329
-    width: 92
-    height: 91
+    y: 741
+    width: 236
+    height: 283
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: collection_6_4
+    x: 237
+    y: 798
+    width: 259
+    height: 226
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: collection_6_5
+    x: 484
+    y: 643
+    width: 240
+    height: 154
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: collection_6_6
+    x: 725
+    y: 670
+    width: 288
+    height: 127
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: collection_6_7
+    x: 380
+    y: 277
+    width: 142
+    height: 282
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: collection_6_8
-    x: 279
-    y: 329
-    width: 92
-    height: 91
+    x: 523
+    y: 260
+    width: 66
+    height: 299
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: collection_6_9
-    x: 186
-    y: 329
-    width: 92
-    height: 91
+    x: 0
+    y: 242
+    width: 207
+    height: 263
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 4
-    paddingRight: 4
-    paddingTop: 3
-    paddingBottom: 6
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   mPixelSize: 1
   mReplacement: {fileID: 0}
   mCoordinates: 0

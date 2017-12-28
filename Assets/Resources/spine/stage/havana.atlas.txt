@@ -1,0 +1,118 @@
+
+havana.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/havana/bird1
+  rotate: true
+  xy: 2, 2
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/havana/bird2
+  rotate: true
+  xy: 351, 116
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/havana/bird3
+  rotate: false
+  xy: 422, 148
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/havana/bird3b
+  rotate: true
+  xy: 25, 2
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/havana/bird4
+  rotate: false
+  xy: 223, 93
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/havana/bird4b
+  rotate: true
+  xy: 374, 116
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/havana/car1
+  rotate: false
+  xy: 2, 19
+  size: 165, 69
+  orig: 165, 69
+  offset: 0, 0
+  index: -1
+img/havana/car2
+  rotate: false
+  xy: 2, 90
+  size: 180, 79
+  orig: 180, 79
+  offset: 0, 0
+  index: -1
+img/havana/carshadow
+  rotate: false
+  xy: 2, 171
+  size: 442, 32
+  orig: 442, 32
+  offset: 0, 0
+  index: -1
+img/havana/house
+  rotate: false
+  xy: 2, 205
+  size: 620, 303
+  orig: 620, 303
+  offset: 0, 0
+  index: -1
+img/havana/lamp1
+  rotate: true
+  xy: 184, 116
+  size: 53, 165
+  orig: 53, 165
+  offset: 0, 0
+  index: -1
+img/havana/lamp2
+  rotate: true
+  xy: 446, 150
+  size: 53, 165
+  orig: 53, 165
+  offset: 0, 0
+  index: -1
+img/havana/lamplight
+  rotate: false
+  xy: 351, 133
+  size: 69, 36
+  orig: 69, 36
+  offset: 0, 0
+  index: -1
+img/havana/shine
+  rotate: false
+  xy: 624, 139
+  size: 393, 369
+  orig: 393, 369
+  offset: 0, 0
+  index: -1
+img/havana/smoke1
+  rotate: false
+  xy: 184, 91
+  size: 37, 23
+  orig: 37, 23
+  offset: 0, 0
+  index: -1
+img/havana/smoke2
+  rotate: false
+  xy: 240, 99
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: -1

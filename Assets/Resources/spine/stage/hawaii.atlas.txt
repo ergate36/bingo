@@ -1,0 +1,209 @@
+
+hawaii.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/hawaii/bird1
+  rotate: true
+  xy: 191, 2
+  size: 34, 28
+  orig: 34, 28
+  offset: 0, 0
+  index: -1
+img/hawaii/bird2
+  rotate: true
+  xy: 221, 2
+  size: 34, 28
+  orig: 34, 28
+  offset: 0, 0
+  index: -1
+img/hawaii/bird3
+  rotate: true
+  xy: 251, 2
+  size: 34, 28
+  orig: 34, 28
+  offset: 0, 0
+  index: -1
+img/hawaii/flower1
+  rotate: false
+  xy: 281, 7
+  size: 16, 29
+  orig: 16, 29
+  offset: 0, 0
+  index: -1
+img/hawaii/flower2
+  rotate: true
+  xy: 339, 58
+  size: 12, 37
+  orig: 12, 37
+  offset: 0, 0
+  index: -1
+img/hawaii/flower3
+  rotate: false
+  xy: 855, 301
+  size: 16, 30
+  orig: 16, 30
+  offset: 0, 0
+  index: -1
+img/hawaii/grass1
+  rotate: false
+  xy: 829, 447
+  size: 91, 63
+  orig: 91, 63
+  offset: 0, 0
+  index: -1
+img/hawaii/grass2
+  rotate: false
+  xy: 922, 448
+  size: 91, 62
+  orig: 91, 62
+  offset: 0, 0
+  index: -1
+img/hawaii/grass3
+  rotate: false
+  xy: 797, 194
+  size: 50, 43
+  orig: 50, 43
+  offset: 0, 0
+  index: -1
+img/hawaii/grass4
+  rotate: false
+  xy: 339, 72
+  size: 57, 67
+  orig: 57, 67
+  offset: 0, 0
+  index: -1
+img/hawaii/grass5
+  rotate: false
+  xy: 829, 400
+  size: 53, 45
+  orig: 53, 45
+  offset: 0, 0
+  index: -1
+img/hawaii/island
+  rotate: false
+  xy: 397, 399
+  size: 430, 111
+  orig: 430, 111
+  offset: 0, 0
+  index: -1
+img/hawaii/leaf1
+  rotate: true
+  xy: 849, 222
+  size: 15, 4
+  orig: 15, 4
+  offset: 0, 0
+  index: -1
+img/hawaii/leaf2
+  rotate: true
+  xy: 180, 8
+  size: 18, 5
+  orig: 18, 5
+  offset: 0, 0
+  index: -1
+img/hawaii/leaf3
+  rotate: true
+  xy: 1015, 491
+  size: 19, 7
+  orig: 19, 7
+  offset: 0, 0
+  index: -1
+img/hawaii/leaf4
+  rotate: false
+  xy: 397, 141
+  size: 41, 14
+  orig: 41, 14
+  offset: 0, 0
+  index: -1
+img/hawaii/shine
+  rotate: false
+  xy: 2, 141
+  size: 393, 369
+  orig: 393, 369
+  offset: 0, 0
+  index: -1
+img/hawaii/tree1
+  rotate: false
+  xy: 703, 239
+  size: 150, 158
+  orig: 150, 158
+  offset: 0, 0
+  index: -1
+img/hawaii/tree2
+  rotate: false
+  xy: 559, 191
+  size: 142, 206
+  orig: 142, 206
+  offset: 0, 0
+  index: -1
+img/hawaii/tree3
+  rotate: false
+  xy: 397, 169
+  size: 160, 228
+  orig: 160, 228
+  offset: 0, 0
+  index: -1
+img/hawaii/tree4
+  rotate: true
+  xy: 2, 28
+  size: 111, 187
+  orig: 111, 187
+  offset: 0, 0
+  index: -1
+img/hawaii/tree5
+  rotate: true
+  xy: 191, 38
+  size: 101, 146
+  orig: 101, 146
+  offset: 0, 0
+  index: -1
+img/hawaii/water1
+  rotate: false
+  xy: 397, 157
+  size: 145, 10
+  orig: 145, 10
+  offset: 0, 0
+  index: -1
+img/hawaii/water2
+  rotate: false
+  xy: 703, 204
+  size: 92, 33
+  orig: 92, 33
+  offset: 0, 0
+  index: -1
+img/hawaii/water3
+  rotate: false
+  xy: 2, 5
+  size: 176, 21
+  orig: 176, 21
+  offset: 0, 0
+  index: -1
+img/hawaii/water4
+  rotate: true
+  xy: 855, 333
+  size: 65, 26
+  orig: 65, 26
+  offset: 0, 0
+  index: -1
+img/hawaii/water5
+  rotate: false
+  xy: 559, 176
+  size: 42, 13
+  orig: 42, 13
+  offset: 0, 0
+  index: -1
+img/hawaii/water6
+  rotate: false
+  xy: 703, 198
+  size: 23, 4
+  orig: 23, 4
+  offset: 0, 0
+  index: -1
+img/hawaii/water7
+  rotate: true
+  xy: 884, 408
+  size: 37, 11
+  orig: 37, 11
+  offset: 0, 0
+  index: -1

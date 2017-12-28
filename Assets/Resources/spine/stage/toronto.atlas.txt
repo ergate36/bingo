@@ -1,0 +1,139 @@
+
+toronto.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/toronto/back
+  rotate: false
+  xy: 2, 264
+  size: 594, 241
+  orig: 594, 241
+  offset: 0, 0
+  index: -1
+img/toronto/buildwater1
+  rotate: false
+  xy: 370, 48
+  size: 42, 6
+  orig: 42, 6
+  offset: 0, 0
+  index: -1
+img/toronto/buildwater2
+  rotate: true
+  xy: 993, 438
+  size: 67, 5
+  orig: 67, 5
+  offset: 0, 0
+  index: -1
+img/toronto/buildwater3
+  rotate: true
+  xy: 1000, 474
+  size: 31, 4
+  orig: 31, 4
+  offset: 0, 0
+  index: -1
+img/toronto/buildwater4
+  rotate: true
+  xy: 582, 206
+  size: 56, 5
+  orig: 56, 5
+  offset: 0, 0
+  index: -1
+img/toronto/buildwater5
+  rotate: false
+  xy: 2, 2
+  size: 66, 6
+  orig: 66, 6
+  offset: 0, 0
+  index: -1
+img/toronto/curuse
+  rotate: false
+  xy: 370, 153
+  size: 169, 33
+  orig: 169, 33
+  offset: 0, 0
+  index: -1
+img/toronto/fog1
+  rotate: false
+  xy: 370, 188
+  size: 210, 74
+  orig: 210, 74
+  offset: 0, 0
+  index: -1
+img/toronto/fog2
+  rotate: false
+  xy: 370, 96
+  size: 137, 55
+  orig: 137, 55
+  offset: 0, 0
+  index: -1
+img/toronto/fog3
+  rotate: false
+  xy: 370, 56
+  size: 64, 38
+  orig: 64, 38
+  offset: 0, 0
+  index: -1
+img/toronto/front
+  rotate: true
+  xy: 2, 10
+  size: 252, 366
+  orig: 252, 366
+  offset: 0, 0
+  index: -1
+img/toronto/helicopter1
+  rotate: false
+  xy: 541, 163
+  size: 38, 23
+  orig: 38, 23
+  offset: 0, 0
+  index: -1
+img/toronto/helicopter2
+  rotate: true
+  xy: 509, 113
+  size: 38, 23
+  orig: 38, 23
+  offset: 0, 0
+  index: -1
+img/toronto/light
+  rotate: false
+  xy: 509, 99
+  size: 10, 12
+  orig: 10, 12
+  offset: 0, 0
+  index: -1
+img/toronto/shine
+  rotate: false
+  xy: 598, 136
+  size: 393, 369
+  orig: 393, 369
+  offset: 0, 0
+  index: -1
+img/toronto/water1
+  rotate: false
+  xy: 436, 89
+  size: 43, 5
+  orig: 43, 5
+  offset: 0, 0
+  index: -1
+img/toronto/water2
+  rotate: true
+  xy: 993, 397
+  size: 39, 5
+  orig: 39, 5
+  offset: 0, 0
+  index: -1
+img/toronto/water3
+  rotate: true
+  xy: 589, 235
+  size: 27, 7
+  orig: 27, 7
+  offset: 0, 0
+  index: -1
+img/toronto/water4
+  rotate: false
+  xy: 70, 3
+  size: 15, 5
+  orig: 15, 5
+  offset: 0, 0
+  index: -1

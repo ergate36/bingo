@@ -592,6 +592,9 @@ public class nbHttp : MonoBehaviour
                             data["stageFeeList"][i].ToJson())
                             );
                     }
+
+                    //stageCompleteCollectionRewardList
+                    //controlStageList
                 }
                 break;
             case nbHttpState.GetStageListSuccess:

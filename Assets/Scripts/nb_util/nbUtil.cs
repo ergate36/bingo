@@ -126,4 +126,22 @@ public class nbUtil
 
         return 0;
     }
+
+    public int getLevelRequireExp(int level)
+    {
+        int result = -1;
+        foreach (var req in nb_GlobalData.g_global.playerLevelRequirement)
+        {
+            if (req.PlayerLevel == level)
+            {
+                result = req.RequireExperience;
+                break;
+            }
+        }
+        if (result == -1)
+        {
+            Debug.Log("cant not found player requirement exp Level : " + level);
+        }
+        return result;
+    }
 }

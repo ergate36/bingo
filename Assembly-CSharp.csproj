@@ -178,7 +178,6 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
-     <Compile Include="Assets\Resources\nb_effect\nb_Effect.cs" />
      <Compile Include="Assets\Scripts\AndroidManager.cs" />
      <Compile Include="Assets\Scripts\BingoData.cs" />
      <Compile Include="Assets\Scripts\Constants.cs" />
@@ -738,6 +737,7 @@
      <None Include="Assets\plugins\Android\res\values\styles.xml" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_top_button.xml" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpriteLighting.cginc" />
+     <None Include="Assets\Resources\spine\stage\sydney.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\spineboy-pro\spineboy.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Gauge\Gauge.atlas.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font (AlphaClip).shader" />
@@ -746,6 +746,7 @@
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_check.xml" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_list_section_header.xml" />
+     <None Include="Assets\Resources\spine\stage\newyork.atlas.txt" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_tooltip_bubble.xml" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\FootSoldier\FS_White.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\ShaderShared.cginc" />
@@ -756,6 +757,7 @@
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Hero\license.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (AlphaClip).shader" />
+     <None Include="Assets\Resources\spine\stage\venice.atlas.txt" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_usersettingsfragment_background_gradient.xml" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Goblins\goblins.atlas.txt" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_search_box.xml" />
@@ -774,6 +776,7 @@
      <None Include="Assets\plugins\Android\res\values-he\strings.xml" />
      <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
      <None Include="Assets\plugins\Android\res\drawable\common_signin_btn_text_light.xml" />
+     <None Include="Assets\Resources\spine\stage\toronto.atlas.txt" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_picker_list_selector_background_transition.xml" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_friendpickerfragment.xml" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
@@ -787,6 +790,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font (SoftClip).shader" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_loginbutton_silver.xml" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\SpritesPixelLit.shader" />
+     <None Include="Assets\Resources\spine\stage\bahama.atlas.txt" />
      <None Include="Assets\Resources\spine\ui_reward_effect.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Raggedy Spineboy\Raggedy Spineboy.atlas.txt" />
      <None Include="Assets\plugins\Android\res\values-xhdpi\dimens.xml" />
@@ -813,12 +817,14 @@
      <None Include="Assets\Resources\Xml\RankXml.xml" />
      <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
+     <None Include="Assets\Resources\spine\stage\paris.atlas.txt" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_login_activity_layout.xml" />
      <None Include="Assets\tools\spine-unity\Assets\Examples\Spine\Dragon\dragon.atlas.txt" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_list_row.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed).shader" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_picker_activity_circle_row.xml" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CameraDepthNormalsTexture.shader" />
+     <None Include="Assets\Resources\spine\stage\havana.atlas.txt" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Shaders\Spine-Skeleton-TintBlack.shader" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\ShaderShared.cginc" />
      <None Include="Assets\Sprites\effectImage\eff_texture\eff_attack_freeze\eff_attack_freeze_notice_magic.shader" />
@@ -847,6 +853,7 @@
      <None Include="Assets\Resources\Xml\MonsterXml.xml" />
      <None Include="Assets\plugins\Android\res\values-iw\strings.xml" />
      <None Include="Assets\plugins\Android\res\layout\com_facebook_placepickerfragment.xml" />
+     <None Include="Assets\Resources\spine\stage\hawaii.atlas.txt" />
      <None Include="Assets\plugins\Android\res\drawable\com_facebook_button_like_selected.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
      <None Include="Assets\tools\spine-unity\Assets\spine-unity\Modules\Shaders\Sprite\CGIncludes\ShaderMaths.cginc" />

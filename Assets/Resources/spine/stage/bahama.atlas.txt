@@ -1,0 +1,139 @@
+
+bahama.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/bahama/bird1
+  rotate: false
+  xy: 976, 287
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/bahama/bird2
+  rotate: false
+  xy: 795, 228
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/bahama/bird3
+  rotate: false
+  xy: 945, 261
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/bahama/bird4
+  rotate: false
+  xy: 977, 484
+  size: 15, 21
+  orig: 15, 21
+  offset: 0, 0
+  index: -1
+img/bahama/fish1
+  rotate: false
+  xy: 189, 25
+  size: 28, 20
+  orig: 28, 20
+  offset: 0, 0
+  index: -1
+img/bahama/fish2
+  rotate: false
+  xy: 341, 114
+  size: 28, 20
+  orig: 28, 20
+  offset: 0, 0
+  index: -1
+img/bahama/fish3
+  rotate: false
+  xy: 397, 187
+  size: 28, 20
+  orig: 28, 20
+  offset: 0, 0
+  index: -1
+img/bahama/grass
+  rotate: false
+  xy: 795, 251
+  size: 148, 31
+  orig: 148, 31
+  offset: 0, 0
+  index: -1
+img/bahama/house
+  rotate: false
+  xy: 397, 365
+  size: 569, 140
+  orig: 569, 140
+  offset: 0, 0
+  index: -1
+img/bahama/housewater1
+  rotate: false
+  xy: 397, 284
+  size: 577, 24
+  orig: 577, 24
+  offset: 0, 0
+  index: -1
+img/bahama/housewater2
+  rotate: false
+  xy: 397, 337
+  size: 600, 26
+  orig: 600, 26
+  offset: 0, 0
+  index: -1
+img/bahama/housewater3
+  rotate: false
+  xy: 397, 310
+  size: 597, 25
+  orig: 597, 25
+  offset: 0, 0
+  index: -1
+img/bahama/island
+  rotate: false
+  xy: 397, 220
+  size: 396, 62
+  orig: 396, 62
+  offset: 0, 0
+  index: -1
+img/bahama/islandwater1
+  rotate: false
+  xy: 397, 209
+  size: 185, 9
+  orig: 185, 9
+  offset: 0, 0
+  index: -1
+img/bahama/islandwater2
+  rotate: false
+  xy: 2, 2
+  size: 160, 7
+  orig: 160, 7
+  offset: 0, 0
+  index: -1
+img/bahama/islandwater3
+  rotate: true
+  xy: 968, 378
+  size: 127, 7
+  orig: 127, 7
+  offset: 0, 0
+  index: -1
+img/bahama/shine
+  rotate: false
+  xy: 2, 136
+  size: 393, 369
+  orig: 393, 369
+  offset: 0, 0
+  index: -1
+img/bahama/tree1
+  rotate: true
+  xy: 2, 11
+  size: 123, 185
+  orig: 123, 185
+  offset: 0, 0
+  index: -1
+img/bahama/tree2
+  rotate: true
+  xy: 189, 47
+  size: 87, 150
+  orig: 87, 150
+  offset: 0, 0
+  index: -1

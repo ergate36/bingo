@@ -20,10 +20,10 @@ Post,Post,우체통
 Close,Close,닫기
 MainMsg_StageConnecting,stage connecting,스테이지 진입중
 Store_Title1,Title1,상점이름1
-Store_Title2,Title2,상점이름2
-Store_Title3,Title3,상점이름3
-Store_Title4,Power_Ups (Normal) Store,상점이름4
-Store_Title5,Power_Ups (Battle) Store,상점이름5
+Store_Title2,Coins Store,코인 상점
+Store_Title3,Credits Store,크레딧 상점
+Store_Title4,Power_Ups (Normal) Store,일반 아이템 상점
+Store_Title5,Power_Ups (Battle) Store,배틀 아이템 상점
 Store_TopText1,TopText1,상점텍스트1
 Store_TopText2,TopText2,상점텍스트2
 Store_TopText3,TopText3,상점텍스트3
@@ -63,3 +63,14 @@ Lobby_MiniGambleBet,Bet:,배팅:
 Lobby_MiniGambleShuffle,Shuffle,섞기
 Rewards,Rewards,보상
 RewardsFrom,Rewards From,획득한 보상
+Reward_ShareAndCollect,Share & Collect,공유 & 수집
+Reward_CollectOnly,Collect,수집
+Reward_FoundText,Found!,찾았다!
+Store_Vip_InfoText,Earn Bingo Rewards VIP Points for any real money purchade,구매를 하면 VIP 포인트를 획득 할 수 있습니다.
+Store_Vip_ButtonText,Learn more,살펴보기
+Option_Voice,Voice,음성
+Option_Sound,Sound,효과음
+Option_Music,Music,배경음
+Option_FullScreen,Full\nscreen,전체화면
+Option_Support,Support,고객문의
+Option_Guide,Guide,가이드

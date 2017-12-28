@@ -4,6 +4,7 @@ using System.Collections;
 public class nb_shopClose_btn : MonoBehaviour
 {
     private BoxCollider[] buttons;
+    private MeshRenderer[] spineRenderers;
 
     public GameObject shopObj;
     public GameObject mainLayer;
@@ -24,6 +25,12 @@ public class nb_shopClose_btn : MonoBehaviour
             for (int i = 0; i < buttons.Length; ++i)
             {
                 buttons[i].enabled = true;
+            }
+
+            spineRenderers = mainLayer.GetComponentsInChildren<MeshRenderer>();
+            for (int i = 0; i < spineRenderers.Length; ++i)
+            {
+                spineRenderers[i].enabled = true;
             }
 
             shopObj.SetActive(false);

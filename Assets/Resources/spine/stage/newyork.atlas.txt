@@ -1,0 +1,104 @@
+
+newyork.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/newyork/bird1
+  rotate: false
+  xy: 922, 291
+  size: 14, 21
+  orig: 14, 21
+  offset: 0, 0
+  index: -1
+img/newyork/bird2
+  rotate: false
+  xy: 954, 335
+  size: 14, 21
+  orig: 14, 21
+  offset: 0, 0
+  index: -1
+img/newyork/door0
+  rotate: false
+  xy: 2, 2
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: -1
+img/newyork/door1
+  rotate: false
+  xy: 922, 314
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: -1
+img/newyork/door2
+  rotate: false
+  xy: 382, 73
+  size: 30, 42
+  orig: 30, 42
+  offset: 0, 0
+  index: -1
+img/newyork/object
+  rotate: false
+  xy: 2, 117
+  size: 459, 371
+  orig: 459, 371
+  offset: 0, 0
+  index: -1
+img/newyork/plane1
+  rotate: false
+  xy: 863, 239
+  size: 34, 12
+  orig: 34, 12
+  offset: 0, 0
+  index: -1
+img/newyork/plane2
+  rotate: true
+  xy: 858, 133
+  size: 118, 3
+  orig: 118, 3
+  offset: 0, 0
+  index: -1
+img/newyork/shine
+  rotate: false
+  xy: 463, 119
+  size: 393, 369
+  orig: 393, 369
+  offset: 0, 0
+  index: -1
+img/newyork/win1
+  rotate: false
+  xy: 858, 253
+  size: 62, 235
+  orig: 62, 235
+  offset: 0, 0
+  index: -1
+img/newyork/win2
+  rotate: true
+  xy: 2, 46
+  size: 69, 255
+  orig: 69, 255
+  offset: 0, 0
+  index: -1
+img/newyork/win3
+  rotate: false
+  xy: 922, 358
+  size: 87, 130
+  orig: 87, 130
+  offset: 0, 0
+  index: -1
+img/newyork/win4
+  rotate: true
+  xy: 259, 9
+  size: 106, 121
+  orig: 106, 121
+  offset: 0, 0
+  index: -1
+img/newyork/win5
+  rotate: false
+  xy: 1011, 471
+  size: 8, 17
+  orig: 8, 17
+  offset: 0, 0
+  index: -1

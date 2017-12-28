@@ -55,7 +55,7 @@ MonoBehaviour:
   mSprites:
   - name: dauber1
     x: 1806
-    y: 1772
+    y: 1854
     width: 100
     height: 87
     borderLeft: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: n5
     x: 625
-    y: 2245
+    y: 2395
     width: 53
     height: 74
     borderLeft: 0
@@ -159,7 +159,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: n6
     x: 625
-    y: 2170
+    y: 2245
     width: 53
     height: 74
     borderLeft: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: n8
     x: 625
-    y: 2395
+    y: 2170
     width: 53
     height: 74
     borderLeft: 0
@@ -201,6 +201,19 @@ MonoBehaviour:
     y: 2022
     width: 51
     height: 73
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: sparkle1
+    x: 625
+    y: 1762
+    width: 44
+    height: 44
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -250,7 +263,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_ball2
     x: 554
-    y: 336
+    y: 828
     width: 122
     height: 122
     borderLeft: 0
@@ -289,7 +302,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_ball5
     x: 554
-    y: 828
+    y: 336
     width: 122
     height: 122
     borderLeft: 0
@@ -301,8 +314,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_bar1
-    x: 2070
-    y: 2178
+    x: 1421
+    y: 7
     width: 192
     height: 32
     borderLeft: 0
@@ -314,7 +327,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_bar10
-    x: 1921
+    x: 2149
     y: 2155
     width: 148
     height: 55
@@ -379,8 +392,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_bar4
-    x: 3192
-    y: 2333
+    x: 3302
+    y: 2403
     width: 198
     height: 58
     borderLeft: 0
@@ -418,8 +431,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_bar7
-    x: 2982
-    y: 2213
+    x: 3523
+    y: 2288
     width: 191
     height: 51
     borderLeft: 0
@@ -457,8 +470,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_battle_card1
-    x: 1421
-    y: 1952
+    x: 277
+    y: 25
     width: 281
     height: 265
     borderLeft: 0
@@ -471,7 +484,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_battle_card2
     x: 1421
-    y: 1686
+    y: 1952
     width: 281
     height: 265
     borderLeft: 0
@@ -483,8 +496,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_battle_card3
-    x: 277
-    y: 25
+    x: 1421
+    y: 1686
     width: 281
     height: 265
     borderLeft: 0
@@ -562,7 +575,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_button_delete
     x: 1806
-    y: 1636
+    y: 1579
     width: 71
     height: 71
     borderLeft: 0
@@ -574,8 +587,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_button_plus
-    x: 1640
-    y: 108
+    x: 1088
+    y: 73
     width: 60
     height: 60
     borderLeft: 0
@@ -588,7 +601,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_button1_card
     x: 3523
-    y: 2440
+    y: 2511
     width: 396
     height: 70
     borderLeft: 0
@@ -601,7 +614,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_button1_shadowcard
     x: 3523
-    y: 2511
+    y: 2440
     width: 396
     height: 70
     borderLeft: 0
@@ -613,8 +626,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_button10
-    x: 1158
-    y: 324
+    x: 425
+    y: 1084
     width: 241
     height: 84
     borderLeft: 0
@@ -640,7 +653,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_button12
     x: 1421
-    y: 447
+    y: 376
     width: 196
     height: 70
     borderLeft: 0
@@ -653,7 +666,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_button13
     x: 1421
-    y: 305
+    y: 447
     width: 196
     height: 70
     borderLeft: 0
@@ -678,8 +691,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_button15
-    x: 425
-    y: 1084
+    x: 1158
+    y: 324
     width: 241
     height: 84
     borderLeft: 0
@@ -691,8 +704,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_button16
-    x: 2335
-    y: 2396
+    x: 2820
+    y: 2436
     width: 371
     height: 84
     borderLeft: 0
@@ -705,7 +718,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_button17
     x: 1088
-    y: 673
+    y: 608
     width: 64
     height: 64
     borderLeft: 0
@@ -718,7 +731,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_button18
     x: 1088
-    y: 608
+    y: 673
     width: 64
     height: 64
     borderLeft: 0
@@ -744,7 +757,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_button3
     x: 1421
-    y: 376
+    y: 305
     width: 196
     height: 70
     borderLeft: 0
@@ -760,6 +773,32 @@ MonoBehaviour:
     y: 2719
     width: 334
     height: 84
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_button4_glossy
+    x: 1707
+    y: 50
+    width: 89
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_button4_text
+    x: 3409
+    y: 2471
+    width: 104
+    height: 49
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -795,8 +834,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_button6
-    x: 2820
-    y: 2436
+    x: 2335
+    y: 2396
     width: 371
     height: 84
     borderLeft: 0
@@ -821,7 +860,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_button8
-    x: 1806
+    x: 2034
     y: 2126
     width: 114
     height: 84
@@ -834,8 +873,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_button9
-    x: 1806
-    y: 2041
+    x: 1919
+    y: 2126
     width: 114
     height: 84
     borderLeft: 0
@@ -848,7 +887,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_card_center
     x: 1088
-    y: 319
+    y: 195
     width: 61
     height: 61
     borderLeft: 0
@@ -873,8 +912,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_chat_emoji_off
-    x: 1806
-    y: 1189
+    x: 1623
+    y: 173
     width: 83
     height: 60
     borderLeft: 0
@@ -887,7 +926,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_chat_emoji_on
     x: 1806
-    y: 1250
+    y: 1142
     width: 83
     height: 60
     borderLeft: 0
@@ -899,8 +938,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_chat_enter
-    x: 1088
-    y: 12
+    x: 1626
+    y: 108
     width: 60
     height: 60
     borderLeft: 0
@@ -926,7 +965,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_chat_message_off
     x: 1806
-    y: 1433
+    y: 1386
     width: 83
     height: 60
     borderLeft: 0
@@ -938,8 +977,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_chat_message_on
-    x: 1623
-    y: 173
+    x: 1806
+    y: 1264
     width: 83
     height: 60
     borderLeft: 0
@@ -952,7 +991,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_chat_setting_off
     x: 1806
-    y: 1372
+    y: 1203
     width: 83
     height: 60
     borderLeft: 0
@@ -965,7 +1004,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_chat_setting_on
     x: 1806
-    y: 1311
+    y: 1325
     width: 83
     height: 60
     borderLeft: 0
@@ -977,8 +1016,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_check
-    x: 1806
-    y: 189
+    x: 3947
+    y: 2212
     width: 59
     height: 52
     borderLeft: 0
@@ -1017,7 +1056,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_collection_icon
     x: 1806
-    y: 81
+    y: 80
     width: 55
     height: 55
     borderLeft: 0
@@ -1160,7 +1199,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_daub1
     x: 1088
-    y: 195
+    y: 257
     width: 61
     height: 61
     borderLeft: 0
@@ -1172,8 +1211,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_effect_chest
-    x: 1806
-    y: 137
+    x: 4007
+    y: 2213
     width: 60
     height: 51
     borderLeft: 0
@@ -1186,7 +1225,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_effect_gold
     x: 1806
-    y: 1077
+    y: 971
     width: 66
     height: 54
     borderLeft: 0
@@ -1224,8 +1263,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_friend_icon2
-    x: 1530
-    y: 2
+    x: 3861
+    y: 2213
     width: 85
     height: 51
     borderLeft: 0
@@ -1263,8 +1302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_friend_on
-    x: 616
-    y: 1350
+    x: 3762
+    y: 2592
     width: 42
     height: 42
     borderLeft: 0
@@ -1277,7 +1316,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_friend_search
     x: 1088
-    y: 73
+    y: 134
     width: 60
     height: 60
     borderLeft: 0
@@ -1329,7 +1368,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_gift_itemslot1
     x: 1707
-    y: 625
+    y: 672
     width: 82
     height: 81
     borderLeft: 0
@@ -1342,7 +1381,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_gift_itemslot2
     x: 1707
-    y: 1040
+    y: 838
     width: 82
     height: 82
     borderLeft: 0
@@ -1368,7 +1407,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_gift_itemslot4
     x: 1806
-    y: 1950
+    y: 2032
     width: 103
     height: 90
     borderLeft: 0
@@ -1472,7 +1511,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_icon_sound1
     x: 1806
-    y: 242
+    y: 136
     width: 59
     height: 54
     borderLeft: 0
@@ -1497,8 +1536,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 3
   - name: ui_info_all1
-    x: 1618
-    y: 305
+    x: 1806
+    y: 1508
     width: 72
     height: 70
     borderLeft: 0
@@ -1524,7 +1563,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo1
     x: 1806
-    y: 717
+    y: 851
     width: 59
     height: 59
     borderLeft: 0
@@ -1537,7 +1576,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo10
     x: 1806
-    y: 777
+    y: 911
     width: 59
     height: 59
     borderLeft: 0
@@ -1550,7 +1589,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo11
     x: 1806
-    y: 477
+    y: 791
     width: 59
     height: 59
     borderLeft: 0
@@ -1563,7 +1602,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo12
     x: 1806
-    y: 957
+    y: 191
     width: 59
     height: 59
     borderLeft: 0
@@ -1576,7 +1615,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo13
     x: 1806
-    y: 657
+    y: 251
     width: 59
     height: 59
     borderLeft: 0
@@ -1589,7 +1628,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo2
     x: 1806
-    y: 897
+    y: 311
     width: 59
     height: 59
     borderLeft: 0
@@ -1602,7 +1641,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo3
     x: 1806
-    y: 357
+    y: 371
     width: 59
     height: 59
     borderLeft: 0
@@ -1615,7 +1654,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo4
     x: 1806
-    y: 417
+    y: 431
     width: 59
     height: 59
     borderLeft: 0
@@ -1628,7 +1667,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo5
     x: 1806
-    y: 837
+    y: 491
     width: 59
     height: 59
     borderLeft: 0
@@ -1641,7 +1680,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo6
     x: 1806
-    y: 297
+    y: 551
     width: 59
     height: 59
     borderLeft: 0
@@ -1654,7 +1693,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo7
     x: 1806
-    y: 1017
+    y: 611
     width: 59
     height: 59
     borderLeft: 0
@@ -1667,7 +1706,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo8
     x: 1806
-    y: 597
+    y: 671
     width: 59
     height: 59
     borderLeft: 0
@@ -1680,7 +1719,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_bingo9
     x: 1806
-    y: 537
+    y: 731
     width: 59
     height: 59
     borderLeft: 0
@@ -1693,7 +1732,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_chest1
     x: 1088
-    y: 738
+    y: 801
     width: 67
     height: 62
     borderLeft: 0
@@ -1706,7 +1745,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_chest2
     x: 1088
-    y: 801
+    y: 738
     width: 67
     height: 62
     borderLeft: 0
@@ -1719,7 +1758,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_info_text1
     x: 1806
-    y: 1132
+    y: 1085
     width: 88
     height: 56
     borderLeft: 0
@@ -1757,8 +1796,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_info_xp1
-    x: 1806
-    y: 1494
+    x: 1618
+    y: 234
     width: 72
     height: 70
     borderLeft: 0
@@ -1770,8 +1809,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_info_xp2
-    x: 1806
-    y: 1565
+    x: 1618
+    y: 305
     width: 72
     height: 70
     borderLeft: 0
@@ -1796,8 +1835,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_inventory_achivement
-    x: 1707
-    y: 1289
+    x: 3192
+    y: 2266
     width: 86
     height: 80
     borderLeft: 0
@@ -1809,32 +1848,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_inventory_achivementback1
-    x: 1934
-    y: 2974
-    width: 1158
-    height: 95
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: ui_inventory_achivementback2
-    x: 1158
-    y: 2804
-    width: 1158
-    height: 165
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: ui_inventory_achivementback3
     x: 1421
     y: 2582
     width: 1158
@@ -1847,8 +1860,34 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: ui_inventory_achivementback4
+  - name: ui_inventory_achivementback2
     x: 2317
+    y: 2804
+    width: 1158
+    height: 165
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_inventory_achivementback3
+    x: 1934
+    y: 2974
+    width: 1158
+    height: 95
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_inventory_achivementback4
+    x: 1158
     y: 2804
     width: 1158
     height: 165
@@ -1887,8 +1926,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_inventory_daubercolorselect
-    x: 1707
-    y: 17
+    x: 1806
+    y: 1651
     width: 92
     height: 62
     borderLeft: 0
@@ -1914,7 +1953,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_inventory_free
     x: 1707
-    y: 156
+    y: 119
     width: 96
     height: 65
     borderLeft: 0
@@ -1926,7 +1965,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_inventory_gauge1
-    x: 3412
+    x: 3008
     y: 2228
     width: 233
     height: 36
@@ -1952,7 +1991,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_inventory_gauge1back2
-    x: 3174
+    x: 2770
     y: 2224
     width: 237
     height: 40
@@ -2056,8 +2095,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_inventory_icon4
-    x: 1640
-    y: 49
+    x: 1806
+    y: 1026
     width: 62
     height: 58
     borderLeft: 0
@@ -2070,7 +2109,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_item_battel1
     x: 1707
-    y: 1123
+    y: 1004
     width: 82
     height: 82
     borderLeft: 0
@@ -2083,7 +2122,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_item_battel10
     x: 1707
-    y: 874
+    y: 1087
     width: 82
     height: 82
     borderLeft: 0
@@ -2122,7 +2161,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_item_battel4
     x: 1707
-    y: 957
+    y: 921
     width: 82
     height: 82
     borderLeft: 0
@@ -2134,8 +2173,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_item_battel5
-    x: 3839
-    y: 2305
+    x: 1707
+    y: 506
     width: 79
     height: 83
     borderLeft: 0
@@ -2148,7 +2187,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_item_battel6
     x: 1707
-    y: 462
+    y: 425
     width: 80
     height: 80
     borderLeft: 0
@@ -2160,8 +2199,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_item_battel7
-    x: 1707
-    y: 1538
+    x: 1622
+    y: 21
     width: 83
     height: 83
     borderLeft: 0
@@ -2174,7 +2213,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_item_battel8
     x: 1707
-    y: 791
+    y: 1170
     width: 82
     height: 82
     borderLeft: 0
@@ -2187,7 +2226,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_item_battel9
     x: 1707
-    y: 543
+    y: 590
     width: 81
     height: 81
     borderLeft: 0
@@ -2199,32 +2238,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_item_gauge1
-    x: 3523
-    y: 2281
-    width: 211
-    height: 48
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 5
-    paddingTop: 5
-    paddingBottom: 5
-  - name: ui_item_gauge2
-    x: 2770
-    y: 2216
-    width: 211
-    height: 48
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 5
-    paddingTop: 5
-    paddingBottom: 5
-  - name: ui_item_gauge3
     x: 2021
     y: 2265
     width: 211
@@ -2237,9 +2250,35 @@ MonoBehaviour:
     paddingRight: 5
     paddingTop: 5
     paddingBottom: 5
-  - name: ui_item_gaugeback
+  - name: ui_item_gauge2
     x: 3523
-    y: 2330
+    y: 2340
+    width: 211
+    height: 48
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 5
+    paddingTop: 5
+    paddingBottom: 5
+  - name: ui_item_gauge3
+    x: 3302
+    y: 2287
+    width: 211
+    height: 48
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 5
+    paddingTop: 5
+    paddingBottom: 5
+  - name: ui_item_gaugeback
+    x: 3192
+    y: 2462
     width: 216
     height: 58
     borderLeft: 0
@@ -2277,8 +2316,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_item_normal1
-    x: 1707
-    y: 1454
+    x: 3834
+    y: 2305
     width: 83
     height: 83
     borderLeft: 0
@@ -2291,7 +2330,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_item_normal10
     x: 1707
-    y: 1622
+    y: 1420
     width: 83
     height: 83
     borderLeft: 0
@@ -2304,7 +2343,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_item_normal2
     x: 1707
-    y: 1206
+    y: 1253
     width: 83
     height: 82
     borderLeft: 0
@@ -2316,8 +2355,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_item_normal3
-    x: 1332
-    y: 829
+    x: 3093
+    y: 2987
     width: 88
     height: 82
     borderLeft: 0
@@ -2330,7 +2369,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_item_normal4
     x: 1707
-    y: 1370
+    y: 1336
     width: 83
     height: 83
     borderLeft: 0
@@ -2355,8 +2394,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_item_normal6
-    x: 3093
-    y: 2987
+    x: 1332
+    y: 829
     width: 88
     height: 82
     borderLeft: 0
@@ -2446,8 +2485,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_menu_fullscreen_off
-    x: 1707
-    y: 2009
+    x: 3920
+    y: 2410
     width: 98
     height: 100
     borderLeft: 0
@@ -2459,8 +2498,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_menu_fullscreen_on
-    x: 2707
-    y: 2295
+    x: 3735
+    y: 2288
     width: 98
     height: 100
     borderLeft: 0
@@ -2473,7 +2512,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_menu_guide
     x: 1707
-    y: 1807
+    y: 1504
     width: 98
     height: 100
     borderLeft: 0
@@ -2499,7 +2538,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_menu_music_off
     x: 1707
-    y: 2110
+    y: 1605
     width: 98
     height: 100
     borderLeft: 0
@@ -2511,8 +2550,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_menu_music_on
-    x: 3920
-    y: 2410
+    x: 1707
+    y: 1706
     width: 98
     height: 100
     borderLeft: 0
@@ -2524,8 +2563,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_menu_sound_off
-    x: 3740
-    y: 2288
+    x: 1707
+    y: 1807
     width: 98
     height: 100
     borderLeft: 0
@@ -2537,8 +2576,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_menu_sound_on
-    x: 3393
-    y: 2356
+    x: 1707
+    y: 2110
     width: 98
     height: 100
     borderLeft: 0
@@ -2550,8 +2589,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_menu_support
-    x: 3920
-    y: 2309
+    x: 1707
+    y: 2009
     width: 98
     height: 100
     borderLeft: 0
@@ -2576,8 +2615,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_menu_voice_off
-    x: 1707
-    y: 1908
+    x: 3920
+    y: 2309
     width: 98
     height: 100
     borderLeft: 0
@@ -2590,7 +2629,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_menu_voice_on
     x: 1707
-    y: 1706
+    y: 1908
     width: 98
     height: 100
     borderLeft: 0
@@ -2616,7 +2655,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_minigame_card1
     x: 991
-    y: 2105
+    y: 2324
     width: 158
     height: 218
     borderLeft: 0
@@ -2629,7 +2668,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_minigame_card2
     x: 991
-    y: 2324
+    y: 2105
     width: 158
     height: 218
     borderLeft: 0
@@ -2641,7 +2680,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_money_back
-    x: 3924
+    x: 3520
     y: 2226
     width: 155
     height: 38
@@ -2655,7 +2694,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_money_battle
     x: 1806
-    y: 1860
+    y: 1942
     width: 103
     height: 89
     borderLeft: 0
@@ -2668,7 +2707,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_money_button
     x: 1088
-    y: 134
+    y: 12
     width: 60
     height: 60
     borderLeft: 0
@@ -2681,7 +2720,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_money_credit
     x: 1707
-    y: 222
+    y: 185
     width: 79
     height: 79
     borderLeft: 0
@@ -2694,7 +2733,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_money_exp
     x: 1707
-    y: 302
+    y: 345
     width: 80
     height: 79
     borderLeft: 0
@@ -2707,7 +2746,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_money_gold
     x: 1707
-    y: 382
+    y: 265
     width: 80
     height: 79
     borderLeft: 0
@@ -2771,32 +2810,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_player_label1
-    x: 354
-    y: 0
-    width: 76
-    height: 24
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: ui_player_label2
-    x: 277
-    y: 0
-    width: 76
-    height: 24
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: ui_player_label3
     x: 991
     y: 1426
     width: 76
@@ -2809,8 +2822,34 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: ui_player_label4
+  - name: ui_player_label2
     x: 431
+    y: 0
+    width: 76
+    height: 24
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_player_label3
+    x: 354
+    y: 0
+    width: 76
+    height: 24
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_player_label4
+    x: 277
     y: 0
     width: 76
     height: 24
@@ -2888,8 +2927,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_post_icon1
-    x: 3393
-    y: 2268
+    x: 1806
+    y: 2123
     width: 112
     height: 87
     borderLeft: 0
@@ -2914,19 +2953,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_postback1
-    x: 1421
-    y: 2678
-    width: 1158
-    height: 125
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: ui_postback2
     x: 2580
     y: 2678
     width: 1158
@@ -2939,9 +2965,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: ui_postback2
+    x: 1421
+    y: 2678
+    width: 1158
+    height: 125
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: ui_profile_edit
-    x: 1866
-    y: 1023
+    x: 1862
+    y: 82
     width: 53
     height: 53
     borderLeft: 0
@@ -2966,8 +3005,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_profile_gauge1
-    x: 2263
-    y: 2181
+    x: 3676
+    y: 2235
     width: 184
     height: 29
     borderLeft: 0
@@ -2992,7 +3031,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_profile_gauge2
-    x: 3646
+    x: 3242
     y: 2235
     width: 277
     height: 29
@@ -3122,8 +3161,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_profile_star1
-    x: 1707
-    y: 80
+    x: 1806
+    y: 1714
     width: 79
     height: 75
     borderLeft: 0
@@ -3136,7 +3175,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_profile_vip
     x: 1806
-    y: 1708
+    y: 1790
     width: 105
     height: 63
     borderLeft: 0
@@ -3188,7 +3227,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_reward_card3
     x: 1707
-    y: 707
+    y: 754
     width: 81
     height: 83
     borderLeft: 0
@@ -3239,19 +3278,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_side_icon2
-    x: 1381
-    y: 1266
-    width: 38
-    height: 36
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: ui_side_icon3
     x: 1158
     y: 1
     width: 38
@@ -3264,9 +3290,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: ui_side_icon4
+  - name: ui_side_icon3
     x: 1381
     y: 1229
+    width: 38
+    height: 36
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_side_icon4
+    x: 1381
+    y: 1266
     width: 38
     height: 36
     borderLeft: 0
@@ -3291,19 +3330,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_sideyback1
-    x: 348
-    y: 1762
-    width: 276
-    height: 781
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: ui_sideyback2
     x: 0
     y: 291
     width: 276
@@ -3316,9 +3342,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: ui_slot
-    x: 625
+  - name: ui_sideyback2
+    x: 348
     y: 1762
+    width: 276
+    height: 781
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ui_slot
+    x: 616
+    y: 1348
     width: 44
     height: 44
     borderLeft: 0
@@ -3460,8 +3499,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_store_credittext2
-    x: 3397
-    y: 2457
+    x: 2539
+    y: 2147
     width: 121
     height: 63
     borderLeft: 0
@@ -3473,8 +3512,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_store_credittext3
-    x: 1921
-    y: 2090
+    x: 2298
+    y: 2146
     width: 123
     height: 64
     borderLeft: 0
@@ -3525,8 +3564,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_store_goldtext1
-    x: 3192
-    y: 2266
+    x: 3302
+    y: 2336
     width: 172
     height: 66
     borderLeft: 0
@@ -3616,8 +3655,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_store_icon1
-    x: 1921
-    y: 2022
+    x: 2422
+    y: 2143
     width: 116
     height: 67
     borderLeft: 0
@@ -3630,7 +3669,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ui_store_icon2
     x: 1088
-    y: 257
+    y: 319
     width: 61
     height: 61
     borderLeft: 0
@@ -3681,8 +3720,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_store_itemtext1
-    x: 3192
-    y: 2392
+    x: 1421
+    y: 40
     width: 200
     height: 64
     borderLeft: 0
@@ -3694,8 +3733,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_store_itemtext2
-    x: 3192
-    y: 2457
+    x: 1421
+    y: 105
     width: 204
     height: 63
     borderLeft: 0
@@ -3785,8 +3824,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_store_normal4
-    x: 1530
-    y: 54
+    x: 3192
+    y: 2347
     width: 109
     height: 114
     borderLeft: 0
@@ -3811,8 +3850,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_store_vip
-    x: 1618
-    y: 244
+    x: 1806
+    y: 1447
     width: 84
     height: 60
     borderLeft: 0
@@ -3954,8 +3993,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ui_worldmap_icon3
-    x: 1421
-    y: 49
+    x: 2707
+    y: 2276
     width: 108
     height: 119
     borderLeft: 0
